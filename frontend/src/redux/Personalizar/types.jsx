@@ -1,0 +1,4 @@
+export const types = {
+    GET_CUSTOM_CONFIG: 'GET_CUSTOM_CONFIG',
+    SAVE_CUSTOM_CONFIG: 'SAVE_CUSTOM_CONFIG',
+}

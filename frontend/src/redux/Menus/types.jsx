@@ -1,0 +1,8 @@
+export const types = {
+    FIND_MENU: 'FIND_MENU',    
+    DELETE_MENU: 'DELETE_MENU',
+    INSERT_MENU: 'INSERT_MENU',
+    UPDATE_MENU: 'UPDATE_MENU',
+    GET_ALL_MENUS: 'GET_ALL_MENUS',
+    GET_MAIN_MENU: 'GET_MAIN_MENU',
+}

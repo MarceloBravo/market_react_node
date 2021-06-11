@@ -1,0 +1,17 @@
+.divPermisos{
+    display: flex;
+}
+
+.itemPermisos{
+    display: inline-flex;
+    width: 50%;
+}
+
+.itemPermisos > .form-group,
+.itemPermisos > .lbl-head-column {
+    width: 25%;
+}
+
+.itemPermisos > .lbl-head-column{
+    font-weight: bold;
+}

@@ -1,0 +1,100 @@
+.login-error{
+  color: white;
+  animation: blinker 1s linear infinite;
+  position: absolute;
+  top: 13%;
+  left: 15%;
+  font-size: larger;
+}
+
+.background-login {
+  /*background-image: url("/src/assets/img/syllabus.jpg");
+  background-image: url("/src/assets/img/bg-3.jpg");*/
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #1e39a5;
+  background-size: 75% 75%;
+}
+
+.login-form {
+  width: 270px;
+  top: 30%;
+  position: absolute;
+  left: 22%;
+  text-align: left;
+  z-index: 10;
+}
+
+.login-form input[type="email"],
+.login-form input[type="password"] {
+  background-color: #ffffff8f !important;
+}
+
+.login-form .text-muted,
+.login-form label {
+  color: #ffffff !important;
+}
+
+.div-name-app {
+  position: absolute;
+  width: 30%;
+  top: 12%;
+  height: 76%;
+  right: 21%;
+  /*background-color: #113577e8;*/
+  z-index: 3;
+  /*
+  border-top-style: solid;
+  border-top-color: #122673;
+  border-bottom-style: solid;
+  border-bottom-color: #122673;
+  */
+}
+
+.div-name-app label {
+  color: white;
+  font-size: xxx-large;
+  top: 43%;
+  position: absolute;
+  left: 0px;
+  width: 100%;
+  font-family: sans-serif;
+  font-style: italic;
+  text-align: center;
+}
+
+.background1 {
+  background-color: #ffffff80;
+  position: absolute;
+  width: 100%;
+  height: 76%;
+  opacity: 0.08;
+  top: 12%;
+  z-index: 5;
+  border-top-style: solid;
+  border-top-color: white;
+  border-bottom-style: solid;
+  border-bottom-color: white;
+}
+
+.background2 {
+  position: absolute;
+  height: 100%;
+  width: 75.5%;
+  /* background-color: white; */
+  opacity: 0.1;
+  left: 12.5%;
+  border-color: white;
+  border-style: solid;
+  border-width: 4px;
+  z-index: 5;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}

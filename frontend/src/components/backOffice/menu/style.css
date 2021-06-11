@@ -1,0 +1,60 @@
+.flex-column {
+  text-align: initial;
+  background-color: #343a40;
+}
+
+.flex-column a {
+  /*color: #8e9eaa;*/
+  color: #b2c8ef;
+}
+
+.flex-column a:hover {
+  color: rgb(8, 8, 8);
+}
+
+.flex-column {
+  background-color: #060854 !important;
+}
+
+.sub-menu {
+  /*background-color: #060854 !important;*/
+  background-color: #3d5c7b !important;
+  border: none !important;
+}
+
+.card-body .nav {
+  display: block;
+}
+
+.card-header {
+  border: none !important;
+  margin: 0px !important;
+}
+
+.card-body {
+  padding: 0px 0px 0px 1.25rem !important;
+}
+
+.card-header button {
+  padding-left: 0px !important;
+}
+
+.card-header button:hover {
+  text-decoration: none !important;
+  color: rgb(20, 20, 20) !important;
+}
+
+.card-header button:focus,
+a.active {
+  text-decoration: none;
+  color: white !important;
+}
+
+.card-header button:focus {
+  box-shadow: none !important;
+}
+
+.pather-menu {
+  /*color: #8e9eaa !important;*/
+  color: #ffffff !important;
+}

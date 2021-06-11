@@ -1,0 +1,4 @@
+export const types = {
+    SHOW_MODAL_DIALOG: 'SHOW_MODAL_DIALOG',
+    HIDE_MODAL_DIALOG: 'HIDE_MODAL_DIALOG'
+}

@@ -1,0 +1,43 @@
+.div-title {
+  font-size: xx-large;
+  text-align: left;
+}
+
+.top-grid-form {
+  padding: 5px 0px;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.top-table-form > div {
+  display: inline-flex;
+}
+
+.table-dark {
+  color: #fff;
+  background-color: #24507b !important;
+}
+
+.table-dark thead th,
+.table-dark tbody td {
+  border-color: #5e92aa !important;
+}
+
+.action-button {
+  padding: 0px 5px;
+  cursor: pointer;
+}
+
+.action-button:hover {
+  color: blue;
+}
+
+.link-edit {
+  color: black;
+}

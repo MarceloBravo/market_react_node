@@ -1,0 +1,30 @@
+header {
+  box-shadow: 0px 5px #6f8bef6b;
+}
+
+.navbar {
+  background-color: #3d5c7b !important;
+}
+
+.perfil-menu{
+  background-color: #3d5c7b !important;
+  border-color: #3d5c7b !important;
+}
+
+.avatar{
+  cursor: pointer;
+  height: 39px;
+  position: relative;
+}
+
+#dropdown-basic {
+  box-shadow: none !important;
+}
+
+.user-name {
+  color: white;
+}
+
+.form-inline{
+  display: contents !important;
+}

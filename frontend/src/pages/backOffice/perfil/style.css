@@ -1,0 +1,13 @@
+.hidden-control{
+    display: none;
+}
+
+.image-content{
+    height: 90%;
+}
+
+.image{
+    cursor: pointer;
+    height: 90%;
+    position: absolute;
+}
