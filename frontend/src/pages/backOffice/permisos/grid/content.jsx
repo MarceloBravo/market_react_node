@@ -79,14 +79,14 @@ export const PermisosContent = (props) => {
                         {
                             permisos.map((p, key) => {
                                 return <div key={key} className="itemPermisos">
-                                            <Form.Group key={`${key}-pantalla`} controlId={`${key}-acceso`}>
+                                            <Form.Group key={`${key}-pantalla`} controlId={`${key}-acceder`}>
                                                 <Form.Check key={`${key}-chk-pantalla`} type="checkbox" label={p.pantalla} checked={p.acceder} onChange={(e) => handlerChanges(e)}/>
                                             </Form.Group>
                                             <Form.Group key={`${key}-crear`} controlId={`${key}-crear`}>
                                                 {p.permite_crear === 1 && <Form.Check key={`${key}-chk-crear`} type="checkbox" checked={p.crear} onChange={(e) => handlerChanges(e)}/>}
                                             </Form.Group>
-                                            <Form.Group key={`${key}-editar`} controlId={`${key}-editar`}>
-                                                {p.permite_modificar === 1 && <Form.Check key={`${key}-chk-editar`} type="checkbox" checked={p.modificar} onChange={(e) => handlerChanges(e)}/>}
+                                            <Form.Group key={`${key}-modificar`} controlId={`${key}-modificar`}>
+                                                {p.permite_modificar === 1 && <Form.Check key={`${key}-chk-modificar`} type="checkbox" checked={p.modificar} onChange={(e) => handlerChanges(e)}/>}
                                             </Form.Group>
                                             <Form.Group key={`${key}-eliminar`} controlId={`${key}-eliminar`}>
                                                 {p.permite_eliminar === 1 && <Form.Check key={`${key}-chk-eliminar`} type="checkbox" checked={p.eliminar} onChange={(e) => handlerChanges(e)}/>}

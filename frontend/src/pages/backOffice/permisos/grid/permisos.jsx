@@ -46,7 +46,7 @@ export const PermisosGrid = () => {
         }
 
         function convertirNulosAFalso(p){
-            Object.keys(p).forEach(k => (p[k] === null && ['acceso','crear','editar','eliminar'].indexOf(k) > -1) ? p[k] = false : p[k] )
+            Object.keys(p).forEach(k => (p[k] === null && ['acceder','crear','modificar','eliminar'].indexOf(k) > -1) ? p[k] = false : p[k] )
             return p
         }
     },[stPermisos, rolId])
@@ -99,15 +99,15 @@ export const PermisosGrid = () => {
     }
     
     const sicronizeCheckboxes = (ids, checked, updatedPermiso) => {
-        if(ids[1] === 'acceso'){
+        if(ids[1] === 'acceder'){
             if(!checked){
                 updatedPermiso[ids[0]].crear = false;
-                updatedPermiso[ids[0]].editar = false;
+                updatedPermiso[ids[0]].modificar = false;
                 updatedPermiso[ids[0]].eliminar = false;
             }
         }else{
             if(checked){
-                updatedPermiso[ids[0]].acceso = true;
+                updatedPermiso[ids[0]].acceder = true;
             }
         }
         return updatedPermiso;

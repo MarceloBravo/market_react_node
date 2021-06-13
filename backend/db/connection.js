@@ -8,7 +8,7 @@ connection.conect = () => {
         port: '3306',
         user: 'root',
         password: 'mabc',
-        database: 'mabc'
+        database: 'market'
     });
 } 
 

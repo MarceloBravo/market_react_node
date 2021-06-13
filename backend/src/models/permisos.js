@@ -120,7 +120,7 @@ const insertPermissions = async (idRol, data) => {
                 CURDATE(),
                 CURDATE()
             )`;
-
+            console.log(p, qry)
         await cnn.promise().query(qry);
     });
 }
@@ -143,7 +143,7 @@ const updatePermissions = async (idRol, data) => {
 
 
 const deletePermissions = async (idRol, data) => {
-    console.log(data)
+    //console.log(data)
     let ids = data.filter(p => p.id !== null).map(p => p.id);
     let qry = `
             DELETE FROM 

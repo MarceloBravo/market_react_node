@@ -12,6 +12,9 @@ import { UsuariosForm } from './pages/backOffice/usuarios/form/usuarios';
 import { PermisosGrid } from './pages/backOffice/permisos/grid/permisos';
 import { PersonalizarForm } from './pages/backOffice/personalizar/personalizar';
 import { Perfil } from './pages/backOffice/perfil/perfil';
+import { ImpuestosGrid } from './pages/backOffice/impuestos/grid/grid';
+import { ImpuestosForm } from './pages/backOffice/impuestos/form/form';
+
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
@@ -47,6 +50,9 @@ function App() {
             <Route exact path="/permisos" component={PermisosGrid} />
             <Route exact path="/personalizar" component={PersonalizarForm} />
             <Route exact path="/perfil" component={Perfil} />
+            <Route exact path="/impuestos" component={ImpuestosGrid} />
+            <Route exact path="/impuestos/nuevo" component={ImpuestosForm} />
+            <Route exact path="/impuestos/edit/:id" component={ImpuestosForm} />
             <Route exact path=""/>
           </Switch>
         </BrowserRouter>

@@ -36,7 +36,12 @@ export const TableGrid = (props) => {
                     <tr>
                         {headers.map((value, index) => {
                             return (widthColumn > 0 ?
-                                <th key={index} style={{ width: + widthColumn + '%' }}>{value}</th> :
+                                (
+                                    (index === 0) ?
+                                    <th key={index}>{value}</th> :
+                                    <th key={index} style={{ width: + widthColumn + '%' }}>{value}</th>
+                                )
+                                :
                                 <th key={index}>{value}</th>
                             )
                         })}

@@ -9,7 +9,8 @@ import { RolesReducer } from './Roles/reducer';
 import { UsersReducer } from './Users/reducer';
 import { PermisosReducer } from './Permisos/reducer';
 import { SpinnerReducer } from './Spinner/reducer';
-import { PersonalizarReducer } from './Personalizar/reducer'
+import { PersonalizarReducer } from './Personalizar/reducer';
+import { ImpuestosReducer } from './Impuestos/reducer';
 
 export default combineReducers({
     LoginReducer,
@@ -22,5 +23,6 @@ export default combineReducers({
     UsersReducer,
     PermisosReducer,
     SpinnerReducer,
-    PersonalizarReducer
+    PersonalizarReducer,
+    ImpuestosReducer
 })
