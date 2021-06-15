@@ -1,9 +1,10 @@
-const impuestosModel = require('../models/impuestos')
+const categoriasModel = require('../models/categorias')
 const checkToken = require('../shared/middlewares/mw_checkToken')
 
+
 module.exports = function(app, passport){
-    app.get('/impuestos/pag/:pag', checkToken, (req, res) => {
-        impuestosModel.getPage(req.params.pag, (data, err) => {
+    app.get('/categorias/pag/:pag', checkToken, (req, res) => {
+        categoriasModel.getPage(req.params.pag, (data, err) =>{
             if(err){
                 res.json(err)
             }else{
@@ -12,8 +13,9 @@ module.exports = function(app, passport){
         })
     })
 
-    app.get('/impuestos/filtrar/:texto/:pag', checkToken, (req, res) => {
-        impuestosModel.filter(req.params.texto, req.params.pag, (data, err) => {
+
+    app.get('/categorias/filtrar/:texto/:pag', checkToken, (req, res) => {
+        categoriasModel.filter(req.params.texto, req.params.pag, (data, err) =>{
             if(err){
                 res.json(err)
             }else{
@@ -22,19 +24,8 @@ module.exports = function(app, passport){
         })
     })
 
-    app.get('/impuestos/:id', checkToken ,(req, res) => {
-        impuestosModel.find(req.params.id, (data, err) => {
-            if(err){
-                res.json(err)
-            }else{
-                res.json(data)
-            }
-        })
-    }) 
-
-    
-    app.post('/impuestos', checkToken, (req, res) => {
-        impuestosModel.insert(req.body, (data, err) => {
+    app.get('/categorias/:id', checkToken, (req, res) => {
+        categoriasModel.find(req.params.id, (data, err) =>{
             if(err){
                 res.json(err)
             }else{
@@ -43,8 +34,10 @@ module.exports = function(app, passport){
         })
     })
 
-    app.put('/impuestos/:id', checkToken, (req, res) => {
-        impuestosModel.update(req.params.id, req.body, (data, err) => {
+
+
+    app.post('/categorias', checkToken, (req, res) => {
+        categoriasModel.insert(req.body, (data, err) =>{
             if(err){
                 res.json(err)
             }else{
@@ -53,8 +46,9 @@ module.exports = function(app, passport){
         })
     })
 
-    app.delete('/impuestos/:id', checkToken, (req, res) => {
-        impuestosModel.softDelete(req.params.id, (data, err) => {
+
+    app.put('/categorias/:id', checkToken, (req, res) => {
+        categoriasModel.update(req.params.id, req.body, (data, err) =>{
             if(err){
                 res.json(err)
             }else{
@@ -63,8 +57,19 @@ module.exports = function(app, passport){
         })
     })
 
-    app.delete('/impuestos/kill/:id', checkToken, (req, res) => {
-        impuestosModel.delete(req.params.id, (data, err) => {
+    app.delete('/categorias/:id', checkToken, (req, res) => {
+        categoriasModel.softDelete(req.params.id, (data, err) =>{
+            if(err){
+                res.json(err)
+            }else{
+                res.json(data)
+            }
+        })
+    })
+
+
+    app.delete('/categorias/kill/:id', checkToken, (req, res) => {
+        categoriasModel.delete(req.params.id, (data, err) =>{
             if(err){
                 res.json(err)
             }else{

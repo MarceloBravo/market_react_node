@@ -14,6 +14,8 @@ import { PersonalizarForm } from './pages/backOffice/personalizar/personalizar';
 import { Perfil } from './pages/backOffice/perfil/perfil';
 import { ImpuestosGrid } from './pages/backOffice/impuestos/grid/grid';
 import { ImpuestosForm } from './pages/backOffice/impuestos/form/form';
+import { CategoriasGrid } from './pages/backOffice/categorias/grid/grid';
+import { CategoriasForm } from './pages/backOffice/categorias/form/form';
 
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
@@ -53,6 +55,9 @@ function App() {
             <Route exact path="/impuestos" component={ImpuestosGrid} />
             <Route exact path="/impuestos/nuevo" component={ImpuestosForm} />
             <Route exact path="/impuestos/edit/:id" component={ImpuestosForm} />
+            <Route exact path="/categorias" component={CategoriasGrid} />
+            <Route exact path="/categorias/nuevo" component={CategoriasForm} />
+            <Route exact path="/categorias/edit/:id" component={CategoriasForm} />
             <Route exact path=""/>
           </Switch>
         </BrowserRouter>

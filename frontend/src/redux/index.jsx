@@ -11,6 +11,7 @@ import { PermisosReducer } from './Permisos/reducer';
 import { SpinnerReducer } from './Spinner/reducer';
 import { PersonalizarReducer } from './Personalizar/reducer';
 import { ImpuestosReducer } from './Impuestos/reducer';
+import { CategoriasReducer } from './Categorias/reducer'
 
 export default combineReducers({
     LoginReducer,
@@ -24,5 +25,6 @@ export default combineReducers({
     PermisosReducer,
     SpinnerReducer,
     PersonalizarReducer,
-    ImpuestosReducer
+    ImpuestosReducer,
+    CategoriasReducer
 })

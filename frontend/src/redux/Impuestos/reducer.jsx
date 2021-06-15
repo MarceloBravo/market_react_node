@@ -30,7 +30,7 @@ export const ImpuestosReducer = (state = INITIAL_STATE,  action) => {
         case types.ELIMINAR_IMPUESTOS:
             return {
                 ...state, 
-                state: INITIAL_STATE
+                state: INITIAL_STATE.impuesto
             }
         default:
             return state
