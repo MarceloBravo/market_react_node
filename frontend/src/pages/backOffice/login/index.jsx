@@ -19,7 +19,9 @@ export const Login = () => {
     
 
     useEffect(() => {
-        if (logedUser.accessToken) {
+        //Si al cargar la pantalla de login ya existe un token, éste se elimina desde el storage y se 
+        //reemplaza por el nuevo token 
+        if (logedUser.accessToken) {    
             setRedirect(true);
             if (rememberMe) {
                 localStorage.removeItem('gimAppMabc')

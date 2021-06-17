@@ -12,12 +12,25 @@ const INITIAL_STATE = {
         updated_at: null,
         deleted_at: null
     },
+    dataGrid: {
+            data: [],
+            rowsPerPage: 10,
+            page: 0,
+            totRows: 0
+    },
     list: [],   //Contiene los menús que se mostrarán en los listados existentes en los formularios de la aplicación
     displayedMenus: [], //Contiene el listado de Menús que se mostrarán cómo menú principal de la aplicación
 }
 
 export const MenusReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
+        case types.LISTAR_MENUS:
+        case types.FILTRAR_MENUS:      
+            console.log(action.payload.data, action.payload)  
+            return {
+                ...state,
+                dataGrid: action.payload.data
+            }
         case types.FIND_MENU:        
             return {
                 ...state,

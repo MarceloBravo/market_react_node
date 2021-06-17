@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { list, filter } from '../../../../actions/grid'
-import { eliminar } from  '../../../../actions/roles'
+//import { list, filter } from '../../../../actions/grid'
+import { getPage, filter, eliminar } from  '../../../../actions/roles'
 import { types } from '../../../../redux/ModalDialog/types'
 import { types as spinnerTypes } from '../../../../redux/Spinner/types'
 import { RolesContent } from './content'
 
 export const RolesGrid = () => {
-    const listado = useSelector(state => state.GridReducer.data )
+    const dataGrid = useSelector(state => state.RolesReducer.dataGrid )
     const dispatch = useDispatch()
     const [ idDelete, setIdDelete ] = useState(0)
 
     useEffect(()=>{
         dispatch({type: spinnerTypes.SHOW_SPINNER})
-        dispatch(list('roles',0));
+        dispatch(getPage(0));
     },[dispatch])
 
     const eliminarRegistro = (id) => {
@@ -26,7 +26,7 @@ export const RolesGrid = () => {
         if(texto.length > 0){
             dispatch(filter('roles', texto, 0));
         }else{
-            dispatch(list('roles',0));
+            dispatch(getPage(0));
         }
     }
 
@@ -34,15 +34,21 @@ export const RolesGrid = () => {
         if(res){
             dispatch({type: spinnerTypes.SHOW_SPINNER})
             dispatch(eliminar(idDelete));
-            dispatch(list('roles',0));
+            dispatch(getPage(0));
         }
+    }
+
+    const goToPage = (e) => {
+        dispatch(getPage(e));
     }
 
     return (
         <RolesContent 
-            listado={listado} 
+            dataGrid={dataGrid} 
             response={response} 
             eliminarRegistro={eliminarRegistro} 
-            filtrar={filtrar}/>
+            filtrar={filtrar}
+            goToPage={goToPage}
+        />
     )
 }

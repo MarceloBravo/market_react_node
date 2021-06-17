@@ -7,6 +7,8 @@ const INITIAL_STATE = {
         expiresIn: 0,
         expired: false,
         roles:[],
+        exp: 0,
+        iat: 0
     },
     isLogout: false,
     
@@ -16,25 +18,31 @@ const INITIAL_STATE = {
 export const LoginReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case types.IDENTIFICAR_USUARIO:
+            let tokenArr = action.payload.access_token.split(".")
             return {
                 ...state,
                 logedUser: {
                     user: action.payload.user,
                     accessToken: action.payload.access_token,
-                    expires: action.payload.expires_in,
+                    expiresIn: action.payload.expires_in,
                     roles: action.payload.roles,
+                    exp: JSON.parse(atob(tokenArr[1])).exp,
+                    iat: JSON.parse(atob(tokenArr[1])).iat,
                 },
                 isLogout: false,
             }
         case types.REFRESH_USER_DATA:
             if(action.payload.user.id === state.logedUser.user.id){
+                let tokenArr = action.payload.access_token.split(".")
                 return {
                     ...state, 
                     logedUser: {
                         user: action.payload.user,
-                        accessToken: state.logedUser.accessToken,
-                        expires: state.logedUser.expires,
-                        roles: state.logedUser.roles
+                        accessToken: action.payload.access_token,
+                        expiresIn: action.payload.expires_in,
+                        roles: action.payload.roles,
+                        exp: JSON.parse(atob(tokenArr[1])).exp,
+                        iat: JSON.parse(atob(tokenArr[1])).iat,
                     }
                 }
             }else{

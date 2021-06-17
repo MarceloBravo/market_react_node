@@ -6,7 +6,7 @@ import { types as spinnerTypes } from  '../../../../redux/Spinner/types'
 import { ContentCategoriasGrid } from './content'
 
 export const CategoriasGrid = (props) => {
-    const listado = useSelector(state => state.CategoriasReducer.list)
+    const dataGrid = useSelector(state => state.CategoriasReducer.dataGrid)
     const dispatch = useDispatch()
     const [ idDelete, setIdDelete ] = useState(null)
 
@@ -39,13 +39,18 @@ export const CategoriasGrid = (props) => {
         }
     }
 
+    const goToPage = (e) => {
+        dispatch(getPage(e))
+    }
+
 
     return (
         <ContentCategoriasGrid 
             response={response} 
-            listado={listado} 
+            dataGrid={dataGrid} 
             eliminarRegistro={eliminarRegistro} 
             filtrar={filtrar}
+            goToPage={goToPage}
         />
     )
 }

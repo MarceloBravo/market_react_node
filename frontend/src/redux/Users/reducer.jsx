@@ -16,12 +16,24 @@ const INITIAL_STATE = {
         roles: [],
         roles_id: [],
     },
+    dataGrid: {
+        data: [],
+        rowsPerPage: 10,
+        page: 0,
+        totRows: 0
+    },
     list: [],
 }
 
 
 export const UsersReducer = (state = INITIAL_STATE, action) => {
     switch(action.type){
+        case types.LISTAR_USUARIOS:
+        case types.FILTRAR_USUARIOS:
+            return {
+                ...state,
+                dataGrid: action.payload.data
+            }
         case types.BUSCAR_USUARIO:
             return {
                 ...state,

@@ -12,11 +12,23 @@ const INITIAL_STATE = {
         updated_at: null,
         deleted_at: null,
     },
+    dataGrid: {
+        data: [],
+        rowsPerPage: 10,
+        page: 0,
+        totRows: 0
+    },
     list: []
 }
 
 export const PantallasReducer = (state = INITIAL_STATE, action) => {
     switch(action.type){
+        case types.LISTAR_PANTALLAS:
+        case types.FILTRAR_PANTALLAS:
+            return {
+                ...state,
+                dataGrid: action.payload.data
+            }
         case types.FIND_PANTALLA:
             return {
                 ...state,

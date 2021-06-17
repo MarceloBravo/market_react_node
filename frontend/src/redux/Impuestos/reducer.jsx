@@ -9,7 +9,12 @@ const INITIAL_STATE = {
         updated_at: '',
         deleted_at: ''
     },
-    listado: []
+    dataGrid: {
+        data: [],
+        rowsPerPage: 10,
+        page: 0,
+        totRows: 0
+    }
 }
 
 export const ImpuestosReducer = (state = INITIAL_STATE,  action) => {
@@ -18,7 +23,7 @@ export const ImpuestosReducer = (state = INITIAL_STATE,  action) => {
         case types.FILTRAR_IMPUESTOS:
             return {
                 ...state,
-                listado: action.payload.data
+                dataGrid: action.payload.data
             }
         case types.BUSCAR_IMPUESTOS:
         case types.INSERTAR_IMPUESTOS:

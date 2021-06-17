@@ -19,7 +19,7 @@ menusModel.mainMenu = (idRol, callback) => {
                 m.menu_padre_id,
                 m.posicion
             FROM
-                menus m
+                menus m 
             WHERE 
                 menu_padre_id = 0 
                 AND deleted_at IS NULL 
@@ -87,24 +87,28 @@ menusModel.getPage = (pag, callback) => {
             SELECT 
                 m.id,
                 m.nombre,
+                mp.nombre as menu_padre,
                 m.url,
                 m.menu_padre_id,
                 m.posicion,
-                created_at,
-                updated_at 
+                m.created_at,
+                m.updated_at 
             FROM 
                 menus m
+                LEFT JOIN menus mp ON m.menu_padre_id = mp.id 
             WHERE 
-                deleted_at IS NULL 
+                m.deleted_at IS NULL 
+            ORDER BY m.nombre 
             LIMIT ${desde}, ${hasta}
+            
         `;
-        
+
         cnn.query(qry, async (err, res) => {
             if(err){
                 return callback({mensaje: err.message, tipoMensaje: 'danger', id: -1});
             }else{
                 let totRows = await totoReg(`SELECT COUNT(*) as totRows FROM menus WHERE deleted_at IS NULL`);
-                return callback(err, {data: res, page: pag, rowsPerPage: constantes.regPerPage, rows: totRows});
+                return callback(err, {data: res, page: pag, rowsPerPage: constantes.regPerPage, totRows});
             }
         })
     }else{
@@ -142,16 +146,19 @@ menusModel.filter = (texto, pag, callback) => {
             SELECT 
                 m.id,
                 m.nombre,
+                mp.nombre as menu_padre,
                 m.url,
                 m.menu_padre_id,
                 m.posicion,
-                created_at,
-                updated_at 
+                m.created_at,
+                m.updated_at 
             FROM 
                 menus m
+                LEFT JOIN menus mp ON m.menu_padre_id = mp.id 
             WHERE 
-                deleted_at IS NULL 
+                m.deleted_at IS NULL
                 ${filtro} 
+            ORDER BY m.nombre
             LIMIT ${desde}, ${hasta}
         `;
         
@@ -159,8 +166,8 @@ menusModel.filter = (texto, pag, callback) => {
             if(err){
                 return callback({mensaje: err.message, tipoMensaje: 'danger', id: -1});
             }else{
-                let rows = await totoReg(`SELECT COUNT(m.id) as totRows FROM menus m WHERE deleted_at IS NULL ${filtro}`)
-                return callback(err, {data: res, page: pag, rowsPerPage: constantes.regPerPage, rows});
+                let totRows = await totoReg(`SELECT COUNT(m.id) as totRows FROM menus m WHERE deleted_at IS NULL ${filtro}`)
+                return callback(err, {data: res, page: pag, rowsPerPage: constantes.regPerPage, totRows});
             }
         })
     }else{

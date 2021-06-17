@@ -51,7 +51,7 @@ userModel.getPage = (pag, callback) => {
                 return callback({mensaje: 'Ocurrió un error al solicitar los datos.', tipoMensaje: 'danger', id: -1});
             }else{
                 let rows = await totRows(`SELECT COUNT(*) as totRows FROM users WHERE deleted_at IS NULL`);
-                return callback(null, {data: res, rows: rows, rowsPerPage: regPerPage, page: pag});
+                return callback(null, {data: res, totRows: rows, rowsPerPage: regPerPage, page: pag});
             }
         });
 
@@ -182,7 +182,7 @@ userModel.filter = (texto, pag, callback) => {
                 return callback({mensaje: 'Ocurrió un error al filtrar los dregistros: ' + err.sqlMessage, tipoMensaje: 'danger', id: -1});
             }else{
                 let rows = await totRows(`SELECT COUNT(*) AS totRows FROM users WHERE deleted_at IS NULL ${filtro}`);
-                return callback(null, {data:res, rows: rows, rowsPerPage: regPerPage, page: pag});
+                return callback(null, {data:res, totRows: rows, rowsPerPage: regPerPage, page: pag});
             }
         });
 

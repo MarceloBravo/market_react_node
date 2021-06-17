@@ -7,7 +7,7 @@ import './style.css'
 import { aplicarPermisos } from '../../../actions/permisos'
 
 export const Grid = (props) => {
-    const { data, headers, actionColumn, title, visibleFields, urlToForm, onClickDelete, onChangeFilter, urlPantalla } = props
+    const { data, headers, actionColumn, title, visibleFields, urlToForm, onClickDelete, onChangeFilter, urlPantalla, totRows, rowsPerPage, page } = props
     const permisos = useSelector(state => state.PermisosReducer.aplicar_permisos)
     const logedUser = useSelector(state => state.LoginReducer.logedUser)
     const [widthColumn, setWidthColumn] = useState(0)
@@ -21,9 +21,13 @@ export const Grid = (props) => {
 
 
     useEffect(()=>{
-        let roles = logedUser ? logedUser.roles.map(r => r.id) : []
-        dispatch(aplicarPermisos(roles, location.pathname.split("/")[1]))
-    },[logedUser, urlPantalla, location, dispatch])
+        if(logedUser.roles){
+            let roles = logedUser ? logedUser.roles.map(r => r.id) : []
+            dispatch(aplicarPermisos(roles, location.pathname.split("/")[1]))
+        }else{
+            history.push('/')
+        }
+    },[logedUser, urlPantalla, location, history, dispatch])
 
 
     const handlerDelete = (id) => {
@@ -71,6 +75,9 @@ export const Grid = (props) => {
             handlerEdit={handlerEdit}
             handlerDelete={handlerDelete}
             permisos={permisos}
+            totRows={totRows}
+            rowsPerPage={rowsPerPage}
+            page={page}
         />
     )
 }

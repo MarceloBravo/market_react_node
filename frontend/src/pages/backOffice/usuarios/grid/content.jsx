@@ -4,11 +4,11 @@ import { Header } from '../../../../components/backOffice/header'
 import { Menu } from '../../../../components/backOffice/menu'
 import { Alerta } from '../../../../components/shared/alerts'
 import { Grid } from '../../../../components/backOffice/grid'
-import { Paginacion } from '../../../../components/backOffice/paginacion'
 import { SpinnerComponent } from '../../../../components/shared/spinner'
+import { Paginacion } from '../../../../components/backOffice/paginacion'
 
 export const ContentGridUsuarios = (props) => {
-    const { response, listado, eliminarRegistro, filtrar } = props
+    const { response, dataGrid, eliminarRegistro, filtrar, goToPage } = props
 
     return (
         <>
@@ -23,7 +23,7 @@ export const ContentGridUsuarios = (props) => {
                     <div className="content-section">                    
                         <Alerta />
                         <Grid
-                            data={listado}
+                            data={dataGrid}
                             headers={['Nombre', 'Apellido 1', 'Apellido 2', 'Fecha creación', 'Fecha actualización']}
                             visibleFields={['name', 'a_paterno', 'a_materno', 'created_at', 'updated_at']}
                             actionColumn={true}
@@ -32,8 +32,8 @@ export const ContentGridUsuarios = (props) => {
                             onClickDelete={e => eliminarRegistro(e)}
                             onChangeFilter={e => filtrar(e)}
                         />
+                        <Paginacion data={dataGrid} goToPage={goToPage}/>
                     </div>
-                    <Paginacion />
                 </div>
             </div>
         </>

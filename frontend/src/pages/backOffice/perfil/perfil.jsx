@@ -22,6 +22,10 @@ export const Perfil = () => {
         }
     },[logedUser])
 
+
+    useEffect(()=>{
+        console.log(usuario)
+    },[usuario])
     
     const response = (e) => {
         if(e){

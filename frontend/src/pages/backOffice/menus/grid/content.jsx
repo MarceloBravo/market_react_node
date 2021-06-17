@@ -2,12 +2,12 @@ import React from 'react'
 import { Header } from '../../../../components/backOffice/header'
 import { Menu } from '../../../../components/backOffice/menu'
 import { Grid } from '../../../../components/backOffice/grid'
-import { Paginacion } from '../../../../components/backOffice/paginacion'
 import { Alerta } from '../../../../components/shared/alerts'
 import { SpinnerComponent } from '../../../../components/shared/spinner'
+import { Paginacion } from '../../../../components/backOffice/paginacion'
 
 export const GridMenus = (props) => {
-    const { listado, eliminarRegistro, filtrar } = props
+    const { listado, eliminarRegistro, filtrar, goToPage } = props
 
     return (
         <div> 
@@ -29,8 +29,8 @@ export const GridMenus = (props) => {
                         onClickDelete={e => eliminarRegistro(e)}
                         onChangeFilter={e => filtrar(e)}
                     />
+                    <Paginacion data={listado} goToPage={goToPage}/>
                 </div>
-                <Paginacion />
             </div>
         </div>
     )

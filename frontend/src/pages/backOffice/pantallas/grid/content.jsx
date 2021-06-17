@@ -3,13 +3,13 @@ import { Header } from '../../../../components/backOffice/header';
 import { Menu } from '../../../../components/backOffice/menu';
 import { Alerta } from '../../../../components/shared/alerts';
 import { Grid } from '../../../../components/backOffice/grid';
-import { Paginacion } from '../../../../components/backOffice/paginacion';
 import { SpinnerComponent } from '../../../../components/shared/spinner'
 import { useSelector } from 'react-redux';
+import { Paginacion } from '../../../../components/backOffice/paginacion'
 
 export const GridPantallas = (props) => {
-    const { eliminarRegistro, filtrar } = props;
-    const listado = useSelector(state => state.GridReducer.data);
+    const { eliminarRegistro, filtrar, goToPage } = props;
+    const dataGrid = useSelector(state => state.PantallasReducer.dataGrid)
 
     
     return (
@@ -23,7 +23,7 @@ export const GridPantallas = (props) => {
                 <div className="content-section">                    
                     <Alerta />
                     <Grid
-                        data={listado}
+                        data={dataGrid}
                         headers={['Nombre', 'Menú', 'Fecha creación', 'Fecha actualización']}
                         visibleFields={['nombre', 'menu', 'created_at', 'updated_at']}
                         actionColumn={true}
@@ -33,8 +33,8 @@ export const GridPantallas = (props) => {
                         onChangeFilter={e => filtrar(e)}
                         
                     />
+                    <Paginacion data={dataGrid} goToPage={goToPage}/>
                 </div>
-                <Paginacion />
             </div>
         </div>
     );

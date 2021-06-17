@@ -28,7 +28,7 @@ categoriasModel.getPage = (pag, callback) => {
             }else{
                 let totRows = await cnn.promise().query(`SELECT count(*) AS totRows FROM categorias WHERE deleted_at IS NULL`)
                 console.log(totRows[0][0])
-                return callback(null, {data: res, rows: totRows[0][0].totRows, rowsPerPage: constantes.regPerPage, pag})
+                return callback(null, {data: res, totRows: totRows[0][0].totRows, rowsPerPage: constantes.regPerPage, pag})
             }
         })
     }else{
@@ -60,7 +60,7 @@ categoriasModel.filter = (texto, pag, callback) => {
             }else{
                 let totRows = await cnn.promise().query(`SELECT count(*) AS totRows FROM categorias WHERE deleted_at IS NULL AND nombre LIKE ${cnn.escape('%'+texto+'%')}`)
                 console.log(totRows)
-                return callback(null, {data: res, rows: totRows[0][0].totRows, rowsPerPage: constantes.regPerPage, pag})
+                return callback(null, {data: res, totRows: totRows[0][0].totRows, rowsPerPage: constantes.regPerPage, pag})
             }
         })
     }else{

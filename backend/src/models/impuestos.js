@@ -28,7 +28,7 @@ impuestosModel.getPage = (pag, callback) => {
                 return callback({mensaje: 'Ocurrió un error al obtener los datos: '+err.sqlMessage, tipoMensaje: 'danger', id:-1})
             }else{
                 let totReg = await cnn.promise().query(`SELECT COUNT(*) AS totReg FROM impuestos WHERE deleted_at IS NULL`)
-                return callback(null,{data: res, rows: totReg[0][0].totReg, rowsPerPage: constantes.regPerPage, page: pag})
+                return callback(null,{data: res, totRows: totReg[0][0].totReg, rowsPerPage: constantes.regPerPage, page: pag})
             }
         })
     }else{
@@ -69,7 +69,7 @@ impuestosModel.filter = (texto, pag, callback) => {
                 return callback({mensaje: 'Ocurrió un error al obtener los datos: '+err.sqlMessage, tipoMensaje: 'danger', id:-1})
             }else{
                 let totReg = await cnn.promise().query(`SELECT COUNT(*) AS totReg FROM impuestos WHERE deleted_at IS NULL AND ${criterio}`)
-                return callback(null,{data: res, rows: totReg[0][0].totReg, rowsPerPage: constantes.regPerPage, page: pag})
+                return callback(null,{data: res, totRows: totReg[0][0].totReg, rowsPerPage: constantes.regPerPage, page: pag})
             }
         })
     }else{

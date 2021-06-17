@@ -29,6 +29,10 @@
   border-color: #5e92aa !important;
 }
 
+.col-action{
+  width: 85px;
+}
+
 .action-button {
   padding: 0px 5px;
   cursor: pointer;

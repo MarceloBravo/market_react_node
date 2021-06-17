@@ -8,7 +8,13 @@ const INITIAL_STATE = {
         updated_at: '',
         deleted_at: '',
     },
-    list:[]
+    list:[],
+    dataGrid: {
+        data: [],
+        rowsPerPage: 10,
+        page: 0,
+        totRows: 0
+    }
 }
 
 
@@ -18,7 +24,7 @@ export const CategoriasReducer = (state = INITIAL_STATE, action) => {
         case types.FILTRAR_CATEGORIAS:
             return {
                 ...state,
-                list: action.payload.data
+                dataGrid: action.payload.data
             }
         case types.BUSCAR_CATEGORIAS:
         case types.INSERTAR_CATEGORIAS:

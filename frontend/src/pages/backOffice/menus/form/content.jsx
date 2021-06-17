@@ -100,7 +100,7 @@ export const ContentMenus = (props) => {
                                     {menus.length === 0 && <option>No se han encontrado registros</option>}
                                     {menus.length > 0 && <option>Seleccione</option>}
                                     {
-                                        menus.map(m => {
+                                        menus.filter(m => m.menu_padre_id === 0).map(m => {
                                             return <option key={m.id} value={m.id}>{m.nombre}</option>
                                         })
                                     }

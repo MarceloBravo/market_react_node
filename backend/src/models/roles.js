@@ -46,7 +46,7 @@ rolesModel.getPage = (pag, callback) => {
                     return callback({mensaje: 'Ocurrió un error al solicitar los registros: '+err.message, tipoMensaje: 'danger', id:-1});
                 }else{
                     let totRows = await getTotRows('SELECT COUNT(*) AS totReg FROM roles WHERE deleted_at IS NULL');
-                    return callback(null, {data:res, page: pag, rows: totRows, rowsPerPage: constantes.regPerPage});
+                    return callback(null, {data:res, page: pag, totRows, rowsPerPage: constantes.regPerPage});
                 }
             });
     }else{
@@ -151,7 +151,7 @@ rolesModel.filter = (texto, pag, callback) => {
                     return callback({mensaje: 'Ocurrió un error al filtrar los registros: '+err.message, tipoMensaje: 'danger', id:-1});
                 }else{
                     let totRows = await getTotRows(`SELECT COUNT(*) AS totReg FROM roles WHERE deleted_at IS NULL ${filtro}`);
-                    return callback(null, {data:res, page: pag, rows: totRows, rowsPerPage: constantes.regPerPage});
+                    return callback(null, {data:res, page: pag, totRows, rowsPerPage: constantes.regPerPage});
                 }
             });
     }else{

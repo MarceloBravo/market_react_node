@@ -45,11 +45,11 @@ export const TableGrid = (props) => {
                                 <th key={index}>{value}</th>
                             )
                         })}
-                        {actionColumn && permisos && (permisos.modificar === 1 || permisos.eliminar === 1) && <th>Acción</th>}
+                        {actionColumn && permisos && (permisos.modificar === 1 || permisos.eliminar === 1) && <th className="col-action">Acción</th>}
                     </tr>
                 </thead>
                 <tbody>
-                    {data && data.map((value, key) => {
+                    {data && data.data.map((value, key) => {
                         return <tr key={ key}>
                             {visibleFields.map((val, id) => {
                                 return <td key={key+'-'+id}>{ formatDate(value[val])}</td>
@@ -64,7 +64,6 @@ export const TableGrid = (props) => {
                     })}
                 </tbody>
             </Table>
-        
         </div>
     )
 }

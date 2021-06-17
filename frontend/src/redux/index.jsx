@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import LoginReducer from './Login/reducer';
-import { GridReducer } from './Grid/reducer';
+//import { GridReducer } from './Grid/reducer';
 import { MenusReducer } from './Menus/reducer';
 import { PantallasReducer } from './Pantalla/reducer';
 import { ModalDialogReducer } from './ModalDialog/reducer';
@@ -15,7 +15,6 @@ import { CategoriasReducer } from './Categorias/reducer'
 
 export default combineReducers({
     LoginReducer,
-    GridReducer,
     MenusReducer,
     PantallasReducer,
     ModalDialogReducer,

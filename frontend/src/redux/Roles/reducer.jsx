@@ -8,11 +8,23 @@ const INITIAL_STATE = {
         updated_at: null,
         deleted_at: null
     },
+    dataGrid: {
+        data: [],
+        rowsPerPage: 10,
+        page: 0,
+        totRows: 0
+    },
     list: []
 }
 
 export const RolesReducer = (state = INITIAL_STATE, action) => {
     switch(action.type){
+        case types.LISTAR_ROLES:
+        case types.FILTRAR_ROLES:
+            return {
+                ...state,
+                dataGrid: action.payload.data
+            }
         case types.BUSCAR_ROL:
         case types.INSERTAR_ROL:
         case types.ACTUALIZAR_ROL:

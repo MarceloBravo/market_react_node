@@ -21,14 +21,18 @@ export const leerPermisos = (idRol) => {
 
 //Ingresa, actualiza y elimina permisos
 export const grabarPermisos = (idRol, permisos) => {
-    console.log('JSON',JSON.stringify(permisos))
     return (dispatch, action)=>{
         axios.post(`${endPoint}/${idRol}`, JSON.stringify(permisos), { headers: getHeader()}).then(res => {
             dispatch({type: types.LEER_PERMISOS, payload: res})
             dispatch({type: AlertasTypes.MOSTRAR_ALERTA, payload: {mensaje: res.data.mensaje, tipo: res.data.tipoMensaje}})
         }).catch(error =>{
             console.log(error)
-            dispatch({type: AlertasTypes.MOSTRAR_ALERTA, payload: {mensaje: error.message, tipo: 'danger'}})
+            if(error.response?.data === 'Token no válido'){
+                dispatch({type: AlertasTypes.MOSTRAR_ALERTA, payload: {mensaje: "Token no válido o expirado.", tipo: 'danger'}})
+            }else{
+                dispatch({type: AlertasTypes.MOSTRAR_ALERTA, payload: {mensaje: error.message, tipo: 'danger'}})
+            }
+            
         })
     }
 }

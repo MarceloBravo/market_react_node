@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { filter, list } from  '../../../../actions/grid'
-import { eliminar } from  '../../../../actions/usuarios'
+//import { filter, list } from  '../../../../actions/grid'
+import { getPage, filter, eliminar } from  '../../../../actions/usuarios'
 import { useSelector, useDispatch } from 'react-redux'
 import { types as typesModal } from '../../../../redux/ModalDialog/types'
 import { types as spinnerTypes } from '../../../../redux/Spinner/types'
@@ -8,7 +8,7 @@ import { ContentGridUsuarios } from './content'
 
 
 export const UsuariosGrid = () => {
-    const listado = useSelector(state => state.GridReducer.data)
+    const dataGrid = useSelector(state => state.UsersReducer.dataGrid)
     const [ refreshList,  setRefreshList ] = useState(false)
     const [ id, setId ] = useState(null)
     const dispatch = useDispatch()
@@ -16,7 +16,7 @@ export const UsuariosGrid = () => {
 
     useEffect(()=>{
         dispatch({type: spinnerTypes.SHOW_SPINNER})
-        dispatch(list('usuarios',0));
+        dispatch(getPage(0));
     },[dispatch, refreshList])
 
 
@@ -37,18 +37,23 @@ export const UsuariosGrid = () => {
     const filtrar = (texto) => {
         dispatch({type: spinnerTypes.SHOW_SPINNER})
         if(texto.length > 0){
-            dispatch(filter('usuarios', texto, 0));
+            dispatch(filter(texto, 0));
         }else{
-            dispatch(list('usuarios',0));
+            dispatch(getPage(0));
         }
+    }
+
+    const goToPage = (e) => {
+        dispatch(getPage(e))
     }
 
     return (
         <ContentGridUsuarios 
             response={response} 
-            listado={listado} 
+            dataGrid={dataGrid} 
             eliminarRegistro={eliminarRegistro} 
             filtrar={filtrar}
+            goToPage={goToPage}
         />
     )
 }

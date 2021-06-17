@@ -1,33 +1,25 @@
-import React, {useEffect } from 'react'
+import React from 'react'
 import { Form, Nav, Navbar, Dropdown, Image } from 'react-bootstrap'
-import { Link, useHistory } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout } from '../../../actions/login'
 import { defaultImagesUrl, defaultAvatarUrl } from '../../../shared/constantes'
+import { types } from '../../../redux/Alert/types'
+import { TimerSession } from '../timerSession'
 import './style.css'
 
 export const Header = () => {
     const user = useSelector(state => state.LoginReducer.logedUser.user)
     const nombre_app = useSelector(state => state.PersonalizarReducer.config.nombre_app)
-    const isLogout = useSelector(state => state.LoginReducer.isLogout)
-    const history = useHistory()
     const dispatch = useDispatch()
-
-
-    useEffect(()=>{
-        if(isLogout){
-            if(sessionStorage.getItem('gimAppMabc')){
-                sessionStorage.removeItem('gimAppMabc')
-            }else if(localStorage.getItem('gimAppMabc')){
-                localStorage.removeItem('gimAppMabc')
-            }
-            history.push('/')
-        }
-    },[isLogout, history])
 
 
     const logoutApp = () => {
         dispatch(logout())
+    }
+
+    const clearMessages = () => {
+        dispatch({type: types.OCULTAR_ALERTA})
     }
 
 
@@ -41,19 +33,21 @@ export const Header = () => {
                 
                 
                 <Form inline>
+                    <TimerSession/>
                     <Dropdown>                        
                         <Dropdown.Toggle variant="success" id="dropdown-basic" className="perfil-menu">
                         {user && user.name } {user && user.a_paterno }
                         </Dropdown.Toggle>
 
                         <Dropdown.Menu>
-                            <Dropdown.Item as={Link} to="/perfil">Mi perfil</Dropdown.Item>
+                            <Dropdown.Item as={Link} to="/perfil" onClick={() => clearMessages()}>Mi perfil</Dropdown.Item>
                             <Dropdown.Divider />
                             <Dropdown.Item as={Link} to="#" onClick={() => logoutApp()}>Salir</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
                 </Form>
                 <Image src={(user && user.foto) ? defaultImagesUrl + user.foto  : defaultAvatarUrl} roundedCircle className="avatar"/>
+                
             </Navbar>
         </header>
     )

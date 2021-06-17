@@ -8,7 +8,7 @@ import { types as spinnerTypes } from '../../../../redux/Spinner/types'
 
 export const ImpuestosGrid = () => {
     const [ idEliminar, setIdEliminar ] = useState(null)
-    const listado = useSelector(state => state.ImpuestosReducer.listado)
+    const dataGrid = useSelector(state => state.ImpuestosReducer.dataGrid)
     const dispatch = useDispatch()
 
     useEffect(()=>{
@@ -38,13 +38,17 @@ export const ImpuestosGrid = () => {
         }
     }
 
+    const goToPage = (e) => {
+        dispatch(getPage(e))
+    }
 
-    return (
+    return (        
         <ImpuestosContent 
             response={response} 
-            listado={listado} 
+            dataGrid={dataGrid} 
             eliminarRegistro={eliminarRegistro} 
             fnFiltrar={fnFiltrar}
+            goToPage={goToPage}
         />
     )
 }

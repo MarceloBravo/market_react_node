@@ -8,7 +8,7 @@ import { Paginacion } from '../../../../components/backOffice/paginacion'
 import { ModalDialog } from '../../../../components/backOffice/modalDialog'
 
 export const ContentCategoriasGrid = (props) => {
-    const { response, listado, eliminarRegistro, filtrar } = props
+    const { response, dataGrid, eliminarRegistro, filtrar, goToPage } = props
 
     return (
         <div> 
@@ -22,7 +22,7 @@ export const ContentCategoriasGrid = (props) => {
                 <div className="content-section">                    
                     <Alerta />
                     <Grid
-                        data={listado}
+                        data={dataGrid}
                         headers={['Nombre', 'Fecha creación', 'Fecha actualización']}
                         visibleFields={['nombre', 'created_at', 'updated_at']}
                         actionColumn={true}
@@ -32,7 +32,7 @@ export const ContentCategoriasGrid = (props) => {
                         onChangeFilter={e => filtrar(e)}
                     />
                 </div>
-                <Paginacion />
+                <Paginacion data={dataGrid} goToPage={goToPage}/>
             </div>
         </div>
     )

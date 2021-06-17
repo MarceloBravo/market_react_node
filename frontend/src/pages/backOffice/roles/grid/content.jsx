@@ -3,12 +3,12 @@ import { Header } from '../../../../components/backOffice/header'
 import { Menu } from '../../../../components/backOffice/menu'
 import { Alerta } from '../../../../components/shared/alerts'
 import { Grid } from '../../../../components/backOffice/grid'
-import { Paginacion } from '../../../../components/backOffice/paginacion'
 import { ModalDialog } from '../../../../components/backOffice/modalDialog'
 import { SpinnerComponent } from '../../../../components/shared/spinner'
+import { Paginacion } from '../../../../components/backOffice/paginacion'
 
 export const RolesContent = (props) => {
-    const { listado, response, eliminarRegistro, filtrar } = props
+    const { dataGrid, response, eliminarRegistro, filtrar, goToPage } = props
 
     return (
         <>
@@ -23,7 +23,7 @@ export const RolesContent = (props) => {
                     <div className="content-section">                    
                         <Alerta />
                         <Grid
-                            data={listado}
+                            data={dataGrid}
                             headers={['Nombre', 'Descripción', 'Fecha creación', 'Fecha actualización']}
                             visibleFields={['name', 'description', 'created_at', 'updated_at']}
                             actionColumn={true}
@@ -32,8 +32,8 @@ export const RolesContent = (props) => {
                             onClickDelete={e => eliminarRegistro(e)}
                             onChangeFilter={e => filtrar(e)}
                         />
+                        <Paginacion data={dataGrid} goToPage={goToPage}/>
                     </div>
-                    <Paginacion />
                 </div>
             </div>
         </>
