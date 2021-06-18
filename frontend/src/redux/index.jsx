@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
 import LoginReducer from './Login/reducer';
-//import { GridReducer } from './Grid/reducer';
 import { MenusReducer } from './Menus/reducer';
 import { PantallasReducer } from './Pantalla/reducer';
 import { ModalDialogReducer } from './ModalDialog/reducer';
@@ -11,7 +10,8 @@ import { PermisosReducer } from './Permisos/reducer';
 import { SpinnerReducer } from './Spinner/reducer';
 import { PersonalizarReducer } from './Personalizar/reducer';
 import { ImpuestosReducer } from './Impuestos/reducer';
-import { CategoriasReducer } from './Categorias/reducer'
+import { CategoriasReducer } from './Categorias/reducer';
+import { SubCategoriasReducer } from  './SubCategorias/reducer';
 
 export default combineReducers({
     LoginReducer,
@@ -25,5 +25,6 @@ export default combineReducers({
     SpinnerReducer,
     PersonalizarReducer,
     ImpuestosReducer,
-    CategoriasReducer
+    CategoriasReducer,
+    SubCategoriasReducer
 })

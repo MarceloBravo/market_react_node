@@ -53,7 +53,7 @@ export const Grid = (props) => {
     }
 
     const formatDate = (date) => {
-        if (date && date !== null && date.toString().length >= 10 && (new Date(date)).toString() !== 'Invalid Date') {
+        if (date && date !== null && date.toString().length >= 10 && (new Date(date)).toString() !== 'Invalid Date' && date.substr(0, 10).split('-').length === 3) {
             let fecha = date.substr(0, 10).split('-').reverse().join('-')
             return fecha
         }

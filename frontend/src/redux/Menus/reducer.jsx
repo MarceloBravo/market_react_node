@@ -25,8 +25,7 @@ const INITIAL_STATE = {
 export const MenusReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case types.LISTAR_MENUS:
-        case types.FILTRAR_MENUS:      
-            console.log(action.payload.data, action.payload)  
+        case types.FILTRAR_MENUS:       
             return {
                 ...state,
                 dataGrid: action.payload.data

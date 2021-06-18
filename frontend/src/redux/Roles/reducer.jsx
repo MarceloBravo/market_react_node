@@ -39,7 +39,6 @@ export const RolesReducer = (state = INITIAL_STATE, action) => {
             }
         case types.ELIMINAR_ROL:
         case types.NUEVO_ROL:
-            console.log('NUEVO_ROL')
             return {
                 ...state, 
                 state: INITIAL_STATE

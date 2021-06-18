@@ -68,6 +68,32 @@ categoriasModel.filter = (texto, pag, callback) => {
     }
 }
 
+categoriasModel.getAll = (callback) => {
+    if(cnn){
+        let qry = `
+            SELECT
+                id,
+                nombre,
+                created_at,
+                updated_at 
+            FROM 
+                categorias 
+            WHERE 
+                deleted_at IS NULL
+        `
+
+        cnn.query(qry, async (err, res) => {
+            if(err){
+                return callback({mensaje: 'Ocurrió un error al solicitar todas las categorías: ' + err.message, tipoMensaje: 'danger'})
+            }else{
+                return callback(null, res)
+            }
+        })
+    }else{
+        return callback({mensaje: 'Conexión inactiva.', tipoMensaje: 'danger'})
+    }
+}
+
 categoriasModel.find = (id, callback) => {
     if(cnn){
         let qry = `

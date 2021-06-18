@@ -32,6 +32,17 @@ export const filter = (texto, pag) => {
     }
 }
 
+export const getAll = () => {
+    return (dispatch, action) => {
+        axios.get(`${endPoint}/${url}/get/all`,{headers: getHeader()}).then(res => {
+            dispatch({type: spinnerTypes.HIDE_SPINNER})
+            dispatch({type: types.GET_ALL_CATEGORIAS, payload: res})
+        }).catch(error => {
+            handlerError(dispatch, error, 'Error al filtrar las categorías: ')
+        })
+    }
+}
+
 export const find = (id) => {
     return (dispatch, action) => {
         axios.get(`${endPoint}/${url}/${id}`,{headers: getHeader()}).then(res => {

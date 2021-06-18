@@ -24,7 +24,6 @@ export const TimerSession = (props) => {
 
 
     useEffect(()=>{
-        console.log(seconds)
         if(seconds !== null && seconds > 0){
             let restaSeg = restaSegundos((new Date()).getTime())
             const interval = setInterval(()=> setSeconds(restaSeg), 1000)

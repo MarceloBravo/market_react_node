@@ -40,6 +40,12 @@ export const CategoriasReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 categoria: INITIAL_STATE.categoria
             }
+        case types.GET_ALL_CATEGORIAS:
+            console.log(action.payload.data, action.payload)
+            return {
+                ...state,
+                list: action.payload.data
+            }
         default:
             return state
     }

@@ -37,7 +37,7 @@ SubCategoriasModel.getPage = (pag, callback) => {
                                                             sc.deleted_at IS NULL AND 
                                                             c.deleted_at IS NULL`
                                                         )
-
+                
                 return callback(null, {data:res, page: pag, totRows: totRows[0][0].totReg, rowsPerPage: constantes.regPerPage});
             }
         })
@@ -133,26 +133,24 @@ SubCategoriasModel.find = (id, callback) => {
     if(cnn){
         let qry = `
                 SELECT 
-                    sc.id,
-                    sc.nombre,
-                    c.nombre as categoria,
-                    sc.categoria_id,
-                    sc.created_at,
-                    sc.updated_at
+                    id,
+                    nombre,
+                    categoria_id,
+                    created_at,
+                    updated_at,
+                    deleted_at
                 FROM 
                     sub_categorias sc 
-                    INNER JOIN categorias c ON sc.categoria_id = c.id
                 WHERE 
-                    sc.deleted_at IS NULL AND 
-                    c.deleted_at IS NULL AND 
-                    sc.id = ${cnn.escape(id)}
+                    deleted_at IS NULL AND 
+                    id = ${cnn.escape(id)}
         `
 
         cnn.query(qry, (err, res) => {
             if(err){
                 return callback({mensaje: 'Ocurrió un error al buscar la categoría: ' + err.message, tipoMensaje: 'danger'})
             }else{
-                return callback(null, res);
+                return callback(null, res[0]);
             }
         })
 

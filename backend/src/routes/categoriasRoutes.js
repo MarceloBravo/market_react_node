@@ -24,6 +24,16 @@ module.exports = function(app, passport){
         })
     })
 
+    app.get('/categorias/get/all', checkToken, (req, res) => {
+        categoriasModel.getAll((data, err) =>{
+            if(err){
+                res.json(err)
+            }else{
+                res.json(data)
+            }
+        })
+    })
+
     app.get('/categorias/:id', checkToken, (req, res) => {
         categoriasModel.find(req.params.id, (data, err) =>{
             if(err){

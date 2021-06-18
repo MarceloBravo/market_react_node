@@ -122,6 +122,39 @@ pantallaModel.get = (id, callback) => {
     }
 } 
 
+pantallaModel.getByUrl = (url, callback) => {
+    if(cnn){
+        let qry = `
+            SELECT 
+                p.nombre,
+                p.created_at,
+                p.updated_at,
+                p.deleted_at,
+                p.menus_id,
+                p.permite_crear,
+                p.permite_modificar,
+                p.permite_eliminar
+            FROM 
+                pantallas p
+                INNER JOIN menus m ON p.menus_id = m.id 
+            WHERE
+                p.deleted_at IS NULL
+                AND m.deleted_at IS NULL 
+                AND m.url = ${cnn.escape(url)}
+            `;
+
+            cnn.query(qry, (err, res) => {
+                if(err){
+                    console.log(err);
+                    return callback({mensaje: 'Ocurrió un error al buscar el registro: ' +err.message, tipoMensaje:'danger', id:-1});
+                }else{
+                    return callback(null, res[0]);
+                }
+            })
+    }else{
+        return callback({mensaje: 'Conexión inactiva.', tipoMensaje: 'danger', id:-1});
+    }
+}
 
 pantallaModel.filter = (texto, pag, callback) => {
     if(cnn){

@@ -33,6 +33,16 @@ module.exports = function(app, passport){
             }
         });
     });
+
+    app.get('/pantallas/byUrl/:url', checkToken, (req, res) => {
+        pantallasModel.getByUrl(req.params.url, (err, data) => {
+            if(err){
+                res.json(err);
+            }else{
+                res.json(data);
+            }
+        });
+    });
     
 
     app.get('/pantallas/filtrar/:texto/:pag', checkToken, (req, res) => {

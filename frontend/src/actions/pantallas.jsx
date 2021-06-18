@@ -41,6 +41,17 @@ export const find = (id) => {
     }
 }
 
+export const findByUrl = (urlWanted) => {
+    return (dispatch, action) => {
+        axios.get(`${endPoint}/${url}/byUrl/${urlWanted}`, {headers: getHeader()}).then(res => {
+            dispatch({type: spinnerTypes.HIDE_SPINNER})
+            dispatch({type: types.FIND_PANTALLA, payload: res});
+        }).catch(error => {
+            handlerError(dispatch, error, 'Error al buscar la pantalla: ')
+        });
+    }
+}
+
 export const insert = (pantalla) => {
     return (dispatch, action) => {
         axios.post(`${endPoint}/${url}`, pantalla, {headers: getHeader()} ).then(res => {
