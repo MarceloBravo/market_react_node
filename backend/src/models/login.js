@@ -47,8 +47,7 @@ login.getUserData = async (credentials, callback) => {
                         return callback(err ? err.message : {mensaje: 'Usuario y/o contraseña no válidos.',tipoMensaje:'danger', id:-1}, {access_token: null, user:null})
                     }else{
                         delete row.password
-                        //console.log('result.id', result.id)
-                        access_token = jwt.sign({user: row, roles}, constantes.secret, {issuer: credentials.host, expiresIn: '120s'})    //Agregar datos al token: https://www.npmjs.com/package/jsonwebtoken
+                        access_token = jwt.sign({user: row, roles}, constantes.secret, {issuer: credentials.host, expiresIn: '5h'})    //Agregar datos al token: https://www.npmjs.com/package/jsonwebtoken
                         return callback(null,{access_token, user: row, roles})
                     }
                 })

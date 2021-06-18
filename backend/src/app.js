@@ -26,6 +26,7 @@ require('./routes/permisosRoutes')(app, null);
 require('./routes/configRoutes')(app, null);
 require('./routes/impuestosRoutes')(app, null);
 require('./routes/categoriasRoutes')(app, null);
+require('./routes/SubCategoriasRoutes')(app, null);
 
 app.listen(app.get('port'), () => {
     console.log('Servidor activo en el puerto 3000')
