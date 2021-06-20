@@ -40,6 +40,11 @@ categoriasModel.filter = (texto, pag, callback) => {
     if(cnn){
         let desde = constantes.regPerPage * pag
         let hasta = desde + constantes.regPerPage
+        let filtro = `(
+            nombre LIKE ${cnn.escape('%'+texto+'%')} OR
+            CONVERT(created_at, CHAR) LIKE ${cnn.escape('%'+texto+'%')} OR
+            CONVERT(updated_at, CHAR) LIKE ${cnn.escape('%'+texto+'%')}
+        )`
         let qry = `
             SELECT
                 id,
@@ -50,7 +55,7 @@ categoriasModel.filter = (texto, pag, callback) => {
                 categorias 
             WHERE 
                 deleted_at IS NULL AND 
-                nombre LIKE ${cnn.escape('%'+texto+'%')}
+                ${filtro}
             LIMIT ${desde}, ${hasta}
         `
 
@@ -58,8 +63,7 @@ categoriasModel.filter = (texto, pag, callback) => {
             if(err){
                 return callback({mensaje: 'Ocurrió un error al filtrar los registros: ' + err.message, tipoMensaje: 'danger'})
             }else{
-                let totRows = await cnn.promise().query(`SELECT count(*) AS totRows FROM categorias WHERE deleted_at IS NULL AND nombre LIKE ${cnn.escape('%'+texto+'%')}`)
-                console.log(totRows)
+                let totRows = await cnn.promise().query(`SELECT count(*) AS totRows FROM categorias WHERE deleted_at IS NULL AND nombre LIKE ${filtro}`)
                 return callback(null, {data: res, totRows: totRows[0][0].totRows, rowsPerPage: constantes.regPerPage, pag})
             }
         })

@@ -12,6 +12,7 @@ import { PersonalizarReducer } from './Personalizar/reducer';
 import { ImpuestosReducer } from './Impuestos/reducer';
 import { CategoriasReducer } from './Categorias/reducer';
 import { SubCategoriasReducer } from  './SubCategorias/reducer';
+import { MarcasReducer } from  './Marcas/reducer';
 
 export default combineReducers({
     LoginReducer,
@@ -26,5 +27,6 @@ export default combineReducers({
     PersonalizarReducer,
     ImpuestosReducer,
     CategoriasReducer,
-    SubCategoriasReducer
+    SubCategoriasReducer,
+    MarcasReducer
 })

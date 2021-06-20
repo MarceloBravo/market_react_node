@@ -17,7 +17,11 @@ import { ImpuestosForm } from './pages/backOffice/impuestos/form/form';
 import { CategoriasGrid } from './pages/backOffice/categorias/grid/grid';
 import { CategoriasForm } from './pages/backOffice/categorias/form/form';
 import { SubCategoriasGrid } from './pages/backOffice/subCategorias/grid/grid';
-import { SubCategoriasForm } from './pages/backOffice/subCategorias/form/form'
+import { SubCategoriasForm } from './pages/backOffice/subCategorias/form/form';
+import { MarcasGridReducer } from './pages/backOffice/marcas/grid/grid';
+import { MarcasForm } from './pages/backOffice/marcas/form/form';
+
+
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
@@ -62,6 +66,9 @@ function App() {
             <Route exact path="/sub_categorias" component={SubCategoriasGrid} />
             <Route exact path="/sub_categorias/nuevo" component={SubCategoriasForm} />
             <Route exact path="/sub_categorias/edit/:id" component={SubCategoriasForm} />
+            <Route exact path="/marcas" component={MarcasGridReducer} />
+            <Route exact path="/marcas/nuevo" component={MarcasForm} />
+            <Route exact path="/marcas/edit/:id" component={MarcasForm} />
             <Route exact path=""/>
           </Switch>
         </BrowserRouter>
