@@ -18,7 +18,6 @@ export const SubCategoriasGrid = () => {
         dispatch({type: spinnerTypes.SHOW_SPINNER})
         dispatch(findByUrl(window.location.pathname.split('/')[1])) //Solicita los datos de la pantalla tales como el nombre
         dispatch(getPage(0))    //Solicita los datos para la grilla
-        console.log('xxxxxxxxxxxxxxxxxxxxxxxxxx')
     },[dispatch])
 
 

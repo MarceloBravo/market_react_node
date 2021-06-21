@@ -20,7 +20,8 @@ import { SubCategoriasGrid } from './pages/backOffice/subCategorias/grid/grid';
 import { SubCategoriasForm } from './pages/backOffice/subCategorias/form/form';
 import { MarcasGridReducer } from './pages/backOffice/marcas/grid/grid';
 import { MarcasForm } from './pages/backOffice/marcas/form/form';
-
+import { UnidadesGrid } from './pages/backOffice/unidades/grid/grid';
+import { UnidadesForm } from './pages/backOffice/unidades/form/form';
 
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
@@ -69,6 +70,9 @@ function App() {
             <Route exact path="/marcas" component={MarcasGridReducer} />
             <Route exact path="/marcas/nuevo" component={MarcasForm} />
             <Route exact path="/marcas/edit/:id" component={MarcasForm} />
+            <Route exact path="/unidades" component={UnidadesGrid} />
+            <Route exact path="/unidades/nuevo" component={UnidadesForm} />
+            <Route exact path="/unidades/edit/:id" component={UnidadesForm} />
             <Route exact path=""/>
           </Switch>
         </BrowserRouter>

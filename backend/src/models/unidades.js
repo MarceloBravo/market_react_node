@@ -116,7 +116,7 @@ UnidadesModel.find = (id, callback) => {
             if(err){
                 return callback({mensaje: 'Ocurrió un error al buscar la unidad: '+err.message, tipoMensaje: 'danger'})
             }else{
-                return callback(null, res)
+                return callback(null, res[0])
             }
         })
     }else{

@@ -4,11 +4,11 @@ import { Header } from '../../../../components/backOffice/header'
 import { SpinnerComponent } from '../../../../components/shared/spinner'
 import { Menu } from '../../../../components/backOffice/menu'
 import { Alerta } from '../../../../components/shared/alerts'
-import { Paginacion } from '../../../../components/backOffice/paginacion'
 import { Grid } from '../../../../components/backOffice/grid'
+import { Paginacion } from '../../../../components/backOffice/paginacion'
 
-export const SubCategoriasGridContent = (props) => {
-    const { dataGrid, pantalla, response, goToPage, eliminarRegistro, filtrar } = props
+export const UnidadesGridContent = (props) => {
+    const { response, dataGrid, currentUrl, eliminarRegistro, filtrar, goToPage, pantalla } = props
 
     return (
         <>
@@ -24,11 +24,11 @@ export const SubCategoriasGridContent = (props) => {
                         <Alerta />
                         <Grid
                             data={dataGrid}
-                            headers={['Nombre', 'Categoría', 'Fecha creación', 'Fecha actualización']}
-                            visibleFields={['nombre', 'categoria', 'created_at', 'updated_at']}
+                            headers={['Nombre', 'Fecha creación', 'Fecha actualización']}
+                            visibleFields={['nombre', 'created_at', 'updated_at']}
                             actionColumn={true}
-                            title={'Mantenedor de ' + pantalla.nombre}
-                            urlToForm={window.location.pathname.split('/')[1]}
+                            title={'Mantenedor de '+pantalla.nombre}
+                            urlToForm={currentUrl}
                             onClickDelete={e => eliminarRegistro(e)}
                             onChangeFilter={e => filtrar(e)}
                         />
