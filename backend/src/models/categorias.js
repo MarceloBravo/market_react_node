@@ -167,7 +167,6 @@ categoriasModel.update = (id, data, callback) => {
         let qry = `
             UPDATE categorias SET 
                 nombre = ${cnn.escape(data.nombre)},
-                created_at = CURDATE(),
                 updated_at = CURDATE()
             WHERE 
                 id = ${cnn.escape(id)}

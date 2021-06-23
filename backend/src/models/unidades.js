@@ -156,7 +156,6 @@ UnidadesModel.update = (id, data, callback) => {
     if(cnn){
         let qry = `UPDATE unidades SET 
                         nombre = ${cnn.escape(data.nombre)},
-                        created_at = CURDATE(),
                         updated_at = CURDATE()
                     WHERE 
                         id = ${cnn.escape(id)}`

@@ -29,6 +29,7 @@ require('./routes/categoriasRoutes')(app, null);
 require('./routes/SubCategoriasRoutes')(app, null);
 require('./routes/marcasRoutes')(app, null);
 require('./routes/unidadesRoutes')(app, null);
+require('./routes/productosRoutes')(app, null);
 
 
 app.listen(app.get('port'), () => {

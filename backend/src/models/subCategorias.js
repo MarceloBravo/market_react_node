@@ -198,7 +198,6 @@ SubCategoriasModel.update = (id, data, callback) => {
                 UPDATE sub_categorias SET 
                     nombre = ${cnn.escape(data.nombre)},
                     categoria_id = ${cnn.escape(data.categoria_id)},
-                    created_at = CURDATE(),
                     updated_at = CURDATE() 
                 WHERE id = ${cnn.escape(id)}
         `

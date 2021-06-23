@@ -161,7 +161,6 @@ MarcasModel.update = (id, data, callback) => {
     if(cnn){
         let qry = `UPDATE marcas SET
                         nombre = ${cnn.escape(data.nombre)},
-                        created_at = CURDATE(),
                         updated_at = CURDATE()
                     WHERE 
                         id = ${cnn.escape(id)}`
