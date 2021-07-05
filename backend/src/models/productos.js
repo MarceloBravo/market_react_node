@@ -46,7 +46,6 @@ ProductosModel.getPage = (pag, callback) => {
                 return callback({mensaje: 'Ocurrió un error al obtener el listado de productos: '+err.message, tipoMensaje: 'danger'})
             }else{
                 let totRows = await cnn.promise().query(`SELECT COUNT(p.id) as totRows FROM ${fromClause} WHERE p.deleted_at IS NULL`)
-                console.log(totRows)
                 return callback(null, {data: res, rousPerPage: constantes.regPerPage, rows: totRows[0][0].totRows, page: pag})
             }
         })
@@ -171,12 +170,28 @@ ProductosModel.find = (id, callback) => {
                 SELECT 
                     p.id,
                     p.nombre,
+                    p.descripcion,
                     p.precio_venta_normal,
+                    CASE 
+                        WHEN 
+                            pp.fecha_desde <= CURRENT_TIMESTAMP() AND 
+                            pp.fecha_hasta >= CURRENT_TIMESTAMP() 
+                        THEN 
+                            pp.precio 
+                        ELSE 
+                            p.precio_venta_normal 
+                    END AS precio_actual,
+                    pp.fecha_desde as precio_fecha_desde, 
+                    pp.fecha_hasta as precio_fecha_hasta, 
                     imp.total_impuestos,
                     p.stock,
-                    u.nombre as unidad,
-                    m.nombre as marca,
-                    c.nombre as categoria,
+                    p.unidad_id,
+                    u.nombre as nombre_unidad,
+                    p.marca_id,
+                    m.nombre as nombre_marca,
+                    p.categoria_id,
+                    c.nombre as nombre_categoria,
+                    p.sub_categoria_id,
                     sc.nombre as subcategoria,
                     ip.source_image,
                     p.created_at,
@@ -194,14 +209,52 @@ ProductosModel.find = (id, callback) => {
                         INNER JOIN impuestos i ON ip.impuesto_id = i.id 
                         GROUP BY ip.producto_id
                     ) imp ON p.id = imp.producto_id
+                    LEFT JOIN (
+                        SELECT precio, producto_id, fecha_desde, fecha_hasta 
+                        FROM precios_productos 
+                        WHERE deleted_at IS NULL 
+                        ORDER BY id DESC 
+                        LIMIT 1
+                    ) pp ON p.id = pp.producto_id
                 WHERE
                     p.deleted_at IS NULL AND 
                     p.id = ${cnn.escape(id)}`
+                
+            let qryImpuestos = `
+                SELECT 
+                    i.id,
+                    i.nombre, 
+                    i.sigla, 
+                    i.porcentaje 
+                FROM 
+                    impuestos_productos ip
+                    INNER JOIN impuestos i ON ip.impuesto_id = i.id
+                WHERE 
+                    ip.deleted_at IS NULL AND 
+                    ip.producto_id = ${cnn.escape(id)}`
 
+            let qryImagenes = `
+                            SELECT 
+                                id,
+                                source_image,
+                                imagen_principal
+                            FROM 
+                                imagenes_productos
+                            WHERE 
+                                deleted_at IS NULL AND 
+                                producto_id = ${cnn.escape(id)}`
         cnn.query(qry, async (err, res) =>{
             if(err){
                 return callback({mensaje: 'Ocurrió un error al buscar el producto: '+err.message, tipoMensaje: 'danger'})
             }else{
+                if(res[0]){
+                    let impuestos = await cnn.promise().query(qryImpuestos)
+                    res[0].impuestos = impuestos[0]
+                    res[0].impuestos_id = impuestos[0].map(i => i.id)
+
+                    let imagenes = await cnn.promise().query(qryImagenes)
+                    res[0].imagenes = imagenes[0]
+                }
                 return callback(null, res[0])
             }
         })
@@ -214,7 +267,6 @@ ProductosModel.find = (id, callback) => {
 ProductosModel.insert = async (data, callback) => {
     if(cnn){
         let { impuestos_id, imagenes } = data
-        console.log(impuestos_id, imagenes)
 
         let qryProductos = `
                 INSERT INTO productos (
@@ -247,12 +299,12 @@ ProductosModel.insert = async (data, callback) => {
                 return callback({mensaje: 'Ocurrió un error al ingresar el producto: '+err.message, tipoMensaje: 'danger'})
             }else{
                 if(res.affectedRows > 0){
-                    if(impuestos_id.length > 0){
+                    if(impuestos_id?.length > 0){
                         if(!await ingresarImpuestos(res.insertId, impuestos_id)){
                             throw 'Error al registrar los impuestos del productos.'
                         }
                     }
-                    if(imagenes.length > 0){
+                    if(imagenes?.length > 0){
                         if(!await ingresarFotos(res.insertId, imagenes)){
                             throw 'Error al registrar las fotos del productos.'
                         }
@@ -301,15 +353,20 @@ const ingresarImpuestos = (idProducto, arrImpuestos) => {
 }
 
 
-const ingresarFotos = (idProducto, arrFotos) => {
+const ingresarFotos = async (idProducto, arrFotos) => {
+    //arrFotos.forEach(f => console.log('f=',f))
+    let fotos = await arrFotos.map(f => JSON.parse(f))
+    //console.log('arrFotos', arrFotos, fotos)
+    
     let fecha = new Date()
     let strFecha = `${fecha.getFullYear()}-${fecha.getMonth()}-${fecha.getDate()} ${fecha.getHours()}:${fecha.getMinutes()}:${fecha.getSeconds()}`
-    let arrNombresFotos = arrFotos.map(f => `'${f.source_image}'`)
+    let arrNombresFotos = fotos.map(f => `'${f.source_image}'`)
 
     let qryFotosDelete = `DELETE FROM imagenes_productos WHERE producto_id = ${idProducto} AND source_image NOT IN (${arrNombresFotos})`
     let qryFotosInsert = `INSERT INTO imagenes_productos 
                             (producto_id, source_image, imagen_principal, created_at, updated_at) 
-                            VALUES ? `
+                            VALUES `
+    let qryFotosUpdate = ``
                             
     return new Promise(function(resolve, reject){
         try{
@@ -318,23 +375,34 @@ const ingresarFotos = (idProducto, arrFotos) => {
                     return reject(false)
                 }else{
                     //Verificando si las imágenes ya se encuentran en la base de datos o no
-                    let arrNuevasImagenes = []
+                    let arrNuevasImagenes = ''
                     //let comparar = true
 
-                    arrFotos.forEach(e => {
+                    fotos.forEach(e => {
                         //comparar = true
                         let existe = res.map(i => i.source_image).indexOf(e.source_image)
 
                         //Sólo si la imágen no se encuentra en la base de datos asociada al producto, se crea el array con los 
                         //datos de la imágen a ingresar y se agrega a la matriz de imágenes a registrar
-                        if(existe === -1){  
-                            arrNuevasImagenes.push([idProducto, `${e.source_image}`, e.imagen_principal, `${strFecha}`, `${strFecha}`])
+                        if(existe === -1){
+                            arrNuevasImagenes += (arrNuevasImagenes !== '' ? ',' :'')+`(${idProducto}, '${e.source_image}', ${e.imagen_principal}, '${strFecha}', '${strFecha}')`
+                        }else{
+                            qryFotosUpdate = `UPDATE imagenes_productos SET 
+                                                imagen_principal = ${e.imagen_principal},
+                                                updated_at = CURDATE()
+                                            WHERE 
+                                                producto_id = ${idProducto} AND 
+                                                source_image = '${e.source_image}' `
                         }
                     })
 
                     await cnn.promise().query(qryFotosDelete)
                     if(arrNuevasImagenes.length > 0){
-                        await cnn.promise().query(qryFotosInsert, [arrNuevasImagenes])
+                        await cnn.promise().query(qryFotosInsert + arrNuevasImagenes)
+                    }
+                    if(qryFotosUpdate !== ``){
+                        //console.log('UPDATE = ',qryFotosUpdate)
+                        await cnn.promise().query(qryFotosUpdate)
                     }
                     return resolve(true)
                 }
@@ -352,7 +420,9 @@ const ingresarFotos = (idProducto, arrFotos) => {
 ProductosModel.update = (id, data, callback) => {
     if(cnn){
         let { impuestos_id, imagenes } = data
-        console.log(impuestos_id, imagenes)
+        //console.log('imagenes',imagenes, imagenes.length, 
+        //imagenes[0], imagenes[1], imagenes[2],
+        //'0-1',imagenes[0].substr(0,1), '1-1',imagenes[0].substr(1,1), '2-1',imagenes[0].substr(2,1))
         
         let qryProductos = `
                 UPDATE productos SET 
@@ -374,12 +444,12 @@ ProductosModel.update = (id, data, callback) => {
                 return callback({mensaje: 'Ocurrió un error al ingresar el producto: '+err.message, tipoMensaje: 'danger'})
             }else{
                 if(res.affectedRows > 0){
-                    if(impuestos_id.length > 0){
+                    if(impuestos_id?.length > 0){
                         if(!await ingresarImpuestos(id, impuestos_id)){
                             throw 'Error al actualizar los impuestos del productos.'
                         }
                     }
-                    if(imagenes.length > 0){
+                    if(imagenes?.length > 0){
                         if(!await ingresarFotos(id, imagenes)){
                             throw 'Error al actualizar las fotos del productos.'
                         }
@@ -396,12 +466,10 @@ ProductosModel.update = (id, data, callback) => {
     }
 }
 
+
 ProductosModel.softDelete = (id, callback) => {
     if(cnn){
-        
         let qryProductos = `UPDATE productos SET deleted_at = CURDATE() WHERE id = ${cnn.escape(id)}`
-        
-        
         cnn.query(qryProductos, async (err, res) => {
             if(err){
                 return callback({mensaje: 'Ocurrió un error al eliminar el producto: '+err.message, tipoMensaje: 'danger'})

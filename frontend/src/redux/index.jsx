@@ -14,6 +14,8 @@ import { CategoriasReducer } from './Categorias/reducer';
 import { SubCategoriasReducer } from  './SubCategorias/reducer';
 import { MarcasReducer } from  './Marcas/reducer';
 import { UnidadesReducer } from  './Unidades/reducer';
+import { ProductosReducer } from  './Productos/reducer';
+
 
 export default combineReducers({
     LoginReducer,
@@ -30,5 +32,6 @@ export default combineReducers({
     CategoriasReducer,
     SubCategoriasReducer,
     MarcasReducer,
-    UnidadesReducer
+    UnidadesReducer,
+    ProductosReducer,
 })

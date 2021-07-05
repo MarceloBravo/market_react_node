@@ -4,7 +4,7 @@ var publicDir = require('path').join(__dirname,'/public');  //Configurando la ca
 
 const app = express();
 app.use(express.static(publicDir)); 
-app.use(cors());    
+app.use(cors());
 
 const morgan = require('morgan');   //
 const bodyParser = require('body-parser');  //Nevesario para atender las peticiones post

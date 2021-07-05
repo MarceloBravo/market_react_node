@@ -35,13 +35,11 @@ export const CategoriasReducer = (state = INITIAL_STATE, action) => {
             }
         case types.ELIMINAR_CATEGORIAS:
         case types.NUEVA_CATEGORIA:
-            console.log('NUEVA_CATEGORIA')
             return {
                 ...state,
                 categoria: INITIAL_STATE.categoria
             }
         case types.GET_ALL_CATEGORIAS:
-            console.log(action.payload.data, action.payload)
             return {
                 ...state,
                 list: action.payload.data

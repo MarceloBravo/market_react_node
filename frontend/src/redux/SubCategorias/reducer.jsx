@@ -44,6 +44,11 @@ export const SubCategoriasReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state, INITIAL_STATE
             }
+        case types.VACIAR_LISTADO_TODAS_LAS_SUBCATEGORIAS:
+            return {
+                ...state,
+                list: []
+            }
         default:
             return state
     }

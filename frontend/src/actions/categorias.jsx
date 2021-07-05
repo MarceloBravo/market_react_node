@@ -70,7 +70,7 @@ export const update = (id, data) => {
         axios.put(`${endPoint}/${url}/${id}`, data, {headers: getHeader()}).then(res => {
             dispatch({type: spinnerTypes.HIDE_SPINNER})
             dispatch({type: alertTypes.MOSTRAR_ALERTA, payload: { mensaje: res.data.mensaje, tipo: res.data.tipoMensaje}})
-            dispatch({type: types.ACTUALIZAR_CATEGORIAS, payload: res.data})
+            dispatch({type: types.ACTUALIZAR_CATEGORIAS, payload: data})
         }).catch(error => {
             handlerError(dispatch, error, 'Error al actualizar la categoría: ')
         })
@@ -82,7 +82,7 @@ export const deleteReg = (id) => {
         axios.delete(`${endPoint}/${url}/${id}`,{headers: getHeader()}).then(res => {
             dispatch({type: spinnerTypes.HIDE_SPINNER})
             dispatch({type: alertTypes.MOSTRAR_ALERTA, payload: { mensaje: res.data.mensaje, tipo: res.data.tipoMensaje}})
-            dispatch({type: types.ELIMINAR_CATEGORIAS, payload: res.data})
+            dispatch({type: types.ELIMINAR_CATEGORIAS})
         }).catch(error => {
             handlerError(dispatch, error, 'Error al eliminar la categoría: ')
         })

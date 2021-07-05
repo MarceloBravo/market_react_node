@@ -20,6 +20,12 @@ module.exports = function(app, passport){
         })
     })
 
+    app.get('/sub_categorias/get/all/:id', checkToken, (req, res) => {
+        SubCategoriasModule.getAllByCategory(req.params.id, (err, data) => {
+            res.json(err ? err : data )
+        })
+    })
+
     app.get('/sub_categorias/:id', checkToken, (req, res) => {
         SubCategoriasModule.find(req.params.id, (err, data) => {
             res.json(err ? err : data )

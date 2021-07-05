@@ -22,6 +22,16 @@ module.exports = function(app, passport){
         })
     })
 
+    app.get('/impuestos/get/all', checkToken, (req, res) => {
+        impuestosModel.getAll((data, err) => {
+            if(err){
+                res.json(err)
+            }else{
+                res.json(data)
+            }
+        })
+    })
+
     app.get('/impuestos/:id', checkToken ,(req, res) => {
         impuestosModel.find(req.params.id, (data, err) => {
             if(err){

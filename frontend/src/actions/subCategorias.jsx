@@ -39,6 +39,19 @@ export const getAll = () => {
     }
 } 
 
+export const getAllByCategory = (id) => {
+    console.log(`${serverEndPoint}/${url}/get/all/${id}`)
+    return (dispatch, action) => {
+        axios.get(`${serverEndPoint}/${url}/get/all/${id}`, {headers: getHeader()}).then(res => {
+            dispatch({type: spinnerTypes.HIDE_SPINNER})
+            dispatch({type: subCategoriasTypes.LISTAR_TODAS_LAS_SUBCATEGORIAS, payload: res})
+        }).catch(error => {
+            handlerError(dispatch, error, 'Ocurrió un error al obtener el listado de sub-categorías:')
+        })
+    }
+} 
+
+
 export const find = (id) => {
     return (dispatch, action) => {
         axios.get(`${serverEndPoint}/${url}/${id}`, {headers: getHeader()}).then(res => {

@@ -37,6 +37,34 @@ impuestosModel.getPage = (pag, callback) => {
 }
 
 
+impuestosModel.getAll = (callback) => {
+    if(cnn){
+        let qry = `SELECT
+                        id,
+                        nombre,
+                        sigla,
+                        porcentaje,
+                        created_at,
+                        updated_at,
+                        deleted_at
+                    FROM 
+                        impuestos 
+                    WHERE 
+                        deleted_at IS NULL`
+
+        cnn.query(qry, (err, res) => {
+            if(err){
+                return callback({mensaje: 'Ocurrió un error al obtener el listado de todos los impuestos: '+err.sqlMessage, tipoMensaje: 'danger', id:-1})
+            }else{
+                return callback(null, res)
+            }
+        })
+    }else{
+        return callback({mensaje: 'Conexión inactive', tipoMensaje: 'danger', id: -1})
+    }
+}
+
+
 
 impuestosModel.filter = (texto, pag, callback) => {
     if(cnn){

@@ -18,3 +18,8 @@ export const handlerError = (dispatch, error, msg) => {
         dispatch({type: alertTypes.MOSTRAR_ALERTA, payload: {mensaje: error.message, tipo: 'danger' }})
     }
 }
+
+export const getHeaderFormData = () => {
+    let token = localStorage.getItem('gimAppMabc')
+    return {'Content-Type':'multipart/form-data', 'Authorization':`Bearer ${token}`}
+}

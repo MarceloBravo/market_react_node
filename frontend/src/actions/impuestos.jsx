@@ -30,6 +30,16 @@ export const filtrar = (texto, pag) => {
     }
 }
 
+export const getAll = () => {
+    return (dispatch, action) => {
+        axios.get(`${endPoint}/${url}/get/all`, {headers: getHeader()}).then(res => {
+            dispatch({type: spinnerTypes.HIDE_SPINNER})
+            dispatch({type: types.GET_ALL_IMPUESTOS, payload: res})
+        }).catch(error => {
+            handlerError(dispatch, error, 'Error al listar los impuestos: ')
+        })
+    }
+}
 
 export const find = (id) => {
     return (dispatch, action) => {

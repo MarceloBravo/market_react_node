@@ -1,0 +1,66 @@
+.div-images-containner{
+    border: solid #dee2e6 thin;
+    border-radius: 5px;
+    padding: 1%;
+}
+
+
+.images-containner{
+    overflow: auto;
+    position: absolute;
+    width: 95% !important;
+    height: 90%;
+    margin: 10px 0px;
+}
+
+
+.image-producto{
+    margin: 5px;
+    cursor: pointer;
+}
+
+.image-producto:hover + .check-button{
+    visibility: visible;
+}
+
+.group-buttons{
+    margin: 10px 0px;
+}
+
+.image-button-containner{
+    position: relative;
+    top: -15%;
+    padding: 0% 14%;
+}
+
+.check-button, 
+.delete-button{
+    height: 25px;
+    cursor: pointer;
+    border-radius: 100%;
+    margin: 0px 5%;
+    position: absolute;
+    visibility: hidden;
+}
+
+.check-button:hover, 
+.delete-button:hover{
+    visibility: visible;
+}
+
+.check-button{
+    left: -9%;
+    top: -15%;
+    position: inherit;
+}
+
+.delete-button{
+    top: 0px;
+    left: 74%;
+    visibility: visible;
+}
+
+.default-image{
+    border-color: #00bcd4  !important;
+    border-width: medium !important;
+}

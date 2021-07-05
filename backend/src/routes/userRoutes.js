@@ -61,7 +61,7 @@ module.exports = function (app, passport){
 
     
     app.put('/usuarios/:id', [checkToken, uploadFiles.single('objImage')], (req, res) => {
-        console.log('req.body',req.body);
+        console.log(req, req.file)
         userModel.update(req.params.id, req.body, (err, data) => {
             if(err){
                 res.json(err)

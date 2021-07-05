@@ -129,6 +129,39 @@ SubCategoriasModel.getAll = (callback) => {
     }
 }
 
+
+SubCategoriasModel.getAllByCategory = (idCategoria, callback) => {
+    if(cnn){
+        let qry = `
+                SELECT 
+                    sc.id,
+                    sc.nombre,
+                    c.nombre as categoria,
+                    sc.categoria_id,
+                    sc.created_at,
+                    sc.updated_at
+                FROM 
+                    sub_categorias sc 
+                    INNER JOIN categorias c ON sc.categoria_id = c.id
+                WHERE 
+                    sc.deleted_at IS NULL AND 
+                    c.deleted_at IS NULL AND 
+                    sc.categoria_id = ${cnn.escape(idCategoria)}
+        `
+
+        cnn.query(qry, (err, res) => {
+            if(err){
+                return callback({mensaje: 'Ocurrió un error al solicitar las sub-categorías por categoría: ' + err.message, tipoMensaje: 'danger'})
+            }else{
+                return callback(null, res);
+            }
+        })
+
+    }else{
+        return callback({mensaje: 'Conexión inactiva.', tipoMensaje: 'danger'})
+    }
+}
+
 SubCategoriasModel.find = (id, callback) => {
     if(cnn){
         let qry = `

@@ -22,6 +22,9 @@ import { MarcasGridReducer } from './pages/backOffice/marcas/grid/grid';
 import { MarcasForm } from './pages/backOffice/marcas/form/form';
 import { UnidadesGrid } from './pages/backOffice/unidades/grid/grid';
 import { UnidadesForm } from './pages/backOffice/unidades/form/form';
+import { ProductosGrid } from './pages/backOffice/productos/grid/grid';
+import { ProductosForm } from './pages/backOffice/productos/form/form';
+
 
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
@@ -73,6 +76,9 @@ function App() {
             <Route exact path="/unidades" component={UnidadesGrid} />
             <Route exact path="/unidades/nuevo" component={UnidadesForm} />
             <Route exact path="/unidades/edit/:id" component={UnidadesForm} />
+            <Route exact path="/productos" component={ProductosGrid} />
+            <Route exact path="/productos/nuevo" component={ProductosForm} />
+            <Route exact path="/productos/edit/:id" component={ProductosForm} />
             <Route exact path=""/>
           </Switch>
         </BrowserRouter>
