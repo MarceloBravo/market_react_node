@@ -1,4 +1,6 @@
 import thunk from 'redux-thunk';
+
+//Componentes del BackOffice
 import { Login } from './pages/backOffice/login';
 import { Home } from './pages/backOffice/home';
 import { MenusGrid } from './pages/backOffice/menus/grid';
@@ -25,6 +27,10 @@ import { UnidadesForm } from './pages/backOffice/unidades/form/form';
 import { ProductosGrid } from './pages/backOffice/productos/grid/grid';
 import { ProductosForm } from './pages/backOffice/productos/form/form';
 
+//Componentes del FrontOffice
+import { HomeMarketComponent } from './pages/frontOffice/home/home';
+
+
 
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
@@ -44,7 +50,11 @@ function App() {
       <div className="App">
         <BrowserRouter>
           <Switch>
-            <Route exact path="/" component={Login} />
+            {/* Rutas FrontOffice */}
+            <Route exact path="/" component={HomeMarketComponent}/>
+
+            {/* Rutas BackOffice */}
+            <Route exact path="/login" component={Login} />
             <Route exact path="/home" component={Home} />
             <Route exact path="/menus" component={MenusGrid} />
             <Route exact path="/menus/nuevo" component={FormMenus} />
