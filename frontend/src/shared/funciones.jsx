@@ -23,3 +23,9 @@ export const getHeaderFormData = () => {
     let token = localStorage.getItem('gimAppMabc')
     return {'Content-Type':'multipart/form-data', 'Authorization':`Bearer ${token}`}
 }
+
+export const isEmail = (val) => {
+    // eslint-disable-next-line
+    let regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return regEmail.test(val)
+}

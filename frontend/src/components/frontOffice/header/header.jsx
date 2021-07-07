@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
-import { Container, Row, Col, Navbar, Nav } from 'react-bootstrap'
+import { Container, Navbar, Nav, Form, FormControl } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
+import * as Icons from 'react-bootstrap-icons' //yarn add react-bootstrap-icons --save
 import { find } from '../../../actions/personalizar'
 import './style.css'
 
@@ -32,21 +33,17 @@ export const HeaderMarketComponent = () => {
                         <Nav.Link href="#home">Venta telefónica al 1234567890</Nav.Link>
                     </Nav>
                     <Nav className="me-auto">
-                        <Nav.Link href="#home">Opción 1</Nav.Link>
-                        <Nav.Link href="#features">Opción 2</Nav.Link>
-                        <Nav.Link href="#pricing">Opción 3</Nav.Link>
+                        <Nav.Link href="#home"><Icons.Person />Mi cuenta</Nav.Link>
+                        <Nav.Link href="#features"><Icons.Cart/>Carro de compras</Nav.Link>
+                        <Nav.Link href="#pricing">
+                        <Form inline>
+                            <FormControl type="text" placeholder="Buscar" className="mr-sm-2" />  
+                            <Icons.Search/>  
+                        </Form>
+                        </Nav.Link>
                     </Nav>
                 </Container>
             </Navbar>
-            {/*
-            <Container>
-                <Row>
-                    <Col>Venta telefónica al 123456798</Col>
-                    <Col></Col>
-                    <Col>gjcgjfgfjgfgfjdgsjgjg</Col>
-                </Row>
-            </Container>
-            */}
         </div>
     )
 }

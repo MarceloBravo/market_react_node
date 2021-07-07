@@ -252,12 +252,14 @@ menusModel.insert = (data, callback) => {
             ) VALUES (
                 ${cnn.escape(data.nombre)},
                 ${cnn.escape(data.url)},
-                ${cnn.escape(data.menu_padre_id)},
+                ${cnn.escape(data.menu_padre_id ? data.menu_padre_id : 0)},
                 ${cnn.escape(data.posicion)},
                 CURDATE(),
                 CURDATE()
             )
         `;
+        
+        console.log(qry)
 
         cnn.query(qry, (err, result) => {
             if(err){

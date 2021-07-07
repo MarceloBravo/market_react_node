@@ -7,6 +7,7 @@ import { types as modalTypes } from '../../../../redux/ModalDialog/types'
 import { types as spinnerTypes } from '../../../../redux/Spinner/types'
 import { types as userTypes } from '../../../../redux/Users/types'
 import { ContentUsuariosForm } from './content';
+import { isEmail } from '../../../../shared/funciones'
 
 export const UsuariosForm = () => {
     const { id } = useParams()
@@ -193,12 +194,7 @@ export const UsuariosForm = () => {
                 setErrors({...errors, [campo]: ''})
         }
     }
-
-    const isEmail = (val) => {
-        // eslint-disable-next-line
-        let regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return regEmail.test(val)
-    }
+    
     
     const validaPassword = (campo, pwd, confirmPwd) =>{
         let valor = campo === 'password' ? pwd : confirmPwd;

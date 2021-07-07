@@ -51,7 +51,7 @@ export const TimerSession = (props) => {
                 localStorage.removeItem('gimAppMabc')
             }
             sessionStorage.removeItem('secs')
-            history.push('/')
+            history.push('/home')
         }
     },[isLogout, history])
 

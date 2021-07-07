@@ -25,7 +25,7 @@ export const Grid = (props) => {
             let roles = logedUser ? logedUser.roles.map(r => r.id) : []
             dispatch(aplicarPermisos(roles, location.pathname.split("/")[1]))
         }else{
-            history.push('/')
+            history.push('/home')
         }
     },[logedUser, urlPantalla, location, history, dispatch])
 

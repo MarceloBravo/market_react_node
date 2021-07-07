@@ -26,6 +26,8 @@ import { UnidadesGrid } from './pages/backOffice/unidades/grid/grid';
 import { UnidadesForm } from './pages/backOffice/unidades/form/form';
 import { ProductosGrid } from './pages/backOffice/productos/grid/grid';
 import { ProductosForm } from './pages/backOffice/productos/form/form';
+import { InfoTiendaFormComponent } from './pages/backOffice/infoTienda/infoTienda.jsx';
+
 
 //Componentes del FrontOffice
 import { HomeMarketComponent } from './pages/frontOffice/home/home';
@@ -89,6 +91,7 @@ function App() {
             <Route exact path="/productos" component={ProductosGrid} />
             <Route exact path="/productos/nuevo" component={ProductosForm} />
             <Route exact path="/productos/edit/:id" component={ProductosForm} />
+            <Route exact path="/tienda" component={InfoTiendaFormComponent} />
             <Route exact path=""/>
           </Switch>
         </BrowserRouter>

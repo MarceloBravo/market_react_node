@@ -40,6 +40,7 @@ export const grabarPermisos = (idRol, permisos) => {
 export const aplicarPermisos = (arrRoles, url) => {
     return (dispatch, action) => {
         axios.post(`${endPoint}/pantalla/${url}`,JSON.stringify(arrRoles),{headers: getHeader()}).then(res => {
+            console.log(res.data[0])
             dispatch({type: types.APLICAR_PERMISOS, payload: res.data[0]})
         }).catch(error => {
             console.log(error);

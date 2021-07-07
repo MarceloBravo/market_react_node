@@ -21,9 +21,10 @@ export const FormButtons = (props) => {
     const clearMessages = () => {
         dispatch({type: types.OCULTAR_ALERTA})
     }
+
     return (
         <div className="btn-group">
-            {permisos && (permisos.crear === 1 || (permisos.editar === 1 && id !== null)) && <Button variant="success" onClick={grabar} disabled={Object.keys(errors).filter(e => (errors[e]!== null && errors[e] !== "")).length>0}>Grabar</Button>}
+            {permisos && (permisos.crear === 1 || (permisos.modificar === 1 && id !== null)) && <Button variant="success" onClick={grabar} disabled={Object.keys(errors).filter(e => (errors[e]!== null && errors[e] !== "")).length>0}>Grabar</Button>}
             {permisos && permisos.eliminar === 1 && <Button variant="danger" onClick={eliminar} disabled={!id}>Eliminar</Button>}
             <Button variant="info" onClick={handlerBtnCancelar}>Cancelar</Button>
         </div>
