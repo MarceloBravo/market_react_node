@@ -11,7 +11,7 @@ const INITIAL_STATE = {
 
 export const InfoTiendaReducer = (state = INITIAL_STATE, action) => {
     switch(action.type){
-        case types.SHOW_SHOP_INFO:
+        case types.GET_SHOP_INFO:
             return {
                 ...state,
                 infoTienda: action.payload.data
