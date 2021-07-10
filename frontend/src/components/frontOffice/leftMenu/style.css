@@ -1,0 +1,17 @@
+#EZDrawer__container{
+    width: 25% !important;
+}
+
+.close-left-menu{
+    position: absolute;
+    right: 0px;
+    margin: 0px 10px;
+    cursor: pointer;
+}
+
+@media (width: 300px) {
+
+    #EZDrawer__container{
+        width: 90% !important;
+    }
+}

@@ -1,0 +1,26 @@
+.footer-component,
+.footer-container{
+    background-color: #343a40!important;
+    color: rgba(255,255,255,.75);
+}
+
+.nombre-tienda-footer{
+    font-size: x-large;
+    font-style: italic;
+}
+
+.footer-container li{
+    list-style: none;
+    font-style: italic;
+    padding-left: 20px;
+}
+
+.footer-component ul{
+    margin: 0px;
+}
+
+.footer-credits{
+    background: #575e65;
+    color: white;
+    padding: 3% 0px;
+}

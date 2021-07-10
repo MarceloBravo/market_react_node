@@ -5,3 +5,13 @@
 .header-market{
     height: 43px;
 }
+
+.input-header-search{
+    width: calc(100% - 31px) !important;
+    display: inline-flex !important;
+}
+
+.icon-header-search{
+    display: inline-flex;
+    margin: 5px;
+}
