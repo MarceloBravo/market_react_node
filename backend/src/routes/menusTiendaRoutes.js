@@ -2,7 +2,7 @@ const menusTiendaModel = require('../models/menusTienda');
 const checkToken = require('../shared/middlewares/mw_checkToken');
 
 module.exports = function(app, passport){
-    app.get('/menus_tienda', checkToken, (req, res) => {
+    app.get('/menus_tienda', (req, res) => {
         menusTiendaModel.mainMenu((err, data) => {
             res.json(err ? err : data);
         });

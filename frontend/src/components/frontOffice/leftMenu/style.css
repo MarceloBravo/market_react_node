@@ -1,5 +1,14 @@
 #EZDrawer__container{
     width: 25% !important;
+    box-shadow: 3px 5px #0000004f !important;
+}
+
+.title-left-menu{
+    padding: 3px;
+    border-bottom-style: solid;
+    border-bottom-width: thin;
+    border-bottom-color: #cacecb;
+    margin: 5px;
 }
 
 .close-left-menu{
@@ -7,6 +16,17 @@
     right: 0px;
     margin: 0px 10px;
     cursor: pointer;
+}
+
+.li_menu_categoria,
+.ul_menu_categoria{
+    color: #7d7d7d;
+    cursor: pointer;
+}
+
+.li_menu_categoria:hover,
+.ul_menu_categoria:hover{
+    font-weight: 600;
 }
 
 @media (width: 300px) {
