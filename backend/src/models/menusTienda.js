@@ -6,9 +6,9 @@ let cnn = connection.conect();
 let menusTiendaModel = {};
 
 
-// ******************* MENÚ DEL ESCRITORIO DE LA APLICACIÓN *******************
-//Retorna el menú principal de la aplicación
-menusTiendaModel.mainMenu = (idRol, callback) => {
+// ******************* MENÚ DE LA TIENDA *******************
+//Retorna el menú principal de la tienda (FrontOffice del FrontEnd)
+menusTiendaModel.mainMenu = (callback) => {
     if(cnn){
         let qry = `
             SELECT
@@ -32,7 +32,7 @@ menusTiendaModel.mainMenu = (idRol, callback) => {
                 }else{
                     let menu = res
                     for(var x=0; x < menu.length; x++){
-                        sub = await subMenus(menu[x].id, idRol)
+                        sub = await subMenus(menu[x].id)
                         menu[x]['sub_menu'] = sub
                     }
                     return callback(err, menu);
@@ -44,23 +44,19 @@ menusTiendaModel.mainMenu = (idRol, callback) => {
 }
 
 
-function subMenus(idMenuPadre, idRol){
+function subMenus(idMenuPadre){
     let qry = `
             SELECT 
                 m.id,
                 m.nombre,
                 m.url,
                 m.menu_padre_id,
-                m.posicion, 
-                pr.acceder 
+                m.posicion  
             FROM 
-                menus_tienda m
-                INNER JOIN pantallas p ON m.id = p.menus_id 
-                INNER JOIN permisos pr ON p.id = pr.pantallas_id 
+                menus_tienda m 
             WHERE 
                 m.deleted_at IS NULL AND 
-                menu_padre_id = ${cnn.escape(idMenuPadre)} AND 
-                roles_id = ${cnn.escape(idRol)}
+                menu_padre_id = ${cnn.escape(idMenuPadre)} 
             ORDER BY posicion
             `;
 
@@ -74,7 +70,7 @@ function subMenus(idMenuPadre, idRol){
             })
         });
 }
-// ******************* FIN MENÚ DEL ESCRITORIO DE LA APLICACIÓN *******************
+// ******************* FIN MENÚ DE LA TIENDA *******************
 
 
 // ******************* MANTENEDOR DE MENÚ *******************

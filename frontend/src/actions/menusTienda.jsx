@@ -90,13 +90,13 @@ export const getAll = ()  => {
     }
 }
 
-export const getMainMenu = (idRoles) => {
+export const getMainMenu = () => {
     return (dispatch, action) => {
-        axios.get(`${endPoint}/${url}/rol/${idRoles}`, {headers: getHeader()}).then(res => {
+        axios.get(`${endPoint}/${url}`, {headers: getHeader()}).then(res => {
             dispatch({type: spinnerTypes.HIDE_SPINNER})
             dispatch({type: menusTiendaTypes.GET_MAIN_MENU_TIENDA, payload: res.data})
         }).catch(error => {
-            handlerError(dispatch, error, 'Ocurrió un error al obtener el menú principal: ')
+            handlerError(dispatch, error, 'Ocurrió un error al obtener el menú de la tienda: ')
         }) 
     }
 }
