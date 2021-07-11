@@ -69,8 +69,8 @@ export const TimerSession = (props) => {
     }
    
     return (
-        <>
-            <label className="session-info">La sessión expira en {(new Date(seconds * 1000)).toISOString().substr(11, 8)} segs.</label>
-        </>        
+        <div className="session-info">
+            <label className="session-info-label">La sessión expira en {(new Date(seconds * 1000)).toISOString().substr(11, 8)} segs.</label>
+        </div>        
     )
 }

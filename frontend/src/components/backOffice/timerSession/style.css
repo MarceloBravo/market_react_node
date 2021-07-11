@@ -1,3 +1,7 @@
 .session-info{
+    vertical-align: -webkit-baseline-middle;
+}
+
+.session-info-label{
     color: white;
 }

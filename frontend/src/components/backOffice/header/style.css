@@ -2,6 +2,12 @@ header {
   box-shadow: 0px 5px #6f8bef6b;
 }
 
+.user-session-info{
+  display: flex;
+  right: 0px;
+  position: absolute;
+}
+
 .navbar {
   background-color: #3d5c7b !important;
 }

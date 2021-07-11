@@ -27,13 +27,12 @@ import { UnidadesForm } from './pages/backOffice/unidades/form/form';
 import { ProductosGrid } from './pages/backOffice/productos/grid/grid';
 import { ProductosForm } from './pages/backOffice/productos/form/form';
 import { InfoTiendaFormComponent } from './pages/backOffice/infoTienda/infoTienda.jsx';
+import { MenusTiendaGrid } from './pages/backOffice/menusTienda/grid/grid';
+import { FormMenusTiendaComponent } from './pages/backOffice/menusTienda/form';
 
 
 //Componentes del FrontOffice
 import { HomeMarketComponent } from './pages/frontOffice/home/home';
-
-
-
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
@@ -92,6 +91,9 @@ function App() {
             <Route exact path="/productos/nuevo" component={ProductosForm} />
             <Route exact path="/productos/edit/:id" component={ProductosForm} />
             <Route exact path="/tienda" component={InfoTiendaFormComponent} />
+            <Route exact path="/menus_tienda" component={MenusTiendaGrid} />
+            <Route exact path="/menus_tienda/nuevo" component={FormMenusTiendaComponent} />
+            <Route exact path="/menus_tienda/edit/:id" component={FormMenusTiendaComponent} />
             <Route exact path=""/>
           </Switch>
         </BrowserRouter>

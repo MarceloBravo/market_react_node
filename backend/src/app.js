@@ -31,6 +31,7 @@ require('./routes/marcasRoutes')(app, null);
 require('./routes/unidadesRoutes')(app, null);
 require('./routes/productosRoutes')(app, null);
 require('./routes/tiendaRoutes')(app, null);
+require('./routes/menusTiendaRoutes')(app, null);
 
 
 app.listen(app.get('port'), () => {

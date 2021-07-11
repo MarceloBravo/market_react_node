@@ -31,23 +31,23 @@ export const Header = () => {
                     <Nav.Link as={Link} to="/home">FrontOffice</Nav.Link>
                 </Nav>
                 
-                
-                <Form inline>
-                    <TimerSession/>
-                    <Dropdown>                        
-                        <Dropdown.Toggle variant="success" id="dropdown-basic" className="perfil-menu">
-                        {user && user.name } {user && user.a_paterno }
-                        </Dropdown.Toggle>
+                <div className="user-session-info">
+                    <Form inline>
+                        <TimerSession/>
+                        <Dropdown>                        
+                            <Dropdown.Toggle variant="success" id="dropdown-basic" className="perfil-menu">
+                            {user && user.name } {user && user.a_paterno }
+                            </Dropdown.Toggle>
 
-                        <Dropdown.Menu>
-                            <Dropdown.Item as={Link} to="/perfil" onClick={() => clearMessages()}>Mi perfil</Dropdown.Item>
-                            <Dropdown.Divider />
-                            <Dropdown.Item as={Link} to="#" onClick={() => logoutApp()}>Salir</Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
-                </Form>
-                <Image src={(user && user.foto) ? defaultImagesUrl + user.foto  : defaultAvatarUrl} roundedCircle className="avatar"/>
-                
+                            <Dropdown.Menu>
+                                <Dropdown.Item as={Link} to="/perfil" onClick={() => clearMessages()}>Mi perfil</Dropdown.Item>
+                                <Dropdown.Divider />
+                                <Dropdown.Item as={Link} to="#" onClick={() => logoutApp()}>Salir</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </Form>
+                    <Image src={(user && user.foto) ? defaultImagesUrl + user.foto  : defaultAvatarUrl} roundedCircle className="avatar"/>
+                </div>                
             </Navbar>
         </header>
     )

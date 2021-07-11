@@ -24,7 +24,7 @@ export const TableGrid = (props) => {
             <Container className="top-grid-form">
                 <Row>
                     <Col className="align-left">
-                        {permisos && permisos.crear === 1 && <Button variant="info" onClick={handlerBtnNuevo }>Nuevo</Button>}
+                        {permisos && permisos.crear === 1 && <Button variant="primary" onClick={handlerBtnNuevo }>Nuevo</Button>}
                     </Col>
                     <Col className="align-right">
                         <Form.Control type="text" placeholder="Ingresa el texto a buscar..." onBlur={e => handlerFilter(e)}/>

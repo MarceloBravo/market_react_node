@@ -57,4 +57,5 @@ a.active {
 .pather-menu {
   /*color: #8e9eaa !important;*/
   color: #ffffff !important;
+  text-decoration: none !important;
 }

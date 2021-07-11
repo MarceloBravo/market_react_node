@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Pagination } from 'react-bootstrap'
+import './style.css'
 
 export const Paginacion = (props) => {
     const renderCount = useRef(0);

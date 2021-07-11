@@ -74,3 +74,16 @@
 .field-error {
   color: red;
 }
+
+
+.alert button,
+.modal-header button{
+  border-style: none;
+  background: #f0f8ff00;
+  font-weight: bold;
+  color: #787b7d;
+  font-size: larger;
+  position: absolute;
+  right: 3px;
+  top: 3px;
+}

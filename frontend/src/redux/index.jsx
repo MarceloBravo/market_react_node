@@ -16,7 +16,7 @@ import { MarcasReducer } from  './Marcas/reducer';
 import { UnidadesReducer } from  './Unidades/reducer';
 import { ProductosReducer } from  './Productos/reducer';
 import { InfoTiendaReducer } from  './InfoTienda/reducer';
-
+import { MenusTiendaReducer } from  './MenusTienda/reducer';
 
 
 export default combineReducers({
@@ -37,4 +37,5 @@ export default combineReducers({
     UnidadesReducer,
     ProductosReducer,
     InfoTiendaReducer,
+    MenusTiendaReducer,
 })
