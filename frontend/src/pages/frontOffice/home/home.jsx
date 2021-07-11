@@ -7,7 +7,7 @@ export const HomeMarketComponent = () => {
     return (
         <>
             <HeaderMarketComponent/>
-
+            
             <FooterComponent/>
         </>
     )
