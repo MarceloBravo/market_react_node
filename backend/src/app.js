@@ -32,6 +32,7 @@ require('./routes/unidadesRoutes')(app, null);
 require('./routes/productosRoutes')(app, null);
 require('./routes/tiendaRoutes')(app, null);
 require('./routes/menusTiendaRoutes')(app, null);
+require('./routes/imagenesMarquezinaRoutes')(app, null);
 
 
 app.listen(app.get('port'), () => {

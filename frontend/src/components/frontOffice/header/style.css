@@ -9,6 +9,7 @@
 .input-header-search{
     width: calc(100% - 31px) !important;
     display: inline-flex !important;
+    margin: 0px !important;
 }
 
 .icon-header-search{

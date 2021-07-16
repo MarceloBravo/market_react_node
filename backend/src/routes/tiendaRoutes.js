@@ -8,7 +8,7 @@ module.exports = function(app, passport){
         })
     })
 
-    app.post('/tienda', (req, res)=>{
+    app.post('/tienda', checkToken, (req, res)=>{
         tiendaModel.save(req.body, (err, data)=> {
             res.json(err ? err : data)
         })

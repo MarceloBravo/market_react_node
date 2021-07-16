@@ -304,8 +304,6 @@ export const ProductosForm = (props) => {
                             }
                             return i
                         })],
-
-                    //objImages: [...producto.imagenes.filter(i => i.obj !== undefined).map(i => i.obj)]
                 })
             }
             setimageCtrl(null)
@@ -325,8 +323,7 @@ export const ProductosForm = (props) => {
         imgs.push({id: Math.random()*-1,source_image, file: obj, imagen_principal: 0, obj: URL.createObjectURL(obj)})
         setProducto({
             ...producto, 
-            imagenes: [...imgs], 
-            //objImages: [...imgs.filter(i => i.obj !== undefined && i.obj !== null).map(i => i.obj)]
+            imagenes: [...imgs]
         })
     }
 
@@ -338,8 +335,7 @@ export const ProductosForm = (props) => {
         };
         setProducto({
             ...producto, 
-            imagenes: [...imgs], 
-            //objImages: [...imgs.filter(i => i.obj !== undefined && i.obj !== null).map(i => i.obj)]
+            imagenes: [...imgs]
         })
     }
 

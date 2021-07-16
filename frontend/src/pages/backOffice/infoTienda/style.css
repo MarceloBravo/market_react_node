@@ -1,0 +1,29 @@
+.form-imagenes-marquezina{
+    display: flow-root;
+}
+
+.images-containner{
+    position: relative;
+}
+
+.images-containner > .row{
+    width: 92%;
+}
+
+.images-containner > .row > .form-group{
+    height: 170px;
+    background: #ffffff00;
+}
+
+.imagen-mnt-marquezina{
+    width: 100% !important;
+    height: 150px !important;
+}
+
+.img-marquezina-pos{
+    width: 25% !important;
+}
+
+.field-error-marquezina{
+    margin-left: 0px !important;
+}

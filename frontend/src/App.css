@@ -72,7 +72,7 @@
 }
 
 .field-error {
-  color: red;
+  color: red !important;
 }
 
 
@@ -86,4 +86,9 @@
   position: absolute;
   right: 3px;
   top: 3px;
+}
+
+input[type='text'],
+input[type='number']{
+  margin: 3px;
 }
