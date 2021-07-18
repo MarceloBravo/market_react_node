@@ -17,7 +17,7 @@
 
 .imagen-mnt-marquezina{
     width: 100% !important;
-    height: 150px !important;
+    max-height: 150px !important;
 }
 
 .img-marquezina-pos{

@@ -1,0 +1,13 @@
+.carousel-item{
+    width: auto !important;
+}
+
+.carousel-caption{
+    background-color: #0000009e;
+}
+
+.carousel-control-next-icon,
+.carousel-control-prev-icon{
+    background-color: black;
+    border-radius: 15%;
+}
