@@ -45,3 +45,16 @@
 .link-edit {
   color: black;
 }
+
+.grid-text-column{
+  padding: 2px !important;
+  border-radius: 0px !important;
+  margin: 0px !important;
+  background: transparent !important;
+  border-style: none !important;
+}
+
+.grid-text-column:focus{
+  background: white !important;
+  border-style: solid !important;
+}

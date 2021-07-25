@@ -19,7 +19,7 @@ export const ProductosFormContent = (props) => {
             <SpinnerComponent /> 
             <div className="main-section">
                 <div className="menu-section">
-                    <Menu activeKeyMenu="0"/>
+                    <Menu activeKeyMenu="1"/>
                 </div>
                 <div className="content-section">
                     <Alerta />
@@ -206,7 +206,7 @@ export const ProductosFormContent = (props) => {
                                             value={producto.sub_categoria_id ? producto.sub_categoria_id : ''}
                                             onChange={e => handlerChangeValue(e)}
                                         >
-                                            {categorias.length > 0 && producto.categoria_id == 0 && <option value="0">Seleccione una categoría</option>}
+                                            {categorias.length > 0 && producto.categoria_id.toString() === '0' && <option value="0">Seleccione una categoría</option>}
                                             {subCategorias.length === 0 && producto.categoria_id > 0 && <option value="0">No se encontraron sub-categorías</option>}
                                             {subCategorias.length > 0 && <option value="0">Seleccione</option>}
                                             {subCategorias.map((s, key) => {

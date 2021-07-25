@@ -12,7 +12,7 @@ import { getAll as categoriasGetAll } from '../../../../actions/categorias'
 import { getAllByCategory as subCategoriasGetAll } from '../../../../actions/subCategorias'
 import { types as subCategoriasTypes } from '../../../../redux/SubCategorias/types'
 import { getAll as impuestosGetAll } from '../../../../actions/impuestos'
-import { defaultImagesUrl } from '../../../../shared/constantes'
+import { defaultImagesProducts } from '../../../../shared/constantes'
 import { ProductosFormContent } from './content'
 import './style.css'
 
@@ -342,7 +342,7 @@ export const ProductosForm = (props) => {
 
     const getImage = (i) => {
         if(i.obj === null || i.obj === undefined){
-            let src = defaultImagesUrl + i.source_image
+            let src = defaultImagesProducts + i.source_image
             return src
         }else{
             return i.obj

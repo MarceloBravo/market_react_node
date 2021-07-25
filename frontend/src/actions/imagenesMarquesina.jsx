@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { serverEndPoint as endPoint } from '../shared/constantes'
-import { getHeader, getHeaderFormData, handlerError } from '../shared/funciones'
+import { getHeader, handlerError } from '../shared/funciones'
 import { types as alertasTypes } from '../redux/Alert/types'
 import { types as spinnerTypes } from '../redux/Spinner/types'
 import { types as imgMarquesinaTypes } from '../redux/ImagenesMarquesina/types'

@@ -29,6 +29,9 @@ import { ProductosForm } from './pages/backOffice/productos/form/form';
 import { InfoTiendaFormComponent } from './pages/backOffice/infoTienda/infoTienda.jsx';
 import { MenusTiendaGrid } from './pages/backOffice/menusTienda/grid/grid';
 import { FormMenusTiendaComponent } from './pages/backOffice/menusTienda/form';
+import { SeccionesHomeGrid } from './pages/backOffice/seccionesHome/grid/grid';
+import { SeccionesHomeForm } from './pages/backOffice/seccionesHome/form/form';
+
 
 
 //Componentes del FrontOffice
@@ -94,6 +97,9 @@ function App() {
             <Route exact path="/menus_tienda" component={MenusTiendaGrid} />
             <Route exact path="/menus_tienda/nuevo" component={FormMenusTiendaComponent} />
             <Route exact path="/menus_tienda/edit/:id" component={FormMenusTiendaComponent} />
+            <Route exact path="/secciones_home" component={SeccionesHomeGrid} />
+            <Route exact path="/secciones_home/nuevo" component={SeccionesHomeForm} />
+            <Route exact path="/secciones_home/edit/:id" component={SeccionesHomeForm} />
             <Route exact path=""/>
           </Switch>
         </BrowserRouter>

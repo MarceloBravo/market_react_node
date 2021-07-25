@@ -52,6 +52,13 @@ export const ProductosReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 producto: INITIAL_STATE.producto
             }
+        case types.ESTADO_INICIAL_PRODUCTO:
+            return {
+                ...state,
+                producto: INITIAL_STATE.producto,
+                dataGrid: INITIAL_STATE.dataGrid,
+                list: INITIAL_STATE.list
+            }
         case types.GET_ALL_PRODUCTO:
             return {
                 ...state,

@@ -3,7 +3,10 @@
 }
 
 .carousel-caption{
-    background-color: #0000009e;
+    right: 0px !important;
+    bottom: -0rem !important;
+    left: 0px !important;
+    background: #0a0a0a69;
 }
 
 .carousel-control-next-icon,

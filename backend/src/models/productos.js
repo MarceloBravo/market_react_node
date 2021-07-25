@@ -354,9 +354,12 @@ const ingresarImpuestos = (idProducto, arrImpuestos) => {
 
 
 const ingresarFotos = async (idProducto, arrFotos) => {
-    //arrFotos.forEach(f => console.log('f=',f))
-    let fotos = await arrFotos.map(f => JSON.parse(f))
-    //console.log('arrFotos', arrFotos, fotos)
+    let fotos = []
+    if(Array.isArray(arrFotos)){
+        fotos = arrFotos.map(f => JSON.parse(f))
+    }else{
+        fotos[0] = JSON.parse(arrFotos)
+    }
     
     let fecha = new Date()
     let strFecha = `${fecha.getFullYear()}-${fecha.getMonth()}-${fecha.getDate()} ${fecha.getHours()}:${fecha.getMinutes()}:${fecha.getSeconds()}`
@@ -401,7 +404,6 @@ const ingresarFotos = async (idProducto, arrFotos) => {
                         await cnn.promise().query(qryFotosInsert + arrNuevasImagenes)
                     }
                     if(qryFotosUpdate !== ``){
-                        //console.log('UPDATE = ',qryFotosUpdate)
                         await cnn.promise().query(qryFotosUpdate)
                     }
                     return resolve(true)

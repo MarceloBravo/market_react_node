@@ -33,7 +33,7 @@ require('./routes/productosRoutes')(app, null);
 require('./routes/tiendaRoutes')(app, null);
 require('./routes/menusTiendaRoutes')(app, null);
 require('./routes/imagenesMarquezinaRoutes')(app, null);
-
+require('./routes/seccionesHomesRoutes')(app, null);
 
 app.listen(app.get('port'), () => {
     console.log('Servidor activo en el puerto 3000')

@@ -9656,6 +9656,11 @@ react-modern-drawer@^0.1.1:
   resolved "https://registry.yarnpkg.com/react-modern-drawer/-/react-modern-drawer-0.1.1.tgz#96f44690e1314c50cddd34fbf2ef95ac1f4c5489"
   integrity sha512-d6oMfVjJzXRVvC0ZclU3cU3HZ759HNqieEypeKan8XztzWgbBwcWbElxS0qmWNFCxtgZuLsw1VUbkJ0Nmt95uQ==
 
+react-multi-carousel@^2.6.3:
+  version "2.6.3"
+  resolved "https://registry.yarnpkg.com/react-multi-carousel/-/react-multi-carousel-2.6.3.tgz#9ec39110de17feb6075cb134d046ae2e02df6b98"
+  integrity sha512-fCe+I1BlhTUyNHm/fh3bWavDo8UzoolTd/zrKao/wvb/XFf9dvesfNOawx7ukAzptiHOQhGCWZiNao+J76Byfw==
+
 react-overlays@^0.7.4:
   version "0.7.4"
   resolved "https://registry.yarnpkg.com/react-overlays/-/react-overlays-0.7.4.tgz#ef2ec652c3444ab8aa014262b18f662068e56d5c"

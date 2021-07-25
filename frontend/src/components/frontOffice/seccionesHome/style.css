@@ -1,0 +1,35 @@
+.div-carrousel{
+    padding: 3em 1em;
+}
+
+.div-secction-title{
+    display: flex;
+}
+
+.div-secction-title > h3{
+    display: inline-flex;
+    padding: 0px 1em;
+    color: #494a4a;
+    font-weight: lighter;
+}
+
+.hr-seccion{
+    width: 50%;
+    right: 0px;
+    position: absolute;
+}
+
+.carousel-item-padding-40-px{
+    padding: 0px 30px;
+    height: 300px !important; 
+}
+
+.carousel-item-padding-40-px > div > .card{
+    height: 100%;
+    width: 90%;
+    position: absolute;
+}
+
+.card-img, .card-img-bottom, .card-img-top {
+    height: 70%;
+}

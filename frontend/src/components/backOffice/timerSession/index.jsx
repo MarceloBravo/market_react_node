@@ -9,13 +9,18 @@ export const TimerSession = (props) => {
     const exp = useSelector(state => state.LoginReducer.logedUser.exp)
     
     const [ seconds, setSeconds ] = useState(()=>{
-        if(exp.toString().length < (new Date()).getTime().toString().length){
-            return (exp - parseInt((new Date()).getTime().toString().substr(0,exp.toString().length)))+1
+        if(exp){
+            if(exp.toString().length < (new Date()).getTime()?.toString().length){
+                return (exp - parseInt((new Date()).getTime().toString().substr(0,exp.toString().length)))+1
+            }
+            if(exp.toString().length > (new Date()).getTime()?.toString().length){
+                return (parseInt(exp.toString().substr(0, (new Date()).getTime().toString().length)) - (new Date().getTime()))+1
+            }
+        
+            return exp-(new Date()).getTime()+1
+        }else{
+            return (new Date()).getTime()
         }
-        if(exp.toString().length > (new Date()).getTime().toString().length){
-            return (parseInt(exp.toString().substr(0, (new Date()).getTime().toString().length)) - (new Date().getTime()))+1
-        }
-        return exp-(new Date()).getTime()+1
     })
     
     const isLogout = useSelector(state => state.LoginReducer.isLogout)
@@ -51,7 +56,7 @@ export const TimerSession = (props) => {
                 localStorage.removeItem('gimAppMabc')
             }
             sessionStorage.removeItem('secs')
-            history.push('/home')
+            history.push('/')
         }
     },[isLogout, history])
 

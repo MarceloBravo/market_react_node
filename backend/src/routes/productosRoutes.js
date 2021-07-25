@@ -1,6 +1,7 @@
 const ProductosModel = require('../models/productos')
 const checkToken = require('../shared/middlewares/mw_checkToken')
-const uploadFiles = require('../shared/middlewares/mw_uploadFiles');
+//const uploadFiles = require('../shared/middlewares/mw_uploadFiles');
+const mw_uploadFiles_productos = require('../shared/middlewares/mw_uploadFiles_productos');
 
 module.exports = function(app, passport) {
     app.get('/productos/pag/:pag',(req, res) => {
@@ -27,21 +28,21 @@ module.exports = function(app, passport) {
         })
     })
 
-    app.post('/productos', [checkToken, uploadFiles.array('objImages')], (req, res) => {
+    app.post('/productos', [checkToken, mw_uploadFiles_productos.array('objImages')], (req, res) => {
         ProductosModel.insert(req.body, (err, data) => {
             res.json(err ? err : data)
         })
     })
     
    
-    app.put('/test_upload/:id', [checkToken, uploadFiles.array('objImages')], (req, res) => {
+    app.put('/test_upload/:id', [checkToken, mw_uploadFiles_productos.array('objImages')], (req, res) => {
         console.log(req.files, req.body)
         res.send(req.files)
      }, (error, req, res, next) => {
          res.status(400).send({ error: error.message })
      })
     
-    app.put('/productos/:id', [checkToken, uploadFiles.array('objImages')], (req, res) => {
+    app.put('/productos/:id', [checkToken, mw_uploadFiles_productos.array('objImages')], (req, res) => {
         ProductosModel.update(req.params.id, req.body, (err, data) => {
             res.json(err ? err : data)
         })

@@ -17,6 +17,7 @@
 .image-producto{
     margin: 5px;
     cursor: pointer;
+    height: 80px !important;
 }
 
 .image-producto:hover + .check-button{
@@ -51,13 +52,14 @@
 .check-button{
     left: -9%;
     top: -15%;
-    position: inherit;
+    position: relative;
 }
 
 .delete-button{
-    top: 0px;
-    left: 74%;
+    top: -90px;
+    left: 37px;
     visibility: visible;
+    position: relative;
 }
 
 .default-image{

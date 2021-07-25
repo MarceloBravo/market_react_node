@@ -39,11 +39,14 @@ ImagenesMarquezinaModel.getData = (callback) => {
 ImagenesMarquezinaModel.save = async (data, callback) => {
     if(cnn){
         try{
+            await cnn.promise().beginTransaction();
             await eliminar(data.imagenes)
             await actualizar(data.imagenes)
             await insertarNuevos(data.imagenes)
+            await cnn.promise().commit()
             return callback(null, {mensaje: 'Las imágenes han sido grabadas.', tipoMensaje: 'success'})
         }catch(err){
+            await cnn.promise().rollback()
             return callback(null, {mensaje: 'Ocurrió un error al intentar grabar las imágenes: '+err.message, tipoMensaje: 'danger'})
         }
         
