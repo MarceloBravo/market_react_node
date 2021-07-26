@@ -105,7 +105,7 @@ SeccionesHome.getAll = (callback) => {
 
 
 const obtenerProductosSeccion = async (res) => {
-    let productos = await Promise.all(res.map(async e => {
+    await Promise.all(res.map(async e => {
     let qry = `SELECT 
                 p.id,
                 p.nombre,
@@ -139,9 +139,8 @@ const obtenerProductosSeccion = async (res) => {
                 psh.seccion_id = ${cnn.escape(e.id)}`
 
         let productos = await cnn.promise().query(qry)
-        return productos[0];
+        e.productos = productos[0]
     }))
-    res[0].productos = productos[0]
     return res
 }
 

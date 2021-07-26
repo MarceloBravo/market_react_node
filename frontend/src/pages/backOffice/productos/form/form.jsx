@@ -93,6 +93,7 @@ export const ProductosForm = (props) => {
 
     useEffect(()=> {
         if(productoState){
+            console.log('productoState',productoState)
             setProducto(productoState)
             dispatch(subCategoriasGetAll(productoState.categoria_id))
         }
@@ -173,7 +174,7 @@ export const ProductosForm = (props) => {
                     }
                 )
             case 'descripcion':
-                return validarTexto(field, value, true, 10, 500, 
+                return validarTexto(field, value, true, 10, 1000, 
                     {
                         msgObligatorio: 'La descripción es obligatoria',
                         msgMin: 'La descripción debe tener como máximo 500 carácteres. Ingresa una descripción más corta.', 

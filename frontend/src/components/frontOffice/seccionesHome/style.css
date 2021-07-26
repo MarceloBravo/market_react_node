@@ -22,6 +22,7 @@
 .carousel-item-padding-40-px{
     padding: 0px 30px;
     height: 300px !important; 
+    width: 250px !important;
 }
 
 .carousel-item-padding-40-px > div > .card{
@@ -32,4 +33,10 @@
 
 .card-img, .card-img-bottom, .card-img-top {
     height: 70%;
+}
+
+.card-footer{
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
 }

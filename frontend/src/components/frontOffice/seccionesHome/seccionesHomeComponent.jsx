@@ -39,20 +39,21 @@ export const SeccionesHomeComponent = (props) => {
     
 
     useEffect(()=>{
+        console.log('listaSeccionesState',listaSeccionesState)
         console.log(listaSeccionesState[0]?.productos)
     },[listaSeccionesState])
     
 
     return (
         <>
-        { listaSeccionesState.map( (s, key1) => {
+        { listaSeccionesState?.map( (s, key1) => {
             return  <div className="div-carrousel" key={key1}>
                         <div className="div-secction-title">
                             <h3>{s.nombre}</h3>
                         </div>
                         <Carousel
-                            swipeable={false}
-                            draggable={false}
+                            swipeable={true}
+                            draggable={true}
                             showDots={true}
                             responsive={responsive}
                             ssr={true} // means to render carousel on server-side.
@@ -62,7 +63,7 @@ export const SeccionesHomeComponent = (props) => {
                             autoPlaySpeed={1000}
                             keyBoardControl={true}
                             customTransition="all .5"
-                            transitionDuration={5000}
+                            transitionDuration={500}
                             containerClass="carousel-container"
                             removeArrowOnDeviceType={["tablet", "mobile"]}
                             //deviceType={this.props.deviceType}
@@ -71,17 +72,17 @@ export const SeccionesHomeComponent = (props) => {
                             centerMode={true}
                             >
 
-                                { s.productos.map((i, key2) => {
+                                { s.productos?.map((i, key2) => {
                                     return <div key={key2}>
                                                 <Card>
                                                     <Card.Img variant="top" src={defaultImagesProducts + i.source_image} />
                                                     <Card.Body>
                                                         <Card.Title>{i.nombre}</Card.Title>
                                                         <Card.Text>
-                                                            {i.texto1.length + i.texto2.length < 40 && <label>{i.texto1} {i.texto2}</label> }
+                                                            {i.texto1.length + i.texto2.length < 30 && <label>{i.texto1} {i.texto2}</label> }
                                                             
                                                             {// eslint-disable-next-line jsx-a11y/no-distracting-elements
-                                                            i.texto1.length + i.texto2.length >= 40 &&  <marquee>
+                                                            i.texto1.length + i.texto2.length >= 30 &&  <marquee>
                                                                         {i.texto1} {i.texto2}
                                                                     </marquee>
                                                             }

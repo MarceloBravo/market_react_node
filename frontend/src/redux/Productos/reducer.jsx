@@ -48,6 +48,7 @@ export const ProductosReducer = (state = INITIAL_STATE, action) => {
             }
         case types.ELIMINAR_PRODUCTO:
         case types.NUEVO_PRODUCTO:
+            console.log('INITIAL_STATE.producto',INITIAL_STATE.producto)
             return {
                 ...state,
                 producto: INITIAL_STATE.producto
