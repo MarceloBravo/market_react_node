@@ -37,13 +37,7 @@ export const SeccionesHomeComponent = (props) => {
         dispatch(getAll())
     },[dispatch])
     
-
-    useEffect(()=>{
-        console.log('listaSeccionesState',listaSeccionesState)
-        console.log(listaSeccionesState[0]?.productos)
-    },[listaSeccionesState])
     
-
     return (
         <>
         { listaSeccionesState?.map( (s, key1) => {
