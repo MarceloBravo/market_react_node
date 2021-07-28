@@ -1,3 +1,4 @@
+
 .div-carrousel{
     padding: 3em 1em;
 }
@@ -31,6 +32,14 @@
     position: absolute;
 }
 
+.card-img-top{
+    max-height: 52% !important;
+}
+
+.preview{
+    cursor: pointer;
+}
+/*
 .card-img, .card-img-bottom, .card-img-top {
     height: 70%;
 }
@@ -40,3 +49,8 @@
     width: 100%;
     bottom: 0px;
 }
+
+.text-muted{
+    cursor: pointer;
+}
+*/

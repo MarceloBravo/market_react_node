@@ -4,6 +4,7 @@ const INITIAL_STATE = {
     unidad:{
         id: '',
         nombre: '',
+        nombre_plural: '',
         created_at: '',
         updated_at: '',
         deleted_at: ''

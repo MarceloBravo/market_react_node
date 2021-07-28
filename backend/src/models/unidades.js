@@ -13,6 +13,7 @@ UnidadesModel.getPage = (pag, callback) => {
             SELECT
                 id,
                 nombre,
+                nombre_plural,
                 created_at,
                 updated_at,
                 deleted_at
@@ -43,6 +44,7 @@ UnidadesModel.filter = (texto, pag, callback) => {
         let filtro = `
                     (
                         nombre LIKE ${cnn.escape('%'+texto+'%')} OR 
+                        nombre_plural LIKE ${cnn.escape('%'+texto+'%')} OR 
                         DATE_FORMAT(created_at, '%d %m %Y') LIKE ${cnn.escape('%'+texto+'%')} OR 
                         DATE_FORMAT(updated_at, '%d %m %Y') LIKE ${cnn.escape('%'+texto+'%')} 
                     )`
@@ -50,6 +52,7 @@ UnidadesModel.filter = (texto, pag, callback) => {
             SELECT
                 id,
                 nombre,
+                nombre_plural,
                 created_at,
                 updated_at,
                 deleted_at
@@ -78,6 +81,7 @@ UnidadesModel.getAll = (callback) => {
         let qry = `SELECT
                         id,
                         nombre,
+                        nombre_plural,
                         created_at,
                         updated_at,
                         deleted_at
@@ -103,6 +107,7 @@ UnidadesModel.find = (id, callback) => {
         let qry = `SELECT
                         id,
                         nombre,
+                        nombre_plural,
                         created_at,
                         updated_at,
                         deleted_at
@@ -128,10 +133,12 @@ UnidadesModel.insert = (data, callback) => {
     if(cnn){
         let qry = `INSERT INTO unidades (
                         nombre,
+                        nombre_plural,
                         created_at,
                         updated_at
                     ) VALUES (
                         ${cnn.escape(data.nombre)},
+                        ${cnn.escape(data.nombre_plural)},
                         CURDATE(),
                         CURDATE()
                     )`
@@ -156,6 +163,7 @@ UnidadesModel.update = (id, data, callback) => {
     if(cnn){
         let qry = `UPDATE unidades SET 
                         nombre = ${cnn.escape(data.nombre)},
+                        nombre_plural = ${cnn.escape(data.nombre_plural)},
                         updated_at = CURDATE()
                     WHERE 
                         id = ${cnn.escape(id)}`

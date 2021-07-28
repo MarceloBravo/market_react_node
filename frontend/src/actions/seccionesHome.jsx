@@ -9,7 +9,6 @@ const url = 'secciones_home'
 export const getPage = (pag) => {
     return (dispatch, action) => {
         axios.get(`${serverEndPoint}/${url}/pag/${pag}`, { headers: getHeader()}).then( res => {
-            console.log(res)
             dispatch({type: spinnerTypes.HIDE_SPINNER})
             dispatch({type: seccionesHomeTypes.GET_PAGE_SECCIONES_HOME, payload: res})
         }).catch(err => {

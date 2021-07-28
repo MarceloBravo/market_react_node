@@ -9,7 +9,6 @@ const url = 'imagenes_marquesina'
 export const getData = () => {
     return (dispatch, action)=> {
         axios.get(`${endPoint}/${url}`, {headers: getHeader()}).then(res => {
-            console.log(res, res.data)
             dispatch({type: spinnerTypes.HIDE_SPINNER})
             dispatch({type: imgMarquesinaTypes.GET_IMAGES_MARQUESINA, payload: {imagenes: res.data, objImage: []}})
         }).catch(err => {

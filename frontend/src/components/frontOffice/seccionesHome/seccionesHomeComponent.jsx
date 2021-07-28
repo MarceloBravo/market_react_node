@@ -3,6 +3,7 @@ import { Card } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import { getAll } from '../../../actions/seccionesHome'
 import { defaultImagesProducts } from '../../../shared/constantes'
+import { useHistory } from 'react-router-dom'
 
 //Documentación multi-carrousel https://www.npmjs.com/package/react-multi-carousel
 //yarn add react-multi-carousel --save
@@ -14,10 +15,11 @@ import './style.css'
 export const SeccionesHomeComponent = (props) => {
     const listaSeccionesState = useSelector(state => state.SeccionesHomeReducer.list)
     const dispatch = useDispatch()
+    const history = useHistory()
     const responsive = {
         desktop: {
           breakpoint: { max: 3000, min: 1024 },
-          items: 3,
+          items: 4,
           slidesToSlide: 3 // optional, default to 1.
         },
         tablet: {
@@ -37,6 +39,11 @@ export const SeccionesHomeComponent = (props) => {
         dispatch(getAll())
     },[dispatch])
     
+
+    const detalleProducto = (id) => {
+        history.push('/detalleProducto/'+id)
+    }
+
     
     return (
         <>
@@ -48,16 +55,16 @@ export const SeccionesHomeComponent = (props) => {
                         <Carousel
                             swipeable={true}
                             draggable={true}
-                            showDots={true}
+                            showDots={false}
                             responsive={responsive}
                             ssr={true} // means to render carousel on server-side.
                             infinite={true}
                             //autoPlay={this.props.deviceType !== "mobile" ? true : false}
                             autoPlay={true}
-                            autoPlaySpeed={1000}
+                            autoPlaySpeed={3000}
                             keyBoardControl={true}
-                            customTransition="all .5"
-                            transitionDuration={500}
+                            customTransition="all 2"
+                            transitionDuration={1000}
                             containerClass="carousel-container"
                             removeArrowOnDeviceType={["tablet", "mobile"]}
                             //deviceType={this.props.deviceType}
@@ -82,8 +89,8 @@ export const SeccionesHomeComponent = (props) => {
                                                             }
                                                         </Card.Text>
                                                     </Card.Body>
-                                                    <Card.Footer>
-                                                        <small className="text-muted">Comprar</small>
+                                                    <Card.Footer className="preview" onClick={() => detalleProducto(i.id)}>
+                                                        <small>Ver producto</small>
                                                     </Card.Footer>
                                                 </Card>
                                         </div>

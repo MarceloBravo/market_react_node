@@ -38,7 +38,7 @@ export const HeaderContentComponent = (props) => {
                                 </Form>
                             </Nav.Link>
                             <Nav.Link href="#home"><Icons.Person />Mi cuenta</Nav.Link>
-                            <Nav.Link href="#features"><Icons.Cart/>Carro de compras</Nav.Link>
+                            <Nav.Link href="/carrito"><Icons.Cart/>Carro de compras</Nav.Link>
                         </Nav>
                     </Container>
                 </Navbar>

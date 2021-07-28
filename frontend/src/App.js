@@ -31,7 +31,7 @@ import { MenusTiendaGrid } from './pages/backOffice/menusTienda/grid/grid';
 import { FormMenusTiendaComponent } from './pages/backOffice/menusTienda/form';
 import { SeccionesHomeGrid } from './pages/backOffice/seccionesHome/grid/grid';
 import { SeccionesHomeForm } from './pages/backOffice/seccionesHome/form/form';
-
+import { DetalleProducto } from './pages/frontOffice/detalleProducto/detalleProducto'
 
 
 //Componentes del FrontOffice
@@ -56,6 +56,7 @@ function App() {
           <Switch>
             {/* Rutas FrontOffice */}
             <Route exact path="/" component={HomeMarketComponent}/>
+            <Route exact path="/detalleProducto/:id" component={DetalleProducto}/>
 
             {/* Rutas BackOffice */}
             <Route exact path="/login" component={Login} />

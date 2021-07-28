@@ -1,17 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { ModalDialog } from '../../../../components/backOffice/modalDialog'
-import { Header } from '../../../../components/backOffice/header'
-import { SpinnerComponent } from '../../../../components/shared/spinner'
-import { Menu } from '../../../../components/backOffice/menu'
-import { FormButtons } from '../../../../components/backOffice/form_buttons'
-import { Form, Col, Row } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory, useParams } from 'react-router'
 import { find, insert, update, deleteReg } from '../../../../actions/unidades'
 import { types as spinnerTypes } from '../../../../redux/Spinner/types'
 import { types as modalTypes } from '../../../../redux/ModalDialog/types'
 import { findByUrl } from '../../../../actions/pantallas'
-import { Alerta } from '../../../../components/shared/alerts'
+import { UnidadesFormComponent } from './content'
 
 export const UnidadesForm = () => {
     const { id } = useParams()
@@ -19,8 +13,8 @@ export const UnidadesForm = () => {
     const pantalla = useSelector(state => state.PantallasReducer.pantalla)
     const unidadState = useSelector(state => state.UnidadesReducer.unidad)
     const alertaTipo = useSelector(state => state.AlertaReducer.tipo)
-    const [ unidad, setUnidad ] = useState({id: '', nombre: '', created_at: '', updated_at:'', deleted_at: ''})
-    const [ errors, setErrors ] = useState({nombre: ''})
+    const [ unidad, setUnidad ] = useState({id: '', nombre: '', nombre_plural: '', created_at: '', updated_at:'', deleted_at: ''})
+    const [ errors, setErrors ] = useState({nombre: '', nombre_plural: '',})
     const [ accion, setAccion ] = useState(null)
     const history = useHistory()
     const dispatch = useDispatch()
@@ -69,7 +63,7 @@ export const UnidadesForm = () => {
 
 
     const handlerChangeValue = (e) => {
-        validaDatos(e.target.value)
+        validaDatos(e.target.name, e.target.value)
         setUnidad({
             ...unidad,
             [e.target.name]: e.target.value
@@ -77,8 +71,9 @@ export const UnidadesForm = () => {
 
     }
 
+
     const grabar = (e) => {
-        if(validaDatos(unidad.nombre)){
+        if(validaDatos('nombre',unidad.nombre) && validaDatos('nombre_plural',unidad.nombre_plural)){
             setAccion('grabar')
             dispatch({type: modalTypes.SHOW_MODAL_DIALOG, payload: {mensaje: '¿Desea grabar el registro?', tipo:'Grabar'}})
         }
@@ -96,16 +91,16 @@ export const UnidadesForm = () => {
     }
 
 
-    const validaDatos = (valor) => {
+    const validaDatos = (field, valor) => {
         let res = false
         if(valor.length === 0){
-            setErrors({...errors, nombre: 'Debe ingresar el nombre para la unidad de medida.'})
+            setErrors({...errors, [field]: `Debe ingresar el ${field} para la unidad de medida.`})
         }else if(valor.length < 3){
-            setErrors({...errors, nombre: 'El nombre para la unidad de medida debe tener almenos 3 carácteres. Ingresa un nombre más largo.'})
+            setErrors({...errors, [field]: `El campo debe tener almenos 3 carácteres. Ingresa un nombre más largo.`})
         }else if(valor.length > 50){
-            setErrors({...errors, nombre: 'El nombre para la unidad de medida debe tener de asta 50 carácteres. Ingresa un nombre más corto.'})
+            setErrors({...errors, [field]: 'El campo debe tener de hasta 50 carácteres. Ingresa un nombre más corto.'})
         }else{
-            setErrors({...errors, nombre: ''})
+            setErrors({...errors, [field]: ''})
             res = true
         }
         return res
@@ -113,47 +108,16 @@ export const UnidadesForm = () => {
 
 
     return (
-        <>
-            <ModalDialog response={response} />
-            <Header />
-            <SpinnerComponent />
-            <div className="main-section">
-                <div className="menu-section">
-                    <Menu activeKeyMenu="1"/>
-                </div>
-                <div className="content-section">                    
-                    <Alerta/>
-                    <Form>
-                        <div className="div-title">Mantenedor de {pantalla.nombre}</div>
-                        <Form.Group as={Row} controlId="formPlaintextEmail">
-                            <Form.Label column sm="2">Nombre</Form.Label>
-                            <Col md="4">
-                                <Form.Control
-                                    type="text"
-                                    name="nombre"
-                                    placeholder="Nombre de la unidad"
-                                    value={unidad.nombre}
-                                    onChange={e => handlerChangeValue(e)}
-                                />
-                            </Col>
-                            
-                        </Form.Group>
-                        {errors.nombre &&
-                            <Form.Group as={Row}>
-                                <Form.Text  className="field-error offset-2">{ errors.nombre }</Form.Text>
-                            </Form.Group>
-                        }
-
-                        <FormButtons 
-                            grabar={grabar} 
-                            eliminar={eliminar} 
-                            handlerBtnCancelar={cancelar} 
-                            errors={errors} 
-                            id={id}
-                        />
-                    </Form>
-                </div>
-            </div>
-        </>
+        <UnidadesFormComponent 
+            response={response} 
+            pantalla={pantalla} 
+            unidad={unidad} 
+            handlerChangeValue={handlerChangeValue} 
+            errors={errors} 
+            grabar={grabar} 
+            eliminar={eliminar} 
+            cancelar={cancelar} 
+            id={id}
+        />
     )
 }

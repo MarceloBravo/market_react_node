@@ -20,7 +20,7 @@ module.exports = function(app, passport){
         })
     })
 
-    app.get('/unidades/:id', checkToken, (req, res) => {
+    app.get('/unidades/:id', (req, res) => {
         UnidadesModel.find(req.params.id, (err, data)=>{
             res.json(err ? err : data)
         })
