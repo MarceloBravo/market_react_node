@@ -6,7 +6,7 @@ import { LeftMenuComponent } from '../leftMenu/leftMenu'
 
 
 export const HeaderContentComponent = (props) => {
-    const { infoTiendaState, toggleMenu, sowMenu } = props
+    const { infoTiendaState, toggleMenu, sowMenu, goToCart } = props
 
     return (
         <>
@@ -38,7 +38,7 @@ export const HeaderContentComponent = (props) => {
                                 </Form>
                             </Nav.Link>
                             <Nav.Link href="#home"><Icons.Person />Mi cuenta</Nav.Link>
-                            <Nav.Link href="/carrito"><Icons.Cart/>Carro de compras</Nav.Link>
+                            <Nav.Link href="#" onClick={() => goToCart()}><Icons.Cart/>Carro de compras</Nav.Link>
                         </Nav>
                     </Container>
                 </Navbar>

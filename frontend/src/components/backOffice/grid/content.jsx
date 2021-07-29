@@ -16,11 +16,13 @@ export const TableGrid = (props) => {
         handlerDelete,
         permisos,
         showNewButton,
-        showFindText,
+        showFindTextBox,
         showDeleteButton,
         showEditButton,
         handlerEditableColum,
         editableColumns,
+        numericColumns,
+        imageColumns,
     } = props
 
     
@@ -33,7 +35,7 @@ export const TableGrid = (props) => {
                         {showNewButton && permisos && permisos.crear === 1 && <Button variant="primary" onClick={handlerBtnNuevo }>Nuevo</Button>}
                     </Col>
                     <Col className="align-right">
-                        {showFindText && <Form.Control type="text" placeholder="Ingresa el texto a buscar..." onBlur={e => handlerFilter(e)}/>}
+                        {showFindTextBox && <Form.Control type="text" placeholder="Ingresa el texto a buscar..." onBlur={e => handlerFilter(e)}/>}
                     </Col>
                 </Row>
             </Container>
@@ -44,38 +46,45 @@ export const TableGrid = (props) => {
                             return (widthColumn > 0 ?
                                 (
                                     (index === 0) ?
-                                    <th key={index}>{value}</th> :
-                                    <th key={index} style={{ width: + widthColumn + '%' }}>{value}</th>
+                                    <th key={index} className={'col-'+value}>{value}</th> :
+                                    <th key={index} style={{ width: + widthColumn + '%' }} className={'col-'+value}>{value}</th>
                                 )
                                 :
                                 <th key={index}>{value}</th>
                             )
                         })}
-                        {actionColumn && permisos && (permisos.modificar === 1 || permisos.eliminar === 1) && <th className="col-action">Acción</th>}
+                        {(((showDeleteButton || showEditButton) && actionColumn) || (actionColumn && permisos && (permisos.modificar === 1 || permisos.eliminar === 1))) && <th className="col-action">Acción</th>}
                     </tr>
                 </thead>
                 <tbody>
                     {data && data.data.map((value, key) => {
                         return <tr key={ key}>
                             {visibleFields.map((val, id, columns) => {
-                                return <td key={key+'-'+id}>
+                                return <td key={key+'-'+id} className={"col-"+columns[id]}>
                                     
                                             {editableColumns.filter(i =>  i=== columns[id]).length > 0 &&
                                                 <Form.Control 
-                                                    type="text"
+                                                    type={numericColumns.find(e => e === columns[id]) ? 'number' : 'text'}
                                                     name={columns[id]+'-'+key}
                                                     value={ data.data[key][columns[id]] }
                                                     onChange={e => handlerEditableColum(key, columns[id], e)}
-                                                    className="grid-text-column"
+                                                    className={"grid-text-column class-"+columns[id]}
                                                 />
                                             }
-                                            {(Array.isArray(editableColumns) && editableColumns.filter(i =>  i=== columns[id]).length === 0) && 
+                                            
+                                            {imageColumns.find(i => i === columns[id]) && 
+                                                <img src={data.data[key][columns[id]]} alt="Foto no encontrada" className={"class-"+columns[id]}/>
+                                            }
+                                            
+                                            {!imageColumns.find(i => i === columns[id]) && (Array.isArray(editableColumns) && editableColumns.filter(i =>  i=== columns[id]).length === 0) && 
                                                 formatDate(value[val])
                                             }
+
+
                                         </td>
                             })}
-                            {actionColumn && permisos && (permisos.modificar === 1 || permisos.eliminar === 1) &&
-                                <td>
+                            {(((showDeleteButton || showEditButton) && actionColumn) || (actionColumn && permisos && (permisos.modificar === 1 || permisos.eliminar === 1))) &&
+                                <td className="col-action">
                                 {(showEditButton === undefined ? permisos.modificar === 1 : showEditButton) && <i className="bi bi-pencil action-button" title="Editar" onClick={() => handlerEdit(value['id'])}></i>}
                                 {(showDeleteButton === undefined ? permisos.eliminar === 1 : showDeleteButton) && <i className="bi bi-trash action-button" title="Eliminar" onClick={() => handlerDelete(value['id'])}></i>}
                                 </td>

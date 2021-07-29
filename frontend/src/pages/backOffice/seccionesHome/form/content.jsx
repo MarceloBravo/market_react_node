@@ -100,7 +100,7 @@ export const SeccionesHomeContent = (props) => {
                             urlToForm={currentUrl}
                             onClickDelete={e => eliminarProducto(e)}
                             showNewButton={false}
-                            showFindText={false}
+                            showFindTextBox={false}
                             showEditButton={false}
                             showDeleteButton={true}
                         />

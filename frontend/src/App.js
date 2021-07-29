@@ -44,7 +44,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import combineReducer from './redux';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-
+import { CarroCompras } from './pages/frontOffice/carroCompras/carroCompras'
 
 const store = createStore(combineReducer, applyMiddleware(thunk))
 
@@ -57,6 +57,8 @@ function App() {
             {/* Rutas FrontOffice */}
             <Route exact path="/" component={HomeMarketComponent}/>
             <Route exact path="/detalleProducto/:id" component={DetalleProducto}/>
+            <Route exact path="/carrito" component={CarroCompras}/>
+            
 
             {/* Rutas BackOffice */}
             <Route exact path="/login" component={Login} />

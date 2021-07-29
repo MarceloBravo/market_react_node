@@ -7,12 +7,17 @@ import './style.css'
 import { aplicarPermisos } from '../../../actions/permisos'
 
 export const Grid = (props) => {
+    //Para forzar la aparición de la columna acción ahunque los permisos no estén otorgados 
+    //para que aparezca, se deben recibir los parametros actionColumn como true y almenos uno 
+    //de los parametros showEditButton o showDeleteButton, con el valor true
     const { 
         data, 
         headers, 
         actionColumn, 
         title, 
         editableColumns,
+        numericColumns,
+        imageColumns,
         visibleFields, 
         urlToForm, 
         onClickDelete, 
@@ -22,9 +27,10 @@ export const Grid = (props) => {
         rowsPerPage, 
         page, 
         showNewButton, 
-        showFindText,
+        showFindTextBox,
         showEditButton,
-        showDeleteButton
+        showDeleteButton,
+        changeGridColumn,
 } = props
     const permisos = useSelector(state => state.PermisosReducer.aplicar_permisos)
     const logedUser = useSelector(state => state.LoginReducer.logedUser)
@@ -33,8 +39,6 @@ export const Grid = (props) => {
     const history = useHistory()
     const location = useLocation()
     const [ datos, setDatos ] = useState(data)
-
-    console.log('---- data ----', data)
 
     useEffect(() => {
         setWidthColumn(100/(headers.length+(actionColumn ? 1 : 0)))
@@ -54,6 +58,7 @@ export const Grid = (props) => {
     useEffect(()=>{
         setDatos(data)
     },[data])
+
 
     const handlerDelete = (id) => {
         dispatch({type: types.OCULTAR_ALERTA})
@@ -89,6 +94,7 @@ export const Grid = (props) => {
     const handlerEditableColum = (key, columna, e) => {
         let arrData = [...datos.data]
         arrData[key][columna] = e.target.value
+        changeGridColumn(key, columna, e.target.value)
         setDatos({
             ...datos,
            data: arrData
@@ -113,11 +119,13 @@ export const Grid = (props) => {
             rowsPerPage={rowsPerPage}
             page={page}
             showNewButton={showNewButton !== undefined ? showNewButton : true}
-            showFindText={showFindText !== undefined ? showFindText : true}
+            showFindTextBox={showFindTextBox !== undefined ? showFindTextBox : true}
             showEditButton={showEditButton}
             showDeleteButton={showDeleteButton}
             handlerEditableColum={handlerEditableColum}
             editableColumns={editableColumns && Array.isArray(editableColumns) ? editableColumns : []}
+            numericColumns={numericColumns && Array.isArray(numericColumns) ? numericColumns : []}
+            imageColumns={imageColumns && Array.isArray(imageColumns) ? imageColumns : []}
         />
     )
 }

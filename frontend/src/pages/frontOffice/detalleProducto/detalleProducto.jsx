@@ -1,24 +1,23 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Row, Col, Form, Button, Tabs, Tab, Table } from 'react-bootstrap'
-import { HeaderMarketComponent } from '../../../components/frontOffice/header/header'
-import { FooterComponent } from '../../../components/frontOffice/footer/footer'
 import { find as buscarProducto}  from '../../../actions/productos'
 import { find as buscarCategoria }  from '../../../actions/categorias'
 import { find as buscarSubCategoria }  from '../../../actions/subCategorias'
 import { find as buscarUnidad }  from '../../../actions/unidades'
+import { find as detalleApp } from '../../../actions/personalizar'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
 import { defaultImagesProducts } from '../../../shared/constantes'
-import { FaShoppingCart, FaRegMoneyBillAlt } from 'react-icons/fa';
+import { DetalleProductoContent } from './content'
 import './style.css'
 
 
-export const DetalleProducto = (props) => {
+export const DetalleProducto = () => {
     const id = useParams('id')
     const productoState = useSelector(state => state.ProductosReducer.producto)
     const unidadState = useSelector(state => state.UnidadesReducer.unidad)
     const categoriaState = useSelector(state => state.CategoriasReducer.categoria)
     const subCategoriaState = useSelector(state => state.SubCategoriasReducer.subCategoria)
+    const appState = useSelector(state => state.PersonalizarReducer.config)
     const [ itemCantidad, setItemCantidad ] = useState(1)
     const [ activeImage, setActiveImage ] = useState(defaultImagesProducts + 'not-found-image.jpg')
     const [ keyTab, setKeyTab ] = useState('caracteristicas')
@@ -33,6 +32,7 @@ export const DetalleProducto = (props) => {
     
     useEffect(()=>{
         if(id){
+            dispatch(detalleApp())
             dispatch(buscarProducto(id.id))
         }else{
             history.push('/')
@@ -47,11 +47,12 @@ export const DetalleProducto = (props) => {
             dispatch(buscarUnidad(productoState.unidad_id))
             let imgs = productoState.imagenes.filter(i => i.imagen_principal)
             setActiveImage(defaultImagesProducts + (imgs.length > 0 ? imgs[0].source_image : 'not-found-image.jpg'))
-            let cart = localStorage.getItem('cart')
+            let cart = localStorage.getItem('cart-'+appState.nombre_app)
             if(cart){
                 setCarrito(JSON.parse(cart))
             }
         }
+        // eslint-disable-next-line
     },[dispatch, productoState])
 
 
@@ -59,15 +60,21 @@ export const DetalleProducto = (props) => {
         if(carrito[id.id]){
             setTextoBotonCarrito('Actualizar carrito de compras')
         }
-        localStorage.setItem('cart',JSON.stringify(carrito))
-    },[carrito])
+    },[carrito, id.id])
 
 
     useEffect(()=>{
         if(pagar){
             history.push('/carrito')
         }
-    },[pagar])
+    },[history, pagar])
+
+
+    useEffect(()=>{
+        if(appState.nombre_app && JSON.stringify(carrito) !== "{}"){
+            localStorage.setItem('cart-'+appState.nombre_app,JSON.stringify(carrito))
+        }
+    },[appState.nombre_app, carrito])
 
    
     const handlerInput = (e) => {
@@ -83,12 +90,28 @@ export const DetalleProducto = (props) => {
 
     const pagarProducto = () => {
         setPagar(true)
-        setCarrito({...carrito, [id.id]:{producto: productoState, cantidad: itemCantidad}})
     }
 
 
     const agregarCarrito = () => {
-        setCarrito({...carrito, [id.id]:{producto: productoState, cantidad: itemCantidad}})
+        setCarrito({...carrito, [id.id]:{
+            id: productoState.id,
+            producto_id: productoState.id, 
+            nombre: productoState.nombre, 
+            precio: productoState.precio_actual, 
+            str_precio: "$  " + (new Intl.NumberFormat("de-DE").format(parseInt(productoState.precio_actual))),
+            //precio_venta: parseInt(productoState.precio_actual) + parseInt(productoState.total_impuestos), 
+            precio_venta: "$  " + (new Intl.NumberFormat("de-DE").format(parseInt(productoState.precio_actual) + parseInt(productoState.total_impuestos))),
+            unidad: productoState.nombre_unidad, 
+            cantidad: itemCantidad,
+            imagen: defaultImagesProducts + productoState.source_image,
+            impuestos: productoState.total_impuestos,
+            categoria: productoState.nombre_categoria,
+            sub_categoria: productoState.subCategoria,
+            marca: productoState.nombre_marca,
+            stock: productoState.stock
+            }
+        })
     }
 
 
@@ -113,129 +136,24 @@ export const DetalleProducto = (props) => {
 
 
     return (
-        <>
-            <HeaderMarketComponent/>
-                <Container>
-                    <Row>
-                        <Col><h4>Detalle del producto</h4></Col>
-                    </Row>
-                    {/* Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop */}
-                    <Row className="header-info-producto">
-                         {categoriaState?.nombre ? categoriaState.nombre : ''} {">"} 
-                         {subCategoriaState?.nombre ? subCategoriaState.nombre : ''} {">"}  
-                         {productoState?.nombre ? productoState.nombre : ''} 
-                    </Row>
-                    {/* Stack the columns on mobile by making one full-width and the other half-width */}
-                    <Row>
-                        <Col xs={12} md={6}>
-                            <Row>
-                                <Col xs="1" md="2">
-                                    {productoState.imagenes.map((i, key) => {
-                                        return <Row key={key}>
-                                                    <Col className="col-miniatura-imagen-producto">
-                                                        <img 
-                                                            className="imagen-miniatura-producto"
-                                                            src={defaultImagesProducts + i.source_image} 
-                                                            alt={i.source_image}
-                                                            onClick={() => selectImage(i.source_image)}
-                                                        >   
-                                                        </img>
-                                                    </Col>
-                                                </Row>
-                                            })
-                                    }
-                                </Col>
-                                <Col xs="11" md="10">
-                                    <img 
-                                        className="imagen-producto" 
-                                        src={activeImage} 
-                                        alt={productoState?.nombre ? productoState?.nombre : 'Foto producto'}
-                                        onClick={()=>setShowPreView(true)}>
-                                    </img>
-                                </Col>
-                            </Row>
-                            
-                        </Col>
-                        <Col xs={6} md={6}>
-                            <h2>{productoState.nombre}</h2>
-                            <label>{productoState.descripcion}</label>
-                            <Row>
-                                <Form.Label column sm="6">Stock disponible: {productoState.stock} {unidadState.nombre_plural}</Form.Label>
-                            </Row>
-                            <Row>
-                                <Form.Group as={Row} controlId="formTxtStock">
-                                    <Form.Label column sm="3">Cantidad </Form.Label>
-                                    <Col xs="9" md="4">
-                                        <Form.Control 
-                                            type="number" 
-                                            name="cantidad"
-                                            onChange={e => handlerInput(e)}
-                                            value={itemCantidad}
-                                            min="0"
-                                            max={productoState.stock}
-                                        ></Form.Control>
-                                    </Col>
-                                    <Form.Label column sm="3">{unidadState.nombre_plural}</Form.Label>
-                                </Form.Group>
-                                {errors.cantidad &&
-                                    <Form.Group as={Row}>
-                                        <Form.Text  className="field-error offset-3">{ errors.cantidad }</Form.Text>
-                                    </Form.Group>
-                                }
-                                
-                            </Row>
-                            <Row>
-                                <Col md="7">
-                                    <Button 
-                                        variant="primary" 
-                                        onClick={() => agregarCarrito()}
-                                        disabled={Object.keys(errors).filter(e => errors[e] !=='').length > 0}
-                                    >
-                                        {textoBotonCarrito} {"  "} 
-                                        <FaShoppingCart/>
-                                    </Button>
-                                </Col>
-                                <Col md="5">
-                                    <Button 
-                                        variant="success" 
-                                        onClick={() => pagarProducto() }
-                                        disabled={Object.keys(errors).filter(e => errors[e] !=='').length > 0}
-                                    >
-                                        Ir al carrito
-                                    </Button>
-                                </Col>
-                            </Row>
-                        </Col>
-                    </Row>
-
-                    {/* Columns are always 50% wide, on mobile and desktop */}
-                    <Row>
-                        <Tabs 
-                            defaultActiveKey="profile" 
-                            id="tab-detalles" 
-                            className="tab-caracteristicas"
-                            activeKey={keyTab}
-                            onSelect={(k) => setKeyTab(k)}
-                        >
-                            <Tab eventKey="caracteristicas" title="Carácterísticas técnicas">
-                                <Table striped bordered hover size="sm" responsive>
-                                </Table>
-                            </Tab>
-                            <Tab eventKey="opiniones" title="Opiniones">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia, sapiente. Suscipit, repellat 
-                                numquam. Unde delectus fuga, est recusandae qui molestiae, laboriosam perspiciatis esse sed 
-                                harum blanditiis amet provident quisquam nesciunt.
-                            </Tab>
-                        </Tabs>
-                    </Row>
-                </Container>
-            <FooterComponent/>  
-            {showPreView && <div className="preview-full-screen" onClick={() => setShowPreView(false)}>
-                                <div></div>
-                                <Form.Label>{productoState.nombre}</Form.Label>
-                                <img src={activeImage} alt={activeImage} className="img-full-screen"></img>
-                            </div>
-            }
-        </>
+            <DetalleProductoContent
+                categoriaState={categoriaState} 
+                subCategoriaState={subCategoriaState} 
+                productoState={productoState} 
+                defaultImagesProducts={defaultImagesProducts} 
+                selectImage={selectImage} 
+                activeImage={activeImage} 
+                setShowPreView={setShowPreView} 
+                unidadState={unidadState}
+                handlerInput={handlerInput} 
+                errors={errors} 
+                agregarCarrito={agregarCarrito} 
+                itemCantidad={itemCantidad} 
+                textoBotonCarrito={textoBotonCarrito} 
+                pagarProducto={pagarProducto} 
+                keyTab={keyTab} 
+                setKeyTab={setKeyTab} 
+                showPreView={showPreView}
+            />       
     )
 }

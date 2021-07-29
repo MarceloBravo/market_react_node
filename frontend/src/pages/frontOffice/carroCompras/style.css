@@ -1,0 +1,50 @@
+.class-imagen{
+    height: auto; 
+    width: 75px;
+    margin: 0px 10%;
+}
+
+.col-Foto{
+    width: 100px !important;
+}
+
+.col-Nombre{
+    width: auto !important;
+}
+
+.col-Precio{
+    width: 15% !important;
+}
+
+.col-Cantidad{
+    width: 10% !important;
+}
+
+.col-cantidad > input{
+    background: white !important;
+}
+
+.col-precio_venta{
+    text-align: right;
+}
+
+.col-action{
+    width: 60px;
+}
+
+td.col-action{
+    text-align: center;
+}
+
+.signal{
+    width: 10px;
+    flex: inherit;
+}
+
+.separator{
+    height: 10px;
+}
+
+.col-sub-totales{
+    text-align: right;
+}
