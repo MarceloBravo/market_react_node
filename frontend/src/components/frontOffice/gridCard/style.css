@@ -1,0 +1,21 @@
+.select-label{
+    text-align: right;
+}
+
+.show-product{
+    cursor: pointer;
+}
+
+.col-card{
+    padding-top: 10px;
+}
+
+.card-grid{
+    height: 100%;
+    width: 11rem !important;
+}
+
+.card-image{
+    width: auto;
+    height: fit-content;
+}

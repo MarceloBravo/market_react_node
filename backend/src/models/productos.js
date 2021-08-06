@@ -6,9 +6,26 @@ let cnn = connection.conect()
 let ProductosModel = {}
 
 ProductosModel.getPage = (pag, callback) => {
+    getProductos(pag, constantes.regPerPage, null, null, callback)
+}
+
+
+ProductosModel.getItemsPerPage = (pag, items, callback) => {
+    console.log('getItemsPerPage',pag, items)
+    return getProductos(pag, items, null, null, callback)
+}
+
+
+ProductosModel.getItemsPerPageOrderBy = (pag, items, orderByField, orderByDirection, callback) => {
+    console.log('getItemsPerPageOrderBy',pag, items, orderByField, orderByDirection)
+    return getProductos(pag, items, orderByField, orderByDirection, callback)
+}
+
+
+const getProductos = (pag, items, orderByField, orderByDirection, callback) => {
     if(cnn){
         let desde = constantes.regPerPage * pag
-        let hasta = desde + constantes.regPerPage
+        let hasta = desde + items
         let fromClause = `  productos p 
                             INNER JOIN unidades u ON p.unidad_id = u.id 
                             INNER JOIN marcas m ON p.marca_id = m.id 
@@ -39,14 +56,32 @@ ProductosModel.getPage = (pag, callback) => {
                     ${fromClause}
                 WHERE
                     p.deleted_at IS NULL  
-                    LIMIT ${desde}, ${hasta}`
+                    ${orderByField && orderByDirection ? ' ORDER BY ' + orderByField + ' ' + orderByDirection : ''} 
+                     LIMIT ${desde}, ${hasta}`
 
         cnn.query(qry, async (err, res) =>{
             if(err){
                 return callback({mensaje: 'Ocurrió un error al obtener el listado de productos: '+err.message, tipoMensaje: 'danger'})
             }else{
                 let totRows = await cnn.promise().query(`SELECT COUNT(p.id) as totRows FROM ${fromClause} WHERE p.deleted_at IS NULL`)
-                return callback(null, {data: res, rousPerPage: constantes.regPerPage, rows: totRows[0][0].totRows, page: pag})
+                return callback(null, {data: res, rowsPerPage: items, totRows: totRows[0][0].totRows, page: pag})
+            }
+        })
+    }else{
+        return callback({mensaje: 'Conexión inactiva.', tipoMensaje: 'danger'})
+    }
+}
+
+
+ProductosModel.getMinMaxPrice = (callback) => {
+    if(cnn){
+        let qry = `SELECT MIN(precio_venta_normal) min, MAX(precio_venta_normal) max FROM productos WHERE deleted_at IS NULL`
+
+        cnn.query(qry, async (err, res) =>{
+            if(err){
+                return callback({mensaje: 'Ocurrió un error al obtener los precios mínimos y máximos de los productos: '+err.message, tipoMensaje: 'danger'})
+            }else{
+                return callback(null, res[0])
             }
         })
     }else{
@@ -112,13 +147,92 @@ ProductosModel.filter = (texto, pag, callback) => {
                 return callback({mensaje: 'Ocurrió un error al filtrar el listado de productos: '+err.message, tipoMensaje: 'danger'})
             }else{
                 let totRows = await cnn.promise().query(`SELECT COUNT(p.id) as totRows FROM ${fromClause} WHERE p.deleted_at IS NULL AND ${filtro}`)
-                return callback(null, {data: res, rousPerPage: constantes.regPerPage, rows: totRows[0][0].totRows, page: pag})
+                return callback(null, {data: res, rowsPerPage: constantes.regPerPage, totRows: totRows[0][0].totRows, page: pag})
             }
         })
     }else{
         return callback({mensaje: 'Conexión inactiva.', tipoMensaje: 'danger'})
     }
 }
+
+
+ProductosModel.filterParams = (data, pag, callback) => {
+    if(cnn){
+        let marcas = data.marcas
+        let categorias = data.departamentos
+        let precioMin = data.min
+        let precioMax = data.max
+        let orderBy = data.ordenar_por
+        let order = data.direccion
+        let texto = data.texto ? data.texto : null
+        let itemsPorPag = data.itemsPorPagina ? data.itemsPorPagina : constantes.regPerPage
+
+        let desde = itemsPorPag * pag
+        let hasta = desde + itemsPorPag
+        let qryFiltro = texto ? `p.id LIKE ${cnn.escape('%'+texto+'%')} OR 
+                        p.nombre LIKE ${cnn.escape('%'+texto+'%')} OR 
+                        CONVERT(p.precio_venta_normal, CHAR) LIKE ${cnn.escape('%'+texto+'%')} OR
+                        u.nombre LIKE ${cnn.escape('%'+texto+'%')} OR 
+                        m.nombre LIKE ${cnn.escape('%'+texto+'%')} OR 
+                        c.nombre LIKE ${cnn.escape('%'+texto+'%')} OR 
+                        sc.nombre LIKE ${cnn.escape('%'+texto+'%')} OR 
+                        CONVERT(p.created_at, CHAR) LIKE ${cnn.escape('%'+texto+'%')} OR
+                        CONVERT(p.updated_at, CHAR) LIKE ${cnn.escape('%'+texto+'%')}`
+                        : ''
+
+        let filtro = ` 
+            ${qryFiltro ? ' AND (' + qryFiltro + ')' : ''}
+            ${marcas ? ' AND m.nombre IN (' + marcas + ')' : ''} 
+            ${categorias ? ' AND c.nombre IN (' + categorias + ')' : ''}
+            AND p.precio_venta_normal BETWEEN ${precioMin} AND ${precioMax}
+        `
+        let fromClause = `  productos p 
+                            INNER JOIN unidades u ON p.unidad_id = u.id 
+                            INNER JOIN marcas m ON p.marca_id = m.id 
+                            INNER JOIN categorias c ON p.categoria_id = c.id
+                            INNER JOIN sub_categorias sc ON p.sub_categoria_id = sc.id 
+                            LEFT JOIN imagenes_productos ip ON p.id = ip.producto_id AND ip.imagen_principal
+                            LEFT JOIN (
+                                SELECT ip.producto_id, SUM(porcentaje) as total_impuestos 
+                                FROM impuestos_productos ip
+                                INNER JOIN impuestos i ON ip.impuesto_id = i.id 
+                                GROUP BY ip.producto_id
+                            ) imp ON p.id = imp.producto_id`
+        let qry = `
+                SELECT 
+                    p.id,
+                    p.nombre,
+                    p.precio_venta_normal,
+                    imp.total_impuestos,
+                    p.stock,
+                    u.nombre as unidad,
+                    m.nombre as marca,
+                    c.nombre as categoria,
+                    sc.nombre as subcategoria,
+                    ip.source_image,
+                    p.created_at,
+                    p.updated_at 
+                FROM 
+                    ${fromClause} 
+                WHERE
+                    p.deleted_at IS NULL  
+                    ${filtro} 
+                    ${orderBy && order ? ' ORDER BY ' + orderBy + ' ' + order : '' }
+                LIMIT ${desde}, ${hasta}`
+
+        cnn.query(qry, async (err, res) =>{
+            if(err){
+                return callback({mensaje: 'Ocurrió un error al filtrar el listado de productos: '+err.message, tipoMensaje: 'danger'})
+            }else{
+                let totRows = await cnn.promise().query(`SELECT COUNT(p.id) as totRows FROM ${fromClause} WHERE p.deleted_at IS NULL ${filtro}`)
+                return callback(null, {data: res, rowsPerPage: constantes.regPerPage, totRows: totRows[0][0].totRows, page: pag})
+            }
+        })
+    }else{
+        return callback({mensaje: 'Conexión inactiva.', tipoMensaje: 'danger'})
+    }
+}
+
 
 ProductosModel.getAll = (callback) => {
     if(cnn){

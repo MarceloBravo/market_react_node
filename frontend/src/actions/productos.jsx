@@ -18,9 +18,49 @@ export const getPage = (pag) => {
     }
 }
 
+
+export const getItemsPage = (pag, items, orderBy) => {
+    let end_point = `${endPoint}/${url}/pag/${pag}/${items}${(orderBy.field && orderBy.direction) ? '/'+orderBy.field+'/'+orderBy.direction : ''}` 
+    return (dispatch, action) => {
+        axios.get(end_point,{headers: getHeader()}).then(res => {
+            dispatch({type: spinnerTypes.HIDE_SPINNER})
+            dispatch({type: productosTypes.LISTAR_PRODUCTOS, payload: res})
+        }).catch(error => {
+            handlerError(dispatch, error, 'Ocurrió un error al obtener el listado de productos: ')
+        })
+    }
+}
+
+
+export const getPreciosMinMax = (pag, items) => {
+    return (dispatch, action) => {
+        axios.get(`${endPoint}/${url}/min/max`,{headers: getHeader()}).then(res => {
+            dispatch({type: spinnerTypes.HIDE_SPINNER})
+            dispatch({type: productosTypes.PRECIOS_PRODUCTOS_MIN_MAX, payload: res})
+        }).catch(error => {
+            handlerError(dispatch, error, 'Ocurrió un error al obtener el listado de productos: ')
+        })
+    }
+}
+
+
 export const filter = (texto, pag) => {
     return (dispatch, action) => {
         axios.get(`${endPoint}/${url}/filtrar/${texto}/${pag}`,{headers: getHeader()}).then(res => {
+            dispatch({type: spinnerTypes.HIDE_SPINNER})
+            dispatch({type: productosTypes.FILTRAR_PRODUCTOS, payload: res})
+        }).catch(error => {
+            handlerError(dispatch, error, 'Ocurrió un error al filtrar el listado de productos: ')
+        })
+    }
+}
+
+
+export const filterParams = (data, pag) => {
+    console.log(`${endPoint}/${url}/filtrar/${pag}`, data)
+    //debugger
+    return (dispatch, action) => {
+        axios.post(`${endPoint}/${url}/filtrar/${pag}`, data, {headers: getHeader()}).then(res => {
             dispatch({type: spinnerTypes.HIDE_SPINNER})
             dispatch({type: productosTypes.FILTRAR_PRODUCTOS, payload: res})
         }).catch(error => {

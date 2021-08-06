@@ -28,11 +28,21 @@ const INITIAL_STATE = {
         rowsPerPage: 10,
         page: 0,
         totRows: 0
-    }
+    },
+    preciosMinMax: {
+        min: 0,
+        max: 0
+    },
+    textoFiltro: '', //Texto para el filtro para productos
 }
 
 export const ProductosReducer = (state = INITIAL_STATE, action) => {
     switch(action.type){
+        case types.TEXTO_FILTRO_PRODUCTO:
+            return {
+                ...state,
+                textoFiltro: action.payload
+            }
         case types.LISTAR_PRODUCTOS:
         case types.FILTRAR_PRODUCTOS:
             return {
@@ -63,6 +73,11 @@ export const ProductosReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 list: action.payload.data
+            }
+        case types.PRECIOS_PRODUCTOS_MIN_MAX:
+            return {
+                ...state,
+                preciosMinMax: action.payload.data
             }
         default:
             return state

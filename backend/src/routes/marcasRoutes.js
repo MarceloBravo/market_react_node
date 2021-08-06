@@ -14,7 +14,7 @@ module.exports = function(app, passport) {
         })
     })
 
-    app.get('/marcas/get/all', checkToken, (req, res) => {
+    app.get('/marcas/get/all', (req, res) => {
         MarcasModel.getAll((err, data) => {
             return res.json(err ? err : data)
         })

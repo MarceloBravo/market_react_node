@@ -1,3 +1,15 @@
+
+.header-menu{
+    color: white;
+    left: 5%;
+    position: absolute;    
+}
+
+.header-menu:hover {
+    color:rgb(199, 201, 202);
+    cursor: pointer;
+}
+
 .header-container{
     background-color: #efefef;
 }
@@ -15,17 +27,5 @@
 .icon-header-search{
     display: inline-flex;
     margin: 5px;
+    color: black !important
 }
-
-/*
-.products-in-cart{
-    background: red;
-    width: 13px;
-    height: 13px;
-    color: white;
-    font-size: x-small;
-    border-radius: 100%;
-    text-align: center;
-    float: right;
-}
-*/

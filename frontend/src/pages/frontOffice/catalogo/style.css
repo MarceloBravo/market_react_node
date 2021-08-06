@@ -1,0 +1,27 @@
+.col-left{
+    border-right: #d8d4d4 solid thin;
+}
+
+.rango-precio-row,
+.rango-precio-min,
+.rango-precio-max{
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.rango-precio-min,
+.rango-precio-max{
+    font-size: small;
+}
+
+.rango-precio-max{
+    text-align: right;
+}
+
+.rc-slider{
+    padding-left: inherit !important;
+}
+
+.row-paginacion{
+    padding: 10px 0px;
+}

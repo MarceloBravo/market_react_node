@@ -29,3 +29,8 @@ export const isEmail = (val) => {
     let regEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return regEmail.test(val)
 }
+
+export const formatearPrecio = (neto, impuestos) => {
+    let precio = parseInt(neto + (neto * impuestos / 100)).toLocaleString('de-DE', { style: 'currency', currency: 'CLP' } )
+    return precio
+ }

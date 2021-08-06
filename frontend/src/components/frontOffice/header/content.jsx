@@ -1,27 +1,38 @@
 import React from 'react'
-import { Container, Navbar, Nav, Form, FormControl } from 'react-bootstrap'
+import { Container, Navbar, Nav, Form, FormControl, OverlayTrigger, Tooltip } from 'react-bootstrap'
 import * as Icons from 'react-bootstrap-icons' //yarn add react-bootstrap-icons --save
 import { ImMenu } from "react-icons/im";    // yarn add react-icons --save
 import { LeftMenuComponent } from '../leftMenu/leftMenu'
 
 
 export const HeaderContentComponent = (props) => {
-    const { infoTiendaState, toggleMenu, sowMenu, goToCart } = props
+    const { infoTiendaState, toggleMenu, sowMenu, goToCart, goToCatalogue, goToHome, handlerTextFiltro, aplicarFiltro, textoFiltro } = props
 
     return (
         <>
             <LeftMenuComponent toggleMenu={toggleMenu} sowMenu={sowMenu}/> 
             <div className="header-container">
                 <Navbar bg="dark" variant="dark" className="header-market">
+
+                    <OverlayTrigger
+                        placement="bottom"
+                        delay={{ show: 250, hide: 400 }}
+                        overlay={<Tooltip id="button-tooltip">Mostrar menu</Tooltip>}
+                    >
+                        <ImMenu 
+                            onClick={toggleMenu} 
+                            className="header-menu"
+                        />
+                    </OverlayTrigger>
+
                     <Container>
                         <Navbar.Brand href="#home">
-                            <ImMenu onClick={toggleMenu}/>
                             { infoTiendaState ? infoTiendaState.nombre_tienda : 'Mi tienda sin nombre' }
                         </Navbar.Brand>
                         <Nav>
-                            <Nav.Link href="#home">Inicio</Nav.Link>
+                            <Nav.Link href="#" onClick={()=> goToHome("/catalogo")}>Inicio</Nav.Link>
                             <Nav.Link href="#features">Nuestras tiendas</Nav.Link>
-                            <Nav.Link href="#pricing">Catálogo de productos</Nav.Link>
+                            <Nav.Link href="#" onClick={()=> goToCatalogue("/catalogo")}>Catálogo de productos</Nav.Link>
                         </Nav>
                     </Container>
                 </Navbar>
@@ -33,8 +44,15 @@ export const HeaderContentComponent = (props) => {
                         <Nav>
                             <Nav.Link href="#pricing">
                                 <Form inline>
-                                    <FormControl type="text" placeholder="Buscar" className="mr-sm-2 input-header-search" />  
-                                    <Icons.Search className="icon-header-search"/>  
+                                    <FormControl 
+                                        type="text" 
+                                        name="textoFiltro"
+                                        placeholder="Buscar" 
+                                        className="mr-sm-2 input-header-search" 
+                                        onChange={e => handlerTextFiltro(e)}
+                                        value={textoFiltro}
+                                    />  
+                                    <Icons.Search className="icon-header-search" onClick={() => aplicarFiltro()}/>  
                                 </Form>
                             </Nav.Link>
                             <Nav.Link href="#home"><Icons.Person />Mi cuenta</Nav.Link>

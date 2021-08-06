@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import Drawer from 'react-modern-drawer'    //yarn add react-modern-drawer
 import { useSelector, useDispatch } from 'react-redux'
 import { getMainMenu } from '../../../actions/menusTienda'
+import { OverlayTrigger, Tooltip } from 'react-bootstrap'
 import 'react-modern-drawer/dist/index.css'
 import './style.css'
 
@@ -26,7 +27,16 @@ export const LeftMenuComponent = (props) => {
     return (
         <>
             <Drawer open={sowMenu} onClose={toggleMenu} direction='left' className="left-menu">
-                <label className="close-left-menu" onClick={() => toggleMenu()}>X</label>
+
+                <OverlayTrigger
+                        placement="bottom"
+                        delay={{ show: 250, hide: 400 }}
+                        overlay={<Tooltip id="button-tooltip">Ocultar menu</Tooltip>}
+                    >
+                        <label className="close-left-menu" onClick={() => toggleMenu()}>X</label>
+                    </OverlayTrigger>
+
+                
                 <div className="title-left-menu">Categorías</div>
                 {
                     menuMostradoState.map((mnu, key)=> {

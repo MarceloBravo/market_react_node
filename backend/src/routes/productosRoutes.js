@@ -10,8 +10,32 @@ module.exports = function(app, passport) {
         })
     })
 
+    app.get('/productos/pag/:pag/:items',(req, res) => {
+        ProductosModel.getItemsPerPage(req.params.pag, req.params.items, (err, data) => {
+            res.json(err ? err : data)
+        })
+    })
+
+    app.get('/productos/pag/:pag/:items/:orderByField/:orderByDirection',(req, res) => {
+        ProductosModel.getItemsPerPageOrderBy(req.params.pag, req.params.items, req.params.orderByField, req.params.orderByDirection, (err, data) => {
+            res.json(err ? err : data)
+        })
+    })
+
+    app.get('/productos/min/max',(req, res) => {
+        ProductosModel.getMinMaxPrice((err, data)=>{
+            res.json(err ? err : data)
+        })
+    })
+
     app.get('/productos/filtrar/:texto/:pag',(req, res) => {
         ProductosModel.filter(req.params.texto, req.params.pag, (err, data) => {
+            res.json(err ? err : data)
+        })
+    })
+
+    app.post('/productos/filtrar/:pag',(req, res) => {
+        ProductosModel.filterParams(req.body, req.params.pag, (err, data) => {
             res.json(err ? err : data)
         })
     })
