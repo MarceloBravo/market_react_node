@@ -6,7 +6,7 @@ import { LeftMenuComponent } from '../leftMenu/leftMenu'
 
 
 export const HeaderContentComponent = (props) => {
-    const { infoTiendaState, toggleMenu, sowMenu, goToCart, goToCatalogue, goToHome, handlerTextFiltro, aplicarFiltro, textoFiltro } = props
+    const { infoTiendaState, toggleMenu, sowMenu, goToCart, goToCatalogue, goToHome, goToLogin, handlerTextFiltro, aplicarFiltro, textoFiltro } = props
 
     return (
         <>
@@ -55,7 +55,7 @@ export const HeaderContentComponent = (props) => {
                                     <Icons.Search className="icon-header-search" onClick={() => aplicarFiltro()}/>  
                                 </Form>
                             </Nav.Link>
-                            <Nav.Link href="#home"><Icons.Person />Mi cuenta</Nav.Link>
+                            <Nav.Link href="#" onClick={()=>goToLogin()} ><Icons.Person />Mi cuenta</Nav.Link>
                             <Nav.Link href="#" onClick={() => goToCart()}><Icons.Cart/>Carro de compras</Nav.Link>
                         </Nav>
                     </Container>

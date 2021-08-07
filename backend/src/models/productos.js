@@ -184,7 +184,7 @@ ProductosModel.filterParams = (data, pag, callback) => {
             ${qryFiltro ? ' AND (' + qryFiltro + ')' : ''}
             ${marcas ? ' AND m.nombre IN (' + marcas + ')' : ''} 
             ${categorias ? ' AND c.nombre IN (' + categorias + ')' : ''}
-            AND p.precio_venta_normal BETWEEN ${precioMin} AND ${precioMax}
+            ${(precioMin && precioMax) ? ' AND p.precio_venta_normal BETWEEN ' + precioMin + ' AND ' + precioMax + ' ': ''}
         `
         let fromClause = `  productos p 
                             INNER JOIN unidades u ON p.unidad_id = u.id 
@@ -219,6 +219,8 @@ ProductosModel.filterParams = (data, pag, callback) => {
                     ${filtro} 
                     ${orderBy && order ? ' ORDER BY ' + orderBy + ' ' + order : '' }
                 LIMIT ${desde}, ${hasta}`
+
+        //console.log(qry)
 
         cnn.query(qry, async (err, res) =>{
             if(err){

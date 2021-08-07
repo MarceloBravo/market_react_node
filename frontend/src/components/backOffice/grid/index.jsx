@@ -31,6 +31,7 @@ export const Grid = (props) => {
         showEditButton,
         showDeleteButton,
         changeGridColumn,
+        checkPermisos,  //Determina si se deben verificr los permisos del usuario, por defecto el valor es undefined, si el valor es undefined o true se verificarán los permisos del usuario  
 } = props
     const permisos = useSelector(state => state.PermisosReducer.aplicar_permisos)
     const logedUser = useSelector(state => state.LoginReducer.logedUser)
@@ -40,22 +41,26 @@ export const Grid = (props) => {
     const location = useLocation()
     const [ datos, setDatos ] = useState(data)
 
+
     useEffect(() => {
         setWidthColumn(100/(headers.length+(actionColumn ? 1 : 0)))
     }, [headers, setWidthColumn, actionColumn])
 
 
     useEffect(()=>{
-        if(logedUser.roles){
-            let roles = logedUser ? logedUser.roles.map(r => r.id) : []
-            dispatch(aplicarPermisos(roles, location.pathname.split("/")[1]))
-        }else{
-            history.push('/home')
+        if(checkPermisos === undefined || checkPermisos === true){    
+            if(logedUser.roles){
+                let roles = logedUser ? logedUser.roles.map(r => r.id) : []
+                dispatch(aplicarPermisos(roles, location.pathname.split("/")[1]))
+            }else{
+                history.push('/home')
+            }
         }
-    },[logedUser, urlPantalla, location, history, dispatch])
+    },[logedUser, urlPantalla, location, history, dispatch, checkPermisos])
 
 
     useEffect(()=>{
+        console.log('DATA',data)
         setDatos(data)
     },[data])
 
@@ -77,10 +82,12 @@ export const Grid = (props) => {
         onChangeFilter(e.target.value)
     }
 
+
     const handlerBtnNuevo = () => {
         dispatch({type: types.OCULTAR_ALERTA})
         history.push(`${urlToForm}/nuevo`)
     }
+
 
     const formatDate = (date) => {
         if (date && date !== null && date.toString().length >= 10 && (new Date(date)).toString() !== 'Invalid Date' && date.substr(0, 10).split('-').length === 3) {
@@ -100,6 +107,7 @@ export const Grid = (props) => {
            data: arrData
         })
     }
+
 
     return (
         <TableGrid

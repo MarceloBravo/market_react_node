@@ -40,7 +40,7 @@ export const CatalogoContent = (props) => {
             <HeaderMarketComponent/>
             <Container>
                 <Row>
-                    <h3>Catálogo</h3>
+                    <h4>Catálogo</h4>
                 </Row>
                 <Row>
                     <Col className="col-left">                        
@@ -58,7 +58,7 @@ export const CatalogoContent = (props) => {
                                 onChange={e => handlerRange(e)}
                                 min={preciosMinMaxState.min ? preciosMinMaxState.min : 0} 
                                 max={preciosMinMaxState.max ? preciosMinMaxState.max : 10000}
-                                step={preciosMinMaxState.max ? parseInt(preciosMinMaxState.max / 20) : 1000}
+                                step={preciosMinMaxState.max ? parseInt((preciosMinMaxState.max - preciosMinMaxState.min) / 20) : 1000}
                                 allowCross={false}
                             />
                             <Row className="rango-precio-row">

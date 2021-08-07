@@ -46,6 +46,8 @@ import combineReducer from './redux';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { CarroCompras } from './pages/frontOffice/carroCompras/carroCompras'
+import { LoginCliente } from './pages/frontOffice/loginCliente/loginCliente'
+
 
 const store = createStore(combineReducer, applyMiddleware(thunk))
 
@@ -60,6 +62,7 @@ function App() {
             <Route exact path="/detalleProducto/:id" component={DetalleProducto}/>
             <Route exact path="/carrito" component={CarroCompras}/>
             <Route exact path="/catalogo" component={Catalogo}/>
+            <Route exact path="/loginCliente" component={LoginCliente}/>
 
 
             {/* Rutas BackOffice */}

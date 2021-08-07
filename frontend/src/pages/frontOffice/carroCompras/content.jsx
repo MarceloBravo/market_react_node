@@ -32,6 +32,7 @@ export const CarroComprasContent = (props) => {
                             showFindTextBox={false}
                             showDeleteButton={true}
                             changeGridColumn={changeGridColumn}
+                            checkPermisos={false}
                         />
                     </Col>
                     <Col md="4">

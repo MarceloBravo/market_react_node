@@ -57,8 +57,6 @@ export const filter = (texto, pag) => {
 
 
 export const filterParams = (data, pag) => {
-    console.log(`${endPoint}/${url}/filtrar/${pag}`, data)
-    //debugger
     return (dispatch, action) => {
         axios.post(`${endPoint}/${url}/filtrar/${pag}`, data, {headers: getHeader()}).then(res => {
             dispatch({type: spinnerTypes.HIDE_SPINNER})

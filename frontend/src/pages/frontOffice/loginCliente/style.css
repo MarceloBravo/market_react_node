@@ -1,0 +1,7 @@
+.login-form-cliente > div{
+    margin-top: 5%;
+    margin-bottom: 5%;
+    padding: 25px;
+    border-radius: 15px;
+    border: #cfd3d6 solid 2px;
+}

@@ -5,6 +5,7 @@ import { getAll as listadoDeptos } from '../../../actions/categorias'
 import { getItemsPage as getProductos, filterParams, getPreciosMinMax } from '../../../actions/productos'
 import { formatearPrecio } from '../../../shared/funciones'
 import { CatalogoContent } from './content'
+import { useHistory } from 'react-router-dom'
 
 
 
@@ -43,6 +44,7 @@ export const Catalogo = () => {
 
     useEffect(()=>{
         aplicarFiltro()
+        setBuscar(false)
         // eslint-disable-next-line
     },[textoFiltroState])
 
@@ -109,14 +111,14 @@ export const Catalogo = () => {
         marcas.forEach((m, id) => {if( m[Object.keys(m)[0]]){_marcas += (_marcas !== '' ? ',': '') + '"' + marcasState[id].nombre + '"'}})
         departamentos.forEach((d, id) => {if( d[Object.keys(d)[0]]){_deptos += (_deptos !== '' ? ',': '') + '"' + departamentosState[id].nombre + '"'}})
         dispatch(filterParams({
-            texto: textoFiltroState, //*
+            texto: textoFiltroState, 
             min: rangeValue[0], 
             max: rangeValue[1], 
             marcas: _marcas, 
             departamentos: _deptos, 
             ordenar_por: orderBy.field, 
             direccion: orderBy.direction,
-            itemsPorPagina: itemsPorPagina  //*
+            itemsPorPagina: itemsPorPagina  
         },0))
     }
     

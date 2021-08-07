@@ -39,6 +39,11 @@ export const HeaderMarketComponent = () => {
     }
 
 
+    const goToLogin = () => {
+        history.push('/loginCliente')
+    }
+
+
     const handlerTextFiltro = (e) => {
         setTextoFiltro(e.target.value)
     }
@@ -58,6 +63,7 @@ export const HeaderMarketComponent = () => {
             goToCart={goToCart}
             goToCatalogue={goToCatalogue}
             goToHome={goToHome}
+            goToLogin={goToLogin}
             handlerTextFiltro={handlerTextFiltro}
             aplicarFiltro={aplicarFiltro}
             textoFiltro={textoFiltro}
