@@ -1,0 +1,27 @@
+.containner{
+    min-height: 526px;
+}
+
+.row-message{
+    height: 50%;
+    margin: 10% 0px;
+}
+
+.col-texto-menssage{
+    text-align: left;
+}
+
+.row-message > .col-message{
+    text-align: center;
+    border: #089ead solid;
+    padding: 2%;
+}
+
+.row-message img{
+    height: 70px;
+    width: auto;
+}
+
+.col-button-OK{
+    text-align: center;
+}

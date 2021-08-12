@@ -1,0 +1,4 @@
+export const types = {
+    LISTAR_REGIONES: 'LISTAR_REGIONES',
+    BUSCAR_REGION: 'BUSCAR_REGION'
+}

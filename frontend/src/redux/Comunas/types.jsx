@@ -1,0 +1,4 @@
+export const types = {
+    LISTAR_COMUNAS: 'LISTAR_COMUNAS',
+    BUSCAR_COMUNA: 'BUSCAR_COMUNA',
+}

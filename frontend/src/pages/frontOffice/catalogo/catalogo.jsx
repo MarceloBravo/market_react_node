@@ -5,8 +5,6 @@ import { getAll as listadoDeptos } from '../../../actions/categorias'
 import { getItemsPage as getProductos, filterParams, getPreciosMinMax } from '../../../actions/productos'
 import { formatearPrecio } from '../../../shared/funciones'
 import { CatalogoContent } from './content'
-import { useHistory } from 'react-router-dom'
-
 
 
 export const Catalogo = () => {

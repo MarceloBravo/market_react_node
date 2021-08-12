@@ -7,7 +7,7 @@ export const FooterComponent = () => {
     const infoTiendaState = useSelector(state => state.InfoTiendaReducer.infoTienda)
 
     return (
-        <>
+        <div>
             <div className="footer-container">
                 <Container className="footer-component">
                     <Row>
@@ -44,6 +44,6 @@ export const FooterComponent = () => {
                     </Row>
                 </Container>
             </div>
-        </>
+        </div>
     )
 }

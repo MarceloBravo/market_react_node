@@ -19,6 +19,28 @@ export const handlerError = (dispatch, error, msg) => {
     }
 }
 
+
+// Valida el rut con su cadena completa "XXXXXXXX-X"
+export const validaRut = (rutCompleto) => {
+    if (!/^[0-9]+[-|‐]{1}[0-9kK]{1}$/.test( rutCompleto ))
+        return false;
+    var tmp 	= rutCompleto.split('-');
+    var digv	= tmp[1]; 
+    var rut 	= tmp[0];
+    // eslint-disable-next-line
+    if ( digv == 'K' ) digv = 'k' ;
+    // eslint-disable-next-line
+    return (dv(rut) == digv );
+}
+
+const dv = (T) => {
+    var M=0,S=1;
+    for(;T;T=Math.floor(T/10))
+        S=(S+T%10*(9-M++%6))%11;
+    return S?S-1:'k';
+}
+
+
 export const getHeaderFormData = () => {
     let token = localStorage.getItem('gimAppMabc')
     return {'Content-Type':'multipart/form-data', 'Authorization':`Bearer ${token}`}
@@ -34,3 +56,26 @@ export const formatearPrecio = (neto, impuestos) => {
     let precio = parseInt(neto + (neto * impuestos / 100)).toLocaleString('de-DE', { style: 'currency', currency: 'CLP' } )
     return precio
  }
+
+ export const validaPassword = (campo, nombreCampoPassword, pwd, nombreCampoConfirmarPassword, confirmPwd, errors, setErrors) =>{
+    let valor = campo === 'password' ? pwd : confirmPwd;
+    let fieldStr = campo === 'password' ? 'contraseña' : 'confirmación de contraseña';
+    
+    if(valor.length < 6){
+        setErrors({...errors, [campo]: `La ${fieldStr} debe tener almenos 6 caráctreres. Ingresa una ${fieldStr} más larga.`})
+    }else if(valor.length > 20){
+        setErrors({...errors, [campo]: `La ${fieldStr} debe tener un máximo de 20 caráctreres. Ingresa una ${fieldStr} más corta.`})
+    }else if(pwd !== confirmPwd){
+        setErrors({...errors, [campo]: 'La contraseña y la confirmación de contraseña no coinciden.'})
+    }else {
+        if(
+            (campo === nombreCampoConfirmarPassword && valor === confirmPwd) || 
+            (campo === nombreCampoPassword && valor === pwd)
+        ){
+            setErrors({...errors, [nombreCampoPassword]: '', [nombreCampoConfirmarPassword]: ''})
+        }else{
+            setErrors({...errors, [campo]: ''})
+        }  
+    }
+}
+

@@ -47,6 +47,8 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { CarroCompras } from './pages/frontOffice/carroCompras/carroCompras'
 import { LoginCliente } from './pages/frontOffice/loginCliente/loginCliente'
+import { RegistroClientes } from './pages/frontOffice/registroCliente/registroCliente'
+import { PageMessage } from './pages/frontOffice/pageMessage/pageMessage'
 
 
 const store = createStore(combineReducer, applyMiddleware(thunk))
@@ -63,6 +65,9 @@ function App() {
             <Route exact path="/carrito" component={CarroCompras}/>
             <Route exact path="/catalogo" component={Catalogo}/>
             <Route exact path="/loginCliente" component={LoginCliente}/>
+            <Route exact path="/registroCliente" component={RegistroClientes}/>
+            <Route exact path="/registroCliente/:id" component={RegistroClientes}/>
+            <Route exact path="/info" component={PageMessage}/>
 
 
             {/* Rutas BackOffice */}

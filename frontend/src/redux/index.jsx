@@ -19,7 +19,10 @@ import { InfoTiendaReducer } from  './InfoTienda/reducer';
 import { MenusTiendaReducer } from  './MenusTienda/reducer';
 import { ImagenesMarquesinaReducer } from  './ImagenesMarquesina/reducer';
 import { SeccionesHomeReducer } from  './SeccionesHome/reducer';
-
+import { ClientesReducer } from  './Clientes/reducer';
+import { RegionesReducer } from  './Regiones/reducer';
+import { ProvinciasReducer } from  './Provincias/reducer';
+import { ComunasReducer } from  './Comunas/reducer';
 
 export default combineReducers({
     LoginReducer,
@@ -41,5 +44,9 @@ export default combineReducers({
     InfoTiendaReducer,
     MenusTiendaReducer,
     ImagenesMarquesinaReducer,
-    SeccionesHomeReducer
+    SeccionesHomeReducer,
+    ClientesReducer,
+    RegionesReducer,
+    ProvinciasReducer,
+    ComunasReducer
 })

@@ -20,7 +20,6 @@ export const getPage = (pag) => {
 export const filter = (texto, pag) => {
     return (dispatch, action) => {
         axios.get(`${serverEndPoint}/${url}/filtrar/${texto}/${pag}`, { headers: getHeader()}).then( res => {
-            console.log(res)
             dispatch({type: spinnerTypes.HIDE_SPINNER})
             dispatch({type: seccionesHomeTypes.FILTER_SECCIONES_HOME, payload: res})
         }).catch(err => {
@@ -32,7 +31,6 @@ export const filter = (texto, pag) => {
 export const getAll = () => {
     return (dispatch, action) => {
         axios.get(`${serverEndPoint}/${url}/get/all`, { headers: getHeader()}).then( res => {
-            console.log(res)
             dispatch({type: spinnerTypes.HIDE_SPINNER})
             dispatch({type: seccionesHomeTypes.GET_ALL_SECCIONES_HOME, payload: res})
         }).catch(err => {
@@ -45,7 +43,6 @@ export const getAll = () => {
 export const find = (id) => {
     return (dispatch, action) => {
         axios.get(`${serverEndPoint}/${url}/${id}`, { headers: getHeader()}).then( res => {
-            console.log(res)
             dispatch({type: spinnerTypes.HIDE_SPINNER})
             dispatch({type: seccionesHomeTypes.FIND_SECCIONES_HOME, payload: res})
         }).catch(err => {
@@ -59,7 +56,6 @@ export const find = (id) => {
 export const insert = (data) => {
     return (dispatch, action) => {
         axios.post(`${serverEndPoint}/${url}`, data, { headers: getHeader()}).then( res => {
-            console.log(res)
             dispatch({type: spinnerTypes.HIDE_SPINNER})
             dispatch({type: alertasTypes.MOSTRAR_ALERTA, payload: {mensaje: res.data.mensaje, tipo: res.data.tipoMensaje}})
             dispatch({type: seccionesHomeTypes.INSERT_SECCIONES_HOME, payload: data})
@@ -72,7 +68,6 @@ export const insert = (data) => {
 export const update = (id, data) => {
     return (dispatch, action) => {
         axios.put(`${serverEndPoint}/${url}/${id}`, data, { headers: getHeader()}).then( res => {
-            console.log(res)
             dispatch({type: spinnerTypes.HIDE_SPINNER})
             dispatch({type: alertasTypes.MOSTRAR_ALERTA, payload: {mensaje: res.data.mensaje, tipo: res.data.tipoMensaje}})
             dispatch({type: seccionesHomeTypes.UPDATE_SECCIONES_HOME, payload: data})
@@ -85,7 +80,6 @@ export const update = (id, data) => {
 export const deleteReg = (id) => {
     return (dispatch, action) => {
         axios.delete(`${serverEndPoint}/${url}/${id}`, { headers: getHeader()}).then( res => {
-            console.log(res)
             dispatch({type: spinnerTypes.HIDE_SPINNER})
             dispatch({type: alertasTypes.MOSTRAR_ALERTA, payload: {mensaje: res.data.mensaje, tipo: res.data.tipoMensaje}})
             dispatch({type: seccionesHomeTypes.DELETE_SECCIONES_HOME})

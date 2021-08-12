@@ -1,12 +1,25 @@
 import React from 'react'
-import { Container, Navbar, Nav, Form, FormControl, OverlayTrigger, Tooltip } from 'react-bootstrap'
+import { Container, Navbar, Nav, Form, FormControl, OverlayTrigger, Tooltip, NavDropdown } from 'react-bootstrap'
 import * as Icons from 'react-bootstrap-icons' //yarn add react-bootstrap-icons --save
 import { ImMenu } from "react-icons/im";    // yarn add react-icons --save
 import { LeftMenuComponent } from '../leftMenu/leftMenu'
 
 
 export const HeaderContentComponent = (props) => {
-    const { infoTiendaState, toggleMenu, sowMenu, goToCart, goToCatalogue, goToHome, goToLogin, handlerTextFiltro, aplicarFiltro, textoFiltro } = props
+    const { 
+        infoTiendaState, 
+        toggleMenu, 
+        sowMenu, 
+        goToCart, 
+        goToCatalogue, 
+        goToHome, 
+        goToLogin, 
+        handlerTextFiltro, 
+        aplicarFiltro, 
+        textoFiltro,
+        datosCliente,
+        cerrarSession,
+     } = props
 
     return (
         <>
@@ -55,8 +68,17 @@ export const HeaderContentComponent = (props) => {
                                     <Icons.Search className="icon-header-search" onClick={() => aplicarFiltro()}/>  
                                 </Form>
                             </Nav.Link>
-                            <Nav.Link href="#" onClick={()=>goToLogin()} ><Icons.Person />Mi cuenta</Nav.Link>
-                            <Nav.Link href="#" onClick={() => goToCart()}><Icons.Cart/>Carro de compras</Nav.Link>
+                            { !datosCliente?.nombres && <Nav.Link to="#" onClick={()=>goToLogin()} ><Icons.Person />Login</Nav.Link>}
+                            { datosCliente?.nombres && 
+                                <NavDropdown title={datosCliente.nombres} id="navbarScrollingDropdown">
+                                    {!datosCliente.id && <NavDropdown.Item href='/loginCliente'>Actualizar mis datos</NavDropdown.Item>}
+                                    {datosCliente.id && <NavDropdown.Item href={`/registroCliente/${datosCliente.id}`}>Actualizar mis datos</NavDropdown.Item>}
+                                    <NavDropdown.Divider />
+                                    <NavDropdown.Item to="#" onClick={() => cerrarSession()}>Cerrar sessión</NavDropdown.Item>
+                                </NavDropdown>
+                            
+                            }
+                            <Nav.Link to="#" onClick={() => goToCart()}><Icons.Cart/>Carro de compras</Nav.Link>
                         </Nav>
                     </Container>
                 </Navbar>

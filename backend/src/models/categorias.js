@@ -27,7 +27,7 @@ categoriasModel.getPage = (pag, callback) => {
                 return callback({mensaje: 'Ocurrió un error al solicitar los datos: ' + err.message, tipoMensaje: 'danger'})
             }else{
                 let totRows = await cnn.promise().query(`SELECT count(*) AS totRows FROM categorias WHERE deleted_at IS NULL`)
-                console.log(totRows[0][0])
+                
                 return callback(null, {data: res, totRows: totRows[0][0].totRows, rowsPerPage: constantes.regPerPage, pag})
             }
         })
