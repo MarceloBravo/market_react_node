@@ -5,9 +5,11 @@ import { getAll as listadoDeptos } from '../../../actions/categorias'
 import { getItemsPage as getProductos, filterParams, getPreciosMinMax } from '../../../actions/productos'
 import { formatearPrecio } from '../../../shared/funciones'
 import { CatalogoContent } from './content'
+import { useParams } from 'react-router-dom'
 
 
 export const Catalogo = () => {
+    const {idCat, idSubCat } = useParams()
     const [ dataGrid, setDataGrid ] = useState({data: []})
     const [ rangeValue, setRangeValue ] = useState([null, null])
     // eslint-disable-next-line
@@ -22,7 +24,6 @@ export const Catalogo = () => {
     const textoFiltroState = useSelector(state => state.ProductosReducer.textoFiltro)
     const preciosMinMaxState = useSelector(state => state.ProductosReducer.preciosMinMax)
     const dispatch = useDispatch()
-
 
     useEffect(()=>{
         dispatch(listadoMarcas())
@@ -65,6 +66,15 @@ export const Catalogo = () => {
     useEffect(()=>{
         setRangeValue([preciosMinMaxState.min, preciosMinMaxState.max])
     },[preciosMinMaxState])
+
+
+    useEffect(()=>{
+        if(idCat && idSubCat){
+            console.log('ID CATEGORÍA', idCat, 'ID SUB-CATEGORIA', idSubCat)
+        }else if(idCat){
+            console.log('ID CATEGORÍA', idCat)
+        }
+    },[idCat, idSubCat])
 
 
     const initialValuesGridCard = (items, orden) => {

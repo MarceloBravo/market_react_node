@@ -42,6 +42,17 @@ export const getAll = () => {
     }
 }
 
+export const getCategoriasSubCategorias = () => {
+    return (dispatch, action) => {
+        axios.get(`${endPoint}/${url}_subCategorias`,{headers: getHeader()}).then(res => {
+            dispatch({type: spinnerTypes.HIDE_SPINNER})
+            dispatch({type: types.LISTAR_CATEGORIAS_SUBCATEGORIAS, payload: res.data})
+        }).catch(error => {
+            handlerError(dispatch, error, 'Error al filtrar las categorías: ')
+        })
+    }
+}
+
 export const find = (id) => {
     return (dispatch, action) => {
         axios.get(`${endPoint}/${url}/${id}`,{headers: getHeader()}).then(res => {

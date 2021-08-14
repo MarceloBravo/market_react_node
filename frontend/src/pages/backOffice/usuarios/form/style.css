@@ -9,5 +9,8 @@
 .image{
     cursor: pointer;
     height: 90%;
-    position: absolute;
+}
+
+.rounded-circle{
+    position: relative !important;
 }

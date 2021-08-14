@@ -27,3 +27,11 @@
 .field-error-marquezina{
     margin-left: 0px !important;
 }
+
+.card-header button:focus {
+    color: black !important;
+}
+
+.btn-light{
+    border-style: hidden !important;
+}

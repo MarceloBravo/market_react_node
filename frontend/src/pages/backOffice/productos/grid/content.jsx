@@ -17,7 +17,7 @@ export const ProductosFormContent = (props) => {
             <ModalDialog response={response}/>
             <div className="main-section">
                 <div className="menu-section">
-                    <Menu activeKeyMenu="1"/>
+                    <Menu activeKeyMenu="19"/>
                 </div>                
                 <div className="content-section">                    
                     <Alerta />
@@ -31,8 +31,8 @@ export const ProductosFormContent = (props) => {
                         onClickDelete={e => eliminarRegistro(e)}
                         onChangeFilter={e => filtrar(e)}
                     />
+                    <Paginacion data={dataGrid} goToPage={goToPage}/>
                 </div>
-                <Paginacion data={dataGrid} goToPage={goToPage}/>
             </div>
         </div>
     )

@@ -16,7 +16,7 @@ export const MenusTiendaGridContent = (props) => {
             <SpinnerComponent />
             <div className="main-section">
                 <div className="menu-section">
-                    <Menu activeKeyMenu="1"/>
+                    <Menu activeKeyMenu="30"/>
                 </div>                
                 <div className="content-section">                    
                     <Alerta />

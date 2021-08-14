@@ -18,7 +18,7 @@ export const SubCategoriasGridContent = (props) => {
                 <SpinnerComponent />
                 <div className="main-section">
                     <div className="menu-section">
-                        <Menu activeKeyMenu="0"/>
+                        <Menu activeKeyMenu="19"/>
                     </div>                
                     <div className="content-section">                    
                         <Alerta />

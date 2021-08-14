@@ -19,7 +19,7 @@ export const ProductosFormContent = (props) => {
             <SpinnerComponent /> 
             <div className="main-section">
                 <div className="menu-section">
-                    <Menu activeKeyMenu="1"/>
+                    <Menu activeKeyMenu="19"/>
                 </div>
                 <div className="content-section">
                     <Alerta />

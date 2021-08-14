@@ -64,6 +64,8 @@ function App() {
             <Route exact path="/detalleProducto/:id" component={DetalleProducto}/>
             <Route exact path="/carrito" component={CarroCompras}/>
             <Route exact path="/catalogo" component={Catalogo}/>
+            <Route exact path="/catalogo/:id" component={Catalogo}/>
+            <Route exact path="/catalogo/:idCat/:idSubCat" component={Catalogo}/>
             <Route exact path="/loginCliente" component={LoginCliente}/>
             <Route exact path="/registroCliente" component={RegistroClientes}/>
             <Route exact path="/registroCliente/:id" component={RegistroClientes}/>

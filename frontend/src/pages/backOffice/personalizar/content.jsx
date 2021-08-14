@@ -20,7 +20,7 @@ export const ContentPersonalizar = (props) => {
 
             <div className="main-section">
                 <div className="menu-section">
-                    <Menu activeKeyMenu="1"/>
+                    <Menu activeKeyMenu="15"/>
                 </div>
                 <div className="content-section">                    
                     <Alerta />

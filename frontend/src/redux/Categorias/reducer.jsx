@@ -14,7 +14,8 @@ const INITIAL_STATE = {
         rowsPerPage: 10,
         page: 0,
         totRows: 0
-    }
+    },
+    categoriasSubCategorias: []
 }
 
 
@@ -25,6 +26,11 @@ export const CategoriasReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 dataGrid: action.payload.data
+            }
+        case types.LISTAR_CATEGORIAS_SUBCATEGORIAS:
+            return {
+                ...state,
+                categoriasSubCategorias: action.payload
             }
         case types.BUSCAR_CATEGORIAS:
         case types.INSERTAR_CATEGORIAS:

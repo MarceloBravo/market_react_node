@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Row, Col, Image, Button, Container } from 'react-bootstrap'
+import { Form, Row, Col, Image, Button, Container, Accordion, Card } from 'react-bootstrap'
 import { ModalDialog } from '../../../components/backOffice/modalDialog' 
 import { Header } from '../../../components/backOffice/header'
 import { SpinnerComponent } from '../../../components/shared/spinner'
@@ -23,15 +23,26 @@ export const InfoTiendaContent = (props) => {
 
             <div className="main-section">
                 <div className="menu-section">
-                    <Menu activeKeyMenu="1"/>
+                    <Menu activeKeyMenu="30"/>
                 </div>
                 <div className="content-section">                    
                     <Alerta />
+                    
+                    <Accordion>
+                            <Card>
+                                <Card.Header>
+                                    <Accordion.Toggle as={Button} variant="light" eventKey="0">
+                                        Configurar la información de la tienda
+                                    </Accordion.Toggle>
+                                </Card.Header>
+                                <Accordion.Collapse eventKey="0">
+                                    <Card.Body>
+                                        
                     <Form>
                         <div className="col-md-12" >
                             <div className="div-title">Información de la tienda</div>
                             <Form.Group as={Row} controlId="formPlaintextEmail">
-                                <Form.Label column sm="2">Nombre de la tienda</Form.Label>
+                                <Form.Label column md="2">Nombre de la tienda</Form.Label>
                                 <Col md="4">
                                     <Form.Control
                                         type="text"
@@ -51,7 +62,7 @@ export const InfoTiendaContent = (props) => {
 
 
                             <Form.Group as={Row} controlId="formPlaintextEmail">
-                                <Form.Label column sm="2">Fono venta</Form.Label>
+                                <Form.Label column md="2">Fono venta</Form.Label>
                                 <Col md="4">
                                     <Form.Control
                                         type="text"
@@ -71,7 +82,7 @@ export const InfoTiendaContent = (props) => {
 
 
                             <Form.Group as={Row} controlId="formPlaintextEmail">
-                                <Form.Label column sm="2">Email</Form.Label>
+                                <Form.Label column md="2">Email</Form.Label>
                                 <Col md="4">
                                     <Form.Control
                                         type="text"
@@ -91,7 +102,7 @@ export const InfoTiendaContent = (props) => {
 
 
                             <Form.Group as={Row} controlId="formPlaintextEmail">
-                                <Form.Label column sm="2">Dirección</Form.Label>
+                                <Form.Label column md="2">Dirección</Form.Label>
                                 <Col md="4">
                                     <Form.Control
                                         type="text"
@@ -120,6 +131,18 @@ export const InfoTiendaContent = (props) => {
                         </div>
 
                     </Form>
+                                    
+                                    </Card.Body>
+                                </Accordion.Collapse>
+                            </Card>
+                            <Card>
+                                <Card.Header>
+                                    <Accordion.Toggle as={Button} variant="light" eventKey="1">
+                                    Configurar las imágenes de la marquesina de la portada de la tienda
+                                    </Accordion.Toggle>
+                                </Card.Header>
+                                <Accordion.Collapse eventKey="1">
+                                    <Card.Body>
 
                     <Form className="form-imagenes-marquezina">
                         <div className="div-title">Imágenes de la marquesina de la portada de la tienda</div>
@@ -226,6 +249,11 @@ export const InfoTiendaContent = (props) => {
 
                     </Form>
                     
+                                    </Card.Body>
+                                </Accordion.Collapse>
+
+                            </Card>
+                        </Accordion>
                 </div>
             </div>
         </>

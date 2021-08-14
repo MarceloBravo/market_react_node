@@ -9,21 +9,24 @@ import { types as spinnerTypes } from '../../../redux/Spinner/types'
 import { InfoTiendaContent } from './content'
 import { defaultImagesTienda } from '../../../shared/constantes'
 import { types as modalTypes } from '../../../redux/ModalDialog/types'
+import { findByUrl as infoPantalla } from '../../../actions/pantallas'
 
-export const InfoTiendaFormComponent = () => {
+export const InfoTiendaFormComponent = () => {    
     const id = 1
+    const currentUrl = window.location.pathname.split('/')[1]
+    //const [ activeKey, setActiveKey ] = useState(0)
     const [ seccion, setSeccion ] = useState('info_tienda') //Indica la seccion a la cual se actualizarán los datos (info_tienda, marquesina)
     const [ infoTienda, setInfoTienda ] = useState({nombre_tienda: '', fono_venta: '', email: '', direccion:'', comuna:'', ciudad: ''})
     const [ errors, setErrors ] = useState({nombre_tienda: '', fono_venta: '', email: '', direccion:'', comuna:'', ciudad: ''})
     const infoTiendaState = useSelector(state => state.InfoTiendaReducer.infoTienda)
     const imagenesMarquesinaState = useSelector(state => state.ImagenesMarquesinaReducer)
+    //const currentPantalla = useSelector(state => state.PantallasReducer.pantalla);    
     const [ imagenesMarquesina, setImagenesMarquesina ] = useState({
         imagenes: [],
         objImage: []
     })
     const dispatch = useDispatch()
     const history = useHistory()
-
     const [ imageCtrl, setimageCtrl ] = useState(null)
     const inputFileRef = useRef()
     const imgRef = useRef([])
@@ -32,7 +35,8 @@ export const InfoTiendaFormComponent = () => {
     useEffect(() => {
         dispatch(getData())
         dispatch(getDataMarquesina())
-    },[dispatch])
+        dispatch(infoPantalla(currentUrl))
+    },[currentUrl, dispatch])
 
 
     useEffect(()=>{
@@ -48,7 +52,15 @@ export const InfoTiendaFormComponent = () => {
         }
     },[imagenesMarquesinaState])
 
+    /*
+    useEffect(()=>{
+        if(currentPantalla && currentPantalla.menu_padre_id){
+            setActiveKey(currentPantalla.menu_padre_id.toString())
+        }
+    },[currentPantalla])
+    */
     
+
     const response = (res) => {
         if(res){
             dispatch({type: spinnerTypes.SHOW_SPINNER})
@@ -301,6 +313,7 @@ export const InfoTiendaFormComponent = () => {
             changeImage={changeImage} 
             removeImage={removeImage}
             handleFieldsImages={handleFieldsImages}
+            //activeKey={activeKey}
         />
     )
 }

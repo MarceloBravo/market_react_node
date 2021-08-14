@@ -18,7 +18,7 @@ export const GridPantallas = (props) => {
             <SpinnerComponent />
             <div className="main-section">
                 <div className="menu-section">
-                    <Menu activeKeyMenu="1"/>
+                    <Menu activeKeyMenu="15"/>
                 </div>                
                 <div className="content-section">                    
                     <Alerta />

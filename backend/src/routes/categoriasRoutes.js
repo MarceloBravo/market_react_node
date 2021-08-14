@@ -34,6 +34,12 @@ module.exports = function(app, passport){
         })
     })
 
+    app.get('/categorias_subcategorias', (req, res) => {
+        categoriasModel.getCategorias((data, err) =>{
+            res.json(err ? err : data)
+        })
+    })
+
     app.get('/categorias/:id', (req, res) => {
         categoriasModel.find(req.params.id, (data, err) =>{
             if(err){

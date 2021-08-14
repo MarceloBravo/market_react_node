@@ -18,7 +18,7 @@ export const SeccionesHomeForm = (props) => {
                 <SpinnerComponent />
                 <div className="main-section">
                     <div className="menu-section">
-                        <Menu activeKeyMenu="0"/>
+                        <Menu activeKeyMenu="30"/>
                     </div>                
                     <div className="content-section">                    
                         <Alerta />

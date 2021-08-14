@@ -126,17 +126,20 @@ pantallaModel.getByUrl = (url, callback) => {
     if(cnn){
         let qry = `
             SELECT 
+                p.id,
                 p.nombre,
                 p.created_at,
                 p.updated_at,
                 p.deleted_at,
                 p.menus_id,
+                mp.id as menu_padre_id,
                 p.permite_crear,
                 p.permite_modificar,
                 p.permite_eliminar
             FROM 
                 pantallas p
                 INNER JOIN menus m ON p.menus_id = m.id 
+                INNER JOIN menus mp ON m.menu_padre_id = mp.id
             WHERE
                 p.deleted_at IS NULL
                 AND m.deleted_at IS NULL 

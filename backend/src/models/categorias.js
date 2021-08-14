@@ -98,6 +98,50 @@ categoriasModel.getAll = (callback) => {
     }
 }
 
+
+categoriasModel.getCategorias = (callback) => {
+    if(cnn){
+        let qry = `
+            SELECT
+                id,
+                nombre,
+                created_at,
+                updated_at 
+            FROM 
+                categorias 
+            WHERE 
+                deleted_at IS NULL
+        `
+
+        cnn.query(qry, async (error, res)=>{
+            if(error){
+                return callback({mensaje: 'Ocurrió un error al obtener el listado de categoríoas: '+error.message, tipoMensaje: 'danger'})
+            }else{
+                let resp = await Promise.all(res.map(async element => {
+                        let subCat = await subCategorias(element.id)
+                        element.sub_categoria = subCat
+                        return element
+                    })
+                );
+                return callback(null, resp)
+            }
+        })
+    }else{
+        return callback({mensaje: 'Conexión inactiva.', tipoMensaje:'danger'})
+    }
+}
+
+const subCategorias = async (idCategoria) => {
+    let qry = `SELECT id, nombre FROM sub_categorias WHERE categoria_id = ${idCategoria}` 
+    try{
+        let res = await cnn.promise().query(qry)
+        return res[0]
+    }catch(error){
+        console.log('ERROR SUB_CATEGORIAS', error)
+        return error
+    }
+}
+
 categoriasModel.find = (id, callback) => {
     if(cnn){
         let qry = `

@@ -1,14 +1,25 @@
+#EZDrawer > nav{
+    padding-left: 1%;
+}
+
 #EZDrawer__container{
     width: 25% !important;
     box-shadow: 3px 5px #0000004f !important;
+    z-index: 1100;
+    background-color: #f8f9fa !important;
+}
+
+.item-categoria-menu{
+    margin-left: 3%;
 }
 
 .title-left-menu{
     padding: 3px;
-    border-bottom-style: solid;
     border-bottom-width: thin;
     border-bottom-color: #cacecb;
     margin: 5px;
+    font-weight: 500;
+    font-style: italic;
 }
 
 .close-left-menu{
@@ -20,14 +31,25 @@
 
 .li_menu_categoria,
 .ul_menu_categoria{
-    color: #7d7d7d;
+    color: #636161 !important;
     cursor: pointer;
+    display: block !important;
+    text-decoration: none;
 }
 
-.li_menu_categoria:hover,
-.ul_menu_categoria:hover{
-    font-weight: 600;
+.ul_menu_categoria{
+    font-weight: inherit;
+    font-style: italic;
 }
+
+.li_menu_categoria{
+    font-weight: lighter;
+}
+
+a.li_menu_categoria:hover{
+    text-decoration: underline ;
+}
+
 
 @media (width: 300px) {
 
