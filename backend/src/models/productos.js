@@ -166,6 +166,8 @@ ProductosModel.filterParams = (data, pag, callback) => {
         let order = data.direccion
         let texto = data.texto ? data.texto : null
         let itemsPorPag = data.itemsPorPagina ? data.itemsPorPagina : constantes.regPerPage
+        let categoriaId  = data.categoriaId ? data.categoriaId : ''
+        let subCategoriaId  = data.subCategoriaId ? data.subCategoriaId : ''
 
         let desde = itemsPorPag * pag
         let hasta = desde + itemsPorPag
@@ -177,7 +179,7 @@ ProductosModel.filterParams = (data, pag, callback) => {
                         c.nombre LIKE ${cnn.escape('%'+texto+'%')} OR 
                         sc.nombre LIKE ${cnn.escape('%'+texto+'%')} OR 
                         CONVERT(p.created_at, CHAR) LIKE ${cnn.escape('%'+texto+'%')} OR
-                        CONVERT(p.updated_at, CHAR) LIKE ${cnn.escape('%'+texto+'%')}`
+                        CONVERT(p.updated_at, CHAR) LIKE ${cnn.escape('%'+texto+'%')}`  
                         : ''
 
         let filtro = ` 
@@ -185,6 +187,8 @@ ProductosModel.filterParams = (data, pag, callback) => {
             ${marcas ? ' AND m.nombre IN (' + marcas + ')' : ''} 
             ${categorias ? ' AND c.nombre IN (' + categorias + ')' : ''}
             ${(precioMin && precioMax) ? ' AND p.precio_venta_normal BETWEEN ' + precioMin + ' AND ' + precioMax + ' ': ''}
+            ${subCategoriaId ? 'AND sc.id = '+cnn.escape(subCategoriaId) : ''}
+            ${categoriaId ? 'AND c.id = '+cnn.escape(categoriaId) : ''}
         `
         let fromClause = `  productos p 
                             INNER JOIN unidades u ON p.unidad_id = u.id 
@@ -219,8 +223,6 @@ ProductosModel.filterParams = (data, pag, callback) => {
                     ${filtro} 
                     ${orderBy && order ? ' ORDER BY ' + orderBy + ' ' + order : '' }
                 LIMIT ${desde}, ${hasta}`
-
-        //console.log(qry)
 
         cnn.query(qry, async (err, res) =>{
             if(err){

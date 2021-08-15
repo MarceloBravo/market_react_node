@@ -20,12 +20,12 @@ export const LeftMenuComponent = (props) => {
     },[dispatch])
 
 
-    const subMenu = (keyMenuPadre, sub_menu) => {
+    const subMenu = (nombreCategoria, keyMenuPadre, sub_menu) => {
         return sub_menu.map((mnu, key) => 
                 <Nav.Link 
                     className="li_menu_categoria"
                     as={Link} 
-                    to={`/catalogo/${keyMenuPadre}/${mnu.id}`} 
+                    to={`/catalogo/${nombreCategoria}/${keyMenuPadre}/${mnu.id}`} 
                     key={`${keyMenuPadre}_${key}`}
                 >
                     {mnu.nombre}
@@ -34,11 +34,11 @@ export const LeftMenuComponent = (props) => {
     }
 
     
-    const todoCategoria = (key, mnu) => {
+    const todoCategoria = (nombreCategoria, key, mnu) => {
         return <Nav.Link 
                     className="li_menu_categoria"
                     as={Link} 
-                    to={"/catalogo/" + mnu.id} 
+                    to={`/catalogo/${nombreCategoria}/${mnu.id}`} 
                     key={mnu.id + key}
                 >
                     Todo {mnu.nombre}
@@ -78,13 +78,13 @@ export const LeftMenuComponent = (props) => {
                                         <Nav 
                                             className="ul_menu_categoria"
                                         >{mnu.nombre}
-                                            {todoCategoria(mnu.id, mnu)}
+                                            {todoCategoria(mnu.nombre, mnu.id, mnu)}
                                         </Nav>
                                     }
                                     {mnu.sub_categoria.length > 0 &&
                                         <Nav className="ul_menu_categoria nav-categoria">{mnu.nombre}
-                                            {todoCategoria(mnu.id, mnu)}
-                                            {subMenu(mnu.id, mnu.sub_categoria)}
+                                            {todoCategoria(mnu.nombre, mnu.id, mnu)}
+                                            {subMenu(mnu.nombre, mnu.id, mnu.sub_categoria)}
                                             
                                         </Nav>
                                     }

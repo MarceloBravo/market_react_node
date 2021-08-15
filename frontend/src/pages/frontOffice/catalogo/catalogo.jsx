@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom'
 
 
 export const Catalogo = () => {
-    const {idCat, idSubCat } = useParams()
+    const { idCat, idSubCat } = useParams()
     const [ dataGrid, setDataGrid ] = useState({data: []})
     const [ rangeValue, setRangeValue ] = useState([null, null])
     // eslint-disable-next-line
@@ -63,17 +63,17 @@ export const Catalogo = () => {
         // eslint-disable-next-line
     },[productosState])
 
+
     useEffect(()=>{
         setRangeValue([preciosMinMaxState.min, preciosMinMaxState.max])
     },[preciosMinMaxState])
 
 
     useEffect(()=>{
-        if(idCat && idSubCat){
-            console.log('ID CATEGORÍA', idCat, 'ID SUB-CATEGORIA', idSubCat)
-        }else if(idCat){
-            console.log('ID CATEGORÍA', idCat)
+        if((idCat && idSubCat) || idCat){
+            aplicarFiltro()
         }
+        // eslint-disable-next-line
     },[idCat, idSubCat])
 
 
@@ -123,10 +123,12 @@ export const Catalogo = () => {
             min: rangeValue[0], 
             max: rangeValue[1], 
             marcas: _marcas, 
-            departamentos: _deptos, 
+            departamentos: _deptos,
             ordenar_por: orderBy.field, 
             direccion: orderBy.direction,
-            itemsPorPagina: itemsPorPagina  
+            itemsPorPagina: itemsPorPagina,
+            categoriaId: idCat,
+            subCategoriaId: idSubCat
         },0))
     }
     
