@@ -1,12 +1,23 @@
 import React from 'react'
 import { HeaderMarketComponent } from '../../../components/frontOffice/header/header'
 import { FooterComponent } from '../../../components/frontOffice/footer/footer'
-import { Container, Row, Col, Card, ListGroup, Button } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 import { Grid } from '../../../components/backOffice/grid'
 import { ModalDialog } from '../../../components/backOffice/modalDialog'
+import { ResumenVentaComponent } from '../../../components/frontOffice/resumenVenta/resumenVenta'
 
 export const CarroComprasContent = (props) => {
-    const { response, dataGrid, eliminarRegistro, changeGridColumn, totalNeto, subTotal, impuestos, volver } = props
+    const { 
+        response, 
+        dataGrid, 
+        eliminarRegistro, 
+        changeGridColumn, 
+        totalNeto, 
+        subTotal, 
+        impuestos, 
+        volver, 
+        continuarCompra
+    } = props
 
     return (
         <>
@@ -36,54 +47,17 @@ export const CarroComprasContent = (props) => {
                         />
                     </Col>
                     <Col md="4">
-                        <Card style={{ width: '18rem' }}>
-                            <Card.Header>Resumen</Card.Header>
-                            <ListGroup variant="flush">
-                                <ListGroup.Item>
-                                    <Row>
-                                        <Col>Total Neto:</Col>
-                                        <Col className="signal">$</Col>
-                                        <Col className="col-sub-totales">{totalNeto}</Col>
-                                    </Row>
-                                </ListGroup.Item>
-                                <ListGroup.Item>
-                                    <Row>
-                                        <Col>Impuestos:</Col>
-                                        <Col className="signal">$</Col>
-                                        <Col className="col-sub-totales">{impuestos}</Col>
-                                    </Row>
-                                </ListGroup.Item>
-                                <ListGroup.Item>
-                                    <Row>
-                                        <Col>Total final :</Col>
-                                        <Col className="signal">$</Col>
-                                        <Col className="col-sub-totales">{subTotal}</Col>
-                                    </Row>
-                                </ListGroup.Item>
-                                <ListGroup.Item>
-                                    <Row>
-                                        El total final no contempla gastos de envío. Los gastos de envío 
-                                        serán calculados al momento de ingresar la dirección de despacho 
-                                        en la siguiente pantalla. 
-                                    </Row>
-                                    <Row className="separator">
-                                         
-                                    </Row>
-                                    <Row>
-                                        <Button variant="primary">Continuar la compra</Button>
-                                    </Row>
-                                    <Row className="separator">
-                                         
-                                    </Row>
-                                    <Row>
-                                        <Button variant="primary" onClick={() => volver()}>Volver a la tienda</Button>
-                                    </Row>
-                                </ListGroup.Item>
-                                
-                            </ListGroup>
-                            
-                        </Card>
+                        <ResumenVentaComponent 
+                            totalNeto={totalNeto} 
+                            subTotal={subTotal}
+                            impuestos={impuestos}
+                            volver={volver}
+                            continuarCompra={continuarCompra}
+                        />
                     </Col>
+                </Row>
+                <Row className="row-bottom">
+
                 </Row>
             </Container>
             <FooterComponent/> 

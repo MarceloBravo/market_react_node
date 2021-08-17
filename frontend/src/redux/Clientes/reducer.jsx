@@ -25,6 +25,8 @@ const INITIAL_STATE = {
         deleted_at: null
     },
     token: '',
+    exp: '',
+    iat: '',
     LIST: [],
     dataGrid: {
         data: [],
@@ -63,9 +65,18 @@ export const ClientesReducer = (state = INITIAL_STATE, action) => {
                 list: action.payload,
             }
         case types.LOGIN_CLIENTE:
+            let tokenArr = action.payload.split(".")
             return {
                 ...state,
+                cliente: JSON.parse(atob(tokenArr[1])).user,
+                exp: JSON.parse(atob(tokenArr[1])).exp,
+                iat: JSON.parse(atob(tokenArr[1])).iat,
                 token: action.payload
+            }
+        case types.CERRAR_SESSION_CLIENTE:
+            return {
+                ...state,
+                token: ''
             }
         default:
             return state

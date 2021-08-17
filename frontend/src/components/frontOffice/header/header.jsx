@@ -4,6 +4,7 @@ import { getData } from '../../../actions/infoTienda'
 import { HeaderContentComponent } from './content'
 import { useHistory } from 'react-router-dom'
 import { types as ProductosTypes } from '../../../redux/Productos/types'
+import { types as clientesTypes } from '../../../redux/Clientes/types'
 import jwt_decode from 'jwt-decode'    //yarn add jwt-decode -> https://www.npmjs.com/package//jwt-decode
 import './style.css'
 
@@ -72,6 +73,7 @@ export const HeaderMarketComponent = () => {
         localStorage.removeItem(infoTiendaState.nombre_tienda + '-cliente')
         sessionStorage.removeItem(infoTiendaState.nombre_tienda + '-cliente')
         setDatosCliente(null)
+        dispatch({type: clientesTypes.CERRAR_SESSION_CLIENTE})
         history.push('/')
     }
 
@@ -84,6 +86,11 @@ export const HeaderMarketComponent = () => {
     const aplicarFiltro = () => {
         dispatch({type: ProductosTypes.TEXTO_FILTRO_PRODUCTO, payload: textoFiltro})
         history.push('/catalogo')
+    }
+
+    
+    const goToUpdateUserData = () => {
+        history.push(`/registroCliente/${datosCliente.id}`)
     }
 
 
@@ -101,6 +108,7 @@ export const HeaderMarketComponent = () => {
             textoFiltro={textoFiltro}
             datosCliente={datosCliente}
             cerrarSession={cerrarSession}
+            goToUpdateUserData={goToUpdateUserData}
         />
     )
 }

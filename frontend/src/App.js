@@ -49,6 +49,8 @@ import { CarroCompras } from './pages/frontOffice/carroCompras/carroCompras'
 import { LoginCliente } from './pages/frontOffice/loginCliente/loginCliente'
 import { RegistroClientes } from './pages/frontOffice/registroCliente/registroCliente'
 import { PageMessage } from './pages/frontOffice/pageMessage/pageMessage'
+import { IdentificacionCliente } from './pages/frontOffice/identificacionCliente/identificacionCliente'
+import { DatosDespacho } from './pages/frontOffice/datosDespacho/datosDespacho'
 
 
 const store = createStore(combineReducer, applyMiddleware(thunk))
@@ -70,7 +72,9 @@ function App() {
             <Route exact path="/registroCliente" component={RegistroClientes}/>
             <Route exact path="/registroCliente/:id" component={RegistroClientes}/>
             <Route exact path="/info" component={PageMessage}/>
-
+            <Route exact path="/IdentificacionCliente" component={IdentificacionCliente}/>
+            <Route exact path="/DatosDespacho" component={DatosDespacho}/>
+            
 
             {/* Rutas BackOffice */}
             <Route exact path="/login" component={Login} />

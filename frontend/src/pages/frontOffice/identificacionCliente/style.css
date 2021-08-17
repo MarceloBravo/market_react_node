@@ -1,0 +1,20 @@
+.titulo-paso{
+    text-align: right;
+}
+
+.col-left{
+    border-right-style: solid;
+    border-right-width: thin;
+    border-color: #a7a7a7;
+}
+
+.row-bottom{
+    height: 2em;
+}
+
+.cssClass > div{
+    margin-top: 5%;
+    margin-bottom: 5%;
+    padding: 25px;
+    border: none;
+}

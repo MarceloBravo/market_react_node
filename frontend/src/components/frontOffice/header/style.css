@@ -18,6 +18,10 @@
     height: 43px;
 }
 
+.header-form-buscar{
+    padding: 0px !important;
+}
+
 .input-header-search{
     width: calc(100% - 31px) !important;
     display: inline-flex !important;

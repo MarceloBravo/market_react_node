@@ -93,7 +93,8 @@ export const CarroCompras = () => {
     const calcularTotalNeto = () => {
         let total = 0
         dataGrid.data.forEach(i => total += (i.precio * i.cantidad))
-        setTotalNeto(new Intl.NumberFormat("de-DE").format(total))
+        //setTotalNeto(new Intl.NumberFormat("de-DE").format(total))
+        setTotalNeto(total)
     }
 
 
@@ -102,7 +103,8 @@ export const CarroCompras = () => {
         dataGrid.data.forEach(i => 
             impuestos += parseInt((i.precio * i.cantidad) * i.impuestos/100)
         )
-        setImpuestos(new Intl.NumberFormat("de-DE").format(impuestos))
+        //setImpuestos(new Intl.NumberFormat("de-DE").format(impuestos))
+        setImpuestos(impuestos)
     }
 
 
@@ -111,12 +113,18 @@ export const CarroCompras = () => {
         dataGrid.data.forEach(i => 
             subTotal += (i.precio * i.cantidad) + parseInt((i.precio * i.cantidad) * i.impuestos /100)
         )
-        setSubTotal(new Intl.NumberFormat("de-DE").format(subTotal))
+        //setSubTotal(new Intl.NumberFormat("de-DE").format(subTotal))
+        setSubTotal(subTotal)
     }
-
+    
 
     const volver = () => {
         history.push('/')
+    }
+
+
+    const continuarCompra = () => {
+        history.push('/IdentificacionCliente')
     }
 
     return (
@@ -129,6 +137,7 @@ export const CarroCompras = () => {
             subTotal={subTotal} 
             impuestos={impuestos} 
             volver={volver}
+            continuarCompra={continuarCompra}
         />
     )
 }

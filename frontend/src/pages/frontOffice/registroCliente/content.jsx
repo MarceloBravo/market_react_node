@@ -290,9 +290,9 @@ export const RegistroClienteContent = (props) => {
                                         value={cliente.ciudad}
                                         onChange={e => handlerChangeValue(e)}
                                     />
-                                    {errors.cod_ciudad  &&
+                                    {errors.ciudad  &&
                                         <Form.Group as={Row}>
-                                            <Form.Text className="field-error">{ errors.cod_ciudad }</Form.Text>
+                                            <Form.Text className="field-error">{ errors.ciudad }</Form.Text>
                                         </Form.Group>
                                     }
                                 </Form.Group>

@@ -67,7 +67,6 @@ export const RegistroClientes = (props) => {
 
 
     useEffect(()=>{
-        console.log('xxxxxxxxxxxx',clienteState)
         if(clienteState?.id){
             if(buscarRut){
                 setBuscarRut(false)
@@ -81,7 +80,6 @@ export const RegistroClientes = (props) => {
                 setBuscarEmail(false)
                 setErrors({...errors, email: 'El email ya se encuentra en uso'})
             }else{
-                console.log('clienteState',clienteState)
                 setCliente(clienteState)
             }
         }
@@ -249,7 +247,7 @@ export const RegistroClientes = (props) => {
                     setErrors({...errors, [field]: ''})
                 }
                 break
-            case 'case_num':
+            case 'casa_num':
                 if(value.length === 0){
                     setErrors({...errors, [field]:'El número de casa es obligatorio.'})
                 }else if(value.length > 10 ){

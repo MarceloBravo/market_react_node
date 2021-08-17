@@ -19,6 +19,7 @@ export const HeaderContentComponent = (props) => {
         textoFiltro,
         datosCliente,
         cerrarSession,
+        goToUpdateUserData, 
      } = props
 
     return (
@@ -55,7 +56,7 @@ export const HeaderContentComponent = (props) => {
                             <Nav.Link href="#home">{infoTiendaState.fono_venta ? 'Venta telefónica al '+infoTiendaState.fono_venta : 'Venta on-line'}</Nav.Link>
                         </Nav>
                         <Nav>
-                            <Nav.Link href="#pricing">
+                            <Nav.Link href="#" className="header-form-buscar">
                                 <Form inline>
                                     <FormControl 
                                         type="text" 
@@ -71,8 +72,7 @@ export const HeaderContentComponent = (props) => {
                             { !datosCliente?.nombres && <Nav.Link to="#" onClick={()=>goToLogin()} ><Icons.Person />Login</Nav.Link>}
                             { datosCliente?.nombres && 
                                 <NavDropdown title={datosCliente.nombres} id="navbarScrollingDropdown">
-                                    {!datosCliente.id && <NavDropdown.Item href='/loginCliente'>Actualizar mis datos</NavDropdown.Item>}
-                                    {datosCliente.id && <NavDropdown.Item href={`/registroCliente/${datosCliente.id}`}>Actualizar mis datos</NavDropdown.Item>}
+                                    {datosCliente.id && <NavDropdown.Item to='#' onClick={()=>goToUpdateUserData()}>Actualizar mis datos</NavDropdown.Item>}
                                     <NavDropdown.Divider />
                                     <NavDropdown.Item to="#" onClick={() => cerrarSession()}>Cerrar sessión</NavDropdown.Item>
                                 </NavDropdown>

@@ -57,6 +57,16 @@ export const formatearPrecio = (neto, impuestos) => {
     return precio
  }
 
+
+ export const formatearNumero = (valor) => {
+     if(!isNaN(valor)){
+        let strPrecio = valor.toLocaleString('de-DE', { style: 'currency', currency: 'CLP' } )
+        return strPrecio.substring(0, strPrecio.length - 4)
+     }else{
+         return "0"
+     }
+ }
+
  export const validaPassword = (campo, nombreCampoPassword, pwd, nombreCampoConfirmarPassword, confirmPwd, errors, setErrors) =>{
     let valor = campo === 'password' ? pwd : confirmPwd;
     let fieldStr = campo === 'password' ? 'contraseña' : 'confirmación de contraseña';
