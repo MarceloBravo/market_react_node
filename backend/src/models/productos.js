@@ -457,13 +457,23 @@ const ingresarImpuestos = (idProducto, arrImpuestos) => {
                                         producto_id = ${idProducto} AND 
                                         impuesto_id IN (${arrImpuestos})
                                 )`
+
+    let qryImpuestosUndelete = `UPDATE impuestos_productos SET 
+                                    deleted_at = null 
+                                WHERE 
+                                    producto_id = ${idProducto} AND 
+                                    impuesto_id IN (${arrImpuestos}) AND 
+                                    NOT deleted_at IS NULL` 
+
+                                
                                 
     return new Promise(async function(resolve, reject){
         try{
             await cnn.promise().query(qryImpuestosDelete)
             await cnn.promise().query(qryImpuestosInsert)
+            await cnn.promise().query(qryImpuestosUndelete)
             return resolve(true)
-        }catch(err){
+        }catch(err){s
             console.log(err)
             return reject(false)
         }

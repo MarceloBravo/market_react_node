@@ -8,6 +8,13 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
 import { defaultImagesProducts } from '../../../shared/constantes'
 import { DetalleProductoContent } from './content'
+import { useToasts } from 'react-toast-notifications';
+/*
+  TOAST: 
+  yarn add react-toast-notifications
+  https://github.com/jossmac/react-toast-notifications
+  Envolver la aplicación en el componente ToastProvider en el archivo index.js
+*/
 import './style.css'
 
 
@@ -28,6 +35,7 @@ export const DetalleProducto = () => {
     const [ textoBotonCarrito, setTextoBotonCarrito ] = useState('Agregar al carrito de compras')
     const dispatch = useDispatch()
     const history = useHistory()
+    const { addToast } = useToasts();
 
     
     useEffect(()=>{
@@ -42,6 +50,7 @@ export const DetalleProducto = () => {
 
     useEffect(()=>{
         if(productoState.id){
+            console.log('productoState',productoState)
             dispatch(buscarCategoria(productoState.categoria_id))
             dispatch(buscarSubCategoria(productoState.sub_categoria_id))
             dispatch(buscarUnidad(productoState.unidad_id))
@@ -92,10 +101,13 @@ export const DetalleProducto = () => {
         setPagar(true)
     }
 
+    const volverAlCatalogo = () => {
+        history.push('/catalogo')
+    }
 
     const agregarCarrito = () => {
-        console.log('SET PRECIO NETO TP STRING', (new Intl.NumberFormat("de-DE").format(parseInt(productoState.precio_actual))))
-        console.log('SET PRECIO VENTA',parseInt(new Intl.NumberFormat("de-DE").format(parseInt(productoState.precio_actual) * ((productoState.total_impuestos/100) + 1))))
+        //console.log('SET PRECIO NETO TP STRING', (new Intl.NumberFormat("de-DE").format(parseInt(productoState.precio_actual))))
+        //console.log('SET PRECIO VENTA',parseInt(new Intl.NumberFormat("de-DE").format(parseInt(productoState.precio_actual) * ((productoState.total_impuestos/100) + 1))))
         setCarrito({...carrito, [id.id]:{
                 id: productoState.id,
                 producto_id: productoState.id, 
@@ -114,6 +126,7 @@ export const DetalleProducto = () => {
                 stock: productoState.stock
             }
         })
+        addToast('El producto ha sigo agregado al carrito', { appearance: 'success' })
     }
 
 
@@ -156,6 +169,7 @@ export const DetalleProducto = () => {
                 keyTab={keyTab} 
                 setKeyTab={setKeyTab} 
                 showPreView={showPreView}
+                volverAlCatalogo={volverAlCatalogo}
             />       
     )
 }

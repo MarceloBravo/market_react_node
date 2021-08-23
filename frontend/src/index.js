@@ -2,11 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import { ToastProvider } from 'react-toast-notifications';  
+/*
+  TOAST: 
+  yarn add react-toast-notifications
+  https://github.com/jossmac/react-toast-notifications
+*/
+
 //import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   //<React.StrictMode>
+    <ToastProvider>
     <App />
+    </ToastProvider>
   //</React.StrictMode >
   ,
   document.getElementById('root')

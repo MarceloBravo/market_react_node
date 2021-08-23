@@ -3,6 +3,7 @@ import { Container, Row, Col, Form, Button, Tabs, Tab, Table } from 'react-boots
 import { HeaderMarketComponent } from '../../../components/frontOffice/header/header'
 import { FooterComponent } from '../../../components/frontOffice/footer/footer'
 import { FaShoppingCart } from 'react-icons/fa';
+import { formatearPrecio }  from '../../../shared/funciones'
 
 export const DetalleProductoContent = (props) => {
     const { 
@@ -22,7 +23,8 @@ export const DetalleProductoContent = (props) => {
         pagarProducto, 
         keyTab, 
         setKeyTab, 
-        showPreView
+        showPreView,
+        volverAlCatalogo
     } = props
 
     return (
@@ -71,9 +73,14 @@ export const DetalleProductoContent = (props) => {
                         </Col>
                         <Col xs={6} md={6}>
                             <h2>{productoState.nombre}</h2>
-                            <label>{productoState.descripcion}</label>
+                            <Row>
+                                <Form.Label column sm="12">{productoState.descripcion}</Form.Label>
+                            </Row>
                             <Row>
                                 <Form.Label column sm="6">Stock disponible: {productoState.stock} {unidadState.nombre_plural}</Form.Label>
+                            </Row>
+                            <Row>
+                                <Form.Label column sm="6">Precio : $ {formatearPrecio(productoState.precio_actual, productoState.total_impuestos)} </Form.Label>
                             </Row>
                             <Row>
                                 <Form.Group as={Row} controlId="formTxtStock">
@@ -110,13 +117,22 @@ export const DetalleProductoContent = (props) => {
                                 </Col>
                                 <Col md="5">
                                     <Button 
-                                        variant="success" 
+                                        variant="danger" 
                                         onClick={() => pagarProducto() }
                                         disabled={Object.keys(errors).filter(e => errors[e] !=='').length > 0}
                                     >
                                         Ir al carrito
                                     </Button>
                                 </Col>
+                            </Row>
+                            <br/>
+                            <Row>
+                                <Button 
+                                    variant="primary" 
+                                    onClick={() => volverAlCatalogo() }
+                                >
+                                    Seguir comprando
+                                </Button>
                             </Row>
                         </Col>
                     </Row>
@@ -142,7 +158,8 @@ export const DetalleProductoContent = (props) => {
                         </Tabs>
                     </Row>
                 </Container>
-            <FooterComponent/>  
+                
+            <FooterComponent />  
             {showPreView && <div className="preview-full-screen" onClick={() => setShowPreView(false)}>
                                 <div></div>
                                 <Form.Label>{productoState.nombre}</Form.Label>
