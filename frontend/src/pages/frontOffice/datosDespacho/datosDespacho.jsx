@@ -83,7 +83,7 @@ export const DatosDespacho = () => {
 
     
     useEffect(()=>{
-        setDisabledButtonContinuar(Object.keys(errors).filter(e => errors[e] !== '').length > 0 || Object.keys(cliente).filter(c => cliente[c] === '').length > 0)
+        setDisabledButtonContinuar(Object.keys(errors).filter(e => errors[e] !== '').length > 0 || Object.keys(cliente).filter(c => c !== 'block_num' && c !== 'referencia' && cliente[c] === '').length > 0)
         // eslint-disable-next-line
     },[errors])
 
@@ -101,7 +101,7 @@ export const DatosDespacho = () => {
 
 
     useEffect(()=>{
-        setDisabledButtonContinuar(Object.keys(errors).filter(e => errors[e] !== '').length > 0 || Object.keys(cliente).filter(c => cliente[c] === '').length > 0)
+        setDisabledButtonContinuar(Object.keys(errors).filter(e => errors[e] !== '').length > 0 || Object.keys(cliente).filter(c => c !== 'block_num' && c !== 'referencia' && cliente[c] === '').length > 0)
         // eslint-disable-next-line
     },[cliente])
 
