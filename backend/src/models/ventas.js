@@ -115,7 +115,7 @@ const registrarCliente = async (venta_id, data) => {
 const registrarProductos = async (venta_id, data) => {
     await data.map(async e => {
 
-    await cnn.promise().query(`INSERT INTO detalle_ventas (
+        await cnn.promise().query(`INSERT INTO detalle_ventas (
                                     venta_id,
                                     producto_id,
                                     precio_neto,
@@ -132,12 +132,14 @@ const registrarProductos = async (venta_id, data) => {
                                     ${cnn.escape(e.precio)},
                                     ${cnn.escape(e.impuestos)},
                                     ${cnn.escape(e.JSON_impuestos)}, 
-                                    ${cnn.escape(e.precio_venta.substring(1)*1)},
+                                    ${cnn.escape(parseInt(e.precio_venta.substring(1).split('.').join('')))},
                                     ${cnn.escape(e.cantidad)},
-                                    ${cnn.escape(e.precio_venta.substring(1) * e.cantidad)},
+                                    ${cnn.escape(parseInt(e.precio_venta.substring(1).split('.').join('')) * e.cantidad)},
                                     CURDATE(),
                                     CURDATE()
                                 )`)
+
+        await descontarStock(e.producto_id, e.cantidad)
     })
 }
 
@@ -206,4 +208,17 @@ const registrarDatosWebPay = async (venta_id, data) => {
                                     CURDATE(),
                                     CURDATE()
                                 )`)
+}
+
+const descontarStock = async (id, cantidad) => {
+    let qry = `UPDATE productos SET stock = stock -${cnn.escape(cantidad)} WHERE id = ${cnn.escape(id)}`
+    console.log('descontarStock',qry)
+    cnn.query(qry, (err, res) => {
+        if(err){
+            console.log('ERROR descontarStock', err.message, err)
+            throw err
+        }else{
+            return true
+        }
+    })
 }
