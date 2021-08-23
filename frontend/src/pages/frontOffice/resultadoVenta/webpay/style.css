@@ -1,0 +1,34 @@
+.containner-resume{
+    padding-bottom: 10px;
+}
+
+.titulo-resumen{
+    text-align: center;
+    font-size: xx-large;
+    font-weight: 500;
+}
+
+.row-message{
+    margin: 1%;
+}
+
+.resumen-col-cantidad{
+    text-align: center;
+}
+
+.resumen-cel-titulo{
+    text-align: right;
+}
+
+.resumen-col-precio{
+    width: 120px;
+    text-align: right;
+}
+
+.col-enviar-email{
+    text-align: right;
+}
+
+.row-bottom-buttons{
+    margin: 0% 15%;
+}

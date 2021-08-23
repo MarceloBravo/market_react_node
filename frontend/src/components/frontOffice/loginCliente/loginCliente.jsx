@@ -29,7 +29,6 @@ export const LoginClienteComponent = (props) => {
 
     useEffect(()=>{
         if(tokenState){
-            console.log('prefijo',prefijo)
             if(rememberMe){
                 localStorage.setItem( prefijo + '-cliente', JSON.stringify(tokenState))
             }else{

@@ -1,23 +1,23 @@
-import React, { useState, useEffect } from 'react'
-import { HeaderMarketComponent } from '../../../components/frontOffice/header/header'
-import { FooterComponent } from '../../../components/frontOffice/footer/footer'
-import { Alerta } from '../../../components/shared/alerts'
-import { Container, Row, Col, Form } from 'react-bootstrap'
-import { ResumenVentaComponent } from '../../../components/frontOffice/resumenVenta/resumenVenta'
+import { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { find as detalleApp }  from '../../../actions/personalizar'
 import { listar as listarRegiones } from '../../../actions/regiones'
 import { listaProvinciasRegion } from '../../../actions/provincias'
 import { listaComunasProvincia } from '../../../actions/comunas'
 import { types as clientesTypes } from '../../../redux/Clientes/types'
+import { initTransaction } from '../../../actions/webpay'
+import { useHistory } from 'react-router-dom'
+import { DatosDespachoContent } from './content'
+import './style.css'
 //npx browserslist@latest --update-db
 
 export const DatosDespacho = () => {
-    const appState = useSelector(state => state.PersonalizarReducer.config)
+    const infoTiendaState = useSelector(state => state.InfoTiendaReducer.infoTienda)
     const listaRegionesState = useSelector(state => state.RegionesReducer.list)
     const listaProvinciasState = useSelector(state => state.ProvinciasReducer.list)
     const listaComunasState = useSelector(state => state.ComunasReducer.list)
     const clienteState = useSelector(state => state.ClientesReducer.cliente)
+    const webPayTransaccionState = useSelector(state => state.WebPayReducer.estado_transaccion)
     const [ totalNeto, setTotalNeto ] = useState(0)
     const [ subTotal, setSubTotal ] = useState(0)
     const [ impuestos, setImpuestos ] = useState(0) //Valor en impuestos
@@ -29,8 +29,12 @@ export const DatosDespacho = () => {
     const [ comunas, setComunas ] = useState([])
     const [ cliente, setCliente ] = useState({rut: '', nombres: '', apellido1: '', apellido2: '', fono: '', email: '', direccion: '', cod_region: '', cod_provincia: '', cod_comuna: '', ciudad: '', casa_num: '', block_num: '', referencia: ''})
     const [ errors, setErrors ] = useState({direccion: '', cod_region: '', cod_provincia: '', cod_comuna: '', ciudad: '', casa_num: '', block_num: '', referencia: ''})
-    const  [ disabledButtonContinuar, setDisabledButtonContinuar ] = useState(true)
+    const [ disabledButtonContinuar, setDisabledButtonContinuar ] = useState(true)
+    const [ webpayEndPoint, setWebpayEndPoint ] = useState('')
+    const [ token, setToken ] = useState('')
     const dispatch = useDispatch()
+    const btnSubmitWebPay = useRef(null)
+    const history = useHistory()
 
 
     useEffect(()=>{
@@ -41,11 +45,11 @@ export const DatosDespacho = () => {
 
 
     useEffect(()=>{
-        let cart = localStorage.getItem(`cart-${appState.nombre_app}`)
+        let cart = localStorage.getItem(`cart-${infoTiendaState.nombre_tienda}`)
         if(cart){
             setCarrito(JSON.parse(cart))
         }
-    },[appState])
+    },[infoTiendaState])
 
 
     useEffect(()=>{
@@ -64,12 +68,12 @@ export const DatosDespacho = () => {
 
 
     useEffect(()=>{
-        if(carrito?.length > 0){
+        if(Object.keys(carrito).length > 0){
             let netTot = 0, tax = 0, subTot = 0
-             carrito.forEach(element => {
-                netTot += parseInt(element.precio) * parseInt(element.cantidad)
-                tax += (parseInt(element.precio) * (parseInt(element.impuestos) / 100) * parseInt(element.cantidad))
-                subTot +=  parseInt(element.precio) * parseInt(element.cantidad) + (parseInt(element.precio) * (parseInt(element.impuestos) / 100) * parseInt(element.cantidad))
+             Object.keys(carrito).forEach(element => {
+                netTot += parseInt(carrito[element].precio) * parseInt(carrito[element].cantidad)
+                tax += (parseInt(carrito[element].precio) * (parseInt(carrito[element].impuestos) / 100) * parseInt(carrito[element].cantidad))
+                subTot +=  parseInt(carrito[element].precio) * parseInt(carrito[element].cantidad) + (parseInt(carrito[element].precio) * (parseInt(carrito[element].impuestos) / 100) * parseInt(carrito[element].cantidad))
             });
             setTotalNeto(netTot)
             setImpuestos(tax)
@@ -102,6 +106,27 @@ export const DatosDespacho = () => {
     },[cliente])
 
 
+    useEffect(()=>{
+        console.log('webPayTransaccionState', webPayTransaccionState)
+        if(webPayTransaccionState?.token && webPayTransaccionState?.url){
+            setWebpayEndPoint(webPayTransaccionState.url)
+            setToken(webPayTransaccionState.token)
+        }
+    },[dispatch, webPayTransaccionState])
+
+
+    useEffect(()=>{
+        if(webpayEndPoint && token){
+            //Almacenando el token para leerlo luego de volver de la página de WebPay, en el 
+            //componente ResultadoVentaWebPayComponent
+            sessionStorage.setItem(infoTiendaState.nombre_tienda + '-webpay-token', token)
+            btnSubmitWebPay.current.click() //Redireccionando a la página de WebPay
+        }
+        // eslint-disable-next-line
+    },[webpayEndPoint, token])
+    
+
+
     const handlerChangeValue = (e) => {
         validaDatos(e.target.name, e.target.value)
         setCliente({
@@ -130,12 +155,19 @@ export const DatosDespacho = () => {
 
 
     const volver = () => {
-
+        history.push('/')
     }
 
 
     const continuarCompra = () => {
-
+        //Iniciando una transacción en WebPay (solicitando la obtención de un token y la url de pago, el 
+        //backend efectúa la solicitud de token y url)
+        dispatch(initTransaction({
+            buy_order: `${Math.floor(Math.random() * 10000)}`, 
+            session_id: `${Math.floor(Math.random() * 10000)+10000}`, 
+            amount: parseInt(subTotal + despacho), 
+            return_url: 'http://192.168.43.118:3001/webpay_plus/success'
+        }))
     }
     
 
@@ -202,193 +234,25 @@ export const DatosDespacho = () => {
 
 
     return (
-        <>
-            <HeaderMarketComponent />
-            <Container>
-                <Alerta />
-                <Row>
-                    <Col>
-                        <h4>Datos de despacho</h4>
-                    </Col>
-                    <Col>
-                        <h4 className="titulo-paso">Paso 2</h4>
-                    </Col>                    
-                </Row>
-                <Row>
-                    <Col md="8">
-
-
-                    <Form.Group className="mb-3" controlId="formGridAddress1">
-                                <Form.Label>Dirección</Form.Label>
-                                <Form.Control 
-                                    type="text"
-                                    name="direccion"
-                                    placeholder="Dirección de despacho" 
-                                    value={cliente.direccion}
-                                    onChange={e => handlerChangeValue(e)}    
-                                />
-                                {errors.direccion  &&
-                                    <Form.Group as={Row}>
-                                        <Form.Text  className="field-error">{ errors.direccion }</Form.Text>
-                                    </Form.Group>
-                                }
-                            </Form.Group>
-
-                            <Row>
-                                <Form.Group as={Col} controlId="formGridCity">
-                                    <Form.Label>Región</Form.Label>
-                                    <Form.Control 
-                                        as="select"
-                                        name="cod_region" 
-                                        value={cliente.cod_region}
-                                        onChange={e => cargarProvincias(e)}
-                                    >
-                                        {regiones.length === 0 && <option key="-1" value="">-- No se han encontrado regiones --</option> }
-                                        {regiones.length > 0 && <option key="-1" value="">-- Seleccione --</option> }
-                                        {regiones.map((r,key) => {
-                                            return  <option key={key} value={r.codigo}>{r.nombre}</option>
-                                        })}
-                                        {errors.cod_region  &&
-                                        <Form.Group as={Row}>
-                                            <Form.Text  className="field-error">{ errors.cod_region }</Form.Text>
-                                        </Form.Group>
-                                    }
-                                    </Form.Control>
-                                </Form.Group>
-
-                                <Form.Group as={Col} controlId="formGridCity">
-                                    <Form.Label>Provincia</Form.Label>
-                                    <Form.Control 
-                                        as="select"
-                                        name="cod_provincia" 
-                                        value={cliente.cod_provincia}
-                                        onChange={e => cargarComunas(e)}
-                                    >
-                                        {provincias.length === 0 && <option key="-1" value="">-- No se han encontrado provincias --</option> }
-                                        {provincias.length > 0 && <option key="-1" value="">-- Seleccione --</option> }
-                                        {provincias.map((c,key) => {
-                                            return  <option key={key} value={c.codigo}>{c.nombre}</option>
-                                        })}
-                                        {errors.cod_provincia  &&
-                                        <Form.Group as={Row}>
-                                            <Form.Text  className="field-error">{ errors.cod_provincia }</Form.Text>
-                                        </Form.Group>
-                                    }
-                                    </Form.Control>
-                                    
-                                </Form.Group>
-                            </Row>
-
-                            <Row className="mb-3">
-                                <Form.Group as={Col} controlId="formGridCity">
-                                    <Form.Label>Comuna</Form.Label>
-                                    <Form.Control 
-                                        as="select"
-                                        name="cod_comuna" 
-                                        value={cliente.cod_comuna}
-                                        onChange={e => handlerChangeValue(e)}
-                                    >
-                                        {comunas.length === 0 && <option key="-1" value="">-- No se han encontrado comunas --</option> }
-                                        {comunas.length > 0 && <option key="-1" value="">-- Seleccione --</option> }
-                                        {comunas.map((c,key) => {
-                                            return  <option key={key} value={c.codigo}>{c.nombre}</option>
-                                        })}
-                                        {errors.cod_comuna  &&
-                                        <Form.Group as={Row}>
-                                            <Form.Text  className="field-error">{ errors.cod_comuna }</Form.Text>
-                                        </Form.Group>
-                                    }
-                                    </Form.Control>
-                                </Form.Group>
-
-                                <Form.Group as={Col} controlId="formGridCity">
-                                    <Form.Label>Ciudad</Form.Label>
-                                    <Form.Control 
-                                        type="text"
-                                        name="ciudad" 
-                                        placeholder="Ciuidad"
-                                        value={cliente.ciudad}
-                                        onChange={e => handlerChangeValue(e)}
-                                    />
-                                    {errors.ciudad  &&
-                                        <Form.Group as={Row}>
-                                            <Form.Text className="field-error">{ errors.ciudad }</Form.Text>
-                                        </Form.Group>
-                                    }
-                                </Form.Group>
-
-                            </Row>
-
-                            <Row className="mb-3">
-                                <Form.Group as={Col} controlId="formGridEmail">
-                                    <Form.Label>Casa número</Form.Label>
-                                    <Form.Control 
-                                        type="text" 
-                                        name="casa_num"
-                                        placeholder="Número de casa" 
-                                        value={cliente.casa_num}
-                                        onChange={e => handlerChangeValue(e)}    
-                                    />
-                                    {errors.casa_num  &&
-                                        <Form.Group as={Row}>
-                                            <Form.Text className="field-error">{ errors.casa_num }</Form.Text>
-                                        </Form.Group>
-                                    }
-                                </Form.Group>
-
-                                <Form.Group as={Col} controlId="formGridPassword">
-                                    <Form.Label>Block N°</Form.Label>
-                                    <Form.Control 
-                                        type="text" 
-                                        name="block_num"
-                                        placeholder="Número de block (Opcional)" 
-                                        value={cliente.block_num}
-                                        onChange={e => handlerChangeValue(e)}
-                                    />
-                                    {errors.block_num  &&
-                                        <Form.Group as={Row}>
-                                            <Form.Text className="field-error">{ errors.block_num }</Form.Text>
-                                        </Form.Group>
-                                    }
-                                </Form.Group>
-                            </Row>
-
-                            <Form.Group className="mb-3" controlId="formGridAddress1">
-                                <Form.Label>Referencia</Form.Label>
-                                <Form.Control 
-                                    type="text"
-                                    name="referencia"
-                                    placeholder="Cómo llegar... (Opcional)" 
-                                    value={cliente.referencia}
-                                    onChange={e => handlerChangeValue(e)}    
-                                />
-                                {errors.referencia  &&
-                                    <Form.Group as={Row}>
-                                        <Form.Text className="field-error">{ errors.referencia }</Form.Text>
-                                    </Form.Group>
-                                }
-                            </Form.Group>
-
-                    </Col>
-                    <Col md="4">
-                        <ResumenVentaComponent 
-                            totalNeto={totalNeto} 
-                            subTotal={subTotal}
-                            impuestos={impuestos}
-                            volver={volver}
-                            continuarCompra={continuarCompra}
-                            despacho={despacho}
-                            disabledButton1={disabledButtonContinuar}
-                            textoContinuarCompra={'Continuar con el pago'}
-                            textoVolver={'Volver al carrito de compras'}
-                        />
-                    </Col>
-                </Row>
-                <Row className="row-bottom">
-
-                </Row>
-            </Container>
-            <FooterComponent />
-        </>
+        <DatosDespachoContent 
+            cliente={cliente} 
+            handlerChangeValue={handlerChangeValue} 
+            errors={errors} 
+            cargarProvincias={cargarProvincias} 
+            cargarComunas={cargarComunas} 
+            regiones={regiones} 
+            provincias={provincias} 
+            comunas={comunas} 
+            totalNeto={totalNeto}
+            subTotal={subTotal}
+            impuestos={impuestos}
+            volver={volver}
+            continuarCompra={continuarCompra}
+            despacho={despacho}         
+            disabledButtonContinuar={disabledButtonContinuar}
+            webpayEndPoint={webpayEndPoint}
+            token={token} 
+            btnSubmitWebPay={btnSubmitWebPay}
+        />
     )
 }

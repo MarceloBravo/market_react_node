@@ -89,3 +89,9 @@ export const formatearPrecio = (neto, impuestos) => {
     }
 }
 
+export const formatearFechaHora = (strFecha) => {
+    if(!strFecha)return ''
+    let fecha = strFecha.substring(0,10).split('-').reverse().join('-')
+    let hora = strFecha.split('T')[1].substring(0,8)
+    return fecha + ' ' + hora
+}

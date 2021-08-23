@@ -51,6 +51,7 @@ import { RegistroClientes } from './pages/frontOffice/registroCliente/registroCl
 import { PageMessage } from './pages/frontOffice/pageMessage/pageMessage'
 import { IdentificacionCliente } from './pages/frontOffice/identificacionCliente/identificacionCliente'
 import { DatosDespacho } from './pages/frontOffice/datosDespacho/datosDespacho'
+import { ResultadoVentaWebPayComponent } from './pages/frontOffice/resultadoVenta/webpay/resultadoVentaWebPay'
 
 
 const store = createStore(combineReducer, applyMiddleware(thunk))
@@ -74,6 +75,7 @@ function App() {
             <Route exact path="/info" component={PageMessage}/>
             <Route exact path="/IdentificacionCliente" component={IdentificacionCliente}/>
             <Route exact path="/DatosDespacho" component={DatosDespacho}/>
+            <Route exact path="/ResultadoVentaWebpay" component={ResultadoVentaWebPayComponent}/>
             
 
             {/* Rutas BackOffice */}

@@ -95,33 +95,6 @@ userModel.get = (id, callback) => {
     
 }
 
-/*
-const rolesUsuario = (idUser) => {
-    let qry = `SELECT 
-                r.id, 
-                name, 
-                description, 
-                r.created_at, 
-                r.updated_at,
-                r.deleted_at 
-            FROM 
-                role_user ru
-                INNER JOIN roles r ON ru.role_id = r.id
-            WHERE 
-                ru.user_id = ${cnn.escape(idUser)}`;
-
-    return new Promise((resolve, reject) => {
-        cnn.query(qry, (err, res) => {
-            if(err){
-                return resolve([]);
-            }else{
-                return resolve(res);
-            }
-        });
-    });
-}
-*/
-
 userModel.getAll = (callback) => {
     if(cnn){
         let qry = `SELECT 

@@ -8,7 +8,7 @@ import './style.css'
 
 
 export const CarroCompras = () => {
-    const appState = useSelector(state => state.PersonalizarReducer.config)
+    const infoTiendaState = useSelector(state => state.InfoTiendaReducer.infoTienda)
     const [ carrito, setCarrito ] = useState(null)
     const [ dataGrid, setDataGrid ] = useState({data:[]})
     const [ idDelete, setIdDelete ] = useState(null)
@@ -25,16 +25,16 @@ export const CarroCompras = () => {
 
     
     useEffect(()=>{
-        if(appState?.nombre_app){
-            setCarrito(JSON.parse(localStorage.getItem('cart-'+appState.nombre_app)))
+        if(infoTiendaState?.nombre_tienda){
+            setCarrito(JSON.parse(localStorage.getItem('cart-'+infoTiendaState.nombre_tienda)))
         }
-    },[appState])
+    },[infoTiendaState])
 
 
     useEffect(()=>{
         if(carrito){
             setDataGrid({...dataGrid, data: Object.keys(carrito).map(i => carrito[i])})
-            localStorage.setItem('cart-'+appState.nombre_app, JSON.stringify(carrito))
+            localStorage.setItem('cart-'+infoTiendaState.nombre_tienda, JSON.stringify(carrito))
         }
         // eslint-disable-next-line
     },[carrito])
@@ -44,6 +44,8 @@ export const CarroCompras = () => {
         calcularTotalNeto()
         calcularImpuestos()
         calcularSubTotal()
+
+        actualizarLocalStorage()
         // eslint-disable-next-line
     },[dataGrid])
 
@@ -62,11 +64,26 @@ export const CarroCompras = () => {
     }
 
 
+    //Actualiza el objeto cart- del almacenamiento local
+    const actualizarLocalStorage = () => {
+        if(infoTiendaState.nombre_tienda){
+            let cart = {}
+            dataGrid.data.forEach((i, key) => cart[key] = i)
+            localStorage.setItem('cart-'+infoTiendaState.nombre_tienda, JSON.stringify(cart))
+        }
+    }
+
+
+    //Actualizando el array para el listado de productos
     const actualizarCelda = (id, field, newValue) => {
         let datos = JSON.parse(JSON.stringify(dataGrid))
         datos.data[id][field] = newValue
         setDataGrid({...dataGrid, data: datos.data})
-        localStorage.setItem('cart-'+appState.nombre_app, JSON.stringify(datos.data))
+        
+        let cart = JSON.parse(JSON.stringify(carrito))
+        cart[id][field] = newValue
+        setCarrito(cart)
+        
     }
 
     const eliminarRegistro = (e) => {
@@ -76,15 +93,30 @@ export const CarroCompras = () => {
 
 
     const response = (res) => {
-        if(res && idDelete){            
-            let obj = JSON.parse(JSON.stringify(carrito))
+        //Obs.: La función siempre eliminará el último producto del carrito, por ello, a partir del
+        //producto a eliminar, se procede a mover los siguientes productos a la posición anterior a 
+        //la que ocupaban en la lista, a partir de la posiciíón del elemento a eliminar, manteniendo
+        //así los id's, eliminando sólo el último
+        if(res && idDelete){   
+            let obj = JSON.parse(JSON.stringify(carrito))   //Obteniendo una copia del carrito para trabajar sobre ella, así no se altera el STORE (almacen)
             let keys = Object.keys(obj)
-            for(var i = 0; i < keys.length; i++){
+            let move = false
+
+            for(var i = 0; i < keys.length - 1; i++){
+
                 // eslint-disable-next-line
-                if(keys[i] == idDelete){
-                    delete obj[keys[i]]
+                if(obj[keys[i]].id == idDelete){    //Encontrando el producto a eliminar
+                    //Activando el dezplazamiento de los productos del carrito a partir del producto 
+                    //actual, sólo si el id a eliminar es igual al id del elemento actual 
+                    move = true
+                }    
+                if(move){
+                    //Copiando el siguiente producto a la posición actual, manteniendo el id de 
+                    //la posición actual del carrito
+                    obj[keys[i]] = obj[keys[i+1]]   
                 }
             }
+            delete obj[keys[keys.length-1]] //Eliminando el último elemento del carrito
             setCarrito(obj)
         }
     }
@@ -93,7 +125,6 @@ export const CarroCompras = () => {
     const calcularTotalNeto = () => {
         let total = 0
         dataGrid.data.forEach(i => total += (i.precio * i.cantidad))
-        //setTotalNeto(new Intl.NumberFormat("de-DE").format(total))
         setTotalNeto(total)
     }
 
@@ -103,7 +134,6 @@ export const CarroCompras = () => {
         dataGrid.data.forEach(i => 
             impuestos += parseInt((i.precio * i.cantidad) * i.impuestos/100)
         )
-        //setImpuestos(new Intl.NumberFormat("de-DE").format(impuestos))
         setImpuestos(impuestos)
     }
 

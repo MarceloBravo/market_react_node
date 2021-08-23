@@ -1,10 +1,11 @@
 import React from 'react'
 import { HeaderMarketComponent } from '../../../components/frontOffice/header/header'
 import { FooterComponent } from '../../../components/frontOffice/footer/footer'
-import { Container, Button, Row, Col, Image } from 'react-bootstrap'
+import { Container, Button, Row, Col } from 'react-bootstrap'
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import { types as alertasTypes } from '../../../redux/Alert/types'
+import { PageMessageComponent } from '../../../components/frontOffice/pageMessage/pageMessage'
 import './style.css'
 
 export const PageMessage = (props) => {
@@ -23,19 +24,9 @@ export const PageMessage = (props) => {
         <>
             <HeaderMarketComponent />
             <Container className="containner">
-                <Row className="row-message">
-                    <Col md={{span: 6, offset: 3}} className="col-message">
-                        <Row>
-                            <Col md={3}>
-                                <Image src="images/exclamacion.png" alt="Signo exclamación"></Image>
-                            </Col>
-                            <Col className="col-texto-menssage">
-                                {alertaState?.mensaje}
-                            </Col>
-                        </Row>
-                        
-                    </Col>
-                </Row>
+
+                <PageMessageComponent mensaje={alertaState?.mensaje}/>
+
                 <Row>
                     <Col md={{span: 4, offset: 4}} className="col-button-OK">
                         <Button variant="primary" onClick={() => goToInicio()}>Aceptar</Button>

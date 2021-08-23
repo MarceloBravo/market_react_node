@@ -45,15 +45,6 @@ export const ResumenVentaComponent = (props) => {
                         </Row>
                     </ListGroup.Item>
                     
-                    {despacho === undefined && 
-                        <ListGroup.Item>
-                            <Row>
-                                El total final no contempla gastos de envío. Los gastos de envío 
-                                serán calculados al momento de ingresar la dirección de despacho 
-                                en la siguiente pantalla. 
-                            </Row>
-                        </ListGroup.Item>
-                    }
                     {despacho !== undefined  &&
                         <>
                             <ListGroup.Item>
@@ -72,6 +63,15 @@ export const ResumenVentaComponent = (props) => {
                                 </Row>
                             </ListGroup.Item>
                         </>
+                    }
+                    
+                    {despacho === undefined && <ListGroup.Item>
+                            <Row>
+                                El Sub-total no contempla gastos de envío. Los gastos de envío 
+                                serán calculados al momento de ingresar la dirección de despacho 
+                                en la siguiente pantalla. 
+                            </Row>
+                        </ListGroup.Item>
                     }
                     <ListGroup.Item>
                         <Row className="separator">

@@ -23,6 +23,9 @@ import { ClientesReducer } from  './Clientes/reducer';
 import { RegionesReducer } from  './Regiones/reducer';
 import { ProvinciasReducer } from  './Provincias/reducer';
 import { ComunasReducer } from  './Comunas/reducer';
+import { WebPayReducer } from  './WebPay/reducer';
+import { TiposPagoReducer } from  './TiposPago/reducer';
+import { VentasReducer } from  './Ventas/reducer';
 
 export default combineReducers({
     LoginReducer,
@@ -48,5 +51,8 @@ export default combineReducers({
     ClientesReducer,
     RegionesReducer,
     ProvinciasReducer,
-    ComunasReducer
+    ComunasReducer,
+    WebPayReducer,
+    TiposPagoReducer,
+    VentasReducer,
 })
