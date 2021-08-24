@@ -19,3 +19,18 @@
     width: auto;
     height: fit-content;
 }
+
+.col-card{
+    height: 310px;
+}
+
+/*
+Alinear texto verticalmente con css 
+https://www.freecodecamp.org/news/css-vertical-align-how-to-center-a-div-text-or-an-image-example-code/
+*/
+.card-text{
+    position: absolute;
+    top: 70%;
+    transform: translateY(-50%);
+    font-size: .92em;
+}

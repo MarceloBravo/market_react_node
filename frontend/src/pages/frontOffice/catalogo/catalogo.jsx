@@ -14,7 +14,7 @@ export const Catalogo = () => {
     const [ rangeValue, setRangeValue ] = useState([null, null])
     // eslint-disable-next-line
     const [ buscar, setBuscar ]  = useState(true)
-    const [ itemsPorPagina, setItemsPorPagina ] = useState(10)
+    const [ itemsPorPagina, setItemsPorPagina ] = useState(12)
     const [ marcas, setMarcas ] = useState([])
     const [ departamentos, setDepartamentos ] = useState([])
     const [ orderBy, setOrderBy ] = useState({field: null, direction: null})
@@ -95,7 +95,7 @@ export const Catalogo = () => {
 
 
     const goToPage = (e) => {
-        dispatch(getProductos(e, itemsPorPagina))
+        dispatch(getProductos(e, itemsPorPagina, orderBy))
     }
 
 

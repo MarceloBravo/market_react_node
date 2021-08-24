@@ -85,13 +85,10 @@ export const GridCardContent = (props) => {
                                         <Card.Title>{value.titulo}</Card.Title>
                                         <Card.Text>
                                             <label>
-                                                {value.nombre} 
+                                                {value.nombre.length <= 50 ? value.nombre : `${value.nombre.substr(0, 67)}...`} 
                                             </label>
                                             <label>
                                                 $ {formatearPrecio(value.precio_venta_normal, value.total_impuestos)} 
-                                            </label>
-                                            <label>
-                                                {value.stock} disponibles
                                             </label>
                                         </Card.Text>
                                     </Card.Body>

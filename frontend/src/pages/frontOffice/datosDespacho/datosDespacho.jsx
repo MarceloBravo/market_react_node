@@ -47,10 +47,19 @@ export const DatosDespacho = () => {
 
 
     useEffect(()=>{
+        // Recuperando el contenido del carrito de compra desde el amacenamiento local
         let cart = localStorage.getItem(`cart-${infoTiendaState.nombre_tienda}`)
         if(cart){
             setCarrito(JSON.parse(cart))
         }
+        
+        // Recuperando el cliente desde el almacenamiento de Session
+        let cli = sessionStorage.getItem(`${infoTiendaState.nombre_tienda}-cliente`)
+        if(cli){            
+            let client = JSON.parse(atob(cli.split('.')[1])).user
+            setCliente(client)
+        }
+
     },[infoTiendaState])
 
 
@@ -92,24 +101,25 @@ export const DatosDespacho = () => {
 
     useEffect(()=>{
         setCliente(clienteState)
-        if(clienteState.cod_region){
-            dispatch(listaProvinciasRegion(clienteState.cod_region))
-        }
-        if(clienteState.cod_provincia){
-            dispatch(listaComunasProvincia(clienteState.cod_provincia))
-        }
+        
         // eslint-disable-next-line
     },[clienteState])
 
 
     useEffect(()=>{
+        if(cliente.cod_region){
+            dispatch(listaProvinciasRegion(cliente.cod_region))
+        }
+        if(cliente.cod_provincia){
+            dispatch(listaComunasProvincia(cliente.cod_provincia))
+        }
+
         setDisabledButtonContinuar(Object.keys(errors).filter(e => errors[e] !== '').length > 0 || Object.keys(cliente).filter(c => c !== 'block_num' && c !== 'referencia' && cliente[c] === '').length > 0)
         // eslint-disable-next-line
     },[cliente])
 
 
     useEffect(()=>{
-        console.log('webPayTransaccionState', webPayTransaccionState)
         if(webPayTransaccionState?.token && webPayTransaccionState?.url){
             setWebpayEndPoint(webPayTransaccionState.url)
             setToken(webPayTransaccionState.token)
