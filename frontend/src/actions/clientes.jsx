@@ -43,7 +43,6 @@ export const getAll = () => {
 export const find = (id) => {
     return (dispatch, action)=>{
         axios.get(`${serverEndPoint}/${url}/${id}`,{headers: getHeader()}).then(res => {
-            console.log(res.data)
             dispatch({type: spinnerTypes.HIDE_SPINNER})
             dispatch({type: clientesTypes.BUSCAR_CLIENTES, payload: res.data})
         }).catch(error=>{

@@ -10,6 +10,7 @@ import { InfoTiendaContent } from './content'
 import { defaultImagesTienda } from '../../../shared/constantes'
 import { types as modalTypes } from '../../../redux/ModalDialog/types'
 import { findByUrl as infoPantalla } from '../../../actions/pantallas'
+import { types as alertasTypes }  from '../../../redux/Alert/types'
 
 export const InfoTiendaFormComponent = () => {    
     const id = 1
@@ -52,14 +53,6 @@ export const InfoTiendaFormComponent = () => {
         }
     },[imagenesMarquesinaState])
 
-    /*
-    useEffect(()=>{
-        if(currentPantalla && currentPantalla.menu_padre_id){
-            setActiveKey(currentPantalla.menu_padre_id.toString())
-        }
-    },[currentPantalla])
-    */
-    
 
     const response = (res) => {
         if(res){
@@ -257,6 +250,10 @@ export const InfoTiendaFormComponent = () => {
     }
 
 
+    const hideAlert = () => {
+        dispatch({type: alertasTypes.OCULTAR_ALERTA})
+    }
+    
     const validaDatosMarquesina = (id, field, value) => {
         let imgs = imagenesMarquesina.imagenes
         console.log(imgs)
@@ -313,6 +310,7 @@ export const InfoTiendaFormComponent = () => {
             changeImage={changeImage} 
             removeImage={removeImage}
             handleFieldsImages={handleFieldsImages}
+            hideAlert={hideAlert}
             //activeKey={activeKey}
         />
     )

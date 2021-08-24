@@ -7,6 +7,7 @@ import { listaComunasProvincia } from '../../../actions/comunas'
 import { types as clientesTypes } from '../../../redux/Clientes/types'
 import { initTransaction } from '../../../actions/webpay'
 import { useHistory } from 'react-router-dom'
+import { types as spinnerTypes } from '../../../redux/Spinner/types'
 import { DatosDespachoContent } from './content'
 import './style.css'
 //npx browserslist@latest --update-db
@@ -38,6 +39,7 @@ export const DatosDespacho = () => {
 
 
     useEffect(()=>{
+        dispatch({type: spinnerTypes.SHOW_SPINNER})
         dispatch(detalleApp())
         dispatch(listarRegiones())
         dispatch({type: clientesTypes.GET_CURRENT_STATE})
