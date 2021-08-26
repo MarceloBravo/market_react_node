@@ -28,7 +28,7 @@ export const Header = () => {
             <Navbar variant="dark" className="navbar">
                 <Navbar.Brand href="/">{ nombre_app }</Navbar.Brand>
                 <Nav className="mr-auto">
-                    <Nav.Link as={Link} to="/home">FrontOffice</Nav.Link>
+                    <Nav.Link as={Link} to="/home">Home</Nav.Link>
                 </Nav>
                 
                 <div className="user-session-info">

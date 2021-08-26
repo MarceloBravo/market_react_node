@@ -31,11 +31,14 @@ import { MenusTiendaGrid } from './pages/backOffice/menusTienda/grid/grid';
 import { FormMenusTiendaComponent } from './pages/backOffice/menusTienda/form';
 import { SeccionesHomeGrid } from './pages/backOffice/seccionesHome/grid/grid';
 import { SeccionesHomeForm } from './pages/backOffice/seccionesHome/form/form';
-import { DetalleProducto } from './pages/frontOffice/detalleProducto/detalleProducto'
-import { Catalogo } from './pages/frontOffice/catalogo/catalogo'
+import { DespachosForm } from './pages/backOffice/despachos/form/form'
+import { DespachosGrid } from './pages/backOffice/despachos/grid/grid'
+
 
 
 //Componentes del FrontOffice
+import { Catalogo } from './pages/frontOffice/catalogo/catalogo'
+import { DetalleProducto } from './pages/frontOffice/detalleProducto/detalleProducto'
 import { HomeMarketComponent } from './pages/frontOffice/home/home';
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
@@ -52,6 +55,7 @@ import { PageMessage } from './pages/frontOffice/pageMessage/pageMessage'
 import { IdentificacionCliente } from './pages/frontOffice/identificacionCliente/identificacionCliente'
 import { DatosDespacho } from './pages/frontOffice/datosDespacho/datosDespacho'
 import { ResultadoVentaWebPayComponent } from './pages/frontOffice/resultadoVenta/webpay/resultadoVentaWebPay'
+
 
 
 const store = createStore(combineReducer, applyMiddleware(thunk))
@@ -81,6 +85,8 @@ function App() {
             {/* Rutas BackOffice */}
             <Route exact path="/login" component={Login} />
             <Route exact path="/home" component={Home} />
+            <Route exact path="/detalle_despacho" component={DespachosGrid} />
+            <Route exact path="/detalle_despacho/edit/:id" component={DespachosForm} />
             <Route exact path="/menus" component={MenusGrid} />
             <Route exact path="/menus/nuevo" component={FormMenus} />
             <Route exact path="/menus/edit/:id" component={FormMenus} />

@@ -54,11 +54,20 @@ export const DatosDespacho = () => {
         }
         
         // Recuperando el cliente desde el almacenamiento de Session
+        let cli = sessionStorage.getItem(infoTiendaState.nombre_tienda + '-cliente')
+        if(!cli){
+            cli = localStorage.getItem(infoTiendaState.nombre_tienda + '-cliente')
+        }
+        if(cli){
+            setCliente(JSON.parse(atob(cli.split('.')[1])).user)
+        }
+        /*
         let cli = sessionStorage.getItem(`${infoTiendaState.nombre_tienda}-cliente`)
         if(cli){            
             let client = JSON.parse(atob(cli.split('.')[1])).user
             setCliente(client)
         }
+        */
 
     },[infoTiendaState])
 

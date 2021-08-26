@@ -32,6 +32,7 @@ export const Grid = (props) => {
         showDeleteButton,
         changeGridColumn,
         checkPermisos,  //Determina si se deben verificr los permisos del usuario, por defecto el valor es undefined, si el valor es undefined o true se verificarán los permisos del usuario  
+        editByColumn, //Editar por (nombre de la columna por la cual efectuar la búsqueda del registro a editar)
 } = props
     const permisos = useSelector(state => state.PermisosReducer.aplicar_permisos)
     const logedUser = useSelector(state => state.LoginReducer.logedUser)
@@ -134,6 +135,7 @@ export const Grid = (props) => {
             editableColumns={editableColumns && Array.isArray(editableColumns) ? editableColumns : []}
             numericColumns={numericColumns && Array.isArray(numericColumns) ? numericColumns : []}
             imageColumns={imageColumns && Array.isArray(imageColumns) ? imageColumns : []}
+            editByColumn={editByColumn ? editByColumn : 'id'}
         />
     )
 }

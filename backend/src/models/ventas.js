@@ -45,7 +45,6 @@ VentasModel.registrar = async (data, callback) => {
     }
 }
 
-
 const insertarVenta = (data) => {
     let qry = `INSERT INTO ventas (
         fecha_venta_tienda, 
@@ -70,7 +69,6 @@ const insertarVenta = (data) => {
     });
 }
 
-
 const registrarIdCliente = async (venta_id, cliente_id) => {
     await cnn.promise().query(
         `INSERT INTO ventas_clientes (
@@ -85,7 +83,6 @@ const registrarIdCliente = async (venta_id, cliente_id) => {
             CURDATE()
         )`)
 }
-
 
 const registrarCliente = async (venta_id, data) => {
     await cnn.promise().query(`INSERT INTO ventas_clientes_sin_registrar (
@@ -110,7 +107,6 @@ const registrarCliente = async (venta_id, data) => {
                                 CURDATE()
                             )`)
 }
-
 
 const registrarProductos = async (venta_id, data) => {
     await data.map(async e => {
@@ -143,7 +139,7 @@ const registrarProductos = async (venta_id, data) => {
     })
 }
 
-const registrarDespacho = async (venta_id, data) => {
+const registrarDespacho = async (venta_id, data) => {    
     await cnn.promise().query(`INSERT INTO despachos_ventas (
                                     venta_id,
                                     direccion,
@@ -154,6 +150,7 @@ const registrarDespacho = async (venta_id, data) => {
                                     casa_num,
                                     block_num,
                                     referencia,
+                                    shipping_cod,
                                     created_at,
                                     updated_at
                                 ) VALUES (
@@ -166,11 +163,11 @@ const registrarDespacho = async (venta_id, data) => {
                                     ${cnn.escape(data.casa_num)},
                                     ${cnn.escape(data.block_num)},
                                     ${cnn.escape(data.referencia)},
+                                    ${cnn.escape(data.shipping_cod)},
                                     CURDATE(),
                                     CURDATE()
                                 )`)
 }
-
 
 const registrarDatosWebPay = async (venta_id, data) => {
     await cnn.promise().query(`INSERT INTO ventas_webpay (
@@ -222,3 +219,27 @@ const descontarStock = async (id, cantidad) => {
         }
     })
 }
+
+
+VentasModel.anularVenta = (id, callback) => {
+    if(cnn){
+        let qry = `UPDATE ventas SET fecha_anulacion = CURDATE() WHERE id = ${cnn.escape(id)}`
+        console.log(qry)
+
+        cnn.query(qry, (err, res)=>{
+            if(err){
+                return callback({mensaje: 'Ha ocurrido un error al intentar anular la venta: ' + err.message, tipoMensaje: 'danger'})
+            }else{
+                if(res.affectedRows > 0){
+                    return callback(null,{mensaje: 'La venta ha sido anulada.', tipoMensaje: 'success'})
+                }else{
+                    return callback({mensaje: 'La venta no fue encontrada o no pudo se anulada.', tipoMensaje: 'danger'})
+                }
+            }
+        })
+    }else{
+        return callback({mensaje: 'Conexión inactiva.', tipoMensaje: 'danger'})
+    }
+}
+
+module.exports = VentasModel

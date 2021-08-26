@@ -3,9 +3,11 @@ import { useHistory } from 'react-router-dom'
 import { validaRut, isEmail } from '../../../shared/funciones'
 import { types as clientesTypes } from '../../../redux/Clientes/types'
 import { IdentificacionClienteContent } from './content'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { getData } from '../../../actions/infoTienda'
 
 export const IdentificacionCliente = () => {
+    const infoTiendaState = useSelector(state => state.InfoTiendaReducer.infoTienda)
     const [ cliente, setCliente ] = useState({rut: '', nombres: '', apellido1: '', apellido2: '', fono: '', email: '', direccion: '', region: '', provincia: '', comuna: '', ciudad: '', casa_num: '', block_num: '', referecia: ''})
     const [ errors, setErrors ] = useState({rut: '', nombres: '', apellido1: '', apellido2: '', fono:'', email: ''})
     const [ continuar, setContinuar ] = useState(false)
@@ -20,6 +22,23 @@ export const IdentificacionCliente = () => {
             [e.target.name]: e.target.value
         })
     }
+
+
+    useEffect(()=>{
+        dispatch(getData())
+    },[dispatch])
+    
+    useEffect(()=>{
+        if(infoTiendaState){
+            let cli = sessionStorage.getItem(infoTiendaState.nombre_tienda + '-cliente')
+            if(!cli){
+                cli = localStorage.getItem(infoTiendaState.nombre_tienda + '-cliente')
+            }
+            if(cli){
+                setCliente(JSON.parse(atob(cli.split('.')[1])).user)
+            }
+        }
+    },[infoTiendaState])
 
 
     useEffect(()=>{

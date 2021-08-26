@@ -19,3 +19,17 @@ export const registrar = (data) => {
         })
     }
 }
+
+
+export const anularVenta = (idVenta) => {
+    return (dispatch, action) => {
+        axios.put(`${endPoint}/${url}/anular/${idVenta}`,{headers: getHeader()}).then(res => {
+            dispatch({type: spinnerTypes.HIDE_SPINNER})
+            dispatch({type: ventasTypes.ANULAR_VENTA})
+            dispatch({type: alertasTypes.MOSTRAR_ALERTA, payload: {mensaje: res.data.mensaje, tipo: res.data.tipoMensaje}})
+            
+        }).catch(error => {
+            handlerError(dispatch, error, 'Ocurrió un error al intentar anular la venta.')
+        })
+    }
+}

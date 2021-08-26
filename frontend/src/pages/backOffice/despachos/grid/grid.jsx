@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react'
-import { Header } from '../../../components/backOffice/header'
-import { SpinnerComponent } from '../../../components/shared/spinner'
-import { Menu } from '../../../components/backOffice/menu'
-import { Alerta } from '../../../components/shared/alerts'
-import { Grid } from '../../../components/backOffice/grid'
-import { Paginacion }  from '../../../components/backOffice/paginacion'
+import { Header } from '../../../../components/backOffice/header'
+import { SpinnerComponent } from '../../../../components/shared/spinner'
+import { ModalDialog } from '../../../../components/backOffice/modalDialog'
+import { Menu } from '../../../../components/backOffice/menu'
+import { Alerta } from '../../../../components/shared/alerts'
+import { Grid } from '../../../../components/backOffice/grid'
+import { Paginacion }  from '../../../../components/backOffice/paginacion'
 import { useSelector, useDispatch } from 'react-redux'
-import { getPage, filtrar } from '../../../actions/despachos'
-import { Row } from 'react-bootstrap'
-import { types as alertasTypes } from '../../../redux/Alert/types'
+import { getPage, filtrar } from '../../../../actions/despachos'
+import { anularVenta } from '../../../../actions/ventas'
+import { types as modalTypes } from '../../../../redux/ModalDialog/types'
+import { Form, Row } from 'react-bootstrap'
 import './style.css'
-import { Form } from 'react-bootstrap'
 
-export const Home  = () => {
+export const DespachosGrid  = () => {
     const listaDespachosState = useSelector(state => state.DespachosReducer.list)
+    const [ idAnular, setIdAnular ] = useState(null)
     const [ currentPage, setCurrentPage ] = useState(0)
     const [ dataGrid, setDataGrid ] = useState({data:[]})
     const [ textoFiltro, setTextoFiltro ] = useState('')
@@ -21,7 +23,6 @@ export const Home  = () => {
 
 
     useEffect(()=>{
-        dispatch({type: alertasTypes.OCULTAR_ALERTA})
         dispatch(getPage(0))
     },[dispatch])
 
@@ -37,7 +38,6 @@ export const Home  = () => {
 
     useEffect(()=>{
         if(listaDespachosState){
-            console.log('listaDespachosState.data',listaDespachosState.data)
             setDataGrid({...dataGrid, data:listaDespachosState.data})
         }
         // eslint-disable-next-line
@@ -49,6 +49,20 @@ export const Home  = () => {
         setTextoFiltro(texto)
     }
 
+
+    const response = (resp) => {
+        if(resp){
+            dispatch(anularVenta(idAnular))
+        }
+    }
+
+
+    const cancelacionVenta = (e) => {
+        dispatch({type: modalTypes.SHOW_MODAL_DIALOG, payload: {mensaje: '¿Desea anular la venta?', titulo: 'Anular Venta'}})
+        setIdAnular(e)       
+    }
+
+
     const goToPage = (e) => {
         setCurrentPage(e)
     }
@@ -58,9 +72,10 @@ export const Home  = () => {
         <>
             <Header />
             <SpinnerComponent />
+            <ModalDialog response={response}/>
             <div className="main-section">
                 <div className="menu-section">
-                    <Menu activeKeyMenu="0"/>
+                    <Menu activeKeyMenu="30"/>
                 </div>                
                 <div className="content-section home-page">                    
                     <Alerta />
@@ -70,12 +85,17 @@ export const Home  = () => {
                         visibleFields={['orden','created_at', 'fecha_despacho', 'total','productos','cliente', 'region', 'provincia', 'comuna', 'ciudad', 'direccion']}
                         actionColumn={true}
                         title={'Despachos'}
+                        urlToForm={'detalle_despacho'}
                         onChangeFilter={e => fnFiltrar(e)}
+                        editByColumn={'orden'}
+                        showDeleteButton={false}
                     />
                     <Paginacion data={dataGrid} goToPage={goToPage}/>
-                    <Row>
-                        <Form.Label>Obs.: {dataGrid.data.length > 0 ? 'Se muestran sólo las ventas de los últimos 30 días.' : 'Sin ventas el último mes.'}</Form.Label>
-                    </Row>
+                    {dataGrid.data.length === 0 && 
+                        <Row>
+                            <Form.Label>Obs.: No se encontraron ventas</Form.Label>
+                        </Row>
+                    }
                 </div>
             </div>
         </>

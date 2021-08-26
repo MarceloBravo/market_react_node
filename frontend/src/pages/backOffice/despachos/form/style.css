@@ -1,0 +1,25 @@
+.no-padding{
+    padding: 0px !important;
+}
+
+.grid-productos-despacho .col-Descripción{
+    width: 50% !important;
+}
+
+.grid-productos-despacho .col-cantidad{
+    text-align: center;
+}
+
+.grid-productos-despacho .col-Total,
+.grid-productos-despacho .col-total_producto{
+    width: 110px !important;
+}
+
+.grid-productos-despacho .col-str_total_producto{
+    text-align: right;
+}
+
+.lbl-total-despacho{
+    text-align: right;
+    font-weight: bold;
+}

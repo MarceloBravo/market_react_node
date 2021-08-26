@@ -22,7 +22,7 @@ export const ResultadoVentaWebPayComponent = () => {
         datos_cliente: null, 
         productos: null, 
         despacho: null, 
-        datos_webpay: null
+        datos_webpay: null,
     })
     const [ token, setToken ] = useState('')
     const [ carrito, setCarrito ] = useState(null)
@@ -97,6 +97,7 @@ export const ResultadoVentaWebPayComponent = () => {
                             casa_num: cliente.casa_num,
                             block_num: cliente.block_num,
                             referencia: cliente.referencia,
+                            shipping_cod: 1,
                         }
                     })
                 }

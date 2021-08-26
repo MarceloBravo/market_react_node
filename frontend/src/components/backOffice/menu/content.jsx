@@ -5,8 +5,6 @@ import { Link } from 'react-router-dom'
 export const ContentMenuComponent = (props) => {
     const {menus, activeKeyMenu, clearMessages} = props
 
-    console.log(activeKeyMenu, menus)
-
     return (
         <div>
             <Nav defaultActiveKey="/home" className="flex-column">

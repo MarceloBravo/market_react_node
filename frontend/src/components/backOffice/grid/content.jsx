@@ -23,6 +23,7 @@ export const TableGrid = (props) => {
         editableColumns,
         numericColumns,
         imageColumns,
+        editByColumn,
     } = props
 
     
@@ -39,7 +40,7 @@ export const TableGrid = (props) => {
                     </Col>
                 </Row>
             </Container>
-            <Table striped bordered hover size="sm" responsive>
+            <Table striped bordered hover size="sm" responsive className="custom-class-table">
                 <thead>
                     <tr>
                         {headers.map((value, index) => {
@@ -57,7 +58,7 @@ export const TableGrid = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data && data.data.map((value, key) => {
+                    {data && data.data?.map((value, key) => {
                         return <tr key={ key}>
                             {visibleFields.map((val, id, columns) => {
                                 return <td key={key+'-'+id} className={"col-"+columns[id]}>
@@ -77,7 +78,7 @@ export const TableGrid = (props) => {
                                             }
                                             
                                             {!imageColumns.find(i => i === columns[id]) && (Array.isArray(editableColumns) && editableColumns.filter(i =>  i=== columns[id]).length === 0) && 
-                                                formatDate(value[val])
+                                                (Array.isArray(value[val]) ? value[val].length :  formatDate(value[val]))
                                             }
 
 
@@ -85,8 +86,8 @@ export const TableGrid = (props) => {
                             })}
                             {(((showDeleteButton || showEditButton) && actionColumn) || (actionColumn && permisos && (permisos.modificar === 1 || permisos.eliminar === 1))) &&
                                 <td className="col-action">
-                                {(showEditButton === undefined ? permisos.modificar === 1 : showEditButton) && <i className="bi bi-pencil action-button" title="Editar" onClick={() => handlerEdit(value['id'])}></i>}
-                                {(showDeleteButton === undefined ? permisos.eliminar === 1 : showDeleteButton) && <i className="bi bi-trash action-button" title="Eliminar" onClick={() => handlerDelete(value['id'])}></i>}
+                                {((showEditButton === undefined && permisos) ? permisos.modificar === 1 : showEditButton) && <i className="bi bi-pencil action-button" title="Editar" onClick={() => handlerEdit(value[editByColumn])}></i>}
+                                {((showDeleteButton === undefined && permisos) ? permisos.eliminar === 1 : showDeleteButton) && <i className="bi bi-trash action-button" title="Eliminar" onClick={() => handlerDelete(value[editByColumn])}></i>}
                                 </td>
                             }
                         </tr>
