@@ -45,7 +45,8 @@ export const Grid = (props) => {
 
     useEffect(() => {
         setWidthColumn(100/(headers.length+(actionColumn ? 1 : 0)))
-    }, [headers, setWidthColumn, actionColumn])
+        // eslint-disable-next-line
+    }, [])
 
 
     useEffect(()=>{
@@ -54,7 +55,7 @@ export const Grid = (props) => {
                 let roles = logedUser ? logedUser.roles.map(r => r.id) : []
                 dispatch(aplicarPermisos(roles, location.pathname.split("/")[1]))
             }else{
-                history.push('/home')
+                history.push('/')
             }
         }
     },[logedUser, urlPantalla, location, history, dispatch, checkPermisos])

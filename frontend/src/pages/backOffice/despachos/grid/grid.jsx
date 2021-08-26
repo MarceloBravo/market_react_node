@@ -1,21 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { Header } from '../../../../components/backOffice/header'
 import { SpinnerComponent } from '../../../../components/shared/spinner'
-import { ModalDialog } from '../../../../components/backOffice/modalDialog'
 import { Menu } from '../../../../components/backOffice/menu'
 import { Alerta } from '../../../../components/shared/alerts'
 import { Grid } from '../../../../components/backOffice/grid'
 import { Paginacion }  from '../../../../components/backOffice/paginacion'
 import { useSelector, useDispatch } from 'react-redux'
 import { getPage, filtrar } from '../../../../actions/despachos'
-import { anularVenta } from '../../../../actions/ventas'
-import { types as modalTypes } from '../../../../redux/ModalDialog/types'
 import { Form, Row } from 'react-bootstrap'
 import './style.css'
 
 export const DespachosGrid  = () => {
     const listaDespachosState = useSelector(state => state.DespachosReducer.list)
-    const [ idAnular, setIdAnular ] = useState(null)
     const [ currentPage, setCurrentPage ] = useState(0)
     const [ dataGrid, setDataGrid ] = useState({data:[]})
     const [ textoFiltro, setTextoFiltro ] = useState('')
@@ -49,20 +45,6 @@ export const DespachosGrid  = () => {
         setTextoFiltro(texto)
     }
 
-
-    const response = (resp) => {
-        if(resp){
-            dispatch(anularVenta(idAnular))
-        }
-    }
-
-
-    const cancelacionVenta = (e) => {
-        dispatch({type: modalTypes.SHOW_MODAL_DIALOG, payload: {mensaje: '¿Desea anular la venta?', titulo: 'Anular Venta'}})
-        setIdAnular(e)       
-    }
-
-
     const goToPage = (e) => {
         setCurrentPage(e)
     }
@@ -72,7 +54,6 @@ export const DespachosGrid  = () => {
         <>
             <Header />
             <SpinnerComponent />
-            <ModalDialog response={response}/>
             <div className="main-section">
                 <div className="menu-section">
                     <Menu activeKeyMenu="30"/>
@@ -91,7 +72,7 @@ export const DespachosGrid  = () => {
                         showDeleteButton={false}
                     />
                     <Paginacion data={dataGrid} goToPage={goToPage}/>
-                    {dataGrid.data.length === 0 && 
+                    {dataGrid.data?.length === 0 && 
                         <Row>
                             <Form.Label>Obs.: No se encontraron ventas</Form.Label>
                         </Row>

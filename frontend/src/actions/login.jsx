@@ -12,6 +12,7 @@ export const login = (credenciales) => {
             dispatch({type: types.IDENTIFICAR_USUARIO, payload: res.data})
             dispatch({type: alertTypes.OCULTAR_ALERTA})
         }).catch(error => {
+            debugger
             const mensaje = error.response.status === 401 ?  'Usuario o contraseña no válidos' : error.response.statusText;
             dispatch({type: alertTypes.MOSTRAR_ALERTA, payload: {mensaje: mensaje, tipo: 'danger' }})
         })

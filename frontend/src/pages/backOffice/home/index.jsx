@@ -73,9 +73,11 @@ export const Home  = () => {
                         onChangeFilter={e => fnFiltrar(e)}
                     />
                     <Paginacion data={dataGrid} goToPage={goToPage}/>
-                    <Row>
-                        <Form.Label>Obs.: {dataGrid.data.length > 0 ? 'Se muestran sólo las ventas de los últimos 30 días.' : 'Sin ventas el último mes.'}</Form.Label>
-                    </Row>
+                    {dataGrid.data?.length === 0 && 
+                        <Row>
+                            <Form.Label>Obs.: No se encontraron ventas</Form.Label>
+                        </Row>
+                    }
                 </div>
             </div>
         </>
