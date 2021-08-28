@@ -62,7 +62,6 @@ export const Grid = (props) => {
 
 
     useEffect(()=>{
-        console.log('DATA',data)
         setDatos(data)
     },[data])
 
