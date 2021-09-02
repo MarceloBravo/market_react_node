@@ -24,7 +24,7 @@ export const DetalleProductoContent = (props) => {
         keyTab, 
         setKeyTab, 
         showPreView,
-        volverAlCatalogo
+        volverAlCatalogo, 
     } = props
 
     return (
@@ -134,6 +134,7 @@ export const DetalleProductoContent = (props) => {
                                     Seguir comprando
                                 </Button>
                             </Row>
+
                         </Col>
                     </Row>
 

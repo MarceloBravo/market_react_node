@@ -57,7 +57,6 @@ import { DatosDespacho } from './pages/frontOffice/datosDespacho/datosDespacho'
 import { ResultadoVentaWebPayComponent } from './pages/frontOffice/resultadoVenta/webpay/resultadoVentaWebPay'
 
 
-
 const store = createStore(combineReducer, applyMiddleware(thunk))
 
 function App() {
@@ -80,7 +79,6 @@ function App() {
             <Route exact path="/IdentificacionCliente" component={IdentificacionCliente}/>
             <Route exact path="/DatosDespacho" component={DatosDespacho}/>
             <Route exact path="/ResultadoVentaWebpay" component={ResultadoVentaWebPayComponent}/>
-            
 
             {/* Rutas BackOffice */}
             <Route exact path="/login" component={Login} />

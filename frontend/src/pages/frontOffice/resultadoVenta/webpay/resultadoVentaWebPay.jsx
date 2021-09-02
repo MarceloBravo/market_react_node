@@ -7,6 +7,9 @@ import { searchByCode } from '../../../../actions/tiposPago'
 import { types as spinnerTypes } from '../../../../redux/Spinner/types'
 import { registrar as registrarVenta } from '../../../../actions/ventas'
 import { ResultadoVentaContent } from './content'
+//yarn add @react-pdf/renderer
+//import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
+
 import './style.css'
 
 
@@ -28,8 +31,11 @@ export const ResultadoVentaWebPayComponent = () => {
     const [ carrito, setCarrito ] = useState(null)
     const [ impuestos, setImpuestos ] = useState(0)
     const [ cliente, setCliente ] = useState(null)
+    const [ dataPDF, setDataPDF ] = useState(null)
+    const [ nombreTienda, setNombreTienda ]= useState('')
     const dispatch = useDispatch()
     const history = useHistory()
+
 
 
     useEffect(()=>{
@@ -39,11 +45,15 @@ export const ResultadoVentaWebPayComponent = () => {
 
     useEffect(()=>{
         if(infoTiendaState.nombre_tienda){
+            setNombreTienda(infoTiendaState.nombre_tienda)
             setToken(sessionStorage.getItem(infoTiendaState.nombre_tienda + '-webpay-token'))
             let cart = JSON.parse(localStorage.getItem('cart-'+infoTiendaState.nombre_tienda))
-            setCarrito(cart)
-            setDatosVenta({...datosVenta, productos: Object.keys(cart).map(item => cart[item])})
-            setCliente(JSON.parse(localStorage.getItem(`cliente-${infoTiendaState.nombre_tienda}`)))
+            if(cart){
+                setCarrito(cart)
+                console.log('datosVenta', cart)
+                setDatosVenta({...datosVenta, productos: Object.keys(cart).map(item => cart[item])})
+                setCliente(JSON.parse(localStorage.getItem(`cliente-${infoTiendaState.nombre_tienda}`)))
+            }
         }
         // eslint-disable-next-line
     },[infoTiendaState])
@@ -118,7 +128,7 @@ export const ResultadoVentaWebPayComponent = () => {
 
 
     useEffect(()=>{
-        if(tipoAlertaState === 'success'){  //Los datos del carrito han sido grabados en la base de datos exitosamente
+        if(tipoAlertaState === 'success' && datosVenta.total){  //Los datos del carrito han sido grabados en la base de datos exitosamente
             //Eliminando el carrito de compras
             localStorage.removeItem('cart-'+infoTiendaState.nombre_tienda)
         }
@@ -126,6 +136,154 @@ export const ResultadoVentaWebPayComponent = () => {
     },[tipoAlertaState])
 
 
+    useEffect(()=>{
+        if(transactionStatus && tipoPagoState && impuestos){
+            let obj = Object.assign({},transactionStatus, tipoPagoState, {impuestos})
+            console.log('dataPDF',obj)
+            setDataPDF(obj)
+        }
+    },[transactionStatus, tipoPagoState, impuestos])
+
+
+/*  
+    useEffect(()=>{
+        setHtml(`<html>
+            <body>
+                <style>
+                .table{
+                    display: table;
+                    width: 100%;
+                }
+        
+                .datos-tienda{
+                    display: table-cell;
+                    width: 65%;
+                }
+                
+                .nombre-tienda{
+                    font-size: x-large;
+                }
+                
+                .box-doc-number{
+                    border: solid red;
+                    height: 100;
+                    text-align: center;
+                }
+                
+                .doc-number{
+                    height: inherit;
+                }
+                
+                .label-order-number{
+                    top: 10%;
+                    width: 100%;
+                    position: relative;
+                    color: red;
+                    font-size: x-large;
+                    display: flow-root;
+                }
+                
+                .order-number{
+                    top: 42%;
+                    width: 100%;
+                    color: red;
+                    left: -21%;
+                    font-size: x-large;
+                    line-height: 3em;
+                }
+                
+                .divider{
+                    height: 20px;
+                }
+                
+                table{
+                    width: 100%;
+                    border: solid thin;
+                    border-collapse: collapse;
+                    border-bottom: none;
+                    border-left: none;
+                }
+                
+                .resumen-col-precio,
+                .resumen-col-cantidad,
+                .resumen-cel-titulo{
+                    width: 25%;
+                    text-align: right;
+                }
+                
+                th, td{
+                    border: solid thin;
+                }
+                
+                .empty-cell{
+                    border-left: none;
+                    border: none;
+                }
+                
+                </style>
+                <div class="table">
+                    <div class="datos-tienda">
+                        <div class="nombre-tienda">Nombre tienda</div>
+                        <div>Descripción del giro</div>
+                        <div>Fecha</div>
+                        <div>N° Trajeta</div>
+                        <div>Cód de autorización</div>
+                        <div>Forma de pago</div>
+                    </div>
+                    <div class="box-doc-number">
+                        <div class="doc-number">
+                            <label class="label-order-number">Orden de Compra N°</label>
+                            <label class="order-number">0000003467</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="divider">
+                </div>
+                
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cantidad</th>
+                                <th>Precio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{carrito[item].nombre}</td>
+                                <td class="resumen-col-cantidad">3</td>
+                                <td class="resumen-col-precio">$ 120.000</td>
+                            </tr>
+                            <tr>
+                                <td class="empty-cell"></td>
+                                <td class="resumen-cel-titulo">Impuestos</td>
+                                <td class="resumen-col-precio">
+                                    $ 19000
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="empty-cell"></td>
+                                <td class="resumen-cel-titulo">Despacho</td>
+                                <td class="resumen-col-precio">
+                                    $ 123456
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="empty-cell"></td>
+                                <td class="resumen-cel-titulo">Total</td>
+                                <td class="resumen-col-precio">
+                                    $ 123456
+                                </td>
+                            </tr>
+        
+                        </tbody>
+                        
+                    </Table>
+                
+            </body>
+        </html>`)
+    },[dataPDF])
+*/
     const goToInicio = () => {
         history.push('/')
     }
@@ -142,6 +300,8 @@ export const ResultadoVentaWebPayComponent = () => {
     }
 
 
+
+
     return (
         <ResultadoVentaContent 
             tipoAlertaState={tipoAlertaState}  
@@ -150,6 +310,9 @@ export const ResultadoVentaWebPayComponent = () => {
             carrito={carrito} 
             impuestos={impuestos} 
             goToInicio={goToInicio}
+            dataPDF={dataPDF}
+            nombreTienda={nombreTienda}
+            //html={html}
         />        
     )
 }

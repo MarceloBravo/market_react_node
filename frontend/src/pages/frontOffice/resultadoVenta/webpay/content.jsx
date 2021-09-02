@@ -4,6 +4,14 @@ import { FooterComponent } from '../../../../components/frontOffice/footer/foote
 import { Container, Button, Row, Col, Image, Table } from 'react-bootstrap'
 import { formatearNumero, formatearFechaHora }  from '../../../../shared/funciones'
 import { Alerta } from '../../../../components/shared/alerts'
+//import { BoletaPDFComponent } from '../../../../components/shared/boletaPDF/BoletaPDF'
+// eslint-disable-next-line
+import { PDFDownloadLink, PDFViewer } from '@react-pdf/renderer';
+import { ErrorHandler } from '../../../../components/errorHandler/ErrorHandlrer'
+
+import { PDFComponent } from '../../../../components/shared/pdf/boletaPdf'
+
+
 
 export const  ResultadoVentaContent = (props) => {
     const {
@@ -13,6 +21,8 @@ export const  ResultadoVentaContent = (props) => {
         carrito, 
         impuestos, 
         goToInicio, 
+        dataPDF,
+        nombreTienda,
     } = props
 
     return (
@@ -104,7 +114,18 @@ export const  ResultadoVentaContent = (props) => {
                     <>
                         <Row className="row-bottom-buttons">
                             <Col md={5}>
-                                <Button variant="primary" onClick={() => goToInicio()}>Descargar comprobante</Button>
+                                {
+                                <ErrorHandler>
+                                {
+                                (dataPDF && carrito) && 
+                                    <PDFDownloadLink variant="primary" document={<PDFComponent data={dataPDF} carrito={carrito} nombre_tienda={nombreTienda}/>} fileName={"comprobante_venta-" + formatearFechaHora(transactionStatus?.transaction_date) + ".pdf"}>
+                                    {
+                                        ({loading}) => loading ? 'Cargando...' : <Button variant="primary" >Descargar comprobante</Button>
+                                    }     
+                                    </PDFDownloadLink>
+                                }
+                                </ErrorHandler>
+                            }
                             </Col>
                             <Col md={2}></Col>
                             <Col md={5} className="col-enviar-email">
@@ -118,7 +139,15 @@ export const  ResultadoVentaContent = (props) => {
                         </Row>
                     </>
                 }
-                
+                {/*
+                <ErrorHandler>
+                    {(dataPDF && (Object.keys(dataPDF).length > 15) && carrito) &&
+                        <PDFViewer>
+                            <PDFComponent data={dataPDF} carrito={carrito}/>
+                        </PDFViewer>
+                    }
+                </ErrorHandler>
+                */}
                 {tipoAlertaState !== 'success' &&  
                     <Row>
                         <Col md={{span: 4, offset: 4}} className="col-button-OK">
