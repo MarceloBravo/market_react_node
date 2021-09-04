@@ -24,7 +24,6 @@ const totRows = (qry) => {
 userModel.getPage = (pag, callback) => {
     if(cnn){
         let desde = regPerPage * pag;
-        let hasta = desde + regPerPage;
         let qry = `
             SELECT 
                 id,
@@ -43,7 +42,7 @@ userModel.getPage = (pag, callback) => {
             FROM users
             WHERE 
                 deleted_at IS NULL
-            LIMIT ${desde}, ${hasta} 
+            LIMIT ${desde}, ${regPerPage} 
         `;
 
         cnn.query(qry, async (err, res) => {

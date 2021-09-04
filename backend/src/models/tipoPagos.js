@@ -8,7 +8,6 @@ let TipoPagosModel = {}
 TipoPagosModel.getPage = (pag, callback) => {
     if(cnn){
         let desde = regPerPage * pag
-        let hasta = desde * regPerPage
         let qry =  `SELECT 
                         id,
                         codigo,
@@ -21,7 +20,7 @@ TipoPagosModel.getPage = (pag, callback) => {
                         tipos_de_pago 
                     WHERE 
                         deleted_at IS NULL 
-                    LIMIT ${desde}, ${hasta}`
+                    LIMIT ${desde}, ${regPerPage}`
 
             cnn.query(qry, async (err, res) => {
                 if(err){
@@ -41,7 +40,6 @@ TipoPagosModel.getPage = (pag, callback) => {
 TipoPagosModel.filter = (texto, pag, callback) => {
     if(cnn){
         let desde = regPerPage * pag
-        let hasta = desde * regPerPage
         let filtro = ` AND (
                     id LIKE ${cnn.escape('%'+texto+'%')} OR 
                     codigo LIKE ${cnn.escape('%'+texto+'%')} OR 
@@ -64,7 +62,7 @@ TipoPagosModel.filter = (texto, pag, callback) => {
                     WHERE 
                         deleted_at IS NULL 
                         ${filtro}
-                    LIMIT ${desde}, ${hasta}`
+                    LIMIT ${desde}, ${regPerPage}`
 
             cnn.query(qry, async (err, res) => {
                 if(err){

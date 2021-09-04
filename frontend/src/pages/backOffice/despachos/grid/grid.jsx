@@ -13,7 +13,7 @@ import './style.css'
 export const DespachosGrid  = () => {
     const listaDespachosState = useSelector(state => state.DespachosReducer.list)
     const [ currentPage, setCurrentPage ] = useState(0)
-    const [ dataGrid, setDataGrid ] = useState({data:[]})
+    const [ dataGrid, setDataGrid ] = useState({data:[], rowsPerPage: 10, totRows: 0})
     const [ textoFiltro, setTextoFiltro ] = useState('')
     const dispatch = useDispatch()
 
@@ -34,7 +34,8 @@ export const DespachosGrid  = () => {
 
     useEffect(()=>{
         if(listaDespachosState){
-            setDataGrid({...dataGrid, data:listaDespachosState.data})
+            setDataGrid({...dataGrid, data:listaDespachosState.data, totRows: listaDespachosState.totRows, page: listaDespachosState.pag})
+            //setDataGrid({...dataGrid, data:listaDespachosState.data})
         }
         // eslint-disable-next-line
     },[listaDespachosState])

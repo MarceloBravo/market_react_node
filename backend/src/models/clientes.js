@@ -12,7 +12,6 @@ let clientesModel = {}
 clientesModel.getPage = (pag, callback) => {
     if(cnn){
         let desde = constantes.regPerPage * pag
-        let hasta = desde + constantes.regPerPage
         let qry = `SELECT 
                     id,
                     rut,
@@ -36,7 +35,7 @@ clientesModel.getPage = (pag, callback) => {
                     clientes
                 WHERE 
                     deleted_at IS NULL 
-                    LIMIT ${desde}, ${hasta}`
+                    LIMIT ${desde}, ${constantes.regPerPage}`
 
         cnn.query(qry, async (err, res) => {
             if(err){
@@ -56,7 +55,6 @@ clientesModel.getPage = (pag, callback) => {
 clientesModel.filter = (texto, pag, callback) => {
     if(cnn){
         let desde = constantes.regPerPage * pag
-        let hasta = desde + constantes.regPerPage
         let filtro = texto ? ` AND (
                         rut LIKE ${cnn.escape('%'+texto+'%')} OR 
                         nombres LIKE ${cnn.escape('%'+texto+'%')} OR 
@@ -100,7 +98,7 @@ clientesModel.filter = (texto, pag, callback) => {
                 WHERE 
                     deleted_at IS NULL 
                     ${filtro}
-                    LIMIT ${desde}, ${hasta}`
+                    LIMIT ${desde}, ${constantes.regPerPage}`
 
         cnn.query(qry, async (err, res) => {
             if(err){

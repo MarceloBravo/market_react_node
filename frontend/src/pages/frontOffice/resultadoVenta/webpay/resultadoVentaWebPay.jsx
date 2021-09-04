@@ -7,8 +7,12 @@ import { searchByCode } from '../../../../actions/tiposPago'
 import { types as spinnerTypes } from '../../../../redux/Spinner/types'
 import { registrar as registrarVenta } from '../../../../actions/ventas'
 import { ResultadoVentaContent } from './content'
+import { bodyPDF }  from '../../../../shared/funciones'
 //yarn add @react-pdf/renderer
-//import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
+
+//Documentación de envío de email con emailJS: https://mailtrap.io/blog/react-send-email/
+import emailjs from 'emailjs-com';
+import { USER_ID, TEMPLATE_ID } from '../../../../shared/emailkey'
 
 import './style.css'
 
@@ -300,6 +304,29 @@ export const ResultadoVentaWebPayComponent = () => {
     }
 
 
+    //Documentación de envío de email con emailJS: https://mailtrap.io/blog/react-send-email/
+    //https://www.emailjs.com/faq/
+    //https://www.emailjs.com/docs/examples/reactjs/
+    const sendEmail = (e) => {
+        e.preventDefault(); // Prevents default refresh by the browser
+        emailjs.send(
+            `service_gr8qyxi`, 
+            TEMPLATE_ID, 
+            {
+                to_name: 'Marcelo Bravo', 
+                content: '',
+                html: bodyPDF(infoTiendaState.nombre_tienda, dataPDF, carrito), 
+                from_name: infoTiendaState.nombre_tienda, 
+                reply_to: 'mabc@live.cl',
+                //content: btoa(generateHtmlPDF(infoTiendaState.nombre_tienda, dataPDF, carrito))
+            }, 
+            USER_ID).then((result) => {
+                console.log("Message Sent, We will get back to you shortly", result.text);
+            },(error) => {
+                console.log("An error occurred, Please try again", error.text);
+            });
+    };
+
 
 
     return (
@@ -312,6 +339,7 @@ export const ResultadoVentaWebPayComponent = () => {
             goToInicio={goToInicio}
             dataPDF={dataPDF}
             nombreTienda={nombreTienda}
+            sendEmail={sendEmail}
             //html={html}
         />        
     )

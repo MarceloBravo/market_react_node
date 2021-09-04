@@ -77,7 +77,6 @@ function subMenus(idMenuPadre){
 menusTiendaModel.getPage = (pag, callback) => {    
     if(cnn){
         let desde = pag  * constantes.regPerPage;
-        let hasta = desde + constantes.regPerPage;
         let qry = `
             SELECT 
                 m.id,
@@ -94,7 +93,7 @@ menusTiendaModel.getPage = (pag, callback) => {
             WHERE 
                 m.deleted_at IS NULL 
             ORDER BY m.nombre 
-            LIMIT ${desde}, ${hasta}
+            LIMIT ${desde}, ${constantes.regPerPage}
             
         `;
 
@@ -136,7 +135,6 @@ menusTiendaModel.filter = (texto, pag, callback) => {
                             m.posicion LIKE ${cnn.escape('%'+texto+'%')} 
                         )`;
         let desde = pag  * 10
-        let hasta = desde + 10;
         let qry = `
             SELECT 
                 m.id,
@@ -154,7 +152,7 @@ menusTiendaModel.filter = (texto, pag, callback) => {
                 m.deleted_at IS NULL
                 ${filtro} 
             ORDER BY m.nombre
-            LIMIT ${desde}, ${hasta}
+            LIMIT ${desde}, ${constantes.regPerPage}
         `;
         
         cnn.query(qry, async (err, res) => {

@@ -10,8 +10,8 @@ import { PDFDownloadLink, PDFViewer } from '@react-pdf/renderer';
 import { ErrorHandler } from '../../../../components/errorHandler/ErrorHandlrer'
 
 import { PDFComponent } from '../../../../components/shared/pdf/boletaPdf'
-
-
+import{ init } from 'emailjs-com';
+init("user_LZ7olBSXez61SyilXGFV9");
 
 export const  ResultadoVentaContent = (props) => {
     const {
@@ -23,6 +23,7 @@ export const  ResultadoVentaContent = (props) => {
         goToInicio, 
         dataPDF,
         nombreTienda,
+        sendEmail
     } = props
 
     return (
@@ -129,7 +130,7 @@ export const  ResultadoVentaContent = (props) => {
                             </Col>
                             <Col md={2}></Col>
                             <Col md={5} className="col-enviar-email">
-                                <Button variant="primary" onClick={() => goToInicio()}>Enviar comprobante por email</Button>
+                                <Button variant="primary" onClick={e => sendEmail(e)}>Enviar comprobante por email</Button>
                             </Col>
                         </Row>
                         <Row>

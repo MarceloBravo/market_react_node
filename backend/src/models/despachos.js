@@ -8,7 +8,6 @@ let DespachosModel = {}
 DespachosModel.getPage = (pag, callback) => {
     if(cnn){
         let desde = constantes.regPerPage * pag
-        let hasta = desde + constantes.regPerPage
         let qry = `SELECT 
                         dv.id, 
                         CONCAT(vc.rut, ' ', CASE WHEN vcsr.rut IS NULL THEN '' ELSE vcsr.rut END) AS rut,
@@ -51,7 +50,7 @@ DespachosModel.getPage = (pag, callback) => {
                         v.fecha_anulacion IS NULL AND 
                         dv.deleted_at IS NULL 
                     ORDER BY fecha_despacho ASC  
-                    LIMIT ${desde}, ${hasta}`
+                    LIMIT ${desde}, ${constantes.regPerPage}`
                 
         cnn.query(qry, async (err, res) => {
             if(err){
@@ -105,7 +104,6 @@ const detalleProductos = async (despachos) => {
 DespachosModel.filter = (texto, pag, callback) => {
     if(cnn){
         let desde = constantes.regPerPage * pag
-        let hasta = desde + constantes.regPerPage
         let filtro = ` AND (
                         CONCAT(vc.rut, ' ', CASE WHEN vcsr.rut IS NULL THEN '' ELSE vcsr.rut END) LIKE ${cnn.escape('%'+texto+'%')} OR 
                         CONCAT(
@@ -172,7 +170,7 @@ DespachosModel.filter = (texto, pag, callback) => {
                         dv.deleted_at IS NULL AND 
                         ${filtro}
                     ORDER BY fecha_despacho ASC 
-                    LIMIT ${desde}, ${hasta}`
+                    LIMIT ${desde}, ${constantes.regPerPage}`
         
 
         cnn.query(qry, async (err, res) => {

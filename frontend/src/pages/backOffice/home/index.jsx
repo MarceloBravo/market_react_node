@@ -15,7 +15,7 @@ import { Form } from 'react-bootstrap'
 export const Home  = () => {
     const listaDespachosState = useSelector(state => state.DespachosReducer.list)
     const [ currentPage, setCurrentPage ] = useState(0)
-    const [ dataGrid, setDataGrid ] = useState({data:[]})
+    const [ dataGrid, setDataGrid ] = useState({data:[], rowsPerPage: 10, totRows: 0})
     const [ textoFiltro, setTextoFiltro ] = useState('')
     const dispatch = useDispatch()
 
@@ -37,8 +37,8 @@ export const Home  = () => {
 
     useEffect(()=>{
         if(listaDespachosState){
-            console.log('listaDespachosState.data',listaDespachosState.data)
-            setDataGrid({...dataGrid, data:listaDespachosState.data})
+            //console.log('listaDespachosState.data',listaDespachosState.data)
+            setDataGrid({...dataGrid, data:listaDespachosState.data, totRows: listaDespachosState.totRows, page: listaDespachosState.pag})
         }
         // eslint-disable-next-line
     },[listaDespachosState])

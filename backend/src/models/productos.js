@@ -25,7 +25,6 @@ ProductosModel.getItemsPerPageOrderBy = (pag, items, orderByField, orderByDirect
 const getProductos = (pag, items, orderByField, orderByDirection, callback) => {
     if(cnn){
         let desde = constantes.regPerPage * pag
-        let hasta = desde + items
         let fromClause = `  productos p 
                             INNER JOIN unidades u ON p.unidad_id = u.id 
                             INNER JOIN marcas m ON p.marca_id = m.id 
@@ -57,7 +56,7 @@ const getProductos = (pag, items, orderByField, orderByDirection, callback) => {
                 WHERE
                     p.deleted_at IS NULL  
                     ${orderByField && orderByDirection ? ' ORDER BY ' + orderByField + ' ' + orderByDirection : ''} 
-                     LIMIT ${desde}, ${hasta}`
+                     LIMIT ${desde}, ${items}`
 
         cnn.query(qry, async (err, res) =>{
             if(err){
@@ -94,7 +93,6 @@ ProductosModel.getMinMaxPrice = (callback) => {
 ProductosModel.filter = (texto, pag, callback) => {
     if(cnn){
         let desde = constantes.regPerPage * pag
-        let hasta = desde + constantes.regPerPage
         let filtro = `
         (
             p.nombre LIKE ${cnn.escape('%'+texto+'%')} OR 
@@ -140,7 +138,7 @@ ProductosModel.filter = (texto, pag, callback) => {
                 WHERE
                     p.deleted_at IS NULL AND 
                     ${filtro} 
-                    LIMIT ${desde}, ${hasta}`
+                    LIMIT ${desde}, ${constantes.regPerPage}`
 
         cnn.query(qry, async (err, res) =>{
             if(err){
@@ -170,7 +168,6 @@ ProductosModel.filterParams = (data, pag, callback) => {
         let subCategoriaId  = data.subCategoriaId ? data.subCategoriaId : ''
 
         let desde = itemsPorPag * pag
-        let hasta = desde + itemsPorPag
         let qryFiltro = texto ? `p.id LIKE ${cnn.escape('%'+texto+'%')} OR 
                         p.nombre LIKE ${cnn.escape('%'+texto+'%')} OR 
                         CONVERT(p.precio_venta_normal, CHAR) LIKE ${cnn.escape('%'+texto+'%')} OR
@@ -222,7 +219,7 @@ ProductosModel.filterParams = (data, pag, callback) => {
                     p.deleted_at IS NULL  
                     ${filtro} 
                     ${orderBy && order ? ' ORDER BY ' + orderBy + ' ' + order : '' }
-                LIMIT ${desde}, ${hasta}`
+                LIMIT ${desde}, ${itemsPorPag}`
 
         cnn.query(qry, async (err, res) =>{
             if(err){
