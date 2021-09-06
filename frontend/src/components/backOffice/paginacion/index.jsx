@@ -18,7 +18,7 @@ export const Paginacion = (props) => {
             let hasta = (totPages > 10 && pag + 2 <= totPages)? pag + 2 : totPages
             if(pag - 4 >= 0){                
                 desde = pag - 3
-                arrNumbers.push(<Pagination.Ellipsis />)
+                arrNumbers.push(<Pagination.Ellipsis key="ellipsis1"/>)
             }
             if(hasta < 5 && totPages > 5){
                 hasta = 5
@@ -34,7 +34,7 @@ export const Paginacion = (props) => {
                 );
             }
             if(totPages > 10 && (pag + 3 < totPages)){
-                arrNumbers.push(<Pagination.Ellipsis />)
+                arrNumbers.push(<Pagination.Ellipsis key="ellipsis2"/>)
             }
             arrNumbers.push(<Pagination.Last key={totPages*10+1} onClick={() => goToPage(totPages)}/>)
             setItems(arrNumbers)

@@ -108,9 +108,8 @@ export const FormMenus = () => {
                 return 1;
             
             case 'url':
-                //if (value.length === 0) { setErrors({ ...errors, url: 'La URL asociada al menú es obligatoria.' })}
-                if (value.length > 0  && value.length < 3) { setErrors({ ...errors, url: 'El la URL debe tener almenos 3 carácteres. Ingrese una URL más larga.' })}
-                else if (value.length > 100) { setErrors({ ...errors, url: 'El la URL debe tener hasta 50 carácteres. Ingrese una URL más corta.' }) }
+                if (value && value.length > 0  && value.length < 3) { setErrors({ ...errors, url: 'El la URL debe tener almenos 3 carácteres. Ingrese una URL más larga.' })}
+                else if (value && value.length > 100) { setErrors({ ...errors, url: 'El la URL debe tener hasta 50 carácteres. Ingrese una URL más corta.' }) }
                 else {
                     setErrors({ ...errors, [name]: null })    
                 }
