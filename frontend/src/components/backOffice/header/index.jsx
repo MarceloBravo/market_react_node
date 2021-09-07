@@ -66,8 +66,8 @@ export const Header = () => {
                             <Dropdown.Menu>
                                 <Dropdown.Item as={Link} to="/perfil" onClick={() => clearMessages()}>Mi perfil</Dropdown.Item>
                                 <Dropdown.Divider />
-                                {token && <Dropdown.Item as={Link} to="#" onClick={() => goToMarket()}>Salir</Dropdown.Item>}
                                 <Dropdown.Item as={Link} to="#" onClick={() => logoutApp()}>Cerrar sessión</Dropdown.Item>
+                                {token && <Dropdown.Item as={Link} to="#" onClick={() => goToMarket()}>Salir</Dropdown.Item>}
                             </Dropdown.Menu>
                         </Dropdown>
                     </Form>
