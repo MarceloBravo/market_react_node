@@ -26,7 +26,7 @@ menusModel.mainMenu = (idRol, callback) => {
             ORDER BY 
                 posicion
             `;
-
+            
             cnn.query(qry, async (err, res) => {
                 if(err){
                     return callback({mensaje: err.message, tipoMensaje: 'danger', id: -1, errores: err})
@@ -64,7 +64,7 @@ function subMenus(idMenuPadre, idRol){
                 roles_id = ${cnn.escape(idRol)}
             ORDER BY posicion
             `;
-
+            
         return new Promise((resolve, reject) => {
             cnn.query(qry, (err, res) => {
                 if(err){
@@ -256,8 +256,6 @@ menusModel.insert = (data, callback) => {
                 CURDATE()
             )
         `;
-        
-        console.log(qry)
 
         cnn.query(qry, (err, result) => {
             if(err){

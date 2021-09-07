@@ -49,11 +49,11 @@ export const TimerSession = (props) => {
     useEffect(()=>{
         //Evalua si el usuario finalizó la sesión para redirigirlo a la pantalla de login
         if(isLogout){
-            if(sessionStorage.getItem('gimAppMabc')){
-                sessionStorage.removeItem('gimAppMabc')
+            if(sessionStorage.getItem('backTkn')){
+                sessionStorage.removeItem('backTkn')
             }
-            if(localStorage.getItem('gimAppMabc')){
-                localStorage.removeItem('gimAppMabc')
+            if(localStorage.getItem('backTkn')){
+                localStorage.removeItem('backTkn')
             }
             sessionStorage.removeItem('secs')
             history.push('/')

@@ -4,7 +4,10 @@ import { types as loginTypes } from '../redux/Login/types'
 
 
 export const getHeader = () => {
-    let token = localStorage.getItem('gimAppMabc')
+    let token = localStorage.getItem('backTkn')
+    if(!token){
+        token = sessionStorage.getItem('backTkn')
+    }
     return {'Content-Type':'application/json', 'Authorization':`Bearer ${token}`}
 }
 

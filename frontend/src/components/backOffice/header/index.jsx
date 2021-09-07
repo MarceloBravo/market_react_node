@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Form, Nav, Navbar, Dropdown, Image } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
@@ -6,17 +6,41 @@ import { logout } from '../../../actions/login'
 import { defaultImagesUrl, defaultAvatarUrl } from '../../../shared/constantes'
 import { types } from '../../../redux/Alert/types'
 import { TimerSession } from '../timerSession'
+import { useHistory } from 'react-router-dom'
 import './style.css'
 
 export const Header = () => {
     const user = useSelector(state => state.LoginReducer.logedUser.user)
     const nombre_app = useSelector(state => state.PersonalizarReducer.config.nombre_app)
+    const [ token, setToken ] = useState(null)
     const dispatch = useDispatch()
+    const history = useHistory()
+
+    
+    useEffect(()=>{
+        console.log('XXXXXXXXXXXXXXXXXX',localStorage.getItem('backTkn'))
+        if(localStorage.getItem('backTkn')){
+            setToken(localStorage.getItem('backTkn'))
+        }
+    },[])
+    
+    
+    useEffect(()=>{
+        if(!user){
+            history.push('/login')
+        }
+    },[history, user])
 
 
     const logoutApp = () => {
         dispatch(logout())
     }
+
+    
+    const goToMarket = () => {
+        history.push('/')
+    }
+
 
     const clearMessages = () => {
         dispatch({type: types.OCULTAR_ALERTA})
@@ -42,7 +66,8 @@ export const Header = () => {
                             <Dropdown.Menu>
                                 <Dropdown.Item as={Link} to="/perfil" onClick={() => clearMessages()}>Mi perfil</Dropdown.Item>
                                 <Dropdown.Divider />
-                                <Dropdown.Item as={Link} to="#" onClick={() => logoutApp()}>Salir</Dropdown.Item>
+                                {token && <Dropdown.Item as={Link} to="#" onClick={() => goToMarket()}>Salir</Dropdown.Item>}
+                                <Dropdown.Item as={Link} to="#" onClick={() => logoutApp()}>Cerrar sessión</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
                     </Form>

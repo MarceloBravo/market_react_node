@@ -16,17 +16,13 @@ export const Perfil = () => {
 
     
     useEffect(()=>{
-        if(logedUser){
+        if(logedUser?.user){
             logedUser.user.objFile = ''
             setUsuario(logedUser.user)
         }
     },[logedUser])
 
 
-    useEffect(()=>{
-        console.log(usuario)
-    },[usuario])
-    
     const response = (e) => {
         if(e){
             dispatch(actualizar(usuario.id, usuario))
@@ -36,7 +32,6 @@ export const Perfil = () => {
 
     const handlerChangeValue = (e) => {
         if(validaDatos(e.target.name, e.target.value, usuario, setErrors, errors)){
-            console.log('Datos válidos')
             setUsuario({
                 ...usuario,
                 [e.target.name]: e.target.value
