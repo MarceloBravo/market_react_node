@@ -8,7 +8,6 @@ let SubCategoriasModel = {}
 SubCategoriasModel.getPage = (pag, callback) => {
     if(cnn){
         let desde = constantes.regPerPage * pag
-        let hasta = desde + constantes.regPerPage
         let qry = `
                 SELECT 
                     sc.id,
@@ -23,7 +22,7 @@ SubCategoriasModel.getPage = (pag, callback) => {
                 WHERE 
                     sc.deleted_at IS NULL AND 
                     c.deleted_at IS NULL 
-                LIMIT ${desde},${hasta}
+                LIMIT ${desde},${constantes.regPerPage}
         `
 
         cnn.query(qry, async (err, res) => {
@@ -51,7 +50,6 @@ SubCategoriasModel.getPage = (pag, callback) => {
 SubCategoriasModel.filter = (texto, pag, callback) => {
     if(cnn){
         let desde = constantes.regPerPage * pag
-        let hasta = desde + constantes.regPerPage
         let filtro = `
                     sc.nombre LIKE ${cnn.escape('%'+texto+'%')} OR
                     c.nombre LIKE ${cnn.escape('%'+texto+'%')} OR 
@@ -74,7 +72,7 @@ SubCategoriasModel.filter = (texto, pag, callback) => {
                     c.deleted_at IS NULL AND (
                         ${filtro}
                     )
-                LIMIT ${desde},${hasta}
+                LIMIT ${desde},${constantes.regPerPage}
         `
 
         cnn.query(qry, async (err, res) => {

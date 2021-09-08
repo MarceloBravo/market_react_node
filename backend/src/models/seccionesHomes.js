@@ -8,7 +8,6 @@ let SeccionesHome = {}
 SeccionesHome.getPage = (pag, callback) => {
     if(cnn){
         let desde = constantes.regPerPage * pag
-        let hasta = desde + constantes.regPerPage
         let qry = `SELECT 
                         id,
                         nombre,
@@ -19,7 +18,7 @@ SeccionesHome.getPage = (pag, callback) => {
                         secciones_home
                     WHERE
                         deleted_at IS NULL
-                    LIMIT ${desde}, ${hasta}
+                    LIMIT ${desde}, ${constantes.regPerPage}
                     `
 
         cnn.query(qry, async (err, res) => {
@@ -39,7 +38,6 @@ SeccionesHome.getPage = (pag, callback) => {
 SeccionesHome.filter = (texto, pag, callback) => {
     if(cnn){
         let desde = constantes.regPerPage * pag
-        let hasta = desde + constantes.regPerPage
         let filtro = ` AND (
                             nombre LIKE ${cnn.escape('%'+texto+'%')} OR 
                             CONVERT(created_at, CHAR) LIKE ${cnn.escape('%'+texto+'%')} OR 
@@ -58,7 +56,7 @@ SeccionesHome.filter = (texto, pag, callback) => {
                         deleted_at IS NULL 
                          ${filtro}    
 
-                    LIMIT ${desde}, ${hasta}
+                    LIMIT ${desde}, ${constantes.regPerPage}
                     `
 
         cnn.query(qry, async (err, res) => {

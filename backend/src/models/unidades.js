@@ -8,7 +8,6 @@ let UnidadesModel = {}
 UnidadesModel.getPage = (pag, callback) => {
     if(cnn){
         let desde = constantes.regPerPage * pag
-        let hasta = desde + constantes.regPerPage
         let qry = `
             SELECT
                 id,
@@ -21,7 +20,7 @@ UnidadesModel.getPage = (pag, callback) => {
                 unidades
             WHERE
                 deleted_at IS NULL
-            LIMIT ${desde}, ${hasta}`
+            LIMIT ${desde}, ${constantes.regPerPage}`
 
         cnn.query(qry, async (err, res) =>{
             if(err){
@@ -40,7 +39,6 @@ UnidadesModel.getPage = (pag, callback) => {
 UnidadesModel.filter = (texto, pag, callback) => {
     if(cnn){
         let desde = constantes.regPerPage * pag
-        let hasta = desde + constantes.regPerPage
         let filtro = `
                     (
                         nombre LIKE ${cnn.escape('%'+texto+'%')} OR 
@@ -61,7 +59,7 @@ UnidadesModel.filter = (texto, pag, callback) => {
             WHERE
                 deleted_at IS NULL AND
                 ${filtro}
-            LIMIT ${desde}, ${hasta}`
+            LIMIT ${desde}, ${constantes.regPerPage}`
 
         cnn.query(qry, async (err, res) =>{
             if(err){

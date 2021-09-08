@@ -24,7 +24,6 @@ const getTotRows = (qry) => {
 rolesModel.getPage = (pag, callback) => {
     if(cnn){
         let desde = rowsPerPage  * pag;
-        let hasta = desde + rowsPerPage;
         let qry = `
                 SELECT 
                     id,
@@ -37,7 +36,7 @@ rolesModel.getPage = (pag, callback) => {
                     roles
                 WHERE 
                     deleted_at IS NULL
-                LIMIT ${desde}, ${hasta}
+                LIMIT ${desde}, ${rowsPerPage}
             `;
 
             cnn.query(qry, async (err, res) => {
@@ -128,7 +127,6 @@ rolesModel.filter = (texto, pag, callback) => {
                     )`;
                     
         let desde = rowsPerPage  * pag;
-        let hasta = desde + rowsPerPage;
         let qry = `
                 SELECT 
                     id,
@@ -142,7 +140,7 @@ rolesModel.filter = (texto, pag, callback) => {
                 WHERE 
                     deleted_at IS NULL
                     ${filtro}
-                LIMIT ${desde}, ${hasta}
+                LIMIT ${desde}, ${rowsPerPage}
             `;
 
             cnn.query(qry, async (err, res) => {

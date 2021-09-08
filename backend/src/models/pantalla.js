@@ -8,7 +8,6 @@ let pantallaModel = {}
 pantallaModel.getPage = (pag, callback) => {
     if(cnn){
         let desde = constantes.regPerPage * pag;
-        let hasta = desde + constantes.regPerPage;
         let qry = `
                 SELECT
                     p.id,
@@ -27,7 +26,7 @@ pantallaModel.getPage = (pag, callback) => {
                     INNER JOIN menus m ON p.menus_id = m.id
                 WHERE
                     p.deleted_at IS NULL
-                LIMIT ${desde}, ${hasta}
+                LIMIT ${desde}, ${constantes.regPerPage}
                 `;
 
             cnn.query(qry, async (err, res) => {
@@ -162,7 +161,6 @@ pantallaModel.getByUrl = (url, callback) => {
 pantallaModel.filter = (texto, pag, callback) => {
     if(cnn){
         let desde = constantes.regPerPage * pag;
-        let hasta = desde + constantes.regPerPage;
         let qry = `
                 SELECT
                     id,
@@ -179,7 +177,7 @@ pantallaModel.filter = (texto, pag, callback) => {
                 WHERE
                     deleted_at IS NULL
                     AND nombre LIKE '%${texto}%' 
-                LIMIT ${desde}, ${hasta}
+                LIMIT ${desde}, ${constantes.regPerPage}
                 `;
 
             cnn.query(qry, async (err, res) => {

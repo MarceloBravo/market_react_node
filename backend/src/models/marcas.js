@@ -8,7 +8,6 @@ let MarcasModel = {}
 MarcasModel.getPage = (pag, callback) => {
     if(cnn){
         let desde = constantes.regPerPage * pag
-        let hasta = desde + constantes.regPerPage
         let qry = `SELECT
                         id,
                         nombre,
@@ -19,7 +18,7 @@ MarcasModel.getPage = (pag, callback) => {
                         marcas
                     WHERE 
                         deleted_at IS NULL 
-                    LIMIT ${desde}, ${hasta}`
+                    LIMIT ${desde}, ${constantes.regPerPage}`
 
         cnn.query(qry, async (err, res) =>{
             if(err){
@@ -37,7 +36,6 @@ MarcasModel.getPage = (pag, callback) => {
 MarcasModel.filter = (texto, pag, callback) => {
     if(cnn){
         let desde = constantes.regPerPage * pag
-        let hasta = desde + constantes.regPerPage
         let filtro = `(
                         nombre LIKE ${cnn.escape('%'+texto+'%')} OR
                         CONVERT(created_at, CHAR) LIKE ${cnn.escape('%'+texto+'%')} OR
@@ -54,7 +52,7 @@ MarcasModel.filter = (texto, pag, callback) => {
                     WHERE 
                         deleted_at IS NULL AND 
                         ${filtro}
-                    LIMIT ${desde}, ${hasta}`
+                    LIMIT ${desde}, ${constantes.regPerPage}`
 
 
         cnn.query(qry, async (err, res) =>{

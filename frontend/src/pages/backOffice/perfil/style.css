@@ -10,4 +10,14 @@
     cursor: pointer;
     height: 90%;
     position: absolute;
+    left: 50%;
+}
+
+.col-image{
+    width: 40%;
+    height: 13em;
+}
+
+.col-md-9{
+    padding-left: 5% !important;
 }

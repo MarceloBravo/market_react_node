@@ -14,7 +14,7 @@ export const ContentMenuComponent = (props) => {
                             <Card className="sub-menu" key={key}>
                                 <Card.Header>
                                     <Accordion.Toggle as={Button} variant="link" eventKey={menu.id.toString()} className="pather-menu">
-                                    {menu.nombre}
+                                    {menu.nombre} 
                                     </Accordion.Toggle>
                                 </Card.Header>
                                 <Accordion.Collapse eventKey={menu.id.toString()}>                                    
@@ -22,7 +22,7 @@ export const ContentMenuComponent = (props) => {
                                         <Card.Body>
                                             <Nav defaultActiveKey={'0-' + menu.id.toString()}>
                                                 {menu.sub_menu.map((sm, k) => 
-                                                    sm.acceder === 1 && <Nav.Link onClick={() => clearMessages() } as={Link} to={"/" + sm.url} key={k}>{sm.nombre}</Nav.Link>
+                                                    sm.acceder === 1 && <Nav.Link onClick={() => clearMessages() } as={Link} to={"/" + sm.url} key={key + '-' + k}>{sm.nombre}</Nav.Link>
                                                 )}
                                             </Nav>
                                         </Card.Body>

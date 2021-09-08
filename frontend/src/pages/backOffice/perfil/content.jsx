@@ -4,7 +4,7 @@ import { Header } from '../../../components/backOffice/header'
 import { SpinnerComponent } from '../../../components/shared/spinner'
 import { Alerta } from '../../../components/shared/alerts'
 import { Menu } from '../../../components/backOffice/menu'
-import { Form, Col, Row, Button, Image } from 'react-bootstrap'
+import { Form, Col, Row, Button, Image, OverlayTrigger, Tooltip } from 'react-bootstrap'
 import { defaultAvatarUrl, defaultImagesUrl } from  '../../../shared/constantes'
 import './style.css'
 
@@ -27,10 +27,10 @@ export const PerfilContent = (props) => {
 
                         <Form.Group as={Row}>
 
-                            <Col md="6">
+                            <Col md="7">
                                 <Form.Group as={Row} controlId="formPlaintextEmail">
-                                    <Form.Label column sm="4">Nombre</Form.Label>
-                                    <Col md="8">
+                                    <Form.Label column sm="3">Nombre</Form.Label>
+                                    <Col md="9">
                                         <Form.Control
                                             type="text"
                                             name="name"
@@ -47,8 +47,8 @@ export const PerfilContent = (props) => {
                                 }
 
                                 <Form.Group as={Row} controlId="formPlaintextEmail">
-                                    <Form.Label column sm="4">A. Paterno</Form.Label>
-                                    <Col md="8">
+                                    <Form.Label column sm="3">A. Paterno</Form.Label>
+                                    <Col md="9">
                                         <Form.Control
                                             type="text"
                                             name="a_paterno"
@@ -65,8 +65,8 @@ export const PerfilContent = (props) => {
                                 }
 
                                 <Form.Group as={Row} controlId="formPlaintextEmail">
-                                    <Form.Label column sm="4">A. Materno</Form.Label>
-                                    <Col md="8">
+                                    <Form.Label column sm="3">A. Materno</Form.Label>
+                                    <Col md="9">
                                         <Form.Control
                                             type="text"
                                             name="a_materno"
@@ -83,8 +83,8 @@ export const PerfilContent = (props) => {
                                 }
 
                                 <Form.Group as={Row} controlId="formPlaintextEmail">
-                                    <Form.Label column sm="4">Fono</Form.Label>
-                                    <Col md="8">
+                                    <Form.Label column sm="3">Fono</Form.Label>
+                                    <Col md="9">
                                         <Form.Control
                                             type="text"
                                             name="fono"
@@ -102,8 +102,8 @@ export const PerfilContent = (props) => {
 
 
                                 <Form.Group as={Row} controlId="formPlaintextEmail">
-                                    <Form.Label column sm="4">Email</Form.Label>
-                                    <Col md="8">
+                                    <Form.Label column sm="3">Email</Form.Label>
+                                    <Col md="9">
                                         <Form.Control
                                             type="text"
                                             name="email"
@@ -119,10 +119,19 @@ export const PerfilContent = (props) => {
                                     </Form.Group>
                                 }
                             </Col>
-                            <Col md="6">
+                            <Col md="5" className="col-image">
                                 <Col xs={6} md={4} className="image-content">
-                                    <Image src={(usuario.foto || usuario.objFile) ? (usuario.objFile ? usuario.objFile : defaultImagesUrl + usuario.foto) : defaultAvatarUrl} roundedCircle onClick={() => fnLoadImage()} className="image"/>
-                                    <input type="file" name="avatar" ref={fileAvatar} onChange={e => fnRefreshAvatar(e)} className="hidden-control"></input>
+                                    <OverlayTrigger
+                                        placement="bottom"
+                                        delay={{ show: 250, hide: 400 }}
+                                        overlay={<Tooltip id="button-tooltip">Da click para cargar una nueva foto</Tooltip>}
+                                    >
+                                        <Image src={(usuario.foto || usuario.objFile) ? (usuario.objFile ? usuario.objFile : defaultImagesUrl + usuario.foto) : defaultAvatarUrl} roundedCircle onClick={() => fnLoadImage()} className="image"/>
+                                    </OverlayTrigger>
+                                    <input type="file" name="avatar" ref={fileAvatar} onChange={e => fnRefreshAvatar(e)} className="hidden-control"></input>                                    
+                                </Col>
+                                <Col>
+                                    Haz click sobre el area de la foto para cambiar tu imágen
                                 </Col>
                                 {errors.foto &&
                                     <Form.Group as={Row}>
@@ -159,7 +168,7 @@ export const PerfilContent = (props) => {
                                     type="text"
                                     name="password"
                                     placeholder="Ingresa una contraseña"
-                                    value={usuario.password}
+                                    value={usuario.password ? usuario.password : ''}
                                     onChange={e => handlerChangeValue(e)}
                                 />
                             </Col>
@@ -177,7 +186,7 @@ export const PerfilContent = (props) => {
                                     type="text"
                                     name="confirm_password"
                                     placeholder="Reingresa la contraseña"
-                                    value={usuario.confirm_password}
+                                    value={usuario.confirm_password ? usuario.confirm_password : ''}
                                     onChange={e => handlerChangeValue(e)}
                                 />
                             </Col>

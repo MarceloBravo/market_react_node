@@ -4,7 +4,10 @@ import { types as loginTypes } from '../redux/Login/types'
 
 
 export const getHeader = () => {
-    let token = localStorage.getItem('gimAppMabc')
+    let token = localStorage.getItem('backTkn')
+    if(!token){
+        token = sessionStorage.getItem('backTkn')
+    }
     return {'Content-Type':'application/json', 'Authorization':`Bearer ${token}`}
 }
 
@@ -95,3 +98,77 @@ export const formatearFechaHora = (strFecha) => {
     let hora = strFecha.split('T')[1].substring(0,8)
     return fecha + ' ' + hora
 }
+
+
+export const generateHtmlPDF = (nombre_tienda, data, carrito) => {
+    const element = `
+        <html>
+            <body>
+                ${bodyPDF(nombre_tienda, data, carrito)}
+            </body>
+        </html>`
+
+        return element
+}
+
+
+export const bodyPDF = (nombre_tienda, data, carrito) => {
+    return `<div style="display: table; width: 100%;">
+                <div style="display: table-cell; ">
+                    <div style="font-size: 30px;">${nombre_tienda}</div>
+                    <div>Descripción del giro</div>
+                    <div>Fecha ${formatearFechaHora(data.transaction_date)}</div>
+                    <div>N° Trajeta ${data.card_detail.card_number}</div>
+                    <div>Cód de autorización ${data.authorization_code}</div>
+                    <div>Forma de pago ${data.nombre}</div>
+                </div>
+                <div style="display: table-cell; position: absolute; width: 34%; right: 0px; top: 0px;">
+                    <div style="border-style: solid; border-color: red; border-width: 5px; height: 100px; text-align: center; ">
+                        <div style="top: 32%; width: 100%; color: red; font-size: 20; line-height: 3em; position: relative">Orden de Compra</div>
+                        <div style="top: 32%; width: 100%; color: red; font-size: 20; line-height: 3em; position: relative">N°000000${data.buy_order}</div>
+                    </div>
+                </div>
+            </div>
+            <div style="height: 20px;">
+            </div>
+    
+            <table style="width: 100%; border-style: solid; border-width: .5px; border-color: black;">
+                <thead>
+                    <tr>
+                        <th >Producto</th>
+                        <th style="width: 70px; text-align: right;">Cantidad</th>
+                        <th style="width: 70px; text-align: right;">Precio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${Object.keys(carrito).map((item, key) => {
+                        return  `<tr key={key}>
+                                    <td>${carrito[item].nombre}</td>
+                                    <td style="width: 70px; text-align: right;">${carrito[item].cantidad}</td>
+                                    <td style="width: 70px; text-align: right;">${carrito[item].str_precio}</td>
+                                </tr>`
+                    })}
+                    <tr>
+                        <td></td>
+                        <td style="text-align: right;">Impuestos</td>
+                        <td style="width: 70px; text-align: right;">
+                            $ ${formatearNumero(data.impuestos)}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="text-align: right;">Despacho</td>
+                        <td style="width: 70px; text-align: right;">
+                            $ ${formatearNumero(0)}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td style="text-align: right;">Total</td>
+                        <td style="width: 70px; text-align: right;">
+                            $  ${formatearNumero(data?.amount ? data.amount : 0)}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>`
+        }

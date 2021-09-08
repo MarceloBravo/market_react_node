@@ -17,7 +17,6 @@ import { useToasts } from 'react-toast-notifications';
 */
 import './style.css'
 
-
 export const DetalleProducto = () => {
     const id = useParams('id')
     const productoState = useSelector(state => state.ProductosReducer.producto)
@@ -37,7 +36,6 @@ export const DetalleProducto = () => {
     const history = useHistory()
     const { addToast } = useToasts();
 
-    
     useEffect(()=>{
         if(id){
             dispatch(detalleApp())

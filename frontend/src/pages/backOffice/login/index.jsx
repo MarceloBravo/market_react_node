@@ -4,6 +4,7 @@ import { login } from '../../../actions/login';
 import { Redirect } from 'react-router-dom';
 import { Content } from './content';
 import { find } from '../../../actions/personalizar'
+import { types as loginTypes } from '../../../redux/Login/types'
 import './style.css';
 
 export const Login = () => {
@@ -15,7 +16,8 @@ export const Login = () => {
     const [ redirect, setRedirect ] = useState(false)
     const [ loginError, setLoginError ] = useState(false)
     const errorState = useSelector(state => state.AlertaReducer)
-    const nombre_app = useSelector(state => state.PersonalizarReducer.config.nombre_app)
+    const nombre_app = useSelector(state => state.PersonalizarReducer.config.nombre_app)  
+    const [ token, setToken ] = useState(null)
     
 
     useEffect(() => {
@@ -24,16 +26,16 @@ export const Login = () => {
         if (logedUser.accessToken) {    
             setRedirect(true);
             if (rememberMe) {
-                localStorage.removeItem('gimAppMabc')
-                sessionStorage.setItem('gimAppMabc', logedUser.accessToken)
+                sessionStorage.removeItem('backTkn')
+                localStorage.setItem('backTkn', logedUser.accessToken)
             } else {
-                localStorage.setItem('gimAppMabc', logedUser.accessToken)
-                sessionStorage.removeItem('gimAppMabc')
+                sessionStorage.setItem('backTkn', logedUser.accessToken)
+                localStorage.removeItem('backTkn')
             }
         }else{
             setRedirect(false)
         }
-    }, [logedUser,rememberMe])
+    }, [logedUser, rememberMe])
 
 
     
@@ -47,10 +49,26 @@ export const Login = () => {
 
 
     useEffect(() => {
-        if (sessionStorage.getItem("gimAppMabc") !== null) {
-            setRedirect(true);        
+        if (localStorage.getItem("backTkn") !== null) {
+            setToken(localStorage.getItem("backTkn"))
+            setRememberMe(true)
         }    
     },[])
+
+
+    useEffect(()=>{
+        if(token){
+            let obj = JSON.parse(atob(token.split('.')[1]))
+            dispatch({type: loginTypes.IDENTIFICAR_USUARIO, payload: 
+            {
+                user: obj.user,
+                access_token: token,
+                expires_in: obj.exp,
+                roles: obj.roles,
+            }})
+            setRedirect(true);        
+        }
+    },[dispatch, token])
 
 
     useEffect(()=>{

@@ -40,6 +40,14 @@ import { DespachosGrid } from './pages/backOffice/despachos/grid/grid'
 import { Catalogo } from './pages/frontOffice/catalogo/catalogo'
 import { DetalleProducto } from './pages/frontOffice/detalleProducto/detalleProducto'
 import { HomeMarketComponent } from './pages/frontOffice/home/home';
+import { CarroCompras } from './pages/frontOffice/carroCompras/carroCompras'
+import { LoginCliente } from './pages/frontOffice/loginCliente/loginCliente'
+import { RegistroClientes } from './pages/frontOffice/registroCliente/registroCliente'
+import { PageMessage } from './pages/frontOffice/pageMessage/pageMessage'
+import { IdentificacionCliente } from './pages/frontOffice/identificacionCliente/identificacionCliente'
+import { DatosDespacho } from './pages/frontOffice/datosDespacho/datosDespacho'
+import { ResultadoVentaWebPayComponent } from './pages/frontOffice/resultadoVenta/webpay/resultadoVentaWebPay'
+
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
@@ -48,13 +56,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import combineReducer from './redux';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import { CarroCompras } from './pages/frontOffice/carroCompras/carroCompras'
-import { LoginCliente } from './pages/frontOffice/loginCliente/loginCliente'
-import { RegistroClientes } from './pages/frontOffice/registroCliente/registroCliente'
-import { PageMessage } from './pages/frontOffice/pageMessage/pageMessage'
-import { IdentificacionCliente } from './pages/frontOffice/identificacionCliente/identificacionCliente'
-import { DatosDespacho } from './pages/frontOffice/datosDespacho/datosDespacho'
-import { ResultadoVentaWebPayComponent } from './pages/frontOffice/resultadoVenta/webpay/resultadoVentaWebPay'
 
 
 
@@ -80,7 +81,6 @@ function App() {
             <Route exact path="/IdentificacionCliente" component={IdentificacionCliente}/>
             <Route exact path="/DatosDespacho" component={DatosDespacho}/>
             <Route exact path="/ResultadoVentaWebpay" component={ResultadoVentaWebPayComponent}/>
-            
 
             {/* Rutas BackOffice */}
             <Route exact path="/login" component={Login} />

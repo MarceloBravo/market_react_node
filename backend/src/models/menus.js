@@ -26,7 +26,7 @@ menusModel.mainMenu = (idRol, callback) => {
             ORDER BY 
                 posicion
             `;
-
+            
             cnn.query(qry, async (err, res) => {
                 if(err){
                     return callback({mensaje: err.message, tipoMensaje: 'danger', id: -1, errores: err})
@@ -64,7 +64,7 @@ function subMenus(idMenuPadre, idRol){
                 roles_id = ${cnn.escape(idRol)}
             ORDER BY posicion
             `;
-
+            
         return new Promise((resolve, reject) => {
             cnn.query(qry, (err, res) => {
                 if(err){
@@ -82,7 +82,6 @@ function subMenus(idMenuPadre, idRol){
 menusModel.getPage = (pag, callback) => {    
     if(cnn){
         let desde = pag  * constantes.regPerPage;
-        let hasta = desde + constantes.regPerPage;
         let qry = `
             SELECT 
                 m.id,
@@ -99,7 +98,7 @@ menusModel.getPage = (pag, callback) => {
             WHERE 
                 m.deleted_at IS NULL 
             ORDER BY m.nombre 
-            LIMIT ${desde}, ${hasta}
+            LIMIT ${desde}, ${constantes.regPerPage}
             
         `;
 
@@ -141,7 +140,6 @@ menusModel.filter = (texto, pag, callback) => {
                             m.posicion LIKE ${cnn.escape('%'+texto+'%')} 
                         )`;
         let desde = pag  * 10
-        let hasta = desde + 10;
         let qry = `
             SELECT 
                 m.id,
@@ -159,7 +157,7 @@ menusModel.filter = (texto, pag, callback) => {
                 m.deleted_at IS NULL
                 ${filtro} 
             ORDER BY m.nombre
-            LIMIT ${desde}, ${hasta}
+            LIMIT ${desde}, ${constantes.regPerPage}
         `;
         
         cnn.query(qry, async (err, res) => {
@@ -258,8 +256,6 @@ menusModel.insert = (data, callback) => {
                 CURDATE()
             )
         `;
-        
-        console.log(qry)
 
         cnn.query(qry, (err, result) => {
             if(err){

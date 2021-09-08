@@ -11,6 +11,7 @@ import { ToastProvider } from 'react-toast-notifications';
 
 //import reportWebVitals from './reportWebVitals';
 
+
 ReactDOM.render(
   //<React.StrictMode>
     <ToastProvider>

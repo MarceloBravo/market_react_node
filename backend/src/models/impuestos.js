@@ -8,7 +8,6 @@ let impuestosModel = {}
 impuestosModel.getPage = (pag, callback) => {
     if(cnn){
         let desde = constantes.regPerPage * pag
-        let hasta = desde + constantes.regPerPage
         let qry = `SELECT
                         id,
                         nombre,
@@ -21,7 +20,7 @@ impuestosModel.getPage = (pag, callback) => {
                         impuestos 
                     WHERE 
                         deleted_at IS NULL
-                    LIMIT ${desde}, ${hasta}`
+                    LIMIT ${desde}, ${constantes.regPerPage}`
 
         cnn.query(qry, async (err, res) => {
             if(err){
@@ -69,7 +68,6 @@ impuestosModel.getAll = (callback) => {
 impuestosModel.filter = (texto, pag, callback) => {
     if(cnn){
         let desde = constantes.regPerPage * pag
-        let hasta = desde + constantes.regPerPage
         let criterio = `(
                             nombre LIKE ${cnn.escape('%'+texto+'%')} OR
                             sigla LIKE ${cnn.escape('%'+texto+'%')} OR
@@ -90,7 +88,7 @@ impuestosModel.filter = (texto, pag, callback) => {
                     WHERE 
                         deleted_at IS NULL AND 
                         ${criterio}
-                    LIMIT ${desde}, ${hasta}`
+                    LIMIT ${desde}, ${constantes.regPerPage}`
 
         cnn.query(qry, async (err, res) => {
             if(err){
