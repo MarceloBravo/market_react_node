@@ -28,6 +28,7 @@ import { TiposPagoReducer } from  './TiposPago/reducer';
 import { VentasReducer } from  './Ventas/reducer';
 import { DespachosReducer } from  './Despachos/reducer';
 import { OrdenesCompraReducer } from  './OrdenesCompra/reducer';
+import { DashboardReducer } from  './Dashboard/reducer';
 
 export default combineReducers({
     LoginReducer,
@@ -59,4 +60,5 @@ export default combineReducers({
     VentasReducer,
     DespachosReducer,
     OrdenesCompraReducer,
+    DashboardReducer,
 })

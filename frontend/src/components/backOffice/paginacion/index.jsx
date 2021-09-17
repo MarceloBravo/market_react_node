@@ -24,7 +24,6 @@ export const Paginacion = (props) => {
                 hasta = 5
             }
             hasta++
-            console.log('hasta',hasta)
             
             for (let number = desde; number < hasta; number++) {
                 arrNumbers.push(

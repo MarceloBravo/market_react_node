@@ -47,7 +47,7 @@ import { PageMessage } from './pages/frontOffice/pageMessage/pageMessage'
 import { IdentificacionCliente } from './pages/frontOffice/identificacionCliente/identificacionCliente'
 import { DatosDespacho } from './pages/frontOffice/datosDespacho/datosDespacho'
 import { ResultadoVentaWebPayComponent } from './pages/frontOffice/resultadoVenta/webpay/resultadoVentaWebPay'
-
+import { Dashboard } from './pages/backOffice/dashboard/dashboard'
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
@@ -81,6 +81,7 @@ function App() {
             <Route exact path="/IdentificacionCliente" component={IdentificacionCliente}/>
             <Route exact path="/DatosDespacho" component={DatosDespacho}/>
             <Route exact path="/ResultadoVentaWebpay" component={ResultadoVentaWebPayComponent}/>
+            <Route exact path="/dashboard" component={Dashboard}/>
 
             {/* Rutas BackOffice */}
             <Route exact path="/login" component={Login} />

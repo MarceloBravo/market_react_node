@@ -53,6 +53,7 @@ export const Header = () => {
                 <Navbar.Brand href="/">{ nombre_app }</Navbar.Brand>
                 <Nav className="mr-auto">
                     <Nav.Link as={Link} to="/home">Home</Nav.Link>
+                    <Nav.Link as={Link} to="/dashboard">Dashboard</Nav.Link>
                 </Nav>
                 
                 <div className="user-session-info">
