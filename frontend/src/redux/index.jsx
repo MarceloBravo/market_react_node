@@ -29,6 +29,7 @@ import { VentasReducer } from  './Ventas/reducer';
 import { DespachosReducer } from  './Despachos/reducer';
 import { OrdenesCompraReducer } from  './OrdenesCompra/reducer';
 import { DashboardReducer } from  './Dashboard/reducer';
+import { PreciosReducer } from './Precios/reducer'
 
 export default combineReducers({
     LoginReducer,
@@ -61,4 +62,5 @@ export default combineReducers({
     DespachosReducer,
     OrdenesCompraReducer,
     DashboardReducer,
+    PreciosReducer,
 })

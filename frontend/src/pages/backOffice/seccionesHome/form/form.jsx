@@ -35,7 +35,6 @@ export const SeccionesHomeForm = () => {
         if(seccionesState){
             setSecciones(seccionesState)
             setArrProductos({data: seccionesState.productos})
-            console.log('seccionesState',seccionesState)
         }
     },[dispatch, seccionesState])
 
@@ -74,7 +73,6 @@ export const SeccionesHomeForm = () => {
     const grabar = () => {
         dispatch({type: modalFialogTypes.SHOW_MODAL_DIALOG, payload: {mensaje: '¿Desea grabar el registro?', titulo: `Grabar sección`}})
         setAccion('grabar')
-        console.log(secciones, JSON.stringify(secciones))
     }
 
 

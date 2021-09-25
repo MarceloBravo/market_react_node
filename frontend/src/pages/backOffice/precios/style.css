@@ -1,0 +1,36 @@
+.div-button-group{
+    width: fit-content !important;
+    position: relative;
+    top: 18%;
+}
+
+.home-page .custom-class-table{
+    width: 1700px !important;
+}
+
+.col-str_precio_venta_normal,
+.col-descuento_maximo,
+.col-precio > input,
+.col-descuento > input{
+    text-align: right;
+    width: 100px;
+}
+
+.col-precio-venta-normal,
+.col-precio,
+.descuento{
+    width: 115px;
+}
+
+.col-marca,
+.col-categoria,
+.col-sub_categoria{
+    width: 8%;
+}
+
+.col-fecha_desde,
+.col-fecha_hasta,
+.col-created_at,
+.col-updated_at{
+    width: 6%;
+}

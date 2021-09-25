@@ -58,3 +58,7 @@
   background: white !important;
   border-style: solid !important;
 }
+
+.react-datepicker__input-container > input[type='text']{
+  width: 100px !important;
+}

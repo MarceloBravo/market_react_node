@@ -6,6 +6,7 @@ import { Menu } from '../../../../components/backOffice/menu'
 import { Alerta } from '../../../../components/shared/alerts'
 import { FormButtons } from '../../../../components/backOffice/form_buttons'
 import { Form, Row, Col, Container, Image, Button } from 'react-bootstrap'
+import { formatearNumero } from '../../../../shared/funciones'
 
 export const ProductosFormContent = (props) => {
     const { response, pantalla, producto, handlerChangeValue, errors, formatDate, unidades, marcas, categorias,
@@ -87,7 +88,7 @@ export const ProductosFormContent = (props) => {
                                 <Form.Group as={Row} controlId="formTxtPrecioVenta">
                                     <Form.Label column sm="4">Precio actual $</Form.Label>
                                     <Col md="8">
-                                        {producto.precio_actual}
+                                        {formatearNumero(producto.precio_actual)}
                                     </Col>
                                 </Form.Group>
 

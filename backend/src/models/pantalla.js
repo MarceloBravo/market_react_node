@@ -31,11 +31,9 @@ pantallaModel.getPage = (pag, callback) => {
 
             cnn.query(qry, async (err, res) => {
                 if(err){
-                    console.log(err);
                     return callback({mensaje: 'Ha ocurrido un error al solicitar los datos: ' + err.message, tipoMensaje: 'danger', id:-1});
                 }else{
                     let totReg = await totRows(`SELECT COUNT(*) AS totRows FROM pantallas WHERE deleted_at IS NULL`);
-                    console.log('totReg',totReg)
                     return callback(err, {data: res, totRows: totReg, rowsPerPage: constantes.regPerPage, page: pag});
                 }
             });
@@ -48,7 +46,6 @@ const totRows = (qry) => {
     return new Promise((resolve, reject) => {
         cnn.query(qry, (err, res) => {
             if(err){
-                console.log(err);
                 return reject(0);
             }else{
                 return resolve(res[0].totRows);
@@ -78,7 +75,6 @@ pantallaModel.getAll = (callback ) => {
 
             cnn.query(qry, (err, res) => {
                 if(err){
-                    console.log(err);
                     return callback({mensaje: 'Ocurrió un error al solicitar los registro: ' +err.message, tipoMensaje:'danger', id:-1});
                 }else{
                     return callback(null, res);
@@ -110,7 +106,6 @@ pantallaModel.get = (id, callback) => {
 
             cnn.query(qry, (err, res) => {
                 if(err){
-                    console.log(err);
                     return callback({mensaje: 'Ocurrió un error al buscar el registro: ' +err.message, tipoMensaje:'danger', id:-1});
                 }else{
                     return callback(null, res[0]);
@@ -147,7 +142,6 @@ pantallaModel.getByUrl = (url, callback) => {
 
             cnn.query(qry, (err, res) => {
                 if(err){
-                    console.log(err);
                     return callback({mensaje: 'Ocurrió un error al buscar el registro: ' +err.message, tipoMensaje:'danger', id:-1});
                 }else{
                     return callback(null, res[0]);
@@ -182,7 +176,6 @@ pantallaModel.filter = (texto, pag, callback) => {
 
             cnn.query(qry, async (err, res) => {
                 if(err){
-                    console.log(err);
                     return callback({mensaje: 'Ocurrió un error al solicitar los datos.', tipoMensaje: 'danger', id:-1});
                 }else{
                     let totReg = await totRows(`SELECT COUNT(*) AS totRows FROM pantallas WHERE deleted_at IS NULL AND nombre LIKE '%${texto}%'`);
@@ -218,7 +211,6 @@ pantallaModel.insert = (data, callback) => {
 
         cnn.query(qry, (err, result) => {
             if(err){
-                console.log(err);
                 return callback({mensaje: 'Ocurrió un error al agregar el registro.', tipoMensaje: 'danger', id:-1});
             }else{
                 return callback({mensaje: 'El registro ha sido agregado exitosamente.', tipoMensaje: 'success', id: result.insertId});
@@ -246,7 +238,6 @@ pantallaModel.update = (id, data, callback) => {
 
         cnn.query(qry, (err, result) => {
             if(err){
-                console.log(err);
                 return callback({mensaje: 'Ocurrió un error al actualizar el registro.', tipoMensaje: 'danger', id:-1});
             }else{
                 return callback({mensaje: 'El registro ha sido actualizado exitosamente.', tipoMensaje: 'success', id: result.insertId});
@@ -268,7 +259,6 @@ pantallaModel.sofDelete = (id, callback) => {
 
         cnn.query(qry, (err, result) => {
             if(err){
-                console.log(err);
                 return callback({mensaje: 'Ocurrió un error al eliminar el registro.', tipoMensaje: 'danger', id:-1});
             }else{
                 return callback({mensaje: 'El registro ha sido eliminado exitosamente.', tipoMensaje: 'success', id: result.insertId});
@@ -290,7 +280,6 @@ pantallaModel.delete = (id, callback) => {
 
         cnn.query(qry, (err, result) => {
             if(err){
-                console.log(err);
                 return callback({mensaje: 'Ocurrió un error al eliminar el registro.', tipoMensaje: 'danger', id:-1});
             }else{
                 return callback({mensaje: 'El registro ha sido eliminado exitosamente.', tipoMensaje: 'success', id: result.insertId});

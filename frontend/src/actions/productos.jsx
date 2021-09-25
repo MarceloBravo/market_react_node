@@ -127,7 +127,7 @@ const crearFormData = (data) => {
             data[i].forEach(img => {
                 fd.append('objImages',img.file)
                 fd.append(i, `{"id": ${img.id}, "source_image": "${img.source_image}", "imagen_principal": ${img.imagen_principal}}`)
-                console.log('imagen_principal',img.imagen_principal)
+                //console.log('imagen_principal',img.imagen_principal)
             })
         }else{
             fd.append(i, data[i])

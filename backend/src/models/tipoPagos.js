@@ -98,7 +98,6 @@ TipoPagosModel.getAll = (callback) => {
                 if(err){
                     return callback({mensaje: 'Ocurrió un error al buscar el tipo de pago: ' + err.message, tipoMendsaje: 'danger'})
                 }else{
-                    console.log('RESPONSE', res)
                     return callback(null, res)
                 }
             })

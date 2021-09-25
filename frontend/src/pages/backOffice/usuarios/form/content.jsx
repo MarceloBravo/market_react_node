@@ -136,7 +136,7 @@ export const ContentUsuariosForm = (props)  =>{
                                     </Form.Group>
                                 }
                             </Col>
-                            <Col md="6">
+                            <Col md="6" className="avatar-container">
                                 <Col xs={6} md={4} className="offset-2 image-content">
                                     <Image src={(usuario.foto || usuario.objImagen) ? (usuario.objImagen ? usuario.objImagen : defaultImagesUrl + usuario.foto )  : defaultAvatarUrl} roundedCircle onClick={() => fnLoadImage()} className="image"/>
                                     <input type="file" name="avatar" ref={fileReference} className="hidden-control" onChange={e => fnRefgreshImage(e) }></input>

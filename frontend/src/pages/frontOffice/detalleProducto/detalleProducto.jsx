@@ -48,7 +48,6 @@ export const DetalleProducto = () => {
 
     useEffect(()=>{
         if(productoState.id){
-            console.log('productoState',productoState)
             dispatch(buscarCategoria(productoState.categoria_id))
             dispatch(buscarSubCategoria(productoState.sub_categoria_id))
             dispatch(buscarUnidad(productoState.unidad_id))

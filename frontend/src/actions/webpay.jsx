@@ -10,7 +10,6 @@ const url = 'webpay_plus'
 export const initTransaction = (data) => {
     return (dispatch, action) => {
         axios.post(`${endPoint}/${url}/transaccion`, data, {headers: getHeader()}).then(res => {
-            console.log('action webpay initTransaction', res)
             dispatch({type: spinnerTypes.HIDE_SPINNER})
             dispatch({type: webPayTypes.WEBPAY_INICIAR_TRANSACCION, payload: res.data.resp})
         }).catch(error =>{
@@ -19,20 +18,6 @@ export const initTransaction = (data) => {
     }
 }
 
-/*
-//Redireccionar a la página de WebPay
-export const pay = (url, token) => {
-    return (dispatch, action) => {
-        axios.post(`${endPoint}/${url}/pago`, {token}, {headers: getHeader()}).then(res => {
-            console.log('action webpay pay',res)
-            dispatch({type: spinnerTypes.HIDE_SPINNER})
-            dispatch({type: webPayTypes.WEBPAY_PAGAR, payload: res.data.resp})
-        }).catch(error =>{
-            handlerError(dispatch, error, 'Ocurrió un error al intentar efectuar el pago: ' + error.message)
-        })
-    }
-}
-*/
 
 //Redireccionar a la página de WebPay
 export const navigateToWebpay = (token, url) => {
@@ -52,7 +37,6 @@ export const navigateToWebpay = (token, url) => {
 export const confirmTransaction = (token) => {
     return (dispatch, action) => {
         axios.post(`${endPoint}/${url}/confirm`, {token},{headers: getHeader()}).then(res => {
-            console.log('response confirm',res)
             dispatch({type: spinnerTypes.HIDE_SPINNER})
             dispatch({type: webPayTypes.WEBPAY_CONCRETAR_PAGO, payload: res.data.data})
             dispatch({type: alertasTypes.MOSTRAR_ALERTA, payload: {mensaje: res.data.mensaje, tipo: res.data.tipoMensaje}})

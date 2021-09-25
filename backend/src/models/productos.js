@@ -289,8 +289,7 @@ ProductosModel.find = (id, callback) => {
                     p.precio_venta_normal,
                     CASE 
                         WHEN 
-                            pp.fecha_desde <= CURRENT_TIMESTAMP() AND 
-                            pp.fecha_hasta >= CURRENT_TIMESTAMP() 
+                            NOT pp.precio IS NULL 
                         THEN 
                             pp.precio 
                         ELSE 
@@ -327,14 +326,17 @@ ProductosModel.find = (id, callback) => {
                     LEFT JOIN (
                         SELECT precio, producto_id, fecha_desde, fecha_hasta 
                         FROM precios_productos 
-                        WHERE deleted_at IS NULL 
-                        ORDER BY id DESC 
+                        WHERE deleted_at IS NULL AND 
+                            producto_id = ${cnn.escape(id)} AND 
+                            NOT fecha_desde IS NULL AND 
+                            fecha_desde >= CURRENT_TIMESTAMP() AND 
+                            (fecha_hasta IS NULL OR fecha_hasta >= CURRENT_TIMESTAMP()) 
                         LIMIT 1
                     ) pp ON p.id = pp.producto_id
                 WHERE
                     p.deleted_at IS NULL AND 
                     p.id = ${cnn.escape(id)}`
-                
+            
             let qryImpuestos = `
                 SELECT 
                     i.id,

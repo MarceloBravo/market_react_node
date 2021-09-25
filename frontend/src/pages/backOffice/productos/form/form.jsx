@@ -92,9 +92,7 @@ export const ProductosForm = (props) => {
 
 
     useEffect(()=> {
-        console.log('resultado busqueda', productoState)
         if(productoState){
-            console.log('productoState',productoState)
             setProducto(productoState)
             dispatch(subCategoriasGetAll(productoState.categoria_id))
         }

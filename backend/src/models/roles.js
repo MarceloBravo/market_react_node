@@ -11,7 +11,6 @@ const getTotRows = (qry) => {
     return new Promise(( resolve, reject) => {
         cnn.query(qry, (err, res) => {
             if(err){
-                console.log(err);
                 return reject(0);
             }else{
                 return resolve(res[0].totReg);
@@ -41,7 +40,6 @@ rolesModel.getPage = (pag, callback) => {
 
             cnn.query(qry, async (err, res) => {
                 if(err){
-                    console.log(err);
                     return callback({mensaje: 'Ocurrió un error al solicitar los registros: '+err.message, tipoMensaje: 'danger', id:-1});
                 }else{
                     let totRows = await getTotRows('SELECT COUNT(*) AS totReg FROM roles WHERE deleted_at IS NULL');
@@ -74,7 +72,6 @@ rolesModel.get = (id, callback) => {
 
             cnn.query(qry, (err, res) => {
                 if(err){
-                    console.log(err);
                     return callback({mensaje: 'Ocurrió un error al buscar el registro: '+err.message, tipoMensaje: 'danger', id:-1});
                 }else{
                     return callback(null, res[0]);
@@ -104,7 +101,6 @@ rolesModel.getAll = (callback) => {
 
             cnn.query(qry, (err, res) => {
                 if(err){
-                    console.log(err);
                     return callback({mensaje: 'Ocurrió un error al solicitar el listado de registros: '+err.message, tipoMensaje: 'danger', id:-1});
                 }else{
                     return callback(null, res);
@@ -145,7 +141,6 @@ rolesModel.filter = (texto, pag, callback) => {
 
             cnn.query(qry, async (err, res) => {
                 if(err){
-                    console.log(err);
                     return callback({mensaje: 'Ocurrió un error al filtrar los registros: '+err.message, tipoMensaje: 'danger', id:-1});
                 }else{
                     let totRows = await getTotRows(`SELECT COUNT(*) AS totReg FROM roles WHERE deleted_at IS NULL ${filtro}`);
@@ -176,7 +171,6 @@ rolesModel.insert = (data, callback) => {
 
         cnn.query(qry, (err, res) => {
             if(err){
-                console.log(err)
                 return callback({mensaje: 'Ocurrió un error al intentar ingresar el registro.', tipoMensaje: 'danger', id:-1});
             }else{
                 return callback(null, {mensaje: 'El registro ha sido ingresado exitosamente.', tipoMensaje: 'success', id: res.newId})

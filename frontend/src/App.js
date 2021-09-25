@@ -33,6 +33,7 @@ import { SeccionesHomeGrid } from './pages/backOffice/seccionesHome/grid/grid';
 import { SeccionesHomeForm } from './pages/backOffice/seccionesHome/form/form';
 import { DespachosForm } from './pages/backOffice/despachos/form/form'
 import { DespachosGrid } from './pages/backOffice/despachos/grid/grid'
+import { MntPrecios } from './pages/backOffice/precios/precios'
 
 
 
@@ -128,6 +129,7 @@ function App() {
             <Route exact path="/secciones_home" component={SeccionesHomeGrid} />
             <Route exact path="/secciones_home/nuevo" component={SeccionesHomeForm} />
             <Route exact path="/secciones_home/edit/:id" component={SeccionesHomeForm} />
+            <Route exact path="/precios" component={MntPrecios} />
             <Route exact path=""/>
           </Switch>
         </BrowserRouter>

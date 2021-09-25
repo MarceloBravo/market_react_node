@@ -2,6 +2,10 @@
     display: none;
 }
 
+.avatar-container{
+    height: 215px;
+}
+
 .image-content{
     height: 90%;
 }

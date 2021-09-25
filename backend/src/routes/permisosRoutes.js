@@ -26,7 +26,6 @@ module.exports = function(app, passport){
 
 
     app.post('/permisos/:id', checkToken, (req, res) => {
-        console.log('PERMISOS',req.body)
         permisosModel.savePermissions(req.params.id, req.body, (err, data) => {
             if(err){
                 res.json(err);

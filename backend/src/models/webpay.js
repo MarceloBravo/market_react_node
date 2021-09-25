@@ -12,7 +12,6 @@ webpayModel.initTransaction = async (data, callback) => {
     if(cnn){
         try{
             const respTransact = await WebpayPlus.Transaction.create(data.buy_order, data.session_id, data.amount, data.return_url);
-            //console.log('respTransact',respTransact.url, respTransact.token)
 
             return callback(null, {resp: respTransact})
         }catch(error){
@@ -37,7 +36,6 @@ webpayModel.success = async (data, callback) => {
 webpayModel.comfirm = async (data, callback) => {
     try{
         const response = await WebpayPlus.Transaction.commit(data.token);
-        console.log(response)
         return callback(null, {mensaje: 'La transacción a sido finalizada exitosamente.', tipoMensaje: 'success', data: response})
     }catch(error){
         return callback({mensaje: 'Ocurrió un error al finalizar la transacción: '+error.message, tipoMensaje: 'danger'})
@@ -47,9 +45,7 @@ webpayModel.comfirm = async (data, callback) => {
 
 webpayModel.status = async (data, callback) => {
     try{
-        console.log('TOKEN',data.token)
         const response = await WebpayPlus.Transaction.status(data.token);
-        console.log('RESPONSE',response)
         return callback(null, response)
     }catch(error){
         return callback({mensaje: 'Ocurrió un error al consultar el estado de la transacción: '+error.message, tipoMensaje: 'danger'})

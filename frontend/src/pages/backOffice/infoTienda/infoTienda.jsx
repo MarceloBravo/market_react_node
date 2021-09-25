@@ -256,11 +256,10 @@ export const InfoTiendaFormComponent = () => {
     
     const validaDatosMarquesina = (id, field, value) => {
         let imgs = imagenesMarquesina.imagenes
-        console.log(imgs)
         if(imgs.length > 0){
             imgs.forEach(e => {
                     if(e.id === id){
-                        console.log(e.id, id, e.id === id)
+                        //console.log(e.id, id, e.id === id)
                         if(!e.errors){e.errors = []}
                         e.errors[field]= validaCampoMarquesina(field, value)
                     }

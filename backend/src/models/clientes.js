@@ -297,7 +297,6 @@ clientesModel.insert = async (data, callback) => {
 
     if(cnn){
         let password = await tools.encriptarPassword(data.password)
-        console.log(data.password, password, password.length)
 
         let qry = `INSERT INTO clientes (
                         rut,
@@ -338,8 +337,6 @@ clientesModel.insert = async (data, callback) => {
                         CURDATE(),
                         CURDATE()
                     )`
-
-            console.log(qry)
 
             cnn.query(qry, (err, res) => {
                 if(err){

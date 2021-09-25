@@ -121,7 +121,6 @@ const totoReg = (qry) => {
     return new Promise((resolve, reject) => {
         cnn.query(qry,(err, res) => {
             if(err){
-                console.log(err.message);
                 return reject(0);                
             }else{
                 return resolve(res[0].totRows);
@@ -259,7 +258,6 @@ menusModel.insert = (data, callback) => {
 
         cnn.query(qry, (err, result) => {
             if(err){
-                console.log(err);
                 mensaje = 'Ocurrió un error al intentar agregar el registro: '+err.message;
                 tipoMensaje = 'danger';
                 id = -1;
@@ -290,7 +288,6 @@ menusModel.update = (id, data, callback) => {
 
         cnn.query(qry, (err, result) => {
             if(err){
-                console.log(err);
                 return callback({mensaje: 'Ocurrió un error al intentar actualizar el registro: ' + err.message, tipoMensaje: 'danger', id: -1});
             }else{
                 return callback(err, {mensaje: 'El registro ha sidio actualizado exitosamente.', tipoMensaje: 'success', id: id})
@@ -313,7 +310,6 @@ menusModel.softDelete = (id, callback) => {
 
         cnn.query(qry, (err, result) => {
             if(err){
-                console.log(err);
                 return callback({mensaje: 'Ocurrió un error al intentar eliminar el registro: ' + err.message, tipoMensaje: 'danger', id: -1});
             }else{
                 return callback(err, {mensaje: 'El registro ha sidio eliminado exitosamente.', tipoMensaje: 'success', id})
@@ -333,7 +329,6 @@ menusModel.delete = (id, callback) => {
 
         cnn.query(qry, (err, result) => {
             if(err){
-                console.log(err);
                 return callback({mensaje: 'Ocurrió un error al intentar eliminar el registro: ' + err.message, tipoMensaje: 'danger', id: -1});
             }else{
                 return callback(err, {mensaje: 'El registro ha sidio eliminado exitosamente.', tipoMensaje: 'success', id})

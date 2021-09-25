@@ -54,7 +54,6 @@ export const ResultadoVentaWebPayComponent = () => {
             let cart = JSON.parse(localStorage.getItem('cart-'+infoTiendaState.nombre_tienda))
             if(cart){
                 setCarrito(cart)
-                console.log('datosVenta', cart)
                 setDatosVenta({...datosVenta, productos: Object.keys(cart).map(item => cart[item])})
                 setCliente(JSON.parse(localStorage.getItem(`cliente-${infoTiendaState.nombre_tienda}`)))
             }
@@ -143,7 +142,6 @@ export const ResultadoVentaWebPayComponent = () => {
     useEffect(()=>{
         if(transactionStatus && tipoPagoState && impuestos){
             let obj = Object.assign({},transactionStatus, tipoPagoState, {impuestos})
-            console.log('dataPDF',obj)
             setDataPDF(obj)
         }
     },[transactionStatus, tipoPagoState, impuestos])

@@ -117,7 +117,6 @@ export const Dashboard = () => {
 
     useEffect(()=>{
         if(ventasDespachosUltimoAnioState){
-            console.log('ventasDespachosUltimoAnioState',ventasDespachosUltimoAnioState)
             let datos =ventasDespachosUltimoAnioState.map((i, k) => {return {fecha_venta: i.fecha_venta, fecha_despacho: i.fecha_despacho, productos: i.productos, despachos: i.despachos}})
             setDataVentasDespachosUltimoAnio({
                 ...dataVentasDespachosUltimoAnio,
