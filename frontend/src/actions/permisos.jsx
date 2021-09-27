@@ -38,7 +38,10 @@ export const grabarPermisos = (idRol, permisos) => {
 }
 
 export const aplicarPermisos = (arrRoles, url) => {
+    let header = getHeader().Authorization
+
     return (dispatch, action) => {
+        if(header.length > 10){
         axios.post(`${endPoint}/pantalla/${url}`,JSON.stringify(arrRoles),{headers: getHeader()}).then(res => {
             //console.log(res.data[0])
             dispatch({type: types.APLICAR_PERMISOS, payload: res.data[0]})
@@ -46,5 +49,9 @@ export const aplicarPermisos = (arrRoles, url) => {
             console.log(error);
             dispatch({type: AlertasTypes.MOSTRAR_ALERTA, payload:{mensaje: error.message, tipo: 'danger'}})
         })
+        }else{
+            dispatch({type: AlertasTypes.MOSTRAR_ALERTA, payload:{mensaje: 'La sessión ha finalizado.', tipo: 'danger'}})
+        }
+        
     }
 }

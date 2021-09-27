@@ -7,6 +7,7 @@ import { defaultImagesUrl, defaultAvatarUrl } from '../../../shared/constantes'
 import { types } from '../../../redux/Alert/types'
 import { TimerSession } from '../timerSession'
 import { useHistory } from 'react-router-dom'
+import { getTokenFromStorage } from '../../../shared/funciones'
 import './style.css'
 
 export const Header = () => {
@@ -32,7 +33,7 @@ export const Header = () => {
 
 
     const logoutApp = () => {
-        dispatch(logout())
+        dispatch(logout(getTokenFromStorage()))
     }
 
     

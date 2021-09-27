@@ -28,9 +28,11 @@ export const Login = () => {
             if (rememberMe) {
                 sessionStorage.removeItem('backTkn')
                 localStorage.setItem('backTkn', logedUser.accessToken)
+                localStorage.setItem('backRefreshTkn', logedUser.refreshToken)
             } else {
                 sessionStorage.setItem('backTkn', logedUser.accessToken)
                 localStorage.removeItem('backTkn')
+                localStorage.removeItem('backRefreshTkn')
             }
         }else{
             setRedirect(false)
@@ -63,6 +65,7 @@ export const Login = () => {
             {
                 user: obj.user,
                 access_token: token,
+                refresh_token: localStorage.getItem("backRefreshTkn") ? localStorage.getItem("backRefreshTkn") : null,
                 expires_in: obj.exp,
                 roles: obj.roles,
             }})
@@ -86,16 +89,17 @@ export const Login = () => {
 
     const changeEmailHandler = (e) => {
         validaEmail(e.target.value)
-        setCredentials({ email: e.target.value, password: credentials.password })
+        setCredentials({...credentials, email: e.target.value})
     }
 
     const changePasswordHandler = (e) => {
         validaPassword(e.target.value)
-        setCredentials({ email: credentials.email, password: e.target.value })
+        setCredentials({...credentials, password: e.target.value})
     }
 
     const changeRememberMeHandler = (e) => {
         setRememberMe(e.target.checked);
+        setCredentials({...credentials, remember: e.target.checked })
     }
 
     /* ---------  Validaciones ------------ */
