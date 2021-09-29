@@ -1,0 +1,18 @@
+.form-cliente .form-control{
+    margin-bottom: 10px !important;
+}
+
+
+.image-content-client{
+    height: 75%;
+}
+
+.client-image{
+    width: 215px;
+    height: 215px;
+}
+
+.info-foto{
+    width: 100%;
+    text-align: center;
+}

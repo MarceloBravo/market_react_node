@@ -34,8 +34,8 @@ import { SeccionesHomeForm } from './pages/backOffice/seccionesHome/form/form';
 import { DespachosForm } from './pages/backOffice/despachos/form/form'
 import { DespachosGrid } from './pages/backOffice/despachos/grid/grid'
 import { MntPrecios } from './pages/backOffice/precios/precios'
-
-
+import { GridMntClientes } from './pages/backOffice/clientes/grid/grid'
+import { MntClientesContent } from './pages/backOffice/clientes/form/form'
 
 //Componentes del FrontOffice
 import { Catalogo } from './pages/frontOffice/catalogo/catalogo'
@@ -130,6 +130,9 @@ function App() {
             <Route exact path="/secciones_home/nuevo" component={SeccionesHomeForm} />
             <Route exact path="/secciones_home/edit/:id" component={SeccionesHomeForm} />
             <Route exact path="/precios" component={MntPrecios} />
+            <Route exact path="/clientes" component={GridMntClientes} />
+            <Route exact path="/clientes/nuevo" component={MntClientesContent} />
+            <Route exact path="/clientes/edit/:id" component={MntClientesContent} />
             <Route exact path=""/>
           </Switch>
         </BrowserRouter>

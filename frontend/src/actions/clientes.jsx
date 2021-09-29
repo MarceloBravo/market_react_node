@@ -10,7 +10,7 @@ export const getPage = (pag) => {
     return (dispatch, action)=>{
         axios.get(`${serverEndPoint}/${url}/pag/${pag}`,{headers: getHeader()}).then(res => {
             dispatch({type: spinnerTypes.HIDE_SPINNER})
-            dispatch({type: clientesTypes.LISTAR_CLIENTES, payload: res})
+            dispatch({type: clientesTypes.LISTAR_CLIENTES, payload: res.data})
         }).catch(error=>{
             handlerError(dispatch, error, 'Ha ocurrido un error al intentar obtener el listado de clientes')
         })
@@ -22,7 +22,7 @@ export const filter = (texto, pag) => {
     return (dispatch, action)=>{
         axios.get(`${serverEndPoint}/${url}/filter/${texto}/${pag}`,{headers: getHeader()}).then(res => {
             dispatch({type: spinnerTypes.HIDE_SPINNER})
-            dispatch({type: clientesTypes.FILTRAR_CLIENTES, payload: res})
+            dispatch({type: clientesTypes.FILTRAR_CLIENTES, payload: res.data})
         }).catch(error=>{
             handlerError(dispatch, error, 'Ha ocurrido un error al intentar filtrar el listado de clientes')
         })

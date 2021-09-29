@@ -53,6 +53,7 @@ export const ClientesReducer = (state = INITIAL_STATE, action) => {
             }
         case types.ELIMINAR_CLIENTES:
         case types.ELIMINAR_REGISTRO_CLIENTES:
+        case types.RESET_STATE_CLIENTE:
             return {
                 ...state,
                 cliente: INITIAL_STATE.cliente,
