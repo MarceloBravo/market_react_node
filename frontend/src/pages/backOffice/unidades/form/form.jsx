@@ -4,6 +4,7 @@ import { useHistory, useParams } from 'react-router'
 import { find, insert, update, deleteReg } from '../../../../actions/unidades'
 import { types as spinnerTypes } from '../../../../redux/Spinner/types'
 import { types as modalTypes } from '../../../../redux/ModalDialog/types'
+import { types as unidadTypes } from '../../../../redux/Unidades/types'
 import { findByUrl } from '../../../../actions/pantallas'
 import { UnidadesFormComponent } from './content'
 
@@ -24,6 +25,8 @@ export const UnidadesForm = () => {
         if(id){
             dispatch({type: spinnerTypes.SHOW_SPINNER})
             dispatch(find(id))
+        }else{
+            dispatch({type: unidadTypes.NUEVA_UNIDAD})
         }
     },[dispatch, id])
 
@@ -94,13 +97,13 @@ export const UnidadesForm = () => {
     const validaDatos = (field, valor) => {
         let res = false
         if(valor.length === 0){
-            setErrors({...errors, [field]: `Debe ingresar el ${field} para la unidad de medida.`})
+            setErrors(prevState => ({...prevState, [field]: `Debe ingresar el ${field} para la unidad de medida.`}))
         }else if(valor.length < 3){
-            setErrors({...errors, [field]: `El campo debe tener almenos 3 carácteres. Ingresa un nombre más largo.`})
+            setErrors(prevState => ({...prevState, [field]: `El campo debe tener almenos 3 carácteres. Ingresa un nombre más largo.`}))
         }else if(valor.length > 50){
-            setErrors({...errors, [field]: 'El campo debe tener de hasta 50 carácteres. Ingresa un nombre más corto.'})
+            setErrors(prevState => ({...prevState, [field]: 'El campo debe tener de hasta 50 carácteres. Ingresa un nombre más corto.'}))
         }else{
-            setErrors({...errors, [field]: ''})
+            setErrors(prevState => ({...prevState, [field]: ''}))
             res = true
         }
         return res

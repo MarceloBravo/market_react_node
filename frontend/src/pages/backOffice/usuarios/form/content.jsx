@@ -55,7 +55,7 @@ export const ContentUsuariosForm = (props)  =>{
                                 </Form.Group>
                                 {errors.name &&
                                     <Form.Group as={Row}>
-                                        <Form.Text  className="field-error offset-2">{ errors.name }</Form.Text>
+                                        <Form.Text  className="field-error offset-4">{ errors.name }</Form.Text>
                                     </Form.Group>
                                 }
 
@@ -74,7 +74,7 @@ export const ContentUsuariosForm = (props)  =>{
                                 </Form.Group>
                                 {errors.a_paterno &&
                                     <Form.Group as={Row}>
-                                        <Form.Text  className="field-error offset-2">{ errors.a_paterno }</Form.Text>
+                                        <Form.Text  className="field-error offset-4">{ errors.a_paterno }</Form.Text>
                                     </Form.Group>
                                 }
 
@@ -93,7 +93,7 @@ export const ContentUsuariosForm = (props)  =>{
                                 </Form.Group>
                                 {errors.a_materno &&
                                     <Form.Group as={Row}>
-                                        <Form.Text  className="field-error offset-2">{ errors.a_materno }</Form.Text>
+                                        <Form.Text  className="field-error offset-4">{ errors.a_materno }</Form.Text>
                                     </Form.Group>
                                 }
 
@@ -113,7 +113,7 @@ export const ContentUsuariosForm = (props)  =>{
                                 </Form.Group>
                                 {errors.fono &&
                                     <Form.Group as={Row}>
-                                        <Form.Text  className="field-error offset-2">{ errors.fono }</Form.Text>
+                                        <Form.Text  className="field-error offset-4">{ errors.fono }</Form.Text>
                                     </Form.Group>
                                 }
 
@@ -132,18 +132,18 @@ export const ContentUsuariosForm = (props)  =>{
                                 </Form.Group>
                                 {errors.email &&
                                     <Form.Group as={Row}>
-                                        <Form.Text  className="field-error offset-2">{ errors.email }</Form.Text>
+                                        <Form.Text  className="field-error offset-4">{ errors.email }</Form.Text>
                                     </Form.Group>
                                 }
                             </Col>
-                            <Col md="6">
+                            <Col md="6" className="avatar-container">
                                 <Col xs={6} md={4} className="offset-2 image-content">
                                     <Image src={(usuario.foto || usuario.objImagen) ? (usuario.objImagen ? usuario.objImagen : defaultImagesUrl + usuario.foto )  : defaultAvatarUrl} roundedCircle onClick={() => fnLoadImage()} className="image"/>
                                     <input type="file" name="avatar" ref={fileReference} className="hidden-control" onChange={e => fnRefgreshImage(e) }></input>
                                 </Col>
                                 {errors.foto  &&
                                     <Form.Group as={Row}>
-                                        <Form.Text  className="field-error offset-2">{ errors.foto }</Form.Text>
+                                        <Form.Text  className="field-error offset-4">{ errors.foto }</Form.Text>
                                     </Form.Group>
                                 }
                             </Col>

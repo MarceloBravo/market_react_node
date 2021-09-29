@@ -6,6 +6,7 @@ import { Grid } from '../../../../components/backOffice/grid';
 import { SpinnerComponent } from '../../../../components/shared/spinner'
 import { useSelector } from 'react-redux';
 import { Paginacion } from '../../../../components/backOffice/paginacion'
+import './style.css'
 
 export const GridPantallas = (props) => {
     const { eliminarRegistro, filtrar, goToPage } = props;

@@ -89,7 +89,6 @@ permisosModel.savePermissions = async (id, data, callback) => {
 
             return callback({mensaje: 'Los permisos han sido actualizados.', tipoMensaje: 'success', id: -1});
         }catch(error){
-            console.log(error)
             await cnn.promise().rollback();
             return callback({mensaje: 'Ocurrió un error al intentar registrar los permisos: '+error.message, tipoMensaje: 'danger', id: -1});
         }
@@ -120,7 +119,6 @@ const insertPermissions = async (idRol, data) => {
                 CURDATE(),
                 CURDATE()
             )`;
-            console.log(p, qry)
         await cnn.promise().query(qry);
     });
 }

@@ -6,6 +6,7 @@ import  { Menu } from '../../../../components/backOffice/menu'
 import { Alerta } from '../../../../components/shared/alerts'
 import { Paginacion } from '../../../../components/backOffice/paginacion'
 import { Grid } from '../../../../components/backOffice/grid'
+import './style.css'
 
 export const ProductosFormContent = (props) => {
     const { response, dataGrid, pantalla, currentUrl, eliminarRegistro, filtrar, goToPage } = props
@@ -19,7 +20,7 @@ export const ProductosFormContent = (props) => {
                 <div className="menu-section">
                     <Menu activeKeyMenu="19"/>
                 </div>                
-                <div className="content-section">                    
+                <div className="content-section tabla-productos">                    
                     <Alerta />
                     <Grid
                         data={dataGrid}

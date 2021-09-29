@@ -16,7 +16,7 @@ export const Content = (props) => {
 
     return (
         <div className="background-login">
-            {loginError && <label className="login-error">Usuario y/o contraseña no válidos.</label>}
+            {loginError && <label className="login-error">{loginError}</label>}
             <Form className="login-form">
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Correo electrónico</Form.Label>

@@ -58,8 +58,6 @@ ImagenesMarquezinaModel.save = async (data, callback) => {
 
 const insertarNuevos = async (data) => {
     return await data.map(async i => {
-        //console.log(i, typeof(i))
-        //console.log(JSON.parse(i).source_image, JSON.parse(i).id)
         let objImage = JSON.parse(i)
         if(objImage.id < 0){
             let qry = `INSERT INTO imagenes_marquesina_home (

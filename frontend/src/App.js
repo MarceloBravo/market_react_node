@@ -33,8 +33,9 @@ import { SeccionesHomeGrid } from './pages/backOffice/seccionesHome/grid/grid';
 import { SeccionesHomeForm } from './pages/backOffice/seccionesHome/form/form';
 import { DespachosForm } from './pages/backOffice/despachos/form/form'
 import { DespachosGrid } from './pages/backOffice/despachos/grid/grid'
-
-
+import { MntPrecios } from './pages/backOffice/precios/precios'
+import { GridMntClientes } from './pages/backOffice/clientes/grid/grid'
+import { MntClientesContent } from './pages/backOffice/clientes/form/form'
 
 //Componentes del FrontOffice
 import { Catalogo } from './pages/frontOffice/catalogo/catalogo'
@@ -47,7 +48,7 @@ import { PageMessage } from './pages/frontOffice/pageMessage/pageMessage'
 import { IdentificacionCliente } from './pages/frontOffice/identificacionCliente/identificacionCliente'
 import { DatosDespacho } from './pages/frontOffice/datosDespacho/datosDespacho'
 import { ResultadoVentaWebPayComponent } from './pages/frontOffice/resultadoVenta/webpay/resultadoVentaWebPay'
-
+import { Dashboard } from './pages/backOffice/dashboard/dashboard'
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
@@ -81,6 +82,7 @@ function App() {
             <Route exact path="/IdentificacionCliente" component={IdentificacionCliente}/>
             <Route exact path="/DatosDespacho" component={DatosDespacho}/>
             <Route exact path="/ResultadoVentaWebpay" component={ResultadoVentaWebPayComponent}/>
+            <Route exact path="/dashboard" component={Dashboard}/>
 
             {/* Rutas BackOffice */}
             <Route exact path="/login" component={Login} />
@@ -127,6 +129,10 @@ function App() {
             <Route exact path="/secciones_home" component={SeccionesHomeGrid} />
             <Route exact path="/secciones_home/nuevo" component={SeccionesHomeForm} />
             <Route exact path="/secciones_home/edit/:id" component={SeccionesHomeForm} />
+            <Route exact path="/precios" component={MntPrecios} />
+            <Route exact path="/clientes" component={GridMntClientes} />
+            <Route exact path="/clientes/nuevo" component={MntClientesContent} />
+            <Route exact path="/clientes/edit/:id" component={MntClientesContent} />
             <Route exact path=""/>
           </Switch>
         </BrowserRouter>

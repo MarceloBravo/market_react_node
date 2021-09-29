@@ -18,7 +18,6 @@ VentasModel.registrar = async (data, callback) => {
             if(data.cliente_id){    //Sólo llega el ID del cliente debido a que éste ya se encuentra registrado en la tabla clientes
                 await registrarIdCliente(ventaRes.insertId, data.cliente_id)
             }else{  //El cliente no es un cliente registrado en la tabla cliente, por lo cual llegan todos sus datos 
-                console.log('registrarCliente', data.datos_cliente)
                 await registrarCliente(ventaRes.insertId, data.datos_cliente)
             }
 
@@ -209,10 +208,8 @@ const registrarDatosWebPay = async (venta_id, data) => {
 
 const descontarStock = async (id, cantidad) => {
     let qry = `UPDATE productos SET stock = stock -${cnn.escape(cantidad)} WHERE id = ${cnn.escape(id)}`
-    console.log('descontarStock',qry)
     cnn.query(qry, (err, res) => {
         if(err){
-            console.log('ERROR descontarStock', err.message, err)
             throw err
         }else{
             return true
@@ -224,7 +221,6 @@ const descontarStock = async (id, cantidad) => {
 VentasModel.anularVenta = (id, callback) => {
     if(cnn){
         let qry = `UPDATE ventas SET fecha_anulacion = CURDATE() WHERE id = ${cnn.escape(id)}`
-        console.log(qry)
 
         cnn.query(qry, (err, res)=>{
             if(err){

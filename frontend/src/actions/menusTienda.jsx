@@ -8,8 +8,7 @@ const url = 'menus_tienda'
 
 export const getPage = (pag) => {
     return (dispatch, action) => {
-        axios.get(`${endPoint}/${url}/pag/${pag}`,{headers: getHeader()}).then(res => {  
-            console.log('getPage',res)          
+        axios.get(`${endPoint}/${url}/pag/${pag}`,{headers: getHeader()}).then(res => {
             dispatch({type: spinnerTypes.HIDE_SPINNER})
             dispatch({type: menusTiendaTypes.LISTAR_MENUS_TIENDA, payload: res})
         }).catch(error => {

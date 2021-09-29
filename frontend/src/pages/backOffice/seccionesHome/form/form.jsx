@@ -6,6 +6,7 @@ import { types as modalFialogTypes } from '../../../../redux/ModalDialog/types'
 import { filter } from '../../../../actions/productos'
 import { types as productosTypes } from '../../../../redux/Productos/types'
 import { SeccionesHomeContent } from './content'
+import { types as seccionesTypes } from '../../../../redux/SeccionesHome/types'
 
 
 export const SeccionesHomeForm = () => {
@@ -13,7 +14,7 @@ export const SeccionesHomeForm = () => {
     const currentUrl = window.location.pathname.split('/')[1]
     const seccionesState = useSelector(state => state.SeccionesHomeReducer.secciones)
     const [ secciones, setSecciones ] = useState({id: '', nombre: '', productos: [], created_at: '', updated_at: '', deleted_at: ''})
-    const [ errors, setErrors ] = useState({id: '', nombre: '', productos: ''})
+    const [ errors, setErrors ] = useState({nombre: '', productos: ''})
     const [ accion, setAccion ] = useState('grabar')
     const [ busqueda, setBusqueda ] = useState('')
     const alertaTipo = useSelector(state => state.AlertaReducer.tipo)
@@ -27,16 +28,17 @@ export const SeccionesHomeForm = () => {
     useEffect(()=>{
         if(id){
             dispatch(find(id))
+        }else{
+            dispatch({type: seccionesTypes.NEW_SECCIONES_HOME})
         }
     },[dispatch, id])
 
 
     useEffect(()=>{
-        if(seccionesState){
+        //if(seccionesState){
             setSecciones(seccionesState)
             setArrProductos({data: seccionesState.productos})
-            console.log('seccionesState',seccionesState)
-        }
+        //}
     },[dispatch, seccionesState])
 
 
@@ -72,9 +74,11 @@ export const SeccionesHomeForm = () => {
 
 
     const grabar = () => {
-        dispatch({type: modalFialogTypes.SHOW_MODAL_DIALOG, payload: {mensaje: '¿Desea grabar el registro?', titulo: `Grabar sección`}})
-        setAccion('grabar')
-        console.log(secciones, JSON.stringify(secciones))
+        Object.keys(errors).forEach(f => validaDatos(f, secciones[f]))
+        if(Object.keys(errors).filter(f => secciones[f].length === 0).length ===0){
+            dispatch({type: modalFialogTypes.SHOW_MODAL_DIALOG, payload: {mensaje: '¿Desea grabar el registro?', titulo: `Grabar sección`}})
+            setAccion('grabar')
+        }
     }
 
 
@@ -126,19 +130,17 @@ export const SeccionesHomeForm = () => {
         switch(field){
             case 'nombre':
                 if(value.length === 0){
-                    setErrors({...errors, [field]: 'El nombre de la sección es obligatorio'})
+                    setErrors(prevState => ({...prevState, [field]: 'El nombre de la sección es obligatorio'}))
                 }else if(value.length < 3){
-                    setErrors({...errors, [field]: 'El nombre de la sección debe tener almenos 3 carácteres. Ingrese un nombre más largo'})
+                    setErrors(prevState => ({...prevState, [field]: 'El nombre de la sección debe tener almenos 3 carácteres. Ingrese un nombre más largo'}))
                 }else if(value.length > 100){
-                    setErrors({...errors, [field]: 'El nombre de la sección debe tener hasta 100 carácteres. Ingrese un nombre más corto'})
+                    setErrors(prevState => ({...prevState, [field]: 'El nombre de la sección debe tener hasta 100 carácteres. Ingrese un nombre más corto'}))
                 }else{
-                    setErrors({...errors, [field]: ''})
-                    return (true)
+                    setErrors(prevState => ({...prevState, [field]: ''}))
                 }
-                return false
+                break
             default:
-                setErrors({...errors, [field]: ''})
-                return (true)
+                setErrors(prevState => ({...prevState, [field]: ''}))
         }
     }
 

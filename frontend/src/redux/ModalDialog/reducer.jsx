@@ -13,7 +13,7 @@ export const ModalDialogReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 show: true,
-                titulo: action.payload.titutlo,
+                titulo: action.payload.titulo,
                 mensaje: action.payload.mensaje
             }
         case types.HIDE_MODAL_DIALOG:

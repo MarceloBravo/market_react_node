@@ -6,6 +6,7 @@ import { Grid } from '../../../components/backOffice/grid'
 import { ModalDialog } from '../../../components/backOffice/modalDialog'
 import { ResumenVentaComponent } from '../../../components/frontOffice/resumenVenta/resumenVenta'
 import { PageMessageComponent } from '../../../components/frontOffice/pageMessage/pageMessage'
+import './style.css'
 
 export const CarroComprasContent = (props) => {
     const { 

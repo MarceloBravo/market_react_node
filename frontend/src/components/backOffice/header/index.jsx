@@ -7,6 +7,7 @@ import { defaultImagesUrl, defaultAvatarUrl } from '../../../shared/constantes'
 import { types } from '../../../redux/Alert/types'
 import { TimerSession } from '../timerSession'
 import { useHistory } from 'react-router-dom'
+import { getTokenFromStorage } from '../../../shared/funciones'
 import './style.css'
 
 export const Header = () => {
@@ -18,7 +19,6 @@ export const Header = () => {
 
     
     useEffect(()=>{
-        console.log('XXXXXXXXXXXXXXXXXX',localStorage.getItem('backTkn'))
         if(localStorage.getItem('backTkn')){
             setToken(localStorage.getItem('backTkn'))
         }
@@ -33,7 +33,7 @@ export const Header = () => {
 
 
     const logoutApp = () => {
-        dispatch(logout())
+        dispatch(logout(getTokenFromStorage()))
     }
 
     
@@ -52,7 +52,8 @@ export const Header = () => {
             <Navbar variant="dark" className="navbar">
                 <Navbar.Brand href="/">{ nombre_app }</Navbar.Brand>
                 <Nav className="mr-auto">
-                    <Nav.Link as={Link} to="/home">Home</Nav.Link>
+                    <Nav.Link as={Link} to="/home" onClick={() => clearMessages()} >Home</Nav.Link>
+                    <Nav.Link as={Link} to="/dashboard" onClick={() => clearMessages()}>Dashboard</Nav.Link>
                 </Nav>
                 
                 <div className="user-session-info">

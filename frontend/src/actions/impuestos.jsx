@@ -44,7 +44,6 @@ export const getAll = () => {
 export const find = (id) => {
     return (dispatch, action) => {
         axios.get(`${endPoint}/${url}/${id}`, {headers: getHeader()}).then(data => {
-            console.log('success',data)
             dispatch({type: spinnerTypes.HIDE_SPINNER})
             dispatch({type: types.BUSCAR_IMPUESTOS, payload: data})
         }).catch(error => {
@@ -57,7 +56,6 @@ export const find = (id) => {
 export const insert = (data) => {
     return (dispatch, action) => {
         axios.post(`${endPoint}/${url}`, data, {headers: getHeader()}).then(res => {
-            console.log('success',res)
             dispatch({type: spinnerTypes.HIDE_SPINNER})
             dispatch({type: types.INSERTAR_IMPUESTOS, payload: data})
             dispatch({type: alertTypes.MOSTRAR_ALERTA, payload: {mensaje: res.data.mensaje, tipo: res.data.tipoMensaje }})
@@ -71,7 +69,6 @@ export const insert = (data) => {
 export const update = (id, data) => {
     return (dispatch, action) => {
         axios.put(`${endPoint}/${url}/${id}`, data, {headers: getHeader()}).then(res => {
-            console.log('success',res)
             dispatch({type: spinnerTypes.HIDE_SPINNER})
             dispatch({type: types.ACTUALIZAR_IMPUESTOS, payload: data})
             dispatch({type: alertTypes.MOSTRAR_ALERTA, payload: {mensaje: res.data.mensaje, tipo: res.data.tipoMensaje }})
@@ -85,7 +82,6 @@ export const update = (id, data) => {
 export const deleteReg = (id) => {
     return (dispatch, action) => {
         axios.delete(`${endPoint}/${url}/${id}`, {headers: getHeader()}).then(res => {
-            console.log('success',res)
             dispatch({type: spinnerTypes.HIDE_SPINNER})
             dispatch({type: types.ELIMINAR_IMPUESTOS})
             dispatch({type: alertTypes.MOSTRAR_ALERTA, payload: {mensaje: res.data.mensaje, tipo: res.data.tipoMensaje }})
@@ -94,16 +90,3 @@ export const deleteReg = (id) => {
         })
     }
 }
-
-/*
-const handlerError = (dispatch, error, msg) => {
-    dispatch({type: spinnerTypes.HIDE_SPINNER})
-    if(error.response?.data === 'Token no válido'){
-        dispatch({type: alertTypes.MOSTRAR_ALERTA, payload: {mensaje: 'Tu sessión ha finalizado. Ingresa nuevamenten a la aplicación.', tipo: 'danger'}})
-        dispatch({type: loginTypes.LOGOUT})
-    }else{                
-        console.log(msg, error)
-        dispatch({type: alertTypes.MOSTRAR_ALERTA, payload: {mensaje: error.message, tipo: 'danger' }})
-    }
-}
-*/

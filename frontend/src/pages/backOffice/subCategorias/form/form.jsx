@@ -40,9 +40,9 @@ export const SubCategoriasForm = () => {
 
     
     useEffect(()=>{
-        if(subCategoria){
+        //if(subCategoria){
             setSub_Categoria(subCategoria)
-        }    
+        //}    
     },[subCategoria, dispatch])
 
 
@@ -100,26 +100,26 @@ export const SubCategoriasForm = () => {
         switch(field){
             case 'nombre':
                 if(value.length === 0){
-                    setErrors({...errors, [field]:'Debe ingresar un nombre para la sub-categoría.'})
+                    setErrors(prevState => ({...prevState, [field]:'Debe ingresar un nombre para la sub-categoría.'}))
                 }else if(value.length < 3){
-                    setErrors({...errors, [field]:'El nombre debe tener almenos 3 carácteres. Ingresa un nombre más largo.'})
+                    setErrors(prevState => ({...prevState, [field]:'El nombre debe tener almenos 3 carácteres. Ingresa un nombre más largo.'}))
                 }else if(value.length > 50){
-                    setErrors({...errors, [field]:'El nombre debe tener hasta 50 carácteres. Ingresa un nombre más corto'})
+                    setErrors(prevState => ({...prevState, [field]:'El nombre debe tener hasta 50 carácteres. Ingresa un nombre más corto'}))
                 }else{
-                    setErrors({...errors, [field]:''})
+                    setErrors(prevState => ({...prevState, [field]:''}))
                     res = true
                 }
                 break;
             case 'categoria_id':
-                if(!value || value === 0){
-                    setErrors({...errors, [field]:'Debe seleccionar una categoría.'})
+                if(!value || value === 0 || value === '-- Seleccione --'){
+                    setErrors(prevState => ({...prevState, [field]:'Debe seleccionar una categoría.'}))
                 }else{
-                    setErrors({...errors, [field]:''})
+                    setErrors(prevState => ({...prevState, [field]:''}))
                     res = true
                 }
                 break;
             default:
-                setErrors({...errors,[field]:''})
+                setErrors(prevState => ({...prevState,[field]:''}))
                 res = true
         }
         return res

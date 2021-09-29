@@ -40,6 +40,8 @@ require('./routes/tipoPagosRoutes')(app, null);
 require('./routes/ventasRoutes')(app, null);
 require('./routes/despachosRoutes')(app, null);
 require('./routes/ordenesCompraRoutes')(app, null);
+require('./routes/dashboardRoutes')(app, null);
+require('./routes/preciosRoutes')(app, null);
 
 
 app.listen(app.get('port'), '192.168.43.118',() => {

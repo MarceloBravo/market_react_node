@@ -70,8 +70,8 @@ clientesModel.filter = (texto, pag, callback) => {
                         casa_num  LIKE ${cnn.escape('%'+texto+'%')} OR 
                         block_num  LIKE ${cnn.escape('%'+texto+'%')} OR 
                         referencia LIKE ${cnn.escape('%'+texto+'%')} OR 
-                        CONVERT(created_at, CHAR) LIKE ${cnn.escape('%'+texto+'%')} OR
-                        CONVERT(updated_at, CHAR) LIKE ${cnn.escape('%'+texto+'%')} 
+                        DATE_FORMAT(created_at, '%d-%m-%Y') LIKE ${cnn.escape('%'+texto+'%')} OR
+                        DATE_FORMAT(updated_at, '%d-%m-%Y') LIKE ${cnn.escape('%'+texto+'%')} 
                         )` : ''
 
         let qry = `SELECT 
@@ -297,7 +297,6 @@ clientesModel.insert = async (data, callback) => {
 
     if(cnn){
         let password = await tools.encriptarPassword(data.password)
-        console.log(data.password, password, password.length)
 
         let qry = `INSERT INTO clientes (
                         rut,
@@ -339,8 +338,6 @@ clientesModel.insert = async (data, callback) => {
                         CURDATE()
                     )`
 
-            console.log(qry)
-
             cnn.query(qry, (err, res) => {
                 if(err){
                     return callback({mensaje: 'Ocurrió un error al intentar ingresar el usuario: '+ err.message, tipoMensaje: 'danger'})
@@ -360,17 +357,20 @@ clientesModel.insert = async (data, callback) => {
 
 
 
-clientesModel.update = (id, data, callback) => {
+clientesModel.update = async (id, data, callback) => {
     let validate = validaDatos(id, data)
     if(validate.length > 0){
         return callback({mensaje: 'Datos incompletos o no válidos', tipoMensaje: 'danger', errors: validate})
     }
 
     if(cnn){
-        let password = data.password ? tools.encriptarPassword(data.password) : null
+        let password = null
+        if(data.password){
+            password = await tools.encriptarPassword(data.password)
+        }
         let qry = `UPDATE clientes SET 
                     rut = ${cnn.escape(data.rut)},
-                    nombress = ${cnn.escape(data.nombres)},
+                    nombres = ${cnn.escape(data.nombres)},
                     apellido1 = ${cnn.escape(data.apellido1)},
                     apellido2 = ${cnn.escape(data.apellido2)},
                     direccion = ${cnn.escape(data.direccion)},
@@ -387,6 +387,8 @@ clientesModel.update = (id, data, callback) => {
                     referencia = ${cnn.escape(data.referencia)},
                     updated_at = CURDATE() 
                 WHERE id = ${cnn.escape(id)}`
+
+        console.log(qry)
 
         cnn.query(qry, (err, res) => {
             if(err){
@@ -533,7 +535,7 @@ const validaDatos = (id, data) => {
     if(data.foto && data.foto.length === 0)res.push({'foto': 'La foto es obligatorio'})
     if(data.foto && data.foto?.length > 255)res.push({'foto': 'La foto ingreesada es demasiada larga. Ingresa una foto más corta'})
 
-    if(data.block_num && data.foto?.length > 10)res.push({'block_num': 'El número de block es demasiado largo. Ingresa un número más corto'})
+    if(data.block_num && data.block_num?.length > 10)res.push({'block_num': 'El número de block es demasiado largo. Ingresa un número más corto'})
 
     if(data.referencia && data.referencia?.length > 255)res.push({'referencia': 'LA referencia es demasiado larga. Ingresa una referencia más corta'})
 

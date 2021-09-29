@@ -93,13 +93,13 @@ export const MarcasForm = () => {
         let res = true
         if(field === 'nombre'){
             if(value.length === 0){
-                setErrors({...errors, [field]: 'El nombre es obligatorio.'})
+                setErrors(prevState => ({...prevState, [field]: 'El nombre es obligatorio.'}))
             }else if(value.length < 3){
-                setErrors({...errors, [field]: 'El nombre debe tener un mínimo de 3 carácteres. Ingresa un nombre más largo.'})
+                setErrors(prevState => ({...prevState, [field]: 'El nombre debe tener un mínimo de 3 carácteres. Ingresa un nombre más largo.'}))
             }else if(value.length > 50){
-                setErrors({...errors, [field]: 'El nombre debe tener un máximo de 50 carácteres. Ingresa un nombre más corto.'})
+                setErrors(prevState => ({...prevState, [field]: 'El nombre debe tener un máximo de 50 carácteres. Ingresa un nombre más corto.'}))
             }else{
-                setErrors({...errors, [field]: ''})
+                setErrors(prevState => ({...prevState, [field]: ''}))
                 res = false
             }        
         }

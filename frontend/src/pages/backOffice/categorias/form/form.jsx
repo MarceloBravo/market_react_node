@@ -48,8 +48,11 @@ export const CategoriasForm = (props) => {
     }
 
     const grabar = (e) => {
-        setAccion('grabar')
-        dispatch({type: modalTypes.SHOW_MODAL_DIALOG, payload: {mensaje: '¿Desea grabar el registro?', titulo: 'Grabar'}})
+        validaDatos('nombre', categoria.nombre)
+        if(errors.nombre !== '' && errors.nombre !== null){
+            setAccion('grabar')
+            dispatch({type: modalTypes.SHOW_MODAL_DIALOG, payload: {mensaje: '¿Desea grabar el registro?', titulo: 'Grabar'}})
+        }
     }
 
     const eliminar = (e) => {
@@ -80,13 +83,13 @@ export const CategoriasForm = (props) => {
     const validaDatos = (field, value) => {
         let res = false
         if(value.length === 0){
-            setErrors({...errors, [field]: 'El nombre es obligatorio.'})
+            setErrors(prevState => ({...prevState, [field]: 'El nombre es obligatorio.'}))
         }else if(value.length > 50){
-            setErrors({...errors, [field]: 'El nombre no debe sobrepasar los 50 carácteres. Ingresa un nombre más corto.'})
+            setErrors(prevState => ({...prevState, [field]: 'El nombre no debe sobrepasar los 50 carácteres. Ingresa un nombre más corto.'}))
         }else if(value.length < 3){
-            setErrors({...errors, [field]: 'El nombre debe tener un mínimo de 3 carácteres. Ingresa un nombre más largo'})
+            setErrors(prevState => ({...prevState, [field]: 'El nombre debe tener un mínimo de 3 carácteres. Ingresa un nombre más largo'}))
         }else{
-            setErrors({...errors, [field]:''})
+            setErrors(prevState => ({...prevState, [field]:''}))
             res = true
         }
         return res

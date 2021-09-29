@@ -26,8 +26,8 @@
     width: 15% !important;
 }
 
-.col-Cantidad{
-    width: 10% !important;
+.col-cantidad{
+    width: 100px !important;
 }
 
 .col-cantidad > input{
@@ -36,6 +36,7 @@
 
 .col-precio_venta{
     text-align: right;
+    min-width: 150px;
 }
 
 .col-action{

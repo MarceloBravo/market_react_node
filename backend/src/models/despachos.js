@@ -49,7 +49,7 @@ DespachosModel.getPage = (pag, callback) => {
                         v.deleted_at IS NULL AND  
                         v.fecha_anulacion IS NULL AND 
                         dv.deleted_at IS NULL 
-                    ORDER BY fecha_despacho ASC  
+                    ORDER BY fecha_despacho, dv.created_at ASC  
                     LIMIT ${desde}, ${constantes.regPerPage}`
                 
         cnn.query(qry, async (err, res) => {

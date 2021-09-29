@@ -40,7 +40,6 @@ export const getAll = () => {
 } 
 
 export const getAllByCategory = (id) => {
-    console.log(`${serverEndPoint}/${url}/get/all/${id}`)
     return (dispatch, action) => {
         axios.get(`${serverEndPoint}/${url}/get/all/${id}`, {headers: getHeader()}).then(res => {
             dispatch({type: spinnerTypes.HIDE_SPINNER})

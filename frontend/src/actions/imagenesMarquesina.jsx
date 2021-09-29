@@ -21,7 +21,6 @@ export const save = (data) => {
     let fd = crearFormData(data)
     return (dispatch, action)=> {
         axios.post(`${endPoint}/${url}`, fd, {headers: getHeader()}).then(res => {
-            console.log('RESPUESTA',res, data)
             dispatch({type: spinnerTypes.HIDE_SPINNER})
             dispatch({type: alertasTypes.MOSTRAR_ALERTA, payload: {mensaje: res.data.mensaje, tipo: res.data.tipoMensaje}})
             dispatch({type: imgMarquesinaTypes.GET_IMAGES_MARQUESINA, payload: data})

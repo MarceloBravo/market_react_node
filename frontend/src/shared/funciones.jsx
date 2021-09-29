@@ -3,19 +3,27 @@ import { types as spinnerTypes } from '../redux/Spinner/types'
 import { types as loginTypes } from '../redux/Login/types'
 
 
-export const getHeader = () => {
-    let token = localStorage.getItem('backTkn')
-    if(!token){
-        token = sessionStorage.getItem('backTkn')
+export const getTokenFromStorage = () => {
+    if (localStorage.getItem('backTkn')) {
+        return localStorage.getItem('backTkn')
+    } else if (sessionStorage.getItem('backTkn')) {
+        return sessionStorage.getItem('backTkn')
+    } else {
+        return null
     }
-    return {'Content-Type':'application/json', 'Authorization':`Bearer ${token}`}
+}
+
+
+export const getHeader = () => {
+    let token = getTokenFromStorage()
+    return {'Content-Type':'application/json', 'Authorization':`Bearer ${token ? token : ''}`}
 }
 
 export const handlerError = (dispatch, error, msg) => {
     dispatch({type: spinnerTypes.HIDE_SPINNER})
     if(error.response?.data === 'Token no válido'){
-        dispatch({type: alertTypes.MOSTRAR_ALERTA, payload: {mensaje: 'Tu sessión ha finalizado. Ingresa nuevamenten a la aplicación.', tipo: 'danger'}})
-        dispatch({type: loginTypes.LOGOUT})
+        dispatch({type: alertTypes.MOSTRAR_ALERTA, payload: {mensaje: 'Tu sessión ha finalizado. Ingresa nuevamente a la aplicación.', tipo: 'danger'}})
+        dispatch({type: loginTypes.TRY_RESTART_SESSION})
     }else{                
         console.log(msg, error)
         dispatch({type: alertTypes.MOSTRAR_ALERTA, payload: {mensaje: error.message, tipo: 'danger' }})

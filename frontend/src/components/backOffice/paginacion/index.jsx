@@ -4,7 +4,7 @@ import './style.css'
 
 export const Paginacion = (props) => {
     const renderCount = useRef(0);
-    const { data, goToPage } = props
+    const { data, goToPage, disabled } = props
     const [ items, setItems ] = useState([])
     renderCount.current = renderCount.current + 1;
 
@@ -13,33 +13,32 @@ export const Paginacion = (props) => {
         let totPages = Math.ceil(data.totRows/data.rowsPerPage) -1
         let pag = data.page * 1
         if (data && totPages > 0) {
-            let arrNumbers = [<Pagination.First key="-1" onClick={() => goToPage(0)}/>]
+            let arrNumbers = [<Pagination.First disabled={disabled} key="-1" onClick={() => goToPage(0)}/>]
             let desde = 0
             let hasta = (totPages > 10 && pag + 2 <= totPages)? pag + 2 : totPages
             if(pag - 4 >= 0){                
                 desde = pag - 3
-                arrNumbers.push(<Pagination.Ellipsis key="ellipsis1"/>)
+                arrNumbers.push(<Pagination.Ellipsis disabled={disabled} key="ellipsis1"/>)
             }
             if(hasta < 5 && totPages > 5){
                 hasta = 5
             }
             hasta++
-            console.log('hasta',hasta)
             
             for (let number = desde; number < hasta; number++) {
                 arrNumbers.push(
-                    <Pagination.Item key={number*10} active={number === pag} onClick={() => goToPage(number)}>
+                    <Pagination.Item disabled={disabled} key={number*10} active={number === pag} onClick={() => goToPage(number)}>
                         {number+1}
                     </Pagination.Item>
                 );
             }
             if(totPages > 10 && (pag + 3 < totPages)){
-                arrNumbers.push(<Pagination.Ellipsis key="ellipsis2"/>)
+                arrNumbers.push(<Pagination.Ellipsis disabled={disabled} key="ellipsis2"/>)
             }
-            arrNumbers.push(<Pagination.Last key={totPages*10+1} onClick={() => goToPage(totPages)}/>)
+            arrNumbers.push(<Pagination.Last disabled={disabled} key={totPages*10+1} onClick={() => goToPage(totPages)}/>)
             setItems(arrNumbers)
         }        
-    },[data, goToPage])
+    },[data, goToPage, disabled])
 
 
     return (

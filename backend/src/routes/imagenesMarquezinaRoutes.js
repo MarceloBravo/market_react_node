@@ -10,7 +10,6 @@ module.exports = function(app, passport){
     })
 
     app.post('/imagenes_marquesina', [checkToken, uploadFiles.array('objImages')], (req, res) => {
-        console.log(uploadFiles.array('objImage'), req.body)
         ImagenesMarquezinaModel.save(req.body, (err, data)=>{
             res.json(err ? err : data)
         })

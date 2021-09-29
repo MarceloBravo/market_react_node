@@ -1,0 +1,12 @@
+.tabla-productos .custom-class-table{
+    min-width: 1036px;
+    width: 105%;
+}
+
+.tabla-productos .col-marca{
+    width: 11%;
+}
+
+.col-marca{
+    width: 115px;
+}

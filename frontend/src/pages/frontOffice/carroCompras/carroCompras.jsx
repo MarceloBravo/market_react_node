@@ -4,7 +4,6 @@ import { find as detalleApp } from '../../../actions/personalizar'
 import { types as modalTypes } from '../../../redux/ModalDialog/types'
 import { useHistory } from 'react-router-dom'
 import { CarroComprasContent } from './content'
-import './style.css'
 
 
 export const CarroCompras = () => {

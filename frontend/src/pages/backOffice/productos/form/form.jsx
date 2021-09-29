@@ -56,7 +56,7 @@ export const ProductosForm = (props) => {
         marca_id: '',
         categoria_id: '',
         sub_categoria_id: '',
-        impuesto_id: ''})
+        impuestos_id: ''})
     const [ accion, setAccion ] = useState(null)
     const [ imageCtrl, setimageCtrl ] = useState(null)    
     const pantalla = useSelector(state => state.PantallasReducer.pantalla)
@@ -92,9 +92,7 @@ export const ProductosForm = (props) => {
 
 
     useEffect(()=> {
-        console.log('resultado busqueda', productoState)
         if(productoState){
-            console.log('productoState',productoState)
             setProducto(productoState)
             dispatch(subCategoriasGetAll(productoState.categoria_id))
         }
@@ -148,8 +146,11 @@ export const ProductosForm = (props) => {
 
 
     const grabar = (e) => {
-        setAccion('grabar')
-        dispatch({type: modalTypes.SHOW_MODAL_DIALOG, payload: {mensaje: '¿Desea grabar el registro?', tipo: 'Grabar'}})
+        Object.keys(producto).forEach(p => validaDatos(p, producto[p]))
+        if(Object.keys(errors).filter(f => producto[f] === '' || producto[f] === 0).length === 0 ){
+            setAccion('grabar')
+            dispatch({type: modalTypes.SHOW_MODAL_DIALOG, payload: {mensaje: '¿Desea grabar el registro?', tipo: 'Grabar'}})
+        }
     }
 
 
@@ -204,7 +205,7 @@ export const ProductosForm = (props) => {
             case 'sub_categoria_id':
                 return validaSelect(field, value, true, {msgObligatorio: 'Debe seleccionar una sub-categoría.'})
             default:
-                setErrors({...errors, [field]: ''})
+                setErrors(prevState => ({...prevState, [field]: ''}))
                 return true
         }
     }
@@ -213,13 +214,13 @@ export const ProductosForm = (props) => {
     const validarTexto = (field, value, obligatorio, min, max, mensajes) => {
         let res = false
         if(obligatorio && value.length === 0){
-            setErrors({...errors, [field]: mensajes.msgObligatorio ? mensajes.msgObligatorio : 'El campo es obligatorio.'})
+            setErrors(prevState => ({...prevState, [field]: mensajes.msgObligatorio ? mensajes.msgObligatorio : 'El campo es obligatorio.'}))
         }else if(value.length < min){
-            setErrors({...errors, [field]: mensajes.msgMin ? mensajes.msgMin : 'El valor ingresado es demasiado corto.'})
+            setErrors(prevState => ({...prevState, [field]: mensajes.msgMin ? mensajes.msgMin : 'El valor ingresado es demasiado corto.'}))
         }else if(max !== null && value.length > max){
-            setErrors({...errors, [field]: mensajes.msgMax ? mensajes.msgMax : 'El valor ingresado es demasiado largo.'})
+            setErrors(prevState => ({...prevState, [field]: mensajes.msgMax ? mensajes.msgMax : 'El valor ingresado es demasiado largo.'}))
         }else{
-            setErrors({...errors, [field]: ''})
+            setErrors(prevState => ({...prevState, [field]: ''}))
             res = true
         }
         return res
@@ -229,15 +230,15 @@ export const ProductosForm = (props) => {
     const validarNumero = (field, value, obligatorio, min, max, mensajes) => {
         let res = false
         if(obligatorio && value === ''){
-            setErrors({...errors, [field]: mensajes.msgObligatorio ? mensajes.msgObligatorio : 'Debe ingresar un número.'})
+            setErrors(prevState => ({...prevState, [field]: mensajes.msgObligatorio ? mensajes.msgObligatorio : 'Debe ingresar un número.'}))
         }else if(isNaN(value) && value !== ''){
-            setErrors({...errors, [field]: 'Debe ingresar sólo números.'})
+            setErrors(prevState => ({...prevState, [field]: 'Debe ingresar sólo números.'}))
         }else if(min !== null&& value < min){
-            setErrors({...errors, [field]: mensajes.msgMin ? mensajes.msgMin : `El número no puede ser menor a ${min}`})
+            setErrors(prevState => ({...prevState, [field]: mensajes.msgMin ? mensajes.msgMin : `El número no puede ser menor a ${min}`}))
         }else if(max !== null && value > max){
-            setErrors({...errors, [field]: mensajes.msgMax ? mensajes.msgMax : `El número no puede ser mayor a ${max}`})
+            setErrors(prevState => ({...prevState, [field]: mensajes.msgMax ? mensajes.msgMax : `El número no puede ser mayor a ${max}`}))
         }else{
-            setErrors({...errors, [field]: ''})
+            setErrors(prevState => ({...prevState, [field]: ''}))
             res = true
         }
         return res
@@ -247,9 +248,9 @@ export const ProductosForm = (props) => {
     const validaSelect = (field, value, obligatorio, mensajes) => {
         let res = false
         if(obligatorio && !value){
-            setErrors({...errors, [field]: mensajes.msgObligatorio ? mensajes.msgObligatorio : 'Debe seleccionar una opción'})
+            setErrors(prevState => ({...prevState, [field]: mensajes.msgObligatorio ? mensajes.msgObligatorio : 'Debe seleccionar una opción'}))
         }else{
-            setErrors({...errors, [field]: ''})
+            setErrors(prevState => ({...prevState, [field]: ''}))
             res = true
         }
         return res
