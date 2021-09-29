@@ -43,6 +43,11 @@ export const UnidadesReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 list: action.payload.data 
             }
+        case types.NUEVA_UNIDAD:
+            return {
+                ...state,
+                unidad: INITIAL_STATE.unidad
+            }
         default:
             return state
     }

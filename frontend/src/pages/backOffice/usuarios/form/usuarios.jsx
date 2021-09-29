@@ -89,8 +89,8 @@ export const UsuariosForm = () => {
     const fnGrabar = () =>{
         Object.keys(usuario).forEach(f => validaDatos(f, usuario[f]))
         if(
-            Object.keys(errors).filter(e => errors[e] !== '').length === 0  ||
-            Object.keys(usuario).filter(e => usuario[e] !== '').length === 0 
+            Object.keys(errors).filter(e => usuario[e].length === 0 && e !== 'password' && e !== 'confirmPassword').length === 0 && 
+            ((!id && usuario.password.length > 0 && usuario.confirmPassword.length > 0) || id)
         ){
             setAccion('grabar')
             dispatch({type: modalTypes.SHOW_MODAL_DIALOG, payload:{titulo: 'Grabar', mensaje:'¿Desea grabar el registro?'}})
@@ -126,73 +126,72 @@ export const UsuariosForm = () => {
             setErrors(prevState => ({...prevState, [campo]: 'Debe seleccionar un rol.'}))
             return
         }
-        valor = valor.trim()
         switch(campo){
             case 'name':
-                if(valor.length === 0){
+                if(valor.trim().length === 0){
                     setErrors(prevState => ({...prevState, [campo]: 'El nombre del usuario es obligatorio.'}))
-                }else if(valor.length < 3){
+                }else if(valor.trim().length < 3){
                     setErrors(prevState => ({...prevState, [campo]: 'El nombre debe tener almenos 3 caráctreres. Ingresa un nombre más largo.'}))
-                }else if(valor.length > 50){
+                }else if(valor.trim().length > 50){
                     setErrors(prevState => ({...prevState, [campo]: 'El nombre debe tener hasta 50 caráctreres. Ingresa un nombre más corto.'}))
                 }else{
                     setErrors(prevState => ({...prevState, [campo]: ''}))
                 }
                 break;
             case 'a_paterno':
-                if(valor.length === 0){
+                if(valor.trim().length === 0){
                     setErrors(prevState => ({...prevState, [campo]: 'El primer apellido es obligatorio.'}))
-                }else if(valor.length < 3){
+                }else if(valor.trim().length < 3){
                     setErrors(prevState => ({...prevState, [campo]: 'El primer apellido debe tener almenos 3 caráctreres. Ingresa un apellido más largo.'}))
-                }else if(valor.length > 50){
+                }else if(valor.trim().length > 50){
                     setErrors(prevState => ({...prevState, [campo]: 'El primer apellido debe tener hasta 50 caráctreres. Ingresa un apellido más corto.'}))
                 }else{
                     setErrors(prevState => ({...prevState, [campo]: ''}))
                 }
                 break;
             case 'a_materno':
-                if(valor.length > 0 && valor.length < 3){
+                if(valor.trim().length > 0 && valor.trim().length < 3){
                     setErrors(prevState => ({...prevState, [campo]: 'El segundo apellido debe tener almenos 3 caráctreres. Ingresa un apellido más largo.'}))
-                }else if(valor.length > 50){
+                }else if(valor.trim().length > 50){
                     setErrors(prevState => ({...prevState, [campo]: 'El segundo apellido debe tener hasta 50 caráctreres. Ingresa un apellido más corto.'}))
                 }else{
                     setErrors(prevState => ({...prevState, [campo]: ''}))
                 }
                 break;
             case 'direccion':
-                if(valor.length === 0){
+                if(valor.trim().length === 0){
                     setErrors(prevState => ({...prevState, [campo]: 'La dirección es obligatoria.'}))
-                }else if(valor.length < 10){
+                }else if(valor.trim().length < 10){
                     setErrors(prevState => ({...prevState, [campo]: 'La dirección debe tener almenos 10 caráctreres. Ingresa una dirección más larga.'}))
-                }else if(valor.length > 150){
+                }else if(valor.trim().length > 150){
                     setErrors(prevState => ({...prevState, [campo]: 'La dirección debe tener hasta 255 caráctreres. Ingresa una dirección más corta.'}))
                 }else{
                     setErrors(prevState => ({...prevState, [campo]: ''}))
                 }
                 break;
             case 'fono':
-                if(valor.length === 0){
+                if(valor.trim().length === 0){
                     setErrors(prevState => ({...prevState, [campo]: 'El teléfono es obligatorio.'}))
-                }else if(valor.length < 3){
+                }else if(valor.trim().length < 3){
                     setErrors(prevState => ({...prevState, [campo]: 'El teléfono debe tener almenos 8 caráctreres. Ingresa un teléfono más largo.'}))
-                }else if(valor.length > 50){
+                }else if(valor.trim().length > 50){
                     setErrors(prevState => ({...prevState, [campo]: 'El teléfono debe tener hasta 15 caráctreres. Ingresa un teléfono más corto.'}))
                 }else{
                     setErrors(prevState => ({...prevState, [campo]: ''}))
                 }
                 break;
             case 'email':
-                if(valor.length === 0){
+                if(valor.trim().length === 0){
                     setErrors(prevState => ({...prevState, [campo]: 'El correo electrónico es obligatorio.'}))
                 }else if(!isEmail(valor)){
                     setErrors(prevState => ({...prevState, [campo]: 'El email ingresado no es válido.'}))
-                }else if(valor.length > 50){
+                }else if(valor.trim().length > 50){
                     setErrors(prevState => ({...prevState, [campo]: 'El email debe tener hasta 150 caráctreres. Ingresa una dirección de correo electrónico más corta.'}))
                 }else{
                     setErrors(prevState => ({...prevState, [campo]: ''}))
                 }
                 break;
-            case 'password':                
+            case 'password':
                 validaPassword(campo, valor, usuario.confirmPassword)
                 break;
             case 'confirmPassword':
@@ -208,7 +207,9 @@ export const UsuariosForm = () => {
         let valor = campo === 'password' ? pwd : confirmPwd;
         let fieldStr = campo === 'password' ? 'contraseña' : 'confirmación de contraseña';
 
-        if(valor.length < 6){
+        if(!id && valor.length === 0){
+            setErrors(prevState => ({...prevState, [campo]: `La ${fieldStr} es obligatoria.`}))
+        }else if(valor.length < 6  && valor.length > 0){
             setErrors(prevState => ({...prevState, [campo]: `La ${fieldStr} debe tener almenos 6 caráctreres. Ingresa una ${fieldStr} más larga.`}))
         }else if(valor.length > 20){
             setErrors(prevState => ({...prevState, [campo]: `La ${fieldStr} debe tener un máximo de 20 caráctreres. Ingresa una ${fieldStr} más corta.`}))

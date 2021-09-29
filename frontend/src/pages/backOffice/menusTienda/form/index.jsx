@@ -61,7 +61,8 @@ export const FormMenusTiendaComponent = () => {
     }
 
     const grabar = () => {
-        if (Object.keys(menu).map(k => validaDatos(k, menu[k])).filter(e => e !== undefined).length !== Object.keys(menu).length) {
+        Object.keys(menu).map(k => validaDatos(k, menu[k]))
+        if (Object.keys(errors).filter(k => menu[k] === '' || menu[k] === null).length === 0) {
             setAccion('grabar')
             dispatch({ type: types.SHOW_MODAL_DIALOG, payload: {titulo: 'Grabar',mensaje: '¿Desea grabar el registro?'} })
         }
@@ -99,32 +100,36 @@ export const FormMenusTiendaComponent = () => {
     const validaDatos = (name, value) => {
         switch (name) {
             case 'nombre':
-                if (value.length === 0) { setErrors({ ...errors, nombre: 'El nombre del menú es obligatorio.' })}
-                else if (value.length < 3) { setErrors({ ...errors, nombre: 'El nombre del menú debe tener almenos 3 carácteres. Ingrese un nombre más largo.' })}
-                else if (value.length > 20) { setErrors({ ...errors, nombre: 'El nombre del menú debe tener hasta 50 carácteres. Ingrese un nombre más corto.' }) }
-                else {
-                    setErrors({ ...errors, [name]: null })    
+                if (value.length === 0) { 
+                    setErrors(prevState => ({ ...prevState, nombre: 'El nombre del menú es obligatorio.' }))
+                }else if (value.length < 3) { 
+                    setErrors(prevState => ({ ...prevState, nombre: 'El nombre del menú debe tener almenos 3 carácteres. Ingrese un nombre más largo.' }))
+                }else if (value.length > 20) { 
+                    setErrors(prevState => ({ ...prevState, nombre: 'El nombre del menú debe tener hasta 50 carácteres. Ingrese un nombre más corto.' }))
+                }else {
+                    setErrors(prevState => ({ ...prevState, [name]: null }))
                 }
-                return 1;
-            
+                break;
             case 'url':
-                //if (value.length === 0) { setErrors({ ...errors, url: 'La URL asociada al menú es obligatoria.' })}
-                if (value.length > 0  && value.length < 3) { setErrors({ ...errors, url: 'El la URL debe tener almenos 3 carácteres. Ingrese una URL más larga.' })}
-                else if (value.length > 100) { setErrors({ ...errors, url: 'El la URL debe tener hasta 50 carácteres. Ingrese una URL más corta.' }) }
-                else {
-                    setErrors({ ...errors, [name]: null })    
+                if (value.length > 0  && value.length < 3) { 
+                    setErrors(prevState => ({ ...prevState, url: 'El la URL debe tener almenos 3 carácteres. Ingrese una URL más larga.' }))
+                }else if (value.length > 100) { 
+                    setErrors(prevState => ({ ...prevState, url: 'El la URL debe tener hasta 50 carácteres. Ingrese una URL más corta.' }))
+                }else {
+                    setErrors(prevState => ({ ...prevState, [name]: null }))
                 }
-                return 1;
+                break;
             case 'posicion':
-                if(isNaN(value) || value === ''){setErrors({...errors, posicion: 'Debes ingresar un número para la posición del menú.'})}
-                else if(value < 0){setErrors({...errors, posicion: 'La posición del menú debe ser un número positivo.'})}
-                else{
-                    return setErrors({...errors, [name]: null})
+                if(isNaN(value) || value === ''){
+                    setErrors(prevState => ({ ...prevState, posicion: 'Debes ingresar un número para la posición del menú.'}))
+                }else if(value < 0){
+                    setErrors(prevState => ({ ...prevState, posicion: 'La posición del menú debe ser un número positivo.'}))
+                }else{
+                    return setErrors(prevState => ({ ...prevState, [name]: null}))
                 }
-                return 1;
-                
+                break;
             default:
-                setErrors({ ...errors, [name]: null })
+                setErrors(prevState => ({ ...prevState, [name]: null }))
         }
         
     }

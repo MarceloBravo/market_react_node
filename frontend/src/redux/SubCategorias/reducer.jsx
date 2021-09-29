@@ -37,12 +37,18 @@ export const SubCategoriasReducer = (state = INITIAL_STATE, action) => {
         case types.ACTUALIZAR_SUB_CATEGORIAS:
             return {
                 ...state,
-                subCategoria: action.payload.data
+                subCategoria: action.payload
             }
         case types.NUEVA_SUB_CATEGORIA:
+            return {
+                ...state, 
+                subCategoria: INITIAL_STATE.subCategoria
+            }
         case types.ELIMINAR_SUB_CATEGORIAS:
             return {
-                ...state, INITIAL_STATE
+                ...state, 
+                subCategoria: INITIAL_STATE.subCategoria,
+                dataGrid: INITIAL_STATE.dataGrid
             }
         case types.VACIAR_LISTADO_TODAS_LAS_SUBCATEGORIAS:
             return {

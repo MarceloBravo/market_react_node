@@ -2,7 +2,7 @@ import { types } from './types'
 
 const INITIAL_STATE = {
     secciones: {
-        id: -1,
+        id: null,
         nombre: '',
         productos: []
     },
@@ -39,7 +39,7 @@ export const SeccionesHomeReducer = (state = INITIAL_STATE, action) => {
         case types.NEW_SECCIONES_HOME:
             return {
                 ...state,
-                secciones: {}
+                secciones: INITIAL_STATE.secciones
             }
         default:
             return state

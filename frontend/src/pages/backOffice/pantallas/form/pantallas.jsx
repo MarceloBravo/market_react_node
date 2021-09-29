@@ -18,14 +18,17 @@ export const PantallasForm = () => {
     const { id } = useParams();
     const history = useHistory();
 
+
     useEffect(()=>{
         dispatch(getAll());
     },[dispatch]);
+
 
     useEffect(()=>{
         dispatch({type: spinnerTypes.SHOW_SPINNER})
         dispatch(find(id));
     },[dispatch, id]);
+
 
     useEffect(()=> {
         if(id){
@@ -56,22 +59,26 @@ export const PantallasForm = () => {
         switch(field){
             case 'nombre':
                 if(value.length === 0){
-                    setErrors({...errors, [field]: 'Debe ingresar el nombre de la pantalla.'})
+                    setErrors(prevState => ({...prevState, [field]: 'Debe ingresar el nombre de la pantalla.'}))
                 }else if(value.length > 50){
-                    setErrors({...errors, [field]: 'El nombre de la pantalla es demasiado largo.'})
+                    setErrors(prevState => ({...prevState, [field]: 'El nombre de la pantalla es demasiado largo.'}))
                 }else{
-                    setErrors({...errors, [field]: null})
+                    setErrors(prevState => ({...prevState, [field]: null}))
                 }
                 break;
             case 'menus_id':
                 if(value.length === 0){
-                    setErrors({...errors, [field]: 'Debe seleccionar el menú asociado a la pantalla.'})
+                    setErrors(prevState => ({...prevState, [field]: 'Debe seleccionar el menú asociado a la pantalla.'}))
                 }else{
-                    setErrors({...errors, [field]: null})
+                    setErrors(prevState => ({...prevState, [field]: null}))
                 }
                 break;
+            case 'created_at':
+            case 'updated_at':
+            case 'deleted_at':
+                break
             default:
-                setErrors({...errors, [field]: null})
+                setErrors(prevState => ({...prevState, [field]: null}))
         }
     }
 
@@ -98,7 +105,8 @@ export const PantallasForm = () => {
 
 
     const grabar = () => {
-        if(Object.keys(pantalla).map(p => validaDatos(p, pantalla[p])).filter(e => e !== undefined).length !== Object.keys(pantalla).length){
+        Object.keys(pantalla).map(p => validaDatos(p, pantalla[p]))
+        if(Object.keys(errors).filter(p => pantalla[p] === '' || pantalla[p] === null).length === 0){
             setAccion('grabar')
             dispatch({ type: types.SHOW_MODAL_DIALOG, payload: {titulo: 'Grabar',mensaje: '¿Desea grabar el registro?'} })
         }

@@ -100,42 +100,42 @@ export const ImpuestosForm = (props) => {
         switch(field){
             case 'nombre':
                 if(value.length === 0){
-                    setErrors({...errors, [field]: 'El nombre del impuesto es obligatorio.'})
+                    setErrors(prevState => ({...prevState, [field]: 'El nombre del impuesto es obligatorio.'}))
                 }else if(value.length < 3){
-                    setErrors({...errors, [field]: 'El nombre debe tener un mínimo de 3 carácteres. Ingresa un nombre más largo.'})
+                    setErrors(prevState => ({...prevState, [field]: 'El nombre debe tener un mínimo de 3 carácteres. Ingresa un nombre más largo.'}))
                 }else if(value.length > 100){
-                    setErrors({...errors, [field]: 'El nombre debe tener hasta 100 carácteres. Ingresa un nombre más corto.'})
+                    setErrors(prevState =>  ({...prevState, [field]: 'El nombre debe tener hasta 100 carácteres. Ingresa un nombre más corto.'}))
                 }else{
-                    setErrors({...errors, [field]:''})
+                    setErrors(prevState => ({...prevState, [field]:''}))
                     res = true
                 }
                 break;
             case 'sigla':
                 if(value.length === 0){
-                    setErrors({...errors, [field]: 'La sigla del impuesto es obligatoria.'})
+                    setErrors(prevState => ({...prevState, [field]: 'La sigla del impuesto es obligatoria.'}))
                 }else if(value.length < 3){
-                    setErrors({...errors, [field]: 'La sigla debe tener un mínimo de 3 carácteres. Ingresa una sigla más larga.'})
+                    setErrors(prevState => ({...prevState, [field]: 'La sigla debe tener un mínimo de 3 carácteres. Ingresa una sigla más larga.'}))
                 }else if(value.length > 15){
-                    setErrors({...errors, [field]: 'La sigla debe tener hasta 15 carácteres. Ingresa una sigla más corta.'})
+                    setErrors(prevState => ({...prevState, [field]: 'La sigla debe tener hasta 15 carácteres. Ingresa una sigla más corta.'}))
                 }else{
-                    setErrors({...errors, [field]:''})
+                    setErrors(prevState => ({...prevState, [field]:''}))
                     res = true
                 }
                 break;
             case 'porcentaje':
                 if(value.length === 0){
-                    setErrors({...errors, [field]: 'El porcentaje de impuesto es obligatorio.'})
+                    setErrors(prevState => ({...prevState, [field]: 'El porcentaje de impuesto es obligatorio.'}))
                 }else if(isNaN(value)){
-                    setErrors({...errors, [field]: 'El porcentaje de impuesto debe ser un número.'})
+                    setErrors(prevState => ({...prevState, [field]: 'El porcentaje de impuesto debe ser un número.'}))
                 }else if(value < 0){
-                    setErrors({...errors, [field]: 'El porcentaje de impuesto debe ser un valor positivo.'})
+                    setErrors(prevState => ({...prevState, [field]: 'El porcentaje de impuesto debe ser un valor positivo.'}))
                 }else{
-                    setErrors({...errors, [field]:''})
+                    setErrors(prevState => ({...prevState, [field]:''}))
                     res = true
                 }
                 break;
             default:
-                setErrors({...errors, [field]: ''})
+                setErrors(prevState => ({...prevState, [field]: ''}))
                 res = true
         }
         return res

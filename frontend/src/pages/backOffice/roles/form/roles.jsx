@@ -66,7 +66,8 @@ export const FormRoles = () => {
     }
 
     const grabar = () => {
-        if(Object.keys(errors).filter(e => errors[e] !== '').length === 0){
+        Object.keys(errors).forEach(e => validaDatos(e, rol[e]))
+        if(Object.keys(errors).filter(e => rol[e] === '').length === 0){
             dispatch({type: modalTypes.SHOW_MODAL_DIALOG, payload:{titulo: 'Grabar', mensaje:'¿Desea grabar el registro?'}})
             setAccion('grabar');
         }
@@ -85,24 +86,24 @@ export const FormRoles = () => {
         switch(campo){            
             case 'name':
                 if(valor.length < 3){
-                    setErrors({...errors, [campo]: 'El nombre del rol es demasiado corto.'})
+                    setErrors(prevState => ({...prevState, [campo]: 'El nombre del rol es demasiado corto.'}))
                 }else if(valor.length > 50){
-                    setErrors({...errors, [campo]: 'El nombre del rol es demasiado largo.'})
+                    setErrors(prevState => ({...prevState, [campo]: 'El nombre del rol es demasiado largo.'}))
                 }else{
-                    setErrors({...errors, [campo]: ''})
+                    setErrors(prevState => ({...prevState, [campo]: ''}))
                 }
                 break;
             case 'description':
                 if(valor.length < 10){
-                    setErrors({...errors, [campo]: 'La descripción del rol es demasiado corto.'})
+                    setErrors(prevState => ({...prevState, [campo]: 'La descripción del rol es demasiado corto.'}))
                 }else if(valor.length > 255){
-                    setErrors({...errors, [campo]: 'La descripción del rol es demasiado largo.'})
+                    setErrors(prevState => ({...prevState, [campo]: 'La descripción del rol es demasiado largo.'}))
                 }else{
-                    setErrors({...errors, [campo]: ''})
+                    setErrors(prevState => ({...prevState, [campo]: ''}))
                 }
                 break;
             default:
-                setErrors({...errors, [campo]: ''})
+                setErrors(prevState => ({...prevState, [campo]: ''}))
         }
     }
 
