@@ -14,3 +14,25 @@
     background-color: black;
     border-radius: 15%;
 }
+
+.carousel-fade{
+    height: auto;
+}
+
+
+.carousel-inner{
+    overflow: scroll;
+    height: 395px;
+}
+
+@media screen and (max-width: 600px) {
+    .carousel-fade{
+        height: 225px;
+    }
+
+    
+    .carousel-inner{
+        overflow: scroll;
+        height: 225px;
+    }
+}

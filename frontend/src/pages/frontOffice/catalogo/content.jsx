@@ -31,7 +31,10 @@ export const CatalogoContent = (props) => {
         orderByOnChange, 
         initialValuesGridCard, 
         productosState, 
-        goToPage
+        goToPage,
+        cerrarFiltro,
+        panelFiltro,
+        mostrarFiltros
     } = props
     
     
@@ -43,7 +46,9 @@ export const CatalogoContent = (props) => {
                     <h4>Catálogo</h4>
                 </Row>
                 <Row>
-                    <Col className="col-left">                        
+                    <Button variant="primary" className="btn-filtros" onClick={() => mostrarFiltros()}>Filtros</Button>
+                    <Col className="filter-panel" ref={panelFiltro}>  
+                        <div className="backgroud-panel-filtro"></div>                      
                         {/* Filtro Rango de precio */}
                         <Row className="rango-precio-row">
                             <Form.Label>Rango de precios</Form.Label>
@@ -112,8 +117,9 @@ export const CatalogoContent = (props) => {
 
 
                         <Button variant="primary" onClick={() => aplicarFiltro()}>Aplicar filtro</Button>
+                        <Button variant="primary" className="btn-cerrar-filtro" onClick={() => cerrarFiltro()}>Cerrar panel</Button>
                     </Col>
-                    <Col xs={10}>
+                    <Col xs={12} md={10}>
                         <GridCardComponent 
                             itemsPerPageOnChange={itemsPerPageOnChange}
                             data={dataGrid}
@@ -121,7 +127,7 @@ export const CatalogoContent = (props) => {
                             initialValues={initialValuesGridCard}
                         />
                         <Row className="row-paginacion">
-                            <Col md={6} className="offset-6">
+                            <Col className="paginacion">
                                 {(productosState?.data && productosState?.data?.length < productosState.totRows) && <Paginacion data={productosState} goToPage={goToPage}/>}
                             </Col>
                         </Row>

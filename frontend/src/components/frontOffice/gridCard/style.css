@@ -34,3 +34,15 @@ https://www.freecodecamp.org/news/css-vertical-align-how-to-center-a-div-text-or
     transform: translateY(-50%);
     font-size: .92em;
 }
+
+@media screen and (max-width: 600px) {
+    .top-grid-form + .container{
+        padding: 0px;
+    }
+
+    .top-grid-form + .container .row>*{
+        width: auto;
+        padding-right: 0px;
+        padding-left: 0px;
+    }
+}
