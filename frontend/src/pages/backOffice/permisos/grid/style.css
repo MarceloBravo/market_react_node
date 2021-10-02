@@ -15,3 +15,16 @@
 .itemPermisos > .lbl-head-column{
     font-weight: bold;
 }
+
+.left-column{
+    padding-right: -10px;
+}
+
+.permisos-container{
+    padding-top: 10px;
+}
+
+.rigth-column{
+    padding-left: 10px;
+    border-left: solid thin;
+}

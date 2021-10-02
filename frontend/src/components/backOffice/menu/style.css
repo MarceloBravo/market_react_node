@@ -9,7 +9,7 @@
 }
 
 .flex-column a:hover {
-  color: rgb(8, 8, 8);
+  color: rgb(113 154 215);
 }
 
 .flex-column {
@@ -18,7 +18,7 @@
 
 .sub-menu {
   /*background-color: #060854 !important;*/
-  background-color: #3d5c7b !important;
+  background-color: #181c44 !important;
   border: none !important;
 }
 
@@ -41,7 +41,7 @@
 
 .card-header button:hover {
   text-decoration: none !important;
-  color: rgb(20, 20, 20) !important;
+  color: rgb(113 154 215) !important;
 }
 
 .card-header button:focus,

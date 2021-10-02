@@ -130,7 +130,7 @@ categoriasModel.getCategorias = (callback) => {
 }
 
 const subCategorias = async (idCategoria) => {
-    let qry = `SELECT id, nombre FROM sub_categorias WHERE categoria_id = ${idCategoria}` 
+    let qry = `SELECT id, nombre FROM sub_categorias WHERE categoria_id = ${idCategoria} AND deleted_at IS NULL` 
     try{
         let res = await cnn.promise().query(qry)
         return res[0]

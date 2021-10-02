@@ -6,7 +6,7 @@
     width: 25% !important;
     box-shadow: 3px 5px #0000004f !important;
     z-index: 1100;
-    background-color: #f8f9fa !important;
+    background-color: #000000 !important;
 }
 
 .item-categoria-menu{
@@ -20,6 +20,7 @@
     margin: 5px;
     font-weight: 500;
     font-style: italic;
+    color: white;
 }
 
 .close-left-menu{
@@ -27,11 +28,12 @@
     right: 0px;
     margin: 0px 10px;
     cursor: pointer;
+    color: white;
 }
 
 .li_menu_categoria,
 .ul_menu_categoria{
-    color: #636161 !important;
+    color: white !important;
     cursor: pointer;
     display: block !important;
     text-decoration: none;
@@ -48,6 +50,10 @@
 
 a.li_menu_categoria:hover{
     text-decoration: underline ;
+}
+
+.nav-link{
+    color: #9f9b9b !important;
 }
 
 

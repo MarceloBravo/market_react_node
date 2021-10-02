@@ -44,7 +44,7 @@ export const DetalleProductoContent = (props) => {
                     <Row>
                         <Col xs={12} md={6}>
                             <Row>
-                                <Col xs="1" md="2">
+                                <Col xs="12" md="2" className="miniature-container">
                                     {productoState.imagenes.map((i, key) => {
                                         return <Row key={key}>
                                                     <Col className="col-miniatura-imagen-producto">
@@ -60,7 +60,7 @@ export const DetalleProductoContent = (props) => {
                                             })
                                     }
                                 </Col>
-                                <Col xs="11" md="10">
+                                <Col xs="12" md="10">
                                     <img 
                                         className="imagen-producto" 
                                         src={activeImage} 
@@ -71,7 +71,7 @@ export const DetalleProductoContent = (props) => {
                             </Row>
                             
                         </Col>
-                        <Col xs={6} md={6}>
+                        <Col xs={12} md={6}>
                             <h2>{productoState.nombre}</h2>
                             <Row>
                                 <Form.Label column sm="12">{productoState.descripcion}</Form.Label>
@@ -82,10 +82,10 @@ export const DetalleProductoContent = (props) => {
                             <Row>
                                 <Form.Label column sm="6">Precio : $ {formatearPrecio(productoState.precio_actual, productoState.total_impuestos)} </Form.Label>
                             </Row>
-                            <Row>
+                            <Row className="row-cantidad">
                                 <Form.Group as={Row} controlId="formTxtStock">
-                                    <Form.Label column sm="3">Cantidad </Form.Label>
-                                    <Col xs="9" md="4">
+                                    <Form.Label column xs="3" sm="3">Cantidad </Form.Label>
+                                    <Col xs="3" md="4">
                                         <Form.Control 
                                             type="number" 
                                             name="cantidad"
@@ -95,7 +95,7 @@ export const DetalleProductoContent = (props) => {
                                             max={productoState.stock}
                                         ></Form.Control>
                                     </Col>
-                                    <Form.Label column sm="3">{unidadState.nombre_plural}</Form.Label>
+                                    <Form.Label column xs="3" sm="3">{unidadState.nombre_plural}</Form.Label>
                                 </Form.Group>
                                 {errors.cantidad &&
                                     <Form.Group as={Row}>
@@ -104,8 +104,8 @@ export const DetalleProductoContent = (props) => {
                                 }
                                 
                             </Row>
-                            <Row>
-                                <Col md="7">
+                            <Row className="content-button">
+                                <Col xs={12} md="4">
                                     <Button 
                                         variant="primary" 
                                         onClick={() => agregarCarrito()}
@@ -115,7 +115,8 @@ export const DetalleProductoContent = (props) => {
                                         <FaShoppingCart/>
                                     </Button>
                                 </Col>
-                                <Col md="5">
+                                <Col xs={12} md={4}></Col>
+                                <Col xs={12} md="4">
                                     <Button 
                                         variant="danger" 
                                         onClick={() => pagarProducto() }
@@ -126,7 +127,7 @@ export const DetalleProductoContent = (props) => {
                                 </Col>
                             </Row>
                             <br/>
-                            <Row>
+                            <Row className="row-btn-buy">
                                 <Button 
                                     variant="primary" 
                                     onClick={() => volverAlCatalogo() }

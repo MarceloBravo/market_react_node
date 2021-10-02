@@ -1,8 +1,8 @@
 
 .header-menu{
     color: white;
-    left: 5%;
-    position: absolute;    
+    position: inherit;
+    margin-right: 10px;   
 }
 
 .header-menu:hover {
@@ -32,4 +32,48 @@
     display: inline-flex;
     margin: 5px;
     color: black !important
+}
+
+.header-market .row{
+    width: 100%;
+}
+
+.right-menu .navbar-nav{
+    justify-content: end;
+}
+
+.find-column{
+    justify-content: right;
+}
+
+@media screen and (max-width: 600px) {
+    .header-market{
+        height: 85px;
+    }
+
+    .header-market a{
+        padding: 0 10px;
+    }
+
+    .header-market > .container{
+        padding: 0;
+    }
+
+    #EZDrawer__container{
+        width: 75% !important;
+    }
+
+    .nav-link {
+        padding-right: 0px !important;
+    }
+    
+
+    .navbar-light{
+        height: 90px;
+    }
+
+    .navbar-nav, 
+    .navbar > .container{
+        justify-content: center !important;
+    }
 }
