@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getAll as listadoMarcas } from '../../../actions/marcas'
 import { getAll as listadoDeptos } from '../../../actions/categorias'
@@ -24,6 +24,7 @@ export const Catalogo = () => {
     const textoFiltroState = useSelector(state => state.ProductosReducer.textoFiltro)
     const preciosMinMaxState = useSelector(state => state.ProductosReducer.preciosMinMax)
     const dispatch = useDispatch()
+    const panelFiltro = useRef()
 
     useEffect(()=>{
         dispatch(listadoMarcas())
@@ -173,6 +174,14 @@ export const Catalogo = () => {
     }
 
 
+    const cerrarFiltro = () => {
+        panelFiltro.current.style = "display: none"
+    }
+
+    const mostrarFiltros = () => {
+        panelFiltro.current.style = "display: block"
+    }
+
     return (
         <CatalogoContent 
             strPrecio={strPrecio} 
@@ -192,6 +201,9 @@ export const Catalogo = () => {
             initialValuesGridCard={initialValuesGridCard} 
             productosState={productosState} 
             goToPage={goToPage}
+            cerrarFiltro={cerrarFiltro}
+            panelFiltro={panelFiltro}
+            mostrarFiltros={mostrarFiltros}
         />
     )
 }

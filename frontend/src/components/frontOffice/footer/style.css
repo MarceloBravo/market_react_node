@@ -24,3 +24,13 @@
     color: white;
     padding: 3% 0px;
 }
+
+@media screen and (max-width: 600px) {
+    .footer-component  ul{
+        padding: 0px;
+    }
+
+    .footer-component li{
+        padding-left: 20%;
+    }
+}

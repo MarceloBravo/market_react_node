@@ -59,3 +59,16 @@ td.col-action{
 .col-sub-totales{
     text-align: right;
 }
+
+
+@media screen and (max-width: 600px) {
+    .custom-class-table{
+        width: 150% !important;
+    }
+
+    .col-precio,
+    .col-precio_venta{
+        min-width: 90px;
+        width: 95px;
+    }
+}

@@ -11,9 +11,9 @@ import './style.css'
 
 
 export const PermisosGrid = () => {
-    const [ rolId, setRolId ] = useState(-1)
+    const [ rolId, setRolId ] = useState('-1')
     // eslint-disable-next-line
-    const [ errors, setErrors ] = useState({})
+    const [ errors, setErrors ] = useState({roles: ''})
     const [ roles, setRoles ] = useState([])
     const [ permisos, setPermisos ] = useState([])
     const listaRoles = useSelector(state => state.RolesReducer.list)
@@ -76,7 +76,11 @@ export const PermisosGrid = () => {
     
 
     const grabar = () => {
-        dispatch({type: typesModal.SHOW_MODAL_DIALOG, payload: {titulo: 'Grabar', mensaje:'¿Deseas grabar los permisos?'}})
+        if(rolId === '-1'){
+            setErrors(prevState => ({...prevState, roles: 'Debes seleccionar un rol'}))
+        }else{
+            dispatch({type: typesModal.SHOW_MODAL_DIALOG, payload: {titulo: 'Grabar', mensaje:'¿Deseas grabar los permisos?'}})
+        }
     }
 
     const cancelar = () => {
@@ -86,7 +90,12 @@ export const PermisosGrid = () => {
 
     const handlerChangeRoles = e => {
         setRolId(e.target.value)
-        dispatch(leerPermisos(e.target.value))
+        if(e.target.value !== '-1'){
+            dispatch(leerPermisos(e.target.value))
+            setErrors({...errors, roles: ''})
+        }else{
+            setErrors({...errors, roles: 'Debes seleccionar un rol'})
+        }
     }
 
     const handlerChanges = e => {

@@ -40,8 +40,8 @@ export const PermisosContent = (props) => {
                                     value={roles.id}
                                     onChange={e => handlerChangeRoles(e)}
                                 >
-                                    {roles.length === 0 && <option key="-1" value="">-- No se han encontrado roles --</option> }
-                                    {roles.length > 0 && <option key="-1" value="">-- Selecciona un rol --</option> }
+                                    {roles.length === 0 && <option key="-1" value="-1">-- No se han encontrado roles --</option> }
+                                    {roles.length > 0 && <option key="-1" value="-1">-- Selecciona un rol --</option> }
                                     {roles.map((r,key) => {
                                         return  <option key={key} value={r.id}>{r.name}</option>
                                     }
@@ -56,7 +56,7 @@ export const PermisosContent = (props) => {
                             </Form.Group>
                         }
                         
-                        <div>
+                        <div classNmame="permisos-container">
                         {
                             permisos.length > 0 && 
                             <div className="divPermisos">
@@ -67,7 +67,7 @@ export const PermisosContent = (props) => {
                                     <label className="lbl-head-column">Eliminar</label>
                                 </div>
                                 {permisos.length > 1 && 
-                                    <div className="itemPermisos">
+                                    <div className="itemPermisos rigth-column">
                                         <label className="lbl-head-column">Pantalla</label>
                                         <label className="lbl-head-column">crear</label>
                                         <label className="lbl-head-column">Editar</label>
@@ -78,7 +78,7 @@ export const PermisosContent = (props) => {
                         }
                         {
                             permisos.map((p, key) => {
-                                return <div key={key} className="itemPermisos">
+                                return <div key={key} className={`itemPermisos ${parseInt(key/2)*2 === key ? 'left-column' : 'rigth-column'}`}>
                                             <Form.Group key={`${key}-pantalla`} controlId={`${key}-acceder`}>
                                                 <Form.Check key={`${key}-chk-pantalla`} type="checkbox" label={p.pantalla} checked={p.acceder} onChange={(e) => handlerChanges(e)}/>
                                             </Form.Group>
@@ -98,7 +98,7 @@ export const PermisosContent = (props) => {
 
                         <div className="btn-group">
                             <Button variant="success" onClick={grabar} disabled={Object.keys(errors).filter(e => errors[e]!== '').length>0}>Grabar</Button>
-                            <Button variant="info" onClick={cancelar}>Cancelar</Button>
+                            <Button variant="primary" onClick={cancelar}>Cancelar</Button>
                         </div>
                     </Form>
                 </div>

@@ -11,10 +11,10 @@ export const FooterComponent = () => {
             <div className="footer-container">
                 <Container className="footer-component">
                     <Row>
-                        <Col>
+                        <Col xs={12} md={4}>
                             <label className="nombre-tienda-footer">{infoTiendaState ? infoTiendaState.nombre_tienda : 'Mi Tienda sin nombre'}</label>
                         </Col>
-                        <Col xs={4}>
+                        <Col xs={12} md={4}>
                             <ul>Tienda
                                 <li>Departamentos</li>
                                 <li>Recupera tu boleta</li>
@@ -22,7 +22,7 @@ export const FooterComponent = () => {
                                 <li>Cambios y devoluciones</li>
                             </ul>
                         </Col>
-                        <Col>
+                        <Col xs={12} md={4}>
                             <ul>Quienes somos
                                 <li>Visión</li>
                                 <li>Misión</li>

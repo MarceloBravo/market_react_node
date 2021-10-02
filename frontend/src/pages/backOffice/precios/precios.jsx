@@ -59,8 +59,12 @@ export const MntPrecios = () => {
 
 
     useEffect(()=>{
-        if(rowsErrors.length > 0){            
-            rowsErrors.forEach(e =>{filasRef.current[ dataGrid.data.map((f , k) => f.id === e ? k : null).filter( k => k !== null)[0] ].style.backgroundColor = "#f8d7da"});
+        if(rowsErrors.length > 0 && filasRef.length > 0){            
+            rowsErrors.forEach(e =>{
+                filasRef.current[ 
+                    dataGrid.data.map((f , k) => f.id === e ? k : null).filter( k => k !== null)[0] 
+                ].style.backgroundColor = "#f8d7da"
+            });
             dispatch({type: alertasTypes.MOSTRAR_ALERTA, payload: {mensaje: 'Existen conflictos de fechas para algunas ofertas. Revisa que las fechas no se topen entre sí.', tipo: 'danger'}})
             setGrabando(false)
         }else{

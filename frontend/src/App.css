@@ -13,7 +13,7 @@
 
 .App-header {
   /* background-color: #282c34;*/
-  background-color: #607d8b;
+  background-color: #181c44;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -46,7 +46,7 @@
 .menu-section {
   width: 200px;
   /*background-color: #060854 !important;*/
-  background-color: #3d5c7b !important;
+  background-color: #181c44 !important;
   box-shadow: 5px 0px #6f8bef6b;
   display: inline-flex;
 }
