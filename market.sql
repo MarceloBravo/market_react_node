@@ -11,7 +11,7 @@
  Target Server Version : 80020
  File Encoding         : 65001
 
- Date: 30/09/2021 23:29:26
+ Date: 03/10/2021 11:39:53
 */
 
 SET NAMES utf8mb4;
@@ -28,7 +28,7 @@ CREATE TABLE `categorias`  (
   `updated_at` timestamp(0) NOT NULL,
   `deleted_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of categorias
@@ -65,16 +65,16 @@ CREATE TABLE `clientes`  (
   `updated_at` timestamp(0) NOT NULL,
   `deleted_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of clientes
 -- ----------------------------
-INSERT INTO `clientes` VALUES (2, '11.111.111-1', 'Marcelo', 'Bravo', 'Castillo', '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '$2b$10$Ead6AIGPX.1cs9UlPF6sxerGCO9/yFTjI7a6hpP.0nOT4Ve1UtNai', 'mabc@live.cl', '+ 56 9 98765432', 'perfil.jpg', '1234', 'Talca', 'Cerca de colegio', '2021-08-10 00:00:00', '2021-09-30 00:00:00', NULL);
+INSERT INTO `clientes` VALUES (2, '11.111.111-1', 'Marcelo', 'Bravo', 'Castillo', '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '$2b$10$Ead6AIGPX.1cs9UlPF6sxerGCO9/yFTjI7a6hpP.0nOT4Ve1UtNai', 'mabc@prueba.cl', '+ 56 9 98765432', 'perfil.jpg', '1234', 'Talca', 'Cerca de colegio', '2021-08-10 00:00:00', '2021-09-30 00:00:00', NULL);
 INSERT INTO `clientes` VALUES (3, '22.222.222-2', 'Juan', 'Pérez', 'Pereira', '1 Nortre 2 Sur', '13', '131', '13108', 'Santiago', '$2b$10$rlcE3dGyjc2dyqynHPkCCeOZyxbdoeNhYHwW8TKmV6hnov73ecQg6', 'juan@ejemplo.cl', '09 87654321', NULL, '5432', '0', 'Cerca del costanera', '2021-08-11 00:00:00', '2021-08-11 00:00:00', NULL);
 INSERT INTO `clientes` VALUES (4, '33.333.333-3', 'Carla', 'Contreras', 'Jerez', '1 Oriente 1 Poniente', '07', '071', '07105', 'Talca', '$2b$10$L0PIiJtrTHY15M19p1RUm.bDjyZCVLH4qkOJbpal7kxt5nS.Qp7E2', 'carla@ejemplo.cl', '091234587654', NULL, '123', '0', 'Cerca de la plaza de armas', '2021-08-11 00:00:00', '2021-08-11 00:00:00', NULL);
 INSERT INTO `clientes` VALUES (5, '77.777.777-7', 'Carla', 'Perez', 'Corales', '1 Oriente 3 y 4 poniente', '07', '073', '07301', 'Curicó', '$2b$10$r/fhKct8pGr5st3leghri.T23JkvwJspJxyWebW/RJLNQLKG6aBKO', 'carla@ejemplo.cl', '0909878765', 'descarga.png', '3210', '', 'Cerca de supermercado Lider', '2021-09-28 00:00:00', '2021-09-28 00:00:00', NULL);
-INSERT INTO `clientes` VALUES (6, '77.777.777-7', 'Valeria', 'Maza', 'Perez', '1 Oriente 4 y 5 poniente', '13', '131', '13109', 'La cisterna', '$2b$10$rAOJOwq34ICdsPZdzuZhku6UjKfyvNuCPPlMQ.IqYvpBN6pF1JcNa', 'valeria_perez@ejemplo.cl', '1234554321', 'descarga.png', '123', '4', 'Cerca de supermercado Totus', '2021-09-28 00:00:00', '2021-09-28 00:00:00', NULL);
+INSERT INTO `clientes` VALUES (6, '88.888.888-8', 'Valeria', 'Maza', 'Perez', '1 Oriente 4 y 5 poniente', '13', '131', '13109', 'La cisterna', '$2b$10$rAOJOwq34ICdsPZdzuZhku6UjKfyvNuCPPlMQ.IqYvpBN6pF1JcNa', 'valeria_perez@ejemplo.cl', '1234554321', 'descarga.png', '123', '4', 'Cerca de supermercado Totus', '2021-09-28 00:00:00', '2021-09-28 00:00:00', NULL);
 
 -- ----------------------------
 -- Table structure for companias_envios
@@ -88,7 +88,7 @@ CREATE TABLE `companias_envios`  (
   `updated_at` timestamp(0) NOT NULL,
   `deleted_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of companias_envios
@@ -105,7 +105,7 @@ CREATE TABLE `configuracion`  (
   `created_at` timestamp(0) NULL DEFAULT NULL,
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of configuracion
@@ -137,7 +137,7 @@ CREATE TABLE `despachos_ventas`  (
   INDEX `companias_evios-despacho_ventas`(`shipping_cod`) USING BTREE,
   CONSTRAINT `companias_evios-despacho_ventas` FOREIGN KEY (`shipping_cod`) REFERENCES `companias_envios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `ventas-despachos` FOREIGN KEY (`venta_id`) REFERENCES `ventas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 419 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 418 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of despachos_ventas
@@ -542,7 +542,7 @@ CREATE TABLE `detalle_ventas`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `ventas-detalle_ventas`(`venta_id`) USING BTREE,
   CONSTRAINT `ventas-detalle_ventas` FOREIGN KEY (`venta_id`) REFERENCES `ventas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 470 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 469 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of detalle_ventas
@@ -969,7 +969,7 @@ CREATE TABLE `imagenes_marquesina_home`  (
   `updated_at` timestamp(0) NOT NULL,
   `deleted_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of imagenes_marquesina_home
@@ -996,7 +996,7 @@ CREATE TABLE `imagenes_productos`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk_imagenes_productos-productos`(`producto_id`) USING BTREE,
   CONSTRAINT `fk_imagenes_productos-productos` FOREIGN KEY (`producto_id`) REFERENCES `productos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 335 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 334 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of imagenes_productos
@@ -1052,7 +1052,7 @@ CREATE TABLE `impuestos`  (
   `deleted_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `nombre`(`nombre`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of impuestos
@@ -1081,7 +1081,7 @@ CREATE TABLE `impuestos_productos`  (
   INDEX `fk_impuestos_productos-impuestos`(`impuesto_id`) USING BTREE,
   CONSTRAINT `fk_impuestos_productos-impuestos` FOREIGN KEY (`impuesto_id`) REFERENCES `impuestos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_impuestos_productos-productos` FOREIGN KEY (`producto_id`) REFERENCES `productos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 195 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 194 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of impuestos_productos
@@ -1112,7 +1112,7 @@ CREATE TABLE `marcas`  (
   `updated_at` timestamp(0) NOT NULL,
   `deleted_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of marcas
@@ -1141,7 +1141,7 @@ CREATE TABLE `menus`  (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `menus_nombre_unique`(`nombre`) USING BTREE,
   UNIQUE INDEX `menus_url_unique`(`url`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 37 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 36 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of menus
@@ -1184,7 +1184,7 @@ CREATE TABLE `menus_tienda`  (
   `updated_at` datetime(0) NOT NULL,
   `deleted_at` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of menus_tienda
@@ -1243,7 +1243,7 @@ CREATE TABLE `pantallas`  (
   UNIQUE INDEX `pantallas_nombre_unique`(`nombre`) USING BTREE,
   INDEX `pantallas_menus_id_foreign`(`menus_id`) USING BTREE,
   CONSTRAINT `pantallas_menus_id_foreign` FOREIGN KEY (`menus_id`) REFERENCES `menus` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of pantallas
@@ -1299,7 +1299,7 @@ CREATE TABLE `permisos`  (
   INDEX `permisos_pantallas_id_foreign`(`pantallas_id`) USING BTREE,
   CONSTRAINT `permisos_pantallas_id_foreign` FOREIGN KEY (`pantallas_id`) REFERENCES `pantallas` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `permisos_roles_id_foreign` FOREIGN KEY (`roles_id`) REFERENCES `roles` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 57 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 56 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of permisos
@@ -1354,7 +1354,7 @@ CREATE TABLE `precios_productos`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk_precios_productos-productos`(`producto_id`) USING BTREE,
   CONSTRAINT `fk_precios_productos-productos` FOREIGN KEY (`producto_id`) REFERENCES `productos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of precios_productos
@@ -1404,7 +1404,7 @@ CREATE TABLE `productos`  (
   CONSTRAINT `fk_productos-marcas` FOREIGN KEY (`marca_id`) REFERENCES `marcas` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fk_productos-sub_categorias` FOREIGN KEY (`sub_categoria_id`) REFERENCES `sub_categorias` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fk_productos-unidades` FOREIGN KEY (`unidad_id`) REFERENCES `unidades` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 74 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 73 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of productos
@@ -1442,7 +1442,7 @@ CREATE TABLE `productos_secciones_home`  (
   INDEX `fk-secciones-productos`(`producto_id`) USING BTREE,
   CONSTRAINT `fk-secciones-productos` FOREIGN KEY (`producto_id`) REFERENCES `productos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk-secciones-productos_secciones` FOREIGN KEY (`seccion_id`) REFERENCES `secciones_home` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of productos_secciones_home
@@ -1471,7 +1471,7 @@ CREATE TABLE `role_user`  (
   `updated_at` timestamp(0) NULL DEFAULT NULL,
   `deleted_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 33 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of role_user
@@ -1503,7 +1503,7 @@ CREATE TABLE `roles`  (
   `deleted_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `roles_name_unique`(`name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of roles
@@ -1527,7 +1527,7 @@ CREATE TABLE `secciones_home`  (
   `updated_at` timestamp(0) NOT NULL,
   `deleted_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of secciones_home
@@ -1549,7 +1549,7 @@ CREATE TABLE `sub_categorias`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk_categ-sub_categ`(`categoria_id`) USING BTREE,
   CONSTRAINT `fk_categ-sub_categ` FOREIGN KEY (`categoria_id`) REFERENCES `categorias` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sub_categorias
@@ -1564,7 +1564,7 @@ INSERT INTO `sub_categorias` VALUES (9, 'qwertyuio', 4, '2021-09-29 00:00:00', '
 INSERT INTO `sub_categorias` VALUES (10, 'sesesesse', 1, '2021-09-29 00:00:00', '2021-09-29 00:00:00', '2021-09-29 00:00:00');
 INSERT INTO `sub_categorias` VALUES (11, 'wawawaa', 1, '2021-09-29 00:00:00', '2021-09-29 00:00:00', '2021-09-29 00:00:00');
 INSERT INTO `sub_categorias` VALUES (12, 'wawaawawa', 1, '2021-09-29 00:00:00', '2021-09-29 00:00:00', '2021-09-29 00:00:00');
-INSERT INTO `sub_categorias` VALUES (13, 'wawawawawawa', 1, '2021-09-29 00:00:00', '2021-09-29 00:00:00', NULL);
+INSERT INTO `sub_categorias` VALUES (13, 'wawawawawawa', 1, '2021-09-29 00:00:00', '2021-09-29 00:00:00', '2021-10-01 00:00:00');
 
 -- ----------------------------
 -- Table structure for tienda
@@ -1579,7 +1579,7 @@ CREATE TABLE `tienda`  (
   `created_at` timestamp(0) NOT NULL,
   `updated_at` timestamp(0) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tienda
@@ -1599,7 +1599,7 @@ CREATE TABLE `tipos_de_pago`  (
   `updated_at` timestamp(0) NOT NULL,
   `deleted_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tipos_de_pago
@@ -1624,7 +1624,7 @@ CREATE TABLE `unidades`  (
   `updated_at` timestamp(0) NOT NULL,
   `deleted_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of unidades
@@ -1655,12 +1655,12 @@ CREATE TABLE `users`  (
   `fono` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `users_email_unique`(`email`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 72 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 71 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES (1, 'Marcelo', 'mabc@live.cl', NULL, '$2b$10$q1ZwYwzfy2QlUzY2fTuLCuZvOJRyQrHmIVMVNMIOIlHAXdj6zliYG', NULL, '2020-11-22 00:00:00', '2021-06-15 00:00:00', NULL, 'Bravo', 'Castillo', '12 Norte 16 Oriente, #2288, Talca', 'Mi Avatar.jpg', '987654321');
+INSERT INTO `users` VALUES (1, 'Marcelo', 'mabc@prueba.cl', NULL, '$2b$10$q1ZwYwzfy2QlUzY2fTuLCuZvOJRyQrHmIVMVNMIOIlHAXdj6zliYG', NULL, '2020-11-22 00:00:00', '2021-06-15 00:00:00', NULL, 'Bravo', 'Castillo', '12 Norte 16 Oriente, #2288, Talca', 'Mi Avatar.jpg', '987654321');
 INSERT INTO `users` VALUES (19, 'Valeria', 'prueba@ejemplo.cl', NULL, '$2b$10$BCo6PZMKbxA/3ROLBo7D1uynIWQ/7GO6LQdk0qez0k9VZhmilWur.', NULL, '2021-01-22 21:47:01', '2021-05-26 00:00:00', NULL, 'Maza', 'sozza', '12 Norte 123', 'descarga.png', '');
 INSERT INTO `users` VALUES (30, 'Marcelo Antonio', 'marcelo.a.bravo.c@gmail.cl', NULL, '$2b$10$66WGQByMZWmVkOtRin00eOGUlw2BKuWu5/nS2Gm.fDEGH0/otpWLi', NULL, '2021-05-05 01:13:57', '2021-06-27 00:00:00', NULL, 'Bravo', 'Castillo', '12 Norte #123', 'FB_IMG_1619323830505.jpg', '');
 INSERT INTO `users` VALUES (62, 'Mariela Andrea', 'mariela2@ejemplo.cl', NULL, '$2b$10$b.qrq9mTNfYSgdPqC.veQuWXNDHe0OeCrlVHVisek7VtrtlhD5Mf6', NULL, '2021-05-05 01:13:57', '2021-04-08 00:00:00', NULL, 'Bezoain', 'Bravo', '12 Norte #123', 'fgfgfgfgfgf', '');
@@ -1679,7 +1679,7 @@ CREATE TABLE `ventas`  (
   `updated_at` timestamp(0) NOT NULL,
   `deleted_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 444 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 443 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ventas
@@ -2080,7 +2080,7 @@ CREATE TABLE `ventas_clientes`  (
   INDEX `ventas-clientes`(`cliente_id`) USING BTREE,
   CONSTRAINT `ventas-clientes` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `ventas-ventas_clientes` FOREIGN KEY (`venta_id`) REFERENCES `ventas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 428 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 427 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ventas_clientes
@@ -2484,7 +2484,7 @@ CREATE TABLE `ventas_clientes_sin_registrar`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `ventas-ventas_clientes_sin_registrar`(`venta_id`) USING BTREE,
   CONSTRAINT `ventas-ventas_clientes_sin_registrar` FOREIGN KEY (`venta_id`) REFERENCES `ventas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for ventas_webpay
@@ -2512,7 +2512,7 @@ CREATE TABLE `ventas_webpay`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `ventas-ventas_webpay`(`venta_id`) USING BTREE,
   CONSTRAINT `ventas-ventas_webpay` FOREIGN KEY (`venta_id`) REFERENCES `ventas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 402 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 401 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ventas_webpay
