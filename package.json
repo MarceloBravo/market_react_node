@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "@react-pdf/renderer": "^2.0.19",
-    "hoek": "^6.1.3"
-  }
-}
