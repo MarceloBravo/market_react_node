@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 //import { list, filter } from '../../../../actions/grid';
 import { types } from  '../../../../redux/ModalDialog/types';
 import { ModalDialog } from '../../../../components/backOffice/modalDialog';
@@ -8,6 +8,7 @@ import { types as spinnerTypes } from '../../../../redux/Spinner/types'
 import { GridPantallas } from './content';
 
 export const PantallasGrid = () => {
+    const togleMenu = useSelector(state => state.MenusReducer.togle)
     const dispatch = useDispatch();
     const [ idDelete, setIdDelete ] = useState(null);
     
@@ -49,7 +50,12 @@ export const PantallasGrid = () => {
     return (
         <>
             <ModalDialog response={response} toggle={mostrarOcultarModal}/>
-            <GridPantallas eliminarRegistro={eliminarRegistro} filtrar={filtrar} goToPage={goToPage}/>
+            <GridPantallas 
+                eliminarRegistro={eliminarRegistro} 
+                filtrar={filtrar} 
+                goToPage={goToPage}
+                togleMenu={togleMenu}
+            />
         </>
     )
 }

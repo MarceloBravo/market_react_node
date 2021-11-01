@@ -19,6 +19,7 @@ export const DespachosForm = () => {
     const provinciaState = useSelector(state => state.ProvinciasReducer.provincia)
     const comunaState = useSelector(state => state.ComunasReducer.comuna)
     const tipoAlertaState = useSelector(state => state.AlertaReducer.tipo)
+    const togleMenu = useSelector(state => state.MenusReducer.togle)
     const [ dataGrid, setDataGrid ] = useState({data:[]})
     const [ accion, setAccion ] = useState(null)
     const dispatch = useDispatch()
@@ -94,6 +95,7 @@ export const DespachosForm = () => {
             eliminar={eliminar} 
             handlerBtnCancelar={handlerBtnCancelar} 
             id={id}
+            togleMenu={togleMenu}
         />
     )
 }

@@ -11,6 +11,7 @@ export const UnidadesGrid = () => {
     const dataGrid = useSelector(state => state.UnidadesReducer.dataGrid)
     const tipoAlerta = useSelector(state => state.AlertaReducer.tipo)
     const pantalla = useSelector(state => state.PantallasReducer.pantalla)
+    const togleMenu = useSelector(state => state.MenusReducer.togle)
     const [ idEliminar, setIdEliminar ] = useState(null)
     const dispatch = useDispatch()
 
@@ -67,6 +68,7 @@ export const UnidadesGrid = () => {
             filtrar={filtrar} 
             goToPage={goToPage}
             pantalla={pantalla}
+            togleMenu={togleMenu}
         />       
     )
 }

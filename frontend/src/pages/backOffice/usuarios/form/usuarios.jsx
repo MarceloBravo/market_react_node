@@ -17,6 +17,7 @@ export const UsuariosForm = () => {
     const roles = useSelector(state => state.RolesReducer.list)
     const user = useSelector(state => state.UsersReducer.user)
     const ok = useSelector(state => state.AlertaReducer.tipo)   //Si ok es verdadero se redirecciona al listado de registros
+    const togleMenu = useSelector(state => state.MenusReducer.togle)
     const dispatch = useDispatch()
     const history = useHistory()
     const fileAvatar = useRef(null)
@@ -242,6 +243,7 @@ export const UsuariosForm = () => {
             fileReference={fileAvatar}  //Referencia al control file
             fnLoadImage={handlerFile} //Función que muestra el cuadro de dialogo para buscar una imágen
             fnRefgreshImage={fnRefgreshImage}   //Función que recibe los cambios de imágen del avatar del usuario
+            togleMenu={togleMenu}
         />       
     )
 }

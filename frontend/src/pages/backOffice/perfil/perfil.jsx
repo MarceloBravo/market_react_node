@@ -8,6 +8,7 @@ import { PerfilContent } from './content'
 
 export const Perfil = () => {
     const logedUser = useSelector(state => state.LoginReducer.logedUser)
+    const togleMenu = useSelector(state => state.MenusReducer.togle)
     const [ usuario, setUsuario ] = useState({id: '', name: '', a_paterno: '', a_materno: '', direccion: '', email: '', fono: '', foto: '', objFile:'', password: '', confirm_password: '', roles:[]})
     const [ errors, setErrors ] = useState({name: '', a_paterno: '', a_materno: '', direccion: '', email: '', fono: '', foto:'', password: '', confirm_password: ''})
     const dispatch = useDispatch()
@@ -75,6 +76,7 @@ export const Perfil = () => {
             fnLoadImage={fnLoadImage}
             fileAvatar={fileAvatar}
             fnRefreshAvatar={fnRefreshAvatar}
+            togleMenu={togleMenu}
         />
     )
 }

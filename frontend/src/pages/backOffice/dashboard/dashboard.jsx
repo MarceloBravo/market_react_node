@@ -13,6 +13,7 @@ export const Dashboard = () => {
     const menosVendidosState = useSelector(state => state.DashboardReducer.menosVendidos)
     const totalesVentasDespachosState = useSelector(state => state.DashboardReducer.totalesVentasDespachos)
     const ventasDespachosUltimoAnioState = useSelector(state => state.DashboardReducer.ventasDespachosUltimoAnio)
+    const togleMenu = useSelector(state => state.MenusReducer.togle)
     const [ dataVentasMenusuales, setDataVentasMensuales ] = useState([])
     const [ dataUnidadesMenusuales, setDataUnidadesMensuales ] = useState([])
     const [ dataVentasTrimestrales, setDataVentasTrimestrales ] = useState([])
@@ -143,6 +144,7 @@ export const Dashboard = () => {
             dataUnidadesTrimestrales={dataUnidadesTrimestrales} 
             dataVentasAnuales={dataVentasAnuales} 
             dataUnidadesAnuales={dataUnidadesAnuales}
+            togleMenu={togleMenu}
         />       
     )
 }

@@ -16,6 +16,7 @@ export const GridMntClientes = () => {
     const [ textoFiltro, setTextoFiltro ] = useState('')
     const dataGrid = useSelector(state => state.ClientesReducer.dataGrid)
     const resultadoOperacionState = useSelector(state => state.AlertaReducer.tipo)
+    const togleMenu = useSelector(state => state.MenusReducer.togle)
     const dispatch = useDispatch()
 
 
@@ -70,13 +71,11 @@ export const GridMntClientes = () => {
 
     return (
         <div> 
-            <Header />
+            <Menu activeKeyMenu="19"/>
             <SpinnerComponent />
             <ModalDialog response={response}/>
-            <div className="main-section">
-                <div className="menu-section">
-                    <Menu activeKeyMenu="19"/>
-                </div>                
+            <div className={"main-section " + (togleMenu ? 'main-width' : 'main-normal')}>
+                <Header />
                 <div className="content-section">                    
                     <Alerta />
                     <Grid

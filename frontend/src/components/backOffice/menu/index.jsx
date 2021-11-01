@@ -6,6 +6,8 @@ import { types } from '../../../redux/Alert/types'
 import './style.css'
 
 export const Menu = (props) => {
+    const nombre_app = useSelector(state => state.PersonalizarReducer.config.nombre_app)
+    const togleMenu = useSelector(state => state.MenusReducer.togle)
     const { activeKeyMenu } = props
     const menus = useSelector(state => state.MenusReducer.displayedMenus)
     const roles = useSelector(state => state.LoginReducer.logedUser.roles)
@@ -26,6 +28,12 @@ export const Menu = (props) => {
     }
 
     return (
-        <ContentMenuComponent menus={menus} activeKeyMenu={activeKeyMenu} clearMessages={clearMessages}/>
+        <ContentMenuComponent
+            menus={menus} 
+            activeKeyMenu={activeKeyMenu} 
+            clearMessages={clearMessages} 
+            nombre_app={nombre_app}
+            togleMenu={togleMenu}
+        />
     )
 }

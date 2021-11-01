@@ -14,6 +14,7 @@ export const UnidadesForm = () => {
     const pantalla = useSelector(state => state.PantallasReducer.pantalla)
     const unidadState = useSelector(state => state.UnidadesReducer.unidad)
     const alertaTipo = useSelector(state => state.AlertaReducer.tipo)
+    const togleMenu = useSelector(state => state.MenusReducer.togle)
     const [ unidad, setUnidad ] = useState({id: '', nombre: '', nombre_plural: '', created_at: '', updated_at:'', deleted_at: ''})
     const [ errors, setErrors ] = useState({nombre: '', nombre_plural: '',})
     const [ accion, setAccion ] = useState(null)
@@ -121,6 +122,7 @@ export const UnidadesForm = () => {
             eliminar={eliminar} 
             cancelar={cancelar} 
             id={id}
+            togleMenu={togleMenu}
         />
     )
 }

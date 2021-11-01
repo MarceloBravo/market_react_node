@@ -10,18 +10,16 @@ import { Alerta } from '../../../components/shared/alerts'
 export const ContentPersonalizar = (props) => {
     // eslint-disable-next-line
     const [ errors, setErrors ] = useState({nombre_app: null})
-    const { response, config, handlerChangeValue, grabar, handlerBtnCancelar, id} = props
+    const { response, config, handlerChangeValue, grabar, handlerBtnCancelar, id, togleMenu } = props
 
     return (
         <div>
             <ModalDialog response={response}/>
-            <Header />
+            <Menu activeKeyMenu="15"/>
             <SpinnerComponent />
 
-            <div className="main-section">
-                <div className="menu-section">
-                    <Menu activeKeyMenu="15"/>
-                </div>
+            <div className={"main-section " + (togleMenu ? 'main-width' : 'main-normal')}>
+                <Header />
                 <div className="content-section">                    
                     <Alerta />
                     <Form>

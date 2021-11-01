@@ -25,17 +25,16 @@ export const ClientesContent = (props) => {
         eliminar, 
         cancelar, 
         id, 
+        togleMenu,
     } = props 
 
     return (
         <div>
             <ModalDialog response={response} />
-            <Header />      
+            <Menu activeKeyMenu="19"/>
             <SpinnerComponent /> 
-            <div className="main-section">
-                <div className="menu-section">
-                    <Menu activeKeyMenu="19"/>
-                </div>
+            <div className={"main-section " + (togleMenu ? 'main-width' : 'main-normal')}>
+                <Header />
                 <div className="content-section">
                     <Alerta />
                     <Form className="form-cliente">

@@ -13,7 +13,7 @@
 
 .App-header {
   /* background-color: #282c34;*/
-  background-color: #181c44;
+  background-color: #222e3c;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -37,18 +37,43 @@
 }
 
 .main-section {
-  display: flex;
+  /*display: flex;
   position: absolute;
   width: 100%;
+  height: calc(100% - 60px);*/
+
   height: calc(100% - 60px);
+  right: 0;
+  width: 85%;
+  position: absolute;
+}
+
+.navbar-brand{
+  height: 50px;
+  padding: 10px;
+  text-align: center;
+  color: white;
+  display: block;
 }
 
 .menu-section {
   width: 200px;
-  /*background-color: #060854 !important;*/
-  background-color: #181c44 !important;
-  box-shadow: 5px 0px #6f8bef6b;
+  /*background-color: #060854 !important;
+  box-shadow: 5px 0px #6f8bef6b;*/
+  background-color: #222e3c !important;
+  
   display: inline-flex;
+  position: fixed;
+  height: 100%;
+  z-index: 10000;
+}
+
+.main-width{
+  width: calc(100% - 50px);
+}
+
+.main-normal{
+  width: calc(100% - 199px);
 }
 /*
 .menu-section,
@@ -58,8 +83,11 @@
 */
 .content-section {
   width: inherit;
-  padding: 2% 5%;
+  /*padding: 2% 5%;*/
   overflow: auto;
+  
+  padding: 5% 2% 0px;
+  width: 100%;
 }
 
 .content-section > div {

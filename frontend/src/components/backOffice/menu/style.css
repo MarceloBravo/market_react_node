@@ -11,14 +11,14 @@
 .flex-column a:hover {
   color: rgb(113 154 215);
 }
-
+/*
 .flex-column {
   background-color: #060854 !important;
 }
-
+*/
 .sub-menu {
   /*background-color: #060854 !important;*/
-  background-color: #181c44 !important;
+  background-color: #222e3c !important;
   border: none !important;
 }
 
@@ -41,7 +41,7 @@
 
 .card-header button:hover {
   text-decoration: none !important;
-  color: rgb(113 154 215) !important;
+  color: rgb(176, 187, 250) !important;
 }
 
 .card-header button:focus,
@@ -58,4 +58,16 @@ a.active {
   /*color: #8e9eaa !important;*/
   color: #ffffff !important;
   text-decoration: none !important;
+}
+
+.pather-menu:focus{
+  text-decoration: underline;
+}
+
+.hideMenu{
+  left: -150px;
+}
+
+.visibleMenu{
+  left: 0px;
 }

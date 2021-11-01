@@ -11,7 +11,8 @@ export const MarcasGridReducer = () => {
     const [ currentPage, setCurrentPage ] = useState(0)
     const dataGrid = useSelector(state => state.MarcasReducer.dataGrid)
     const tipoAlerta = useSelector(state => state.AlertaReducer.tipo)    
-    const pantalla = useSelector(state => state.PantallasReducer.pantalla)    
+    const pantalla = useSelector(state => state.PantallasReducer.pantalla) 
+    const togleMenu = useSelector(state => state.MenusReducer.togle)   
     const dispatch = useDispatch()
     
 
@@ -73,6 +74,7 @@ export const MarcasGridReducer = () => {
             filtrar={filtrar} 
             goToPage={goToPage}
             currentPath={currentPath}
+            togleMenu={togleMenu}
         />
     )
 }

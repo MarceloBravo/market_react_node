@@ -11,17 +11,15 @@ import { formatearNumero } from '../../../../shared/funciones'
 export const ProductosFormContent = (props) => {
     const { response, pantalla, producto, handlerChangeValue, errors, formatDate, unidades, marcas, categorias,
         subCategorias, impuestos, loadImage, inputFileRef, refreshImage, getImage, imgRef, changeImage, 
-        selectDefaultImage, removeImage, grabar, eliminar, handlerBtnCancelar, id  } = props
+        selectDefaultImage, removeImage, grabar, eliminar, handlerBtnCancelar, id, togleMenu  } = props
 
     return (
         <div>
             <ModalDialog response={response} />
-            <Header />      
+            <Menu activeKeyMenu="19"/>
             <SpinnerComponent /> 
-            <div className="main-section">
-                <div className="menu-section">
-                    <Menu activeKeyMenu="19"/>
-                </div>
+            <div className={"main-section " + (togleMenu ? 'main-width' : 'main-normal')}>
+                <Header />
                 <div className="content-section">
                     <Alerta />
                     <Form>

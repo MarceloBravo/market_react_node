@@ -10,6 +10,7 @@ export const ImpuestosForm = (props) => {
     const { id } = useParams()
     const data = useSelector(state => state.ImpuestosReducer.impuesto)
     const ok = useSelector(state => state.AlertaReducer.tipo) 
+    const togleMenu = useSelector(state => state.MenusReducer.togle)
     const [ impuesto, setImpuesto ] = useState({nombre:'', sigla:'', porcentaje: '', created_at: '', updated_at: '', deleted_at:''})
     const [ errors, setErrors ] = useState({nombre:'', sigla:'', porcentaje: ''})
     const [ accion, setAccion ] = useState(null)
@@ -152,6 +153,7 @@ export const ImpuestosForm = (props) => {
             eliminar={eliminar} 
             handlerBtnCancelar={handlerBtnCancelar} 
             id={id}
+            togleMenu={togleMenu}
         />        
     )
 }

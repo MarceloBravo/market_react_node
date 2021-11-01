@@ -9,17 +9,26 @@ import { defaultAvatarUrl, defaultImagesUrl } from  '../../../shared/constantes'
 import './style.css'
 
 export const PerfilContent = (props) => {
-    const { response, usuario, handlerChangeValue, errors, grabar, cancelar, fileAvatar, fnLoadImage, fnRefreshAvatar } = props
+    const { 
+        response, 
+        usuario, 
+        handlerChangeValue, 
+        errors, 
+        grabar, 
+        cancelar, 
+        fileAvatar, 
+        fnLoadImage, 
+        fnRefreshAvatar, 
+        togleMenu 
+    } = props
 
     return (
         <div>
             <ModalDialog response={response}/>
             <SpinnerComponent/>
-            <Header/>
-            <div className="main-section">
-                <div className="menu-section">
-                    <Menu activeKeyMenu="1"/>
-                </div>
+            <Menu activeKeyMenu="1"/>
+            <div className={"main-section " + (togleMenu ? 'main-width' : 'main-normal')}>
+                <Header/>
                 <div className="content-section">
                     <Alerta />
                     <Form>

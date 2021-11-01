@@ -9,6 +9,7 @@ import { PreciosContent } from './content'
 export const MntPrecios = () => {
     const dataGridState = useSelector(state => state.PreciosReducer.dataGrid)
     const alertaState = useSelector(state => state.AlertaReducer)
+    const togleMenu = useSelector(state => state.MenusReducer.togle)
     const [ dataGrid, setDataGrid ] = useState([])
     const [ filtro, setFiltro ] = useState('')
     const [ idDelete, setIdDelete ] = useState(null)
@@ -320,6 +321,7 @@ export const MntPrecios = () => {
             onDoubleClickColumn={onDoubleClickColumn}
             filasRef={filasRef}
             goToPage={goToPage}
+            togleMenu={togleMenu}
         />
     )
 }

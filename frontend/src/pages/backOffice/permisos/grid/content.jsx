@@ -15,17 +15,16 @@ export const PermisosContent = (props) => {
         errors,
         permisos,
         grabar,
-        cancelar
+        cancelar,
+        togleMenu,
     } = props
 
     return (
         <>
             <ModalDialog response={response} toggle={mostrarOcultarModal}/>
-            <Header />
-            <div className="main-section">
-                <div className="menu-section">
-                    <Menu activeKeyMenu="15"/>
-                </div>
+            <Menu activeKeyMenu="15"/>
+            <div className={"main-section " + (togleMenu ? 'main-width' : 'main-normal')}>
+                <Header />
                 <div className="content-section">   
                     <Alerta/>                 
                     <Form>

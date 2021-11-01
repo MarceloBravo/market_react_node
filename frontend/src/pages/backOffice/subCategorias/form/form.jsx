@@ -21,6 +21,7 @@ export const SubCategoriasForm = () => {
     const categorias = useSelector(state => state.CategoriasReducer.list)
     const pantalla = useSelector(state => state.PantallasReducer.pantalla)
     const tipo = useSelector(state => state.AlertaReducer.tipo)
+    const togleMenu = useSelector(state => state.MenusReducer.togle)
     const dispatch = useDispatch()
     const history = useHistory()
 
@@ -136,7 +137,8 @@ export const SubCategoriasForm = () => {
             grabar={grabar} 
             eliminar={eliminar} 
             cancelar={cancelar} 
-            id 
+            id={id}
+            togleMenu={togleMenu}
         />
     )
 }

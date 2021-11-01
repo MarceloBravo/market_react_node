@@ -7,17 +7,26 @@ import { FormButtons } from '../../../../components/backOffice/form_buttons'
 import { SpinnerComponent } from '../../../../components/shared/spinner'
 
 export const RolesForm = (props) => {
-    const { response, mostrarOcultarModal, rol, handlerChangeValue, errors, grabar, eliminar, cancelar, id} = props
+    const { 
+        response, 
+        mostrarOcultarModal, 
+        rol, 
+        handlerChangeValue, 
+        errors, 
+        grabar, 
+        eliminar, 
+        cancelar, 
+        id,
+        togleMenu,
+    } = props
 
     return (
         <>
             <ModalDialog response={response} toggle={mostrarOcultarModal}/>
-            <Header />
+            <Menu activeKeyMenu="15"/>
             <SpinnerComponent />
-            <div className="main-section">
-                <div className="menu-section">
-                    <Menu activeKeyMenu="15"/>
-                </div>
+            <div className={"main-section " + (togleMenu ? 'main-width' : 'main-normal')}>
+                <Header />
                 <div className="content-section">                    
                     <Form>
                         <div className="div-title">Mantenedor de Roles</div>

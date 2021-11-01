@@ -13,6 +13,7 @@ export const FormRoles = () => {
     const [ errors, setErrors ] = useState({name: '', description: ''})
     const rolState = useSelector(state => state.RolesReducer.rol)
     const ok = useSelector(state => state.AlertaReducer.tipo)
+    const togleMenu = useSelector(state => state.MenusReducer.togle)
     const [ accion, setAccion ] = useState('');
     const dispatch = useDispatch()
     const history = useHistory()
@@ -118,6 +119,7 @@ export const FormRoles = () => {
             eliminar={showModalEeliminar} 
             cancelar={cancelar} 
             id={id}
+            togleMenu={togleMenu}
         />
     )
 }

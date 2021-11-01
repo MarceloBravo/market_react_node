@@ -24,17 +24,16 @@ export const DashBoardContent = (props) => {
         dataVentasTrimestrales, 
         dataUnidadesTrimestrales, 
         dataVentasAnuales, 
-        dataUnidadesAnuales
+        dataUnidadesAnuales,
+        togleMenu,
     } = props
 
     return (
         <>
-            <Header />
+            <Menu activeKeyMenu="30"/>
             <SpinnerComponent />
-            <div className="main-section">
-                <div className="menu-section">
-                    <Menu activeKeyMenu="30"/>
-                </div>                
+            <div className={"main-section " + (togleMenu ? 'main-width' : 'main-normal')}>                    
+                <Header />
                 <div className="content-section home-page">                    
                     <Alerta />
                     <div className="div-title">Cuadro de mando</div>

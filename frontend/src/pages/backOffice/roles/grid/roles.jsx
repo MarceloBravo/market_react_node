@@ -8,6 +8,7 @@ import { RolesContent } from './content'
 
 export const RolesGrid = () => {
     const dataGrid = useSelector(state => state.RolesReducer.dataGrid )
+    const togleMenu = useSelector(state => state.MenusReducer.togle)
     const dispatch = useDispatch()
     const [ idDelete, setIdDelete ] = useState(0)
 
@@ -49,6 +50,7 @@ export const RolesGrid = () => {
             eliminarRegistro={eliminarRegistro} 
             filtrar={filtrar}
             goToPage={goToPage}
+            togleMenu={togleMenu}
         />
     )
 }

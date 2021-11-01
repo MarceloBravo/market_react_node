@@ -27,6 +27,7 @@ export const ProductosForm = (props) => {
     const impuestos = useSelector(state => state.ImpuestosReducer.list)
     const tipoAlerta = useSelector(state => state.AlertaReducer.tipo)
     const productoState = useSelector(state => state.ProductosReducer.producto)
+    const togleMenu = useSelector(state => state.MenusReducer.togle)
     const [ producto, setProducto ] = useState({
         id: 0,
         nombre: '',
@@ -378,6 +379,7 @@ export const ProductosForm = (props) => {
             eliminar={eliminar} 
             handlerBtnCancelar={handlerBtnCancelar} 
             id={id}
+            togleMenu={togleMenu}
         />       
     )
 }

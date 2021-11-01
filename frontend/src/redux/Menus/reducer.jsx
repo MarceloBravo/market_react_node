@@ -20,6 +20,7 @@ const INITIAL_STATE = {
     },
     list: [],   //Contiene los menús que se mostrarán en los listados existentes en los formularios de la aplicación
     displayedMenus: [], //Contiene el listado de Menús que se mostrarán cómo menú principal de la aplicación
+    togle: false,
 }
 
 export const MenusReducer = (state = INITIAL_STATE, action) => {
@@ -51,6 +52,11 @@ export const MenusReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 displayedMenus: action.payload,
+            }
+        case types.TOGLE_MENU:
+            return {
+                ...state,
+                togle: !state.togle
             }
         default:
             return state;

@@ -14,6 +14,7 @@ import { Form } from 'react-bootstrap'
 
 export const Home  = () => {
     const listaDespachosState = useSelector(state => state.DespachosReducer.list)
+    const togleMenu = useSelector(state => state.MenusReducer.togle)
     const [ currentPage, setCurrentPage ] = useState(0)
     const [ dataGrid, setDataGrid ] = useState({data:[], rowsPerPage: 10, totRows: 0})
     const [ textoFiltro, setTextoFiltro ] = useState('')
@@ -56,12 +57,11 @@ export const Home  = () => {
 
     return(
         <>
-            <Header />
+            
+            <Menu activeKeyMenu="0"/>
             <SpinnerComponent />
-            <div className="main-section">
-                <div className="menu-section">
-                    <Menu activeKeyMenu="0"/>
-                </div>                
+            <div className={"main-section " + (togleMenu ? 'main-width' : 'main-normal')}>
+                <Header />                      
                 <div className="content-section home-page">                    
                     <Alerta />
                     <Grid

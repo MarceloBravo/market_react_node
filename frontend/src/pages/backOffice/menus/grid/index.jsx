@@ -10,6 +10,7 @@ import { types as spinnerTypes } from '../../../../redux/Spinner/types'
 
 export const MenusGrid = () => {
     const dataGrid = useSelector(state => state.MenusReducer.dataGrid)
+    const togleMenu = useSelector(state => state.MenusReducer.togle)   
     const [ idDelete, setIdDelete] = useState(null)
     const dispatch = useDispatch()
 
@@ -53,7 +54,13 @@ export const MenusGrid = () => {
     return (
         <>
             <ModalDialog response={response} toggle={mostrarOcultarModal}/>
-            <GridMenus listado={dataGrid} eliminarRegistro={eliminarRegistro} filtrar={filtrar} goToPage={goToPage}/>
+            <GridMenus 
+                listado={dataGrid} 
+                eliminarRegistro={eliminarRegistro} 
+                filtrar={filtrar} 
+                goToPage={goToPage} 
+                togleMenu={togleMenu}
+            />
         </>
     )
 }

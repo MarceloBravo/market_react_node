@@ -5,6 +5,7 @@ import { GridContent } from './content'
 
 export const DespachosGrid  = () => {
     const listaDespachosState = useSelector(state => state.DespachosReducer.list)
+    const togleMenu = useSelector(state => state.MenusReducer.togle)
     const [ currentPage, setCurrentPage ] = useState(0)
     const [ dataGrid, setDataGrid ] = useState({data:[], rowsPerPage: 10, totRows: 0})
     const [ textoFiltro, setTextoFiltro ] = useState('')
@@ -45,6 +46,6 @@ export const DespachosGrid  = () => {
 
 
     return(
-        <GridContent dataGrid={dataGrid} fnFiltrar={fnFiltrar} goToPage={goToPage}/>       
+        <GridContent dataGrid={dataGrid} fnFiltrar={fnFiltrar} goToPage={goToPage} togleMenu={togleMenu}/>       
     )
 }
