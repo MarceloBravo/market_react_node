@@ -23,7 +23,8 @@ export const  ResultadoVentaContent = (props) => {
         goToInicio, 
         dataPDF,
         nombreTienda,
-        sendEmail
+        sendEmail,
+        generarBoleta
     } = props
 
     return (
@@ -119,7 +120,13 @@ export const  ResultadoVentaContent = (props) => {
                                 <ErrorHandler>
                                 {
                                 (dataPDF && carrito) && 
-                                    <PDFDownloadLink variant="primary" document={<PDFComponent data={dataPDF} carrito={carrito} nombre_tienda={nombreTienda}/>} fileName={"comprobante_venta-" + formatearFechaHora(transactionStatus?.transaction_date) + ".pdf"}>
+                                    <PDFDownloadLink 
+                                        variant="primary" 
+                                        document={<PDFComponent data={dataPDF} 
+                                        carrito={carrito} 
+                                        nombre_tienda={nombreTienda}/>} 
+                                        fileName={"comprobante_venta-" + formatearFechaHora(transactionStatus?.transaction_date) + ".pdf"}
+                                    >
                                     {
                                         ({loading}) => loading ? 'Cargando...' : <Button variant="primary" >Descargar comprobante</Button>
                                     }     
@@ -140,6 +147,7 @@ export const  ResultadoVentaContent = (props) => {
                         </Row>
                     </>
                 }
+                {carrito && <Button onClick={() => generarBoleta()}>Descarga tu boleta</Button>}
                 {/*
                 <ErrorHandler>
                     {(dataPDF && (Object.keys(dataPDF).length > 15) && carrito) &&

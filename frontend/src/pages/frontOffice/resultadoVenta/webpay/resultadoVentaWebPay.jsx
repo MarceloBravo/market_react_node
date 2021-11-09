@@ -8,6 +8,8 @@ import { types as spinnerTypes } from '../../../../redux/Spinner/types'
 import { registrar as registrarVenta } from '../../../../actions/ventas'
 import { ResultadoVentaContent } from './content'
 import { bodyPDF }  from '../../../../shared/funciones'
+import jsPDF from 'jspdf'   //https://www.npmjs.com/package/jspdf
+import 'jspdf-autotable'    //https://www.npmjs.com/package/jspdf-autotable
 //yarn add @react-pdf/renderer
 
 //Documentación de envío de email con emailJS: https://mailtrap.io/blog/react-send-email/
@@ -326,6 +328,65 @@ export const ResultadoVentaWebPayComponent = () => {
     };
 
 
+    const formatNumber = e => {
+        return new Intl.NumberFormat("de-DE").format(e) //https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat
+    }
+
+
+    const generarBoleta = () => {
+        const fecha = new Date()
+        var doc = new jsPDF('portrait','px','a4','false');
+        doc.setFont('Helvetica','bold');
+        doc.setFontSize(20)
+        doc.setTextColor('red')
+        doc.text(290, 40, 'Boleta N°')
+        doc.text(300, 60, `${datosVenta.datos_webpay.buy_order}`.padStart(6, '0'))
+
+        
+        doc.setLineWidth(1.5);  //https://github.com/parallax/jsPDF/issues/1331
+        doc.setDrawColor('red');
+        doc.line(250, 20, 400, 20);
+        doc.line(250, 20, 250, 80);
+        doc.line(250, 80, 400, 80);
+        doc.line(400, 20, 400, 80);
+
+
+        doc.setTextColor('black')
+        doc.setFontSize(20);
+        doc.text(20, 30, nombreTienda);
+        doc.setFontSize(10);
+        doc.text(30, 65, 'Fecha:');
+        
+        doc.text(30, 80, 'Dirección:')
+        doc.text(30, 95, 'email:')
+        doc.text(30, 110, 'Fono venta')
+
+        console.log(datosVenta, infoTiendaState)
+        doc.setFont('Helvetica','normal')
+        doc.text(80, 65, `${(fecha.getDay() ? '0' : '') + fecha.getDay()}/${(fecha.getMonth() < 10 ? '0' : '') + fecha.getMonth()}/${fecha.getFullYear()}`);
+        doc.text(80, 80, infoTiendaState.direccion)
+        doc.text(80, 95, infoTiendaState.email)
+        doc.text(80, 110, infoTiendaState.fono_venta)
+        
+        var table = datosVenta.productos.map(e => {
+            return [e.nombre, e.str_precio, e.cantidad, '$ ' + `${formatNumber(e.precio * e.cantidad)}`.padStart(12, ' ')]    //https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/String/padStart
+        })
+
+        table.push(['','','Total','$ ' + `${formatNumber(datosVenta.total)}`.padStart(12, ' ')])
+
+        doc.autoTable({
+            startY: 150,
+            theme: 'grid',
+            head: [['Producto','Precio','Cant.','Subtotal']],
+            body: table
+        })
+        doc.save()
+        
+        //doc.html(detalle, {callback: function(doc){doc.setFont('Helvetica','normal'); doc.setFontSize(10); doc.save()}, x: 10, y: 60, width: 100})
+        
+        //doc.save()
+    }
+
 
     return (
         <ResultadoVentaContent 
@@ -338,6 +399,7 @@ export const ResultadoVentaWebPayComponent = () => {
             dataPDF={dataPDF}
             nombreTienda={nombreTienda}
             sendEmail={sendEmail}
+            generarBoleta={generarBoleta}
             //html={html}
         />        
     )
