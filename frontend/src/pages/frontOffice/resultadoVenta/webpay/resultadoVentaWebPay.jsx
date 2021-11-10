@@ -7,14 +7,16 @@ import { searchByCode } from '../../../../actions/tiposPago'
 import { types as spinnerTypes } from '../../../../redux/Spinner/types'
 import { registrar as registrarVenta } from '../../../../actions/ventas'
 import { ResultadoVentaContent } from './content'
-import { bodyPDF }  from '../../../../shared/funciones'
+//import { bodyPDF }  from '../../../../shared/funciones'
+import { sendEmail as enviarEmail } from '../../../../actions/email'
+
 import jsPDF from 'jspdf'   //https://www.npmjs.com/package/jspdf
 import 'jspdf-autotable'    //https://www.npmjs.com/package/jspdf-autotable
 //yarn add @react-pdf/renderer
 
 //Documentación de envío de email con emailJS: https://mailtrap.io/blog/react-send-email/
-import emailjs from 'emailjs-com';
-import { USER_ID, TEMPLATE_ID } from '../../../../shared/emailkey'
+//import emailjs from 'emailjs-com';
+//import { USER_ID, TEMPLATE_ID } from '../../../../shared/emailkey'
 
 import './style.css'
 
@@ -149,9 +151,28 @@ export const ResultadoVentaWebPayComponent = () => {
     },[transactionStatus, tipoPagoState, impuestos])
 
 
-/*  
-    useEffect(()=>{
-        setHtml(`<html>
+
+    const getHtmlBoleta = () =>{
+        let numBoleta = `${datosVenta.datos_webpay.buy_order}`.padStart(6, '0')
+        let hoy = new Date()
+        let fecha = `${(hoy.getDay() ? '0' : '') + hoy.getDay()}/${(hoy.getMonth() < 10 ? '0' : '') + hoy.getMonth()}/${hoy.getFullYear()}`
+        let detalle = ''
+        let total = 0
+        datosVenta.productos.forEach(e => {
+                detalle += `<tr>
+                                <td>${e.nombre}</td>
+                                <td class="resumen-col-cantidad">${e.str_precio}</td>
+                                <td class="resumen-col-precio">${e.cantidad}</td>
+                                <td>$ ${toString(formatNumber(e.precio * e.cantidad), 12)}</td>
+                            </tr>`
+                total += (e.cantidad * e.precio)
+            })
+
+        if(detalle.length > 0){
+            detalle += `<tr><td></td><td></td><td>Total</td><td>$ ${toString(formatNumber(total), 12)}</td></tr>`
+        }
+
+        let html = `<html>
             <body>
                 <style>
                 .table{
@@ -227,17 +248,17 @@ export const ResultadoVentaWebPayComponent = () => {
                 </style>
                 <div class="table">
                     <div class="datos-tienda">
-                        <div class="nombre-tienda">Nombre tienda</div>
+                        <div class="nombre-tienda">${nombreTienda}</div>
                         <div>Descripción del giro</div>
-                        <div>Fecha</div>
-                        <div>N° Trajeta</div>
-                        <div>Cód de autorización</div>
-                        <div>Forma de pago</div>
+                        <div>Fecha: ${fecha}</div>
+                        <div>N° Dirección: ${infoTiendaState.direccion}</div>
+                        <div>Email: ${infoTiendaState.email}</div>
+                        <div>Fono venta: ${infoTiendaState.fono_venta}</div>
                     </div>
                     <div class="box-doc-number">
                         <div class="doc-number">
-                            <label class="label-order-number">Orden de Compra N°</label>
-                            <label class="order-number">0000003467</label>
+                            <label class="label-order-number">Boleta N°</label>
+                            <label class="order-number">${numBoleta}</label>
                         </div>
                     </div>
                 </div>
@@ -250,44 +271,26 @@ export const ResultadoVentaWebPayComponent = () => {
                                 <th>Producto</th>
                                 <th>Cantidad</th>
                                 <th>Precio</th>
+                                <th>Subtotal</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>{carrito[item].nombre}</td>
-                                <td class="resumen-col-cantidad">3</td>
-                                <td class="resumen-col-precio">$ 120.000</td>
-                            </tr>
-                            <tr>
-                                <td class="empty-cell"></td>
-                                <td class="resumen-cel-titulo">Impuestos</td>
-                                <td class="resumen-col-precio">
-                                    $ 19000
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="empty-cell"></td>
-                                <td class="resumen-cel-titulo">Despacho</td>
-                                <td class="resumen-col-precio">
-                                    $ 123456
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="empty-cell"></td>
-                                <td class="resumen-cel-titulo">Total</td>
-                                <td class="resumen-col-precio">
-                                    $ 123456
-                                </td>
-                            </tr>
-        
+                            ${detalle}
                         </tbody>
                         
                     </Table>
                 
             </body>
-        </html>`)
-    },[dataPDF])
-*/
+        </html>`
+
+        return html;
+    }
+
+
+    const toString = (number, longitud) => {
+        return `${number}`.padStart(longitud, ' ')
+    }
+
     const goToInicio = () => {
         history.push('/')
     }
@@ -304,11 +307,39 @@ export const ResultadoVentaWebPayComponent = () => {
     }
 
 
+    
+    const sendEmail = (e) => {
+        dispatch({type: spinnerTypes.SHOW_SPINNER}) //Muestra la pantalla de espera con el spinner girando
+
+        dispatch(
+            enviarEmail({
+                from: `${nombreTienda} <${infoTiendaState.email}>`,
+                to: datosVenta.datos_cliente.email,
+                subject: 'Comprobante de compra',
+                text: '',
+                html: getHtmlBoleta()
+            })
+        )
+    }
+
     //Documentación de envío de email con emailJS: https://mailtrap.io/blog/react-send-email/
     //https://www.emailjs.com/faq/
     //https://www.emailjs.com/docs/examples/reactjs/
+    /*
     const sendEmail = (e) => {
         e.preventDefault(); // Prevents default refresh by the browser
+
+        dispatch(
+            enviarEmail({
+                from: nombreTienda,
+                to: datosVenta.datos_cliente.email,
+                subject: 'Comprobante de compra',
+                text: '',
+                html: ''
+            })
+        )
+
+        
         emailjs.send(
             `service_gr8qyxi`, 
             TEMPLATE_ID, 
@@ -325,8 +356,9 @@ export const ResultadoVentaWebPayComponent = () => {
             },(error) => {
                 console.log("An error occurred, Please try again", error.text);
             });
+            
     };
-
+    */
 
     const formatNumber = e => {
         return new Intl.NumberFormat("de-DE").format(e) //https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat
@@ -342,7 +374,7 @@ export const ResultadoVentaWebPayComponent = () => {
         doc.text(290, 40, 'Boleta N°')
         doc.text(300, 60, `${datosVenta.datos_webpay.buy_order}`.padStart(6, '0'))
 
-        
+        //Dibujando el marco de color rojo en trorno al número de la boleta
         doc.setLineWidth(1.5);  //https://github.com/parallax/jsPDF/issues/1331
         doc.setDrawColor('red');
         doc.line(250, 20, 400, 20);
@@ -350,7 +382,7 @@ export const ResultadoVentaWebPayComponent = () => {
         doc.line(250, 80, 400, 80);
         doc.line(400, 20, 400, 80);
 
-
+        //Imprimiendo los datos de la boleta
         doc.setTextColor('black')
         doc.setFontSize(20);
         doc.text(20, 30, nombreTienda);
@@ -361,7 +393,6 @@ export const ResultadoVentaWebPayComponent = () => {
         doc.text(30, 95, 'email:')
         doc.text(30, 110, 'Fono venta')
 
-        console.log(datosVenta, infoTiendaState)
         doc.setFont('Helvetica','normal')
         doc.text(80, 65, `${(fecha.getDay() ? '0' : '') + fecha.getDay()}/${(fecha.getMonth() < 10 ? '0' : '') + fecha.getMonth()}/${fecha.getFullYear()}`);
         doc.text(80, 80, infoTiendaState.direccion)
@@ -400,7 +431,6 @@ export const ResultadoVentaWebPayComponent = () => {
             nombreTienda={nombreTienda}
             sendEmail={sendEmail}
             generarBoleta={generarBoleta}
-            //html={html}
         />        
     )
 }

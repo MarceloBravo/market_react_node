@@ -116,24 +116,25 @@ export const  ResultadoVentaContent = (props) => {
                     <>
                         <Row className="row-bottom-buttons">
                             <Col md={5}>
-                                {
-                                <ErrorHandler>
-                                {
-                                (dataPDF && carrito) && 
-                                    <PDFDownloadLink 
-                                        variant="primary" 
-                                        document={<PDFComponent data={dataPDF} 
-                                        carrito={carrito} 
-                                        nombre_tienda={nombreTienda}/>} 
-                                        fileName={"comprobante_venta-" + formatearFechaHora(transactionStatus?.transaction_date) + ".pdf"}
-                                    >
+                                {/*
+                                    <ErrorHandler>
                                     {
-                                        ({loading}) => loading ? 'Cargando...' : <Button variant="primary" >Descargar comprobante</Button>
-                                    }     
-                                    </PDFDownloadLink>
-                                }
-                                </ErrorHandler>
-                            }
+                                    (dataPDF && carrito) && 
+                                        <PDFDownloadLink 
+                                            variant="primary" 
+                                            document={<PDFComponent data={dataPDF} 
+                                            carrito={carrito} 
+                                            nombre_tienda={nombreTienda}/>} 
+                                            fileName={"comprobante_venta-" + formatearFechaHora(transactionStatus?.transaction_date) + ".pdf"}
+                                        >
+                                        {
+                                            ({loading}) => loading ? 'Cargando...' : <Button variant="primary" >Descargar comprobante</Button>
+                                        }     
+                                        </PDFDownloadLink>
+                                    }
+                                    </ErrorHandler>
+                                */}
+                                {carrito && <Button onClick={() => generarBoleta()}>Descarga tu boleta</Button>}
                             </Col>
                             <Col md={2}></Col>
                             <Col md={5} className="col-enviar-email">
@@ -147,7 +148,7 @@ export const  ResultadoVentaContent = (props) => {
                         </Row>
                     </>
                 }
-                {carrito && <Button onClick={() => generarBoleta()}>Descarga tu boleta</Button>}
+                
                 {/*
                 <ErrorHandler>
                     {(dataPDF && (Object.keys(dataPDF).length > 15) && carrito) &&
