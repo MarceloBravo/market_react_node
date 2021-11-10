@@ -9,17 +9,26 @@ import { SpinnerComponent } from '../../../../components/shared/spinner'
 
 export const ContentPantallas = (props) => {
     const menus = useSelector(state => state.MenusReducer.list);
-    const { id, response, mostrarOcultarModal, pantalla, errors, handlerChangeValue, grabar, eliminar, handlerBtnCancelar } = props
+    const { 
+            id, 
+            response, 
+            mostrarOcultarModal, 
+            pantalla, 
+            errors, 
+            handlerChangeValue, 
+            grabar, 
+            eliminar, 
+            handlerBtnCancelar, 
+            togleMenu,
+        } = props
 
     return (
         <div>
             <ModalDialog response={response} toggle={mostrarOcultarModal}/>
-            <Header />      
-            <SpinnerComponent />        
-            <div className="main-section">
-                <div className="menu-section">
-                    <Menu activeKeyMenu="15"/>
-                </div>
+            <SpinnerComponent />
+            <Menu activeKeyMenu="15"/>
+            <div className={"main-section " + (togleMenu ? 'main-width' : 'main-normal')}>
+                <Header />
                 <div className="content-section">                    
                     <Form>
                         <div className="div-title">Mantenedor de Pantallas</div>

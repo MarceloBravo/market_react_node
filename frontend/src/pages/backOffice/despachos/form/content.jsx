@@ -21,18 +21,17 @@ export const DespachosFormComponent = (props) => {
         grabar, 
         eliminar, 
         handlerBtnCancelar, 
-        id
+        id,
+        togleMenu, 
     } = props
 
     return (
         <>
             <ModalDialog response={response} />
-            <Header />      
             <SpinnerComponent /> 
-            <div className="main-section">
-                <div className="menu-section">
-                    <Menu activeKeyMenu="30"/>
-                </div>
+            <Menu activeKeyMenu="30"/>
+            <div className={"main-section " + (togleMenu ? 'main-width' : 'main-normal')}>                    
+                <Header />                
                 <div className="content-section">
                     <Alerta />
                     <Row>

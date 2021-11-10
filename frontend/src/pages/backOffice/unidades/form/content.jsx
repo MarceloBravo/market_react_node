@@ -8,17 +8,15 @@ import { Form, Col, Row } from 'react-bootstrap'
 import { Alerta } from '../../../../components/shared/alerts'
 
 export const UnidadesFormComponent = (props) => {
-    const { response, pantalla, unidad, handlerChangeValue, errors, grabar, eliminar, cancelar, id } = props
+    const { response, pantalla, unidad, handlerChangeValue, errors, grabar, eliminar, cancelar, id, togleMenu } = props
 
     return (
         <>
             <ModalDialog response={response} />
-            <Header />
+            <Menu activeKeyMenu="19"/>
             <SpinnerComponent />
-            <div className="main-section">
-                <div className="menu-section">
-                    <Menu activeKeyMenu="19"/>
-                </div>
+            <div className={"main-section " + (togleMenu ? 'main-width' : 'main-normal')}>
+                <Header />
                 <div className="content-section">                    
                     <Alerta/>
                     <Form>

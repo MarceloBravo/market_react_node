@@ -14,6 +14,7 @@ export const CategoriasForm = (props) => {
     const [ categoria, setCategoria ] = useState({id: '', nombre: '', created_at: '', updated_at: '', deleted_at: ''})
     const data = useSelector(state => state.CategoriasReducer.categoria)
     const alertaState = useSelector(state => state.AlertaReducer)
+    const togleMenu = useSelector(state => state.MenusReducer.togle)
     const dispatch = useDispatch()
     const history = useHistory()
 
@@ -106,6 +107,7 @@ export const CategoriasForm = (props) => {
             eliminar={eliminar} 
             handlerBtnCancelar={handlerBtnCancelar} 
             id={id}
+            togleMenu={togleMenu}
         />
     )
 }

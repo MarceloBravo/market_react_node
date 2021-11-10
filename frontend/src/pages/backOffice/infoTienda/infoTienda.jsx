@@ -21,6 +21,7 @@ export const InfoTiendaFormComponent = () => {
     const [ errors, setErrors ] = useState({nombre_tienda: '', fono_venta: '', email: '', direccion:'', comuna:'', ciudad: ''})
     const infoTiendaState = useSelector(state => state.InfoTiendaReducer.infoTienda)
     const imagenesMarquesinaState = useSelector(state => state.ImagenesMarquesinaReducer)
+    const togleMenu = useSelector(state => state.MenusReducer.togle)
     //const currentPantalla = useSelector(state => state.PantallasReducer.pantalla);    
     const [ imagenesMarquesina, setImagenesMarquesina ] = useState({
         imagenes: [],
@@ -310,6 +311,7 @@ export const InfoTiendaFormComponent = () => {
             removeImage={removeImage}
             handleFieldsImages={handleFieldsImages}
             hideAlert={hideAlert}
+            togleMenu={togleMenu}
             //activeKey={activeKey}
         />
     )

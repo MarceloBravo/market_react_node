@@ -8,17 +8,15 @@ import { Form, Col, Row } from 'react-bootstrap'
 import { Alerta } from '../../../../components/shared/alerts'
 
 export  const ContentImpuestos = (props) => {
-    const { response, impuesto, handlerChangeValue, errors, grabar, eliminar, handlerBtnCancelar, id } = props
+    const { response, impuesto, handlerChangeValue, errors, grabar, eliminar, handlerBtnCancelar, id, togleMenu } = props
 
     return (
         <div>
+            <Menu activeKeyMenu="19"/>
             <ModalDialog response={response} />
-            <Header />      
             <SpinnerComponent /> 
-            <div className="main-section">
-                <div className="menu-section">
-                    <Menu activeKeyMenu="19"/>
-                </div>
+            <div className={"main-section " + (togleMenu ? 'main-width' : 'main-normal')}>
+                <Header />
                 <div className="content-section">
                     <Alerta />
                     <Form>

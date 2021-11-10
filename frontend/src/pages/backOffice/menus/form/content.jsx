@@ -17,19 +17,18 @@ export const ContentMenus = (props) => {
         handlerChangeValue,
         grabar,
         eliminar, 
-        handlerBtnCancelar
+        handlerBtnCancelar,
+        togleMenu,
     } = props;
 
 
     return (
         <div>
+            <Menu activeKeyMenu="15"/>
             <ModalDialog response={response} toggle={mostrarOcultarModal}/>
-            <Header />         
             <SpinnerComponent />   
-            <div className="main-section">
-                <div className="menu-section">
-                    <Menu activeKeyMenu="15"/>
-                </div>
+            <div className={"main-section " + (togleMenu ? 'main-width' : 'main-normal')}>
+                <Header />
                 <div className="content-section">                    
                     <Form>
                         <div className="div-title">Mantenedor de menús</div>

@@ -9,6 +9,7 @@ export const PersonalizarForm = (props) => {
     const [ config, setConfig ] = useState({nombre_app: ''})
     const state = useSelector(state => state.PersonalizarReducer.config)
     const isOk = useSelector(state => state.PersonalizarReducer.isOk)
+    const togleMenu = useSelector(state => state.MenusReducer.togle)
     const dispatch = useDispatch()
     const history = useHistory()
     const { id } = useParams()
@@ -63,6 +64,7 @@ export const PersonalizarForm = (props) => {
             grabar={grabar} 
             handlerBtnCancelar={handlerBtnCancelar}
             id={id}
+            togleMenu={togleMenu}
         />
     )
 }

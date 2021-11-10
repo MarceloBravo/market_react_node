@@ -8,17 +8,15 @@ import { Paginacion } from '../../../../components/backOffice/paginacion'
 import { ModalDialog } from '../../../../components/backOffice/modalDialog'
 
 export const ContentCategoriasGrid = (props) => {
-    const { response, dataGrid, eliminarRegistro, filtrar, goToPage } = props
+    const { response, dataGrid, eliminarRegistro, filtrar, goToPage, togleMenu } = props
 
     return (
         <div> 
-            <Header />
+            <Menu activeKeyMenu="19"/>
             <SpinnerComponent />
             <ModalDialog response={response}/>
-            <div className="main-section">
-                <div className="menu-section">
-                    <Menu activeKeyMenu="19"/>
-                </div>                
+            <div className={"main-section " + (togleMenu ? 'main-width' : 'main-normal')}>
+                <Header />
                 <div className="content-section">                    
                     <Alerta />
                     <Grid

@@ -17,6 +17,7 @@ export const FormMenusTiendaComponent = () => {
     const menus = useSelector(state => state.MenusTiendaReducer.list)
     const currentMenu = useSelector(state => state.MenusTiendaReducer.menu)
     const ok = useSelector(state => state.AlertaReducer.tipo)
+    const togleMenu = useSelector(state => state.MenusReducer.togle)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -147,6 +148,7 @@ export const FormMenusTiendaComponent = () => {
             grabar={grabar} 
             eliminar={eliminar}  
             handlerBtnCancelar={handlerBtnCancelar} 
+            togleMenu={togleMenu}
         />       
     )
 }

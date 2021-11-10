@@ -7,4 +7,5 @@ export const types = {
     UPDATE_MENU: 'UPDATE_MENU',
     GET_ALL_MENUS: 'GET_ALL_MENUS',
     GET_MAIN_MENU: 'GET_MAIN_MENU',
+    TOGLE_MENU: 'TOGLE_MENU',
 }

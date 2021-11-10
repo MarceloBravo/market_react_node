@@ -11,6 +11,7 @@ export const SubCategoriasGrid = () => {
     const [ idEliminar, setIdEliminar ] = useState(null)
     const dataGrid = useSelector(state => state.SubCategoriasReducer.dataGrid)
     const pantalla = useSelector(state => state.PantallasReducer.pantalla)
+    const togleMenu = useSelector(state => state.MenusReducer.togle)
     const dispatch = useDispatch()
 
 
@@ -55,6 +56,7 @@ export const SubCategoriasGrid = () => {
             goToPage={goToPage}
             eliminarRegistro={eliminarRegistro}
             filtrar={filtrar}
+            togleMenu={togleMenu}
         />
     )
 }

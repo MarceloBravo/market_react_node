@@ -17,6 +17,7 @@ export const MarcasForm = () => {
     const pantalla = useSelector(state => state.PantallasReducer.pantalla)
     const state = useSelector(state => state.MarcasReducer.marca)
     const alertaTipo = useSelector(state => state.AlertaReducer.tipo)
+    const togleMenu = useSelector(state => state.MenusReducer.togle)
     const dispatch = useDispatch()
     const history = useHistory()
 
@@ -117,6 +118,7 @@ export const MarcasForm = () => {
             eliminar={eliminar} 
             handlerBtnCancelar={handlerBtnCancelar} 
             id={id}
+            togleMenu={togleMenu}
         />
     )   
 }

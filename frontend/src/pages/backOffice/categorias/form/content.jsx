@@ -8,17 +8,25 @@ import { FormButtons } from '../../../../components/backOffice/form_buttons'
 import { Form, Col, Row } from 'react-bootstrap'
 
 export const ContentCategoriasForm = (props) => {
-    const { response, errors, categoria, handlerChangeValue, grabar, eliminar, handlerBtnCancelar, id } = props
+    const { 
+        response, 
+        errors, 
+        categoria, 
+        handlerChangeValue, 
+        grabar, 
+        eliminar, 
+        handlerBtnCancelar, 
+        id, 
+        togleMenu 
+    } = props
 
     return (
         <div>
+            <Menu activeKeyMenu="19"/>
             <ModalDialog response={response} />
-            <Header />      
             <SpinnerComponent /> 
-            <div className="main-section">
-                <div className="menu-section">
-                    <Menu activeKeyMenu="19"/>
-                </div>
+            <div className={"main-section " + (togleMenu ? 'main-width' : 'main-normal')}>
+                <Header />
                 <div className="content-section">
                     <Alerta />
                     <Form>

@@ -9,18 +9,16 @@ import { Paginacion } from '../../../../components/backOffice/paginacion'
 import './style.css'
 
 export const GridPantallas = (props) => {
-    const { eliminarRegistro, filtrar, goToPage } = props;
+    const { eliminarRegistro, filtrar, goToPage, togleMenu } = props;
     const dataGrid = useSelector(state => state.PantallasReducer.dataGrid)
 
     
     return (
         <div> 
-            <Header />
+            <Menu activeKeyMenu="15"/>
             <SpinnerComponent />
-            <div className="main-section">
-                <div className="menu-section">
-                    <Menu activeKeyMenu="15"/>
-                </div>                
+            <div className={"main-section " + (togleMenu ? 'main-width' : 'main-normal')}>
+                <Header />            
                 <div className="content-section">                    
                     <Alerta />
                     <Grid

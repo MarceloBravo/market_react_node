@@ -8,15 +8,15 @@ import { types } from '../../../redux/Alert/types'
 import { TimerSession } from '../timerSession'
 import { useHistory } from 'react-router-dom'
 import { getTokenFromStorage } from '../../../shared/funciones'
+import { types as menusTypes } from '../../../redux/Menus/types'
 import './style.css'
 
-export const Header = () => {
+export const Header = (props) => {
     const user = useSelector(state => state.LoginReducer.logedUser.user)
-    const nombre_app = useSelector(state => state.PersonalizarReducer.config.nombre_app)
+    const togleMenu = useSelector(state => state.MenusReducer.togle)
     const [ token, setToken ] = useState(null)
     const dispatch = useDispatch()
     const history = useHistory()
-
     
     useEffect(()=>{
         if(localStorage.getItem('backTkn')){
@@ -46,13 +46,17 @@ export const Header = () => {
         dispatch({type: types.OCULTAR_ALERTA})
     }
 
+    const togleLeftMenu = () => {
+        dispatch({type: menusTypes.TOGLE_MENU})
+    }
 
     return (
-        <header className="topbar" data-navbarbg="skin6" >
+        <header className={"topbar " + (togleMenu ? 'widthHeader' : 'normalHeader')} data-navbarbg="skin6">
             <Navbar variant="dark" className="navbar">
-                <Navbar.Brand href="/">{ nombre_app }</Navbar.Brand>
+                <Image src="/icon-menu.png" alt="Mostrar ocultar menú" className="icon-menu" onClick={()=>togleLeftMenu()}/>
+                {/*<Navbar.Brand href="/">{ nombre_app }</Navbar.Brand>*/}
                 <Nav className="mr-auto">
-                    <Nav.Link as={Link} to="/home" onClick={() => clearMessages()} >Home</Nav.Link>
+                    <Nav.Link as={Link} to="/home" onClick={() => clearMessages()} className="bo-navLink ">Home</Nav.Link>
                     <Nav.Link as={Link} to="/dashboard" onClick={() => clearMessages()}>Dashboard</Nav.Link>
                 </Nav>
                 

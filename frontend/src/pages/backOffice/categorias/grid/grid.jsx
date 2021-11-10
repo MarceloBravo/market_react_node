@@ -7,6 +7,7 @@ import { ContentCategoriasGrid } from './content'
 
 export const CategoriasGrid = (props) => {
     const dataGrid = useSelector(state => state.CategoriasReducer.dataGrid)
+    const togleMenu = useSelector(state => state.MenusReducer.togle)
     const dispatch = useDispatch()
     const [ idDelete, setIdDelete ] = useState(null)
 
@@ -51,6 +52,7 @@ export const CategoriasGrid = (props) => {
             eliminarRegistro={eliminarRegistro} 
             filtrar={filtrar}
             goToPage={goToPage}
+            togleMenu={togleMenu}
         />
     )
 }

@@ -20,6 +20,7 @@ export const SeccionesHomeForm = () => {
     const alertaTipo = useSelector(state => state.AlertaReducer.tipo)
     const [ arrProductos, setArrProductos ] = useState({data:[]})
     const productosState = useSelector(state => state.ProductosReducer.dataGrid.data)
+    const togleMenu = useSelector(state => state.MenusReducer.togle)
     const dispatch = useDispatch()
     const history = useHistory()
     const selectProductoRef = useRef()
@@ -163,6 +164,7 @@ export const SeccionesHomeForm = () => {
             eliminar={eliminar}
             cancelar={cancelar}
             id={id}
+            togleMenu={togleMenu}
         />
     )
 }

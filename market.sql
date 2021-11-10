@@ -11,7 +11,7 @@
  Target Server Version : 80020
  File Encoding         : 65001
 
- Date: 03/10/2021 11:39:53
+ Date: 06/10/2021 13:59:50
 */
 
 SET NAMES utf8mb4;
@@ -28,7 +28,7 @@ CREATE TABLE `categorias`  (
   `updated_at` timestamp(0) NOT NULL,
   `deleted_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of categorias
@@ -70,11 +70,11 @@ CREATE TABLE `clientes`  (
 -- ----------------------------
 -- Records of clientes
 -- ----------------------------
-INSERT INTO `clientes` VALUES (2, '11.111.111-1', 'Marcelo', 'Bravo', 'Castillo', '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '$2b$10$Ead6AIGPX.1cs9UlPF6sxerGCO9/yFTjI7a6hpP.0nOT4Ve1UtNai', 'mabc@prueba.cl', '+ 56 9 98765432', 'perfil.jpg', '1234', 'Talca', 'Cerca de colegio', '2021-08-10 00:00:00', '2021-09-30 00:00:00', NULL);
+INSERT INTO `clientes` VALUES (2, '11.111.111-1', 'Marcelo', 'Bravo', 'Castillo', '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '$2b$10$Ead6AIGPX.1cs9UlPF6sxerGCO9/yFTjI7a6hpP.0nOT4Ve1UtNai', 'mabc@live.cl', '+ 56 9 98765432', 'perfil.jpg', '1234', 'Talca', 'Cerca de colegio', '2021-08-10 00:00:00', '2021-09-30 00:00:00', NULL);
 INSERT INTO `clientes` VALUES (3, '22.222.222-2', 'Juan', 'Pérez', 'Pereira', '1 Nortre 2 Sur', '13', '131', '13108', 'Santiago', '$2b$10$rlcE3dGyjc2dyqynHPkCCeOZyxbdoeNhYHwW8TKmV6hnov73ecQg6', 'juan@ejemplo.cl', '09 87654321', NULL, '5432', '0', 'Cerca del costanera', '2021-08-11 00:00:00', '2021-08-11 00:00:00', NULL);
 INSERT INTO `clientes` VALUES (4, '33.333.333-3', 'Carla', 'Contreras', 'Jerez', '1 Oriente 1 Poniente', '07', '071', '07105', 'Talca', '$2b$10$L0PIiJtrTHY15M19p1RUm.bDjyZCVLH4qkOJbpal7kxt5nS.Qp7E2', 'carla@ejemplo.cl', '091234587654', NULL, '123', '0', 'Cerca de la plaza de armas', '2021-08-11 00:00:00', '2021-08-11 00:00:00', NULL);
 INSERT INTO `clientes` VALUES (5, '77.777.777-7', 'Carla', 'Perez', 'Corales', '1 Oriente 3 y 4 poniente', '07', '073', '07301', 'Curicó', '$2b$10$r/fhKct8pGr5st3leghri.T23JkvwJspJxyWebW/RJLNQLKG6aBKO', 'carla@ejemplo.cl', '0909878765', 'descarga.png', '3210', '', 'Cerca de supermercado Lider', '2021-09-28 00:00:00', '2021-09-28 00:00:00', NULL);
-INSERT INTO `clientes` VALUES (6, '88.888.888-8', 'Valeria', 'Maza', 'Perez', '1 Oriente 4 y 5 poniente', '13', '131', '13109', 'La cisterna', '$2b$10$rAOJOwq34ICdsPZdzuZhku6UjKfyvNuCPPlMQ.IqYvpBN6pF1JcNa', 'valeria_perez@ejemplo.cl', '1234554321', 'descarga.png', '123', '4', 'Cerca de supermercado Totus', '2021-09-28 00:00:00', '2021-09-28 00:00:00', NULL);
+INSERT INTO `clientes` VALUES (6, '77.777.777-7', 'Valeria', 'Maza', 'Perez', '1 Oriente 4 y 5 poniente', '13', '131', '13109', 'La cisterna', '$2b$10$rAOJOwq34ICdsPZdzuZhku6UjKfyvNuCPPlMQ.IqYvpBN6pF1JcNa', 'valeria_perez@ejemplo.cl', '1234554321', 'descarga.png', '123', '4', 'Cerca de supermercado Totus', '2021-09-28 00:00:00', '2021-09-28 00:00:00', NULL);
 
 -- ----------------------------
 -- Table structure for companias_envios
@@ -969,7 +969,7 @@ CREATE TABLE `imagenes_marquesina_home`  (
   `updated_at` timestamp(0) NOT NULL,
   `deleted_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of imagenes_marquesina_home
@@ -996,7 +996,7 @@ CREATE TABLE `imagenes_productos`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk_imagenes_productos-productos`(`producto_id`) USING BTREE,
   CONSTRAINT `fk_imagenes_productos-productos` FOREIGN KEY (`producto_id`) REFERENCES `productos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 334 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 335 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of imagenes_productos
@@ -1404,7 +1404,7 @@ CREATE TABLE `productos`  (
   CONSTRAINT `fk_productos-marcas` FOREIGN KEY (`marca_id`) REFERENCES `marcas` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fk_productos-sub_categorias` FOREIGN KEY (`sub_categoria_id`) REFERENCES `sub_categorias` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `fk_productos-unidades` FOREIGN KEY (`unidad_id`) REFERENCES `unidades` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 73 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 74 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of productos
@@ -1442,7 +1442,7 @@ CREATE TABLE `productos_secciones_home`  (
   INDEX `fk-secciones-productos`(`producto_id`) USING BTREE,
   CONSTRAINT `fk-secciones-productos` FOREIGN KEY (`producto_id`) REFERENCES `productos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk-secciones-productos_secciones` FOREIGN KEY (`seccion_id`) REFERENCES `secciones_home` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of productos_secciones_home
@@ -1527,7 +1527,7 @@ CREATE TABLE `secciones_home`  (
   `updated_at` timestamp(0) NOT NULL,
   `deleted_at` timestamp(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of secciones_home
@@ -1549,7 +1549,7 @@ CREATE TABLE `sub_categorias`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk_categ-sub_categ`(`categoria_id`) USING BTREE,
   CONSTRAINT `fk_categ-sub_categ` FOREIGN KEY (`categoria_id`) REFERENCES `categorias` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sub_categorias
@@ -1579,7 +1579,7 @@ CREATE TABLE `tienda`  (
   `created_at` timestamp(0) NOT NULL,
   `updated_at` timestamp(0) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tienda
@@ -1660,7 +1660,7 @@ CREATE TABLE `users`  (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES (1, 'Marcelo', 'mabc@prueba.cl', NULL, '$2b$10$q1ZwYwzfy2QlUzY2fTuLCuZvOJRyQrHmIVMVNMIOIlHAXdj6zliYG', NULL, '2020-11-22 00:00:00', '2021-06-15 00:00:00', NULL, 'Bravo', 'Castillo', '12 Norte 16 Oriente, #2288, Talca', 'Mi Avatar.jpg', '987654321');
+INSERT INTO `users` VALUES (1, 'Marcelo', 'mabc@live.cl', NULL, '$2b$10$q1ZwYwzfy2QlUzY2fTuLCuZvOJRyQrHmIVMVNMIOIlHAXdj6zliYG', NULL, '2020-11-22 00:00:00', '2021-06-15 00:00:00', NULL, 'Bravo', 'Castillo', '12 Norte 16 Oriente, #2288, Talca', 'Mi Avatar.jpg', '987654321');
 INSERT INTO `users` VALUES (19, 'Valeria', 'prueba@ejemplo.cl', NULL, '$2b$10$BCo6PZMKbxA/3ROLBo7D1uynIWQ/7GO6LQdk0qez0k9VZhmilWur.', NULL, '2021-01-22 21:47:01', '2021-05-26 00:00:00', NULL, 'Maza', 'sozza', '12 Norte 123', 'descarga.png', '');
 INSERT INTO `users` VALUES (30, 'Marcelo Antonio', 'marcelo.a.bravo.c@gmail.cl', NULL, '$2b$10$66WGQByMZWmVkOtRin00eOGUlw2BKuWu5/nS2Gm.fDEGH0/otpWLi', NULL, '2021-05-05 01:13:57', '2021-06-27 00:00:00', NULL, 'Bravo', 'Castillo', '12 Norte #123', 'FB_IMG_1619323830505.jpg', '');
 INSERT INTO `users` VALUES (62, 'Mariela Andrea', 'mariela2@ejemplo.cl', NULL, '$2b$10$b.qrq9mTNfYSgdPqC.veQuWXNDHe0OeCrlVHVisek7VtrtlhD5Mf6', NULL, '2021-05-05 01:13:57', '2021-04-08 00:00:00', NULL, 'Bezoain', 'Bravo', '12 Norte #123', 'fgfgfgfgfgf', '');

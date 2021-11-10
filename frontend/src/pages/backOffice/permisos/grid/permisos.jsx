@@ -18,6 +18,7 @@ export const PermisosGrid = () => {
     const [ permisos, setPermisos ] = useState([])
     const listaRoles = useSelector(state => state.RolesReducer.list)
     const stPermisos = useSelector(state => state.PermisosReducer.permisos)
+    const togleMenu = useSelector(state => state.MenusReducer.togle)
     const [ refreshMenu, setRefreshMenu ] = useState(false)
     const history = useHistory()
     const dispatch = useDispatch()
@@ -133,6 +134,7 @@ export const PermisosGrid = () => {
             permisos={permisos}
             grabar={grabar}
             cancelar={cancelar}
+            togleMenu={togleMenu}
         />
     );
 }

@@ -14,6 +14,7 @@ export const PantallasForm = () => {
     const dispatch = useDispatch();
     const [ errors, setErrors ] = useState({nombre: '', menus_id: '', permite_crear: '', permite_modificar: '', permite_eliminar: ''});
     const ok = useSelector(state => state.AlertaReducer.tipo)
+    const togleMenu = useSelector(state => state.MenusReducer.togle)
     const [ accion, setAccion ] = useState('');
     const { id } = useParams();
     const history = useHistory();
@@ -132,6 +133,9 @@ export const PantallasForm = () => {
             handlerChangeValue={handlerChangeValue} 
             grabar={grabar} 
             eliminar={eliminar} 
-            handlerBtnCancelar={handlerBtnCancelar}/>
+            handlerBtnCancelar={handlerBtnCancelar}
+            togleMenu={togleMenu}
+        />
+            
     );
 }

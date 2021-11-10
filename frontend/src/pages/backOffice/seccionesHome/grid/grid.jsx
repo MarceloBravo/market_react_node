@@ -10,6 +10,7 @@ export const SeccionesHomeGrid = () => {
     const [ idDelete, setIdDelete ] = useState(null)
     const pantalla = useSelector(state => state.PantallasReducer.pantalla)
     const dataGrid = useSelector(state => state.SeccionesHomeReducer.dataGrid)
+    const togleMenu = useSelector(state => state.MenusReducer.togle)
     const dispatch = useDispatch()
 
 
@@ -56,6 +57,7 @@ export const SeccionesHomeGrid = () => {
             eliminarRegistro={eliminarRegistro} 
             filtrar={filtrar} 
             goToPage={goToPage}
+            togleMenu={togleMenu}
         />
     )
 }

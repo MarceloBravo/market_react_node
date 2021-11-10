@@ -9,6 +9,7 @@ export const MenusTiendaGrid = () => {
     const [ idEliminar, setIdEliminar ] = useState(null)
     const [ textoFiltro, setTextoFiltro ] = useState('')
     const listadoState = useSelector(state => state.MenusTiendaReducer.dataGrid)
+    const togleMenu = useSelector(state => state.MenusReducer.togle)
     const dispatch = useDispatch()
 
 
@@ -58,6 +59,7 @@ export const MenusTiendaGrid = () => {
             eliminarRegistro={eliminarRegistro} 
             filtrar={filtrar} 
             goToPage={goToPage}
+            togleMenu={togleMenu}
         />       
     )
 }

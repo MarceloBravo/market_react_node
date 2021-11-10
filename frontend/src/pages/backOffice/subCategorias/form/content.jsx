@@ -18,18 +18,17 @@ export const SubCategoriasContent = (props) => {
         grabar, 
         eliminar, 
         cancelar, 
-        id 
+        id,
+        togleMenu, 
     } = props
 
     return (
         <>
             <ModalDialog response={response}/>
-            <Header />
+            <Menu activeKeyMenu="19"/>
             <SpinnerComponent />
-            <div className="main-section">
-                <div className="menu-section">
-                    <Menu activeKeyMenu="19"/>
-                </div>
+            <div className={"main-section " + (togleMenu ? 'main-width' : 'main-normal')}>
+                <Header />
                 <div className="content-section"> 
                     <Alerta />                   
                     <Form>

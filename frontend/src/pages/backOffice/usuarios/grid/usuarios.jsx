@@ -9,6 +9,7 @@ import { ContentGridUsuarios } from './content'
 
 export const UsuariosGrid = () => {
     const dataGrid = useSelector(state => state.UsersReducer.dataGrid)
+    const togleMenu = useSelector(state => state.MenusReducer.togle)
     const [ refreshList,  setRefreshList ] = useState(false)
     const [ id, setId ] = useState(null)
     const dispatch = useDispatch()
@@ -54,6 +55,7 @@ export const UsuariosGrid = () => {
             eliminarRegistro={eliminarRegistro} 
             filtrar={filtrar}
             goToPage={goToPage}
+            togleMenu={togleMenu}
         />
     )
 }

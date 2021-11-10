@@ -8,16 +8,14 @@ import { Paginacion } from '../../../../components/backOffice/paginacion'
 import { ModalDialog } from '../../../../components/backOffice/modalDialog'
 
 export const MenusTiendaGridContent = (props) => {
-    const { response, listadoState, eliminarRegistro, filtrar, goToPage } = props
+    const { response, listadoState, eliminarRegistro, filtrar, goToPage, togleMenu } = props
 
     return (
         <div> 
-            <Header />
             <SpinnerComponent />
-            <div className="main-section">
-                <div className="menu-section">
-                    <Menu activeKeyMenu="30"/>
-                </div>                
+            <Menu activeKeyMenu="30"/>
+            <div className={"main-section " + (togleMenu ? 'main-width' : 'main-normal')}>
+                <Header />
                 <div className="content-section">                    
                     <Alerta />
                     <ModalDialog response={response}/>

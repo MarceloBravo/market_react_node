@@ -17,22 +17,21 @@ export const MenusTiendaContent = (props) => {
         handlerChangeValue,
         grabar,
         eliminar, 
-        handlerBtnCancelar
+        handlerBtnCancelar,
+        togleMenu
     } = props;
 
 
     return (
         <div>
             <ModalDialog response={response} toggle={mostrarOcultarModal}/>
-            <Header />         
             <SpinnerComponent />   
-            <div className="main-section">
-                <div className="menu-section">
-                    <Menu activeKeyMenu="30"/>
-                </div>
+            <Menu activeKeyMenu="30"/>
+            <div className={"main-section " + (togleMenu ? 'main-width' : 'main-normal')}>
+                <Header />
                 <div className="content-section">                    
                     <Form>
-                        <div className="div-title">Mantenedor de menús</div>
+                        <div className="div-title">Mantenedor de menús de la tienda</div>
                         <Form.Group as={Row} controlId="formPlaintextEmail">
                             <Form.Label column sm="2">Nombre</Form.Label>
                             <Col md="4">

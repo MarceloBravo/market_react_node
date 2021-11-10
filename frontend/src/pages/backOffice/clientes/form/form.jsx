@@ -17,6 +17,7 @@ export const MntClientesContent = (props) => {
     const regionesState = useSelector(state => state.RegionesReducer.list)
     const provinciasState = useSelector(state => state.ProvinciasReducer.list)
     const comunasState = useSelector(state => state.ComunasReducer.list)
+    const togleMenu = useSelector(state => state.MenusReducer.togle)
     const resultadoOperacionState = useSelector(state => state.AlertaReducer.tipo)
     const [ errors, setErrors ] = useState({rut: '', nombres: '', apellido1: '', apellido2: '', direccion: '', cod_region: '', cod_provincia: '', cod_comuna: '', ciudad: '', password: '', confirm_password: '', email: '', fono: '', foto: '', casa_num: '', block_num: '', referencia: ''})
     const [ cliente, setCliente ] = useState({rut: '', nombres: '', apellido1: '', apellido2: '', direccion: '', cod_region: '', cod_provincia: '', cod_comuna: '', ciudad: '', password: '', confirm_password: '', email: '', fono: '', foto: '', objImagen: null, casa_num: '', block_num: '', referencia: ''})
@@ -76,7 +77,6 @@ export const MntClientesContent = (props) => {
 
         switch(e.target.name){
             case 'cod_region':
-                console.log('aaaaaaaaaaaaaaaaaaaaa',e.target.value)
                 dispatch({type: spinnerTypes.SHOW_SPINNER})
                 dispatch(listaProvinciasRegion(e.target.value))
                 break;
@@ -299,6 +299,7 @@ export const MntClientesContent = (props) => {
             eliminar={eliminar} 
             cancelar={cancelar} 
             id={id} 
+            togleMenu={togleMenu}
         />
     )
 }

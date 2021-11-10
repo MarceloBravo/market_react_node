@@ -7,16 +7,14 @@ import { SpinnerComponent } from '../../../../components/shared/spinner'
 import { Paginacion } from '../../../../components/backOffice/paginacion'
 
 export const GridMenus = (props) => {
-    const { listado, eliminarRegistro, filtrar, goToPage } = props
+    const { listado, eliminarRegistro, filtrar, goToPage, togleMenu } = props
 
     return (
         <div> 
-            <Header />
+            <Menu activeKeyMenu="15"/>
             <SpinnerComponent />
-            <div className="main-section">
-                <div className="menu-section">
-                    <Menu activeKeyMenu="15"/>
-                </div>                
+            <div className={"main-section " + (togleMenu ? 'main-width' : 'main-normal')}>
+                <Header />            
                 <div className="content-section">                    
                     <Alerta />
                     <Grid

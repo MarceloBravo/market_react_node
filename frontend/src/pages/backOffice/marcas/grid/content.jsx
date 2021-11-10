@@ -8,17 +8,15 @@ import { Grid } from '../../../../components/backOffice/grid'
 import { Paginacion } from '../../../../components/backOffice/paginacion'
 
 export const MarcasGridContent = (props) => {
-    const { response, dataGrid, pantalla, eliminarRegistro, filtrar, goToPage, currentPath } = props
+    const { response, dataGrid, pantalla, eliminarRegistro, filtrar, goToPage, currentPath, togleMenu } = props
 
     return (
-        <div> 
-            <Header />
+        <div>
             <SpinnerComponent />
             <ModalDialog response={response}/>
-            <div className="main-section">
-                <div className="menu-section">
-                    <Menu activeKeyMenu="19"/>
-                </div>                
+            <Menu activeKeyMenu="19"/>
+            <div className={"main-section " + (togleMenu ? 'main-width' : 'main-normal')}>
+                <Header />
                 <div className="content-section">                    
                     <Alerta />
                     <Grid

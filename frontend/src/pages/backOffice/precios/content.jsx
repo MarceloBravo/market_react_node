@@ -23,18 +23,17 @@ export const PreciosContent = (props) => {
         onChangeColumn, 
         onDoubleClickColumn, 
         filasRef,
-        goToPage
+        goToPage,
+        togleMenu, 
     } = props
 
     return (
         <>
-            <Header />
+            <Menu activeKeyMenu="19"/>
             <SpinnerComponent />
             <ModalDialog response={response}/>
-            <div className="main-section">
-                <div className="menu-section">
-                    <Menu activeKeyMenu="19"/>
-                </div>                
+            <div className={"main-section " + (togleMenu ? 'main-width' : 'main-normal')}>
+                <Header />
                 <div className="content-section home-page">                    
                     <Alerta />
                     <div className="div-button-group">

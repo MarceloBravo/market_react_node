@@ -9,17 +9,15 @@ import { Grid } from '../../../../components/backOffice/grid'
 import './style.css'
 
 export const ProductosFormContent = (props) => {
-    const { response, dataGrid, pantalla, currentUrl, eliminarRegistro, filtrar, goToPage } = props
+    const { response, dataGrid, pantalla, currentUrl, eliminarRegistro, filtrar, goToPage, togleMenu } = props
 
     return (
-        <div> 
-            <Header />
+        <div>
+            <Menu activeKeyMenu="19"/>
             <SpinnerComponent />
             <ModalDialog response={response}/>
-            <div className="main-section">
-                <div className="menu-section">
-                    <Menu activeKeyMenu="19"/>
-                </div>                
+            <div className={"main-section " + (togleMenu ? 'main-width' : 'main-normal')}>
+                <Header />
                 <div className="content-section tabla-productos">                    
                     <Alerta />
                     <Grid
