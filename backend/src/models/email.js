@@ -24,7 +24,7 @@ sendEmail.sendEmail1 = function(req, callback){
     };
 
     try{
-        await transporter.sendMail(mailOptions)
+        transporter.sendMail(mailOptions)
         return callback(null,{mensaje: 'El email ha sido enviado', tipoMensaje: 'success'})
     }catch(err){
         return callback({mensaje: 'Ocurrio un error al intentar enviar el email: ' + err.message, tipoMensaje: 'danger'})
