@@ -93,6 +93,10 @@ export const HeaderMarketComponent = () => {
         history.push(`/registroCliente/${datosCliente.id}`)
     }
 
+    const gotToAdmin = () => {
+        history.push('/login')
+    }
+
 
     return (
         <HeaderContentComponent 
@@ -109,6 +113,7 @@ export const HeaderMarketComponent = () => {
             datosCliente={datosCliente}
             cerrarSession={cerrarSession}
             goToUpdateUserData={goToUpdateUserData}
+            gotToAdmin={gotToAdmin}
         />
     )
 }
