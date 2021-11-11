@@ -31,7 +31,7 @@ export const DetalleProducto = () => {
     const [ errors, setErrors ] = useState({cantidad: ''})
     const [ carrito, setCarrito ] = useState({})
     const [ pagar, setPagar ] = useState(false)
-    const [ textoBotonCarrito, setTextoBotonCarrito ] = useState('Agregar al carrito de compras')
+    const [ textoBotonCarrito, setTextoBotonCarrito ] = useState('Agregar al carrito')
     const dispatch = useDispatch()
     const history = useHistory()
     const { addToast } = useToasts();
@@ -48,6 +48,7 @@ export const DetalleProducto = () => {
 
     useEffect(()=>{
         if(productoState.id){
+            if(productoState.stock === 0){setItemCantidad(0)}
             dispatch(buscarCategoria(productoState.categoria_id))
             dispatch(buscarSubCategoria(productoState.sub_categoria_id))
             dispatch(buscarUnidad(productoState.unidad_id))
@@ -134,7 +135,7 @@ export const DetalleProducto = () => {
                     setErrors({...errors, [field]: 'Debe ingresar una cantidad'})
                 }else if(value <= 0){
                     setErrors({...errors, [field]: 'Debe ingresar un número mayor a 0'})
-                }else if(value > productoState.stock){
+                }else if(value > productoState.stock || productoState.stock === 0){
                     setErrors({...errors, [field]: 'No hay suficiente stock, ingresa una cantidad menor'})
                 }else{
                     setErrors({...errors, [field]: ''})
