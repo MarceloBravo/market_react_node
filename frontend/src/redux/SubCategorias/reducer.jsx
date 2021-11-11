@@ -37,7 +37,7 @@ export const SubCategoriasReducer = (state = INITIAL_STATE, action) => {
         case types.ACTUALIZAR_SUB_CATEGORIAS:
             return {
                 ...state,
-                subCategoria: action.payload
+                subCategoria: action.payload.data
             }
         case types.NUEVA_SUB_CATEGORIA:
             return {

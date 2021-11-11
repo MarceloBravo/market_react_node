@@ -41,9 +41,7 @@ export const SubCategoriasForm = () => {
 
     
     useEffect(()=>{
-        //if(subCategoria){
-            setSub_Categoria(subCategoria)
-        //}    
+        setSub_Categoria(subCategoria)
     },[subCategoria, dispatch])
 
 

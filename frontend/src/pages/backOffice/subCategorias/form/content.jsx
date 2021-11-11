@@ -76,7 +76,7 @@ export const SubCategoriasContent = (props) => {
                                 <Form.Text  className="field-error offset-2">{ errors.categoria_id}</Form.Text>
                             </Form.Group>
                         }
-
+                        <br/>
                         <FormButtons 
                             grabar={grabar} 
                             eliminar={eliminar} 

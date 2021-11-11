@@ -20,6 +20,7 @@ export const HeaderContentComponent = (props) => {
         datosCliente,
         cerrarSession,
         goToUpdateUserData, 
+        gotToAdmin
      } = props
 
     return (
@@ -47,9 +48,21 @@ export const HeaderContentComponent = (props) => {
                             </Col>
                             <Col xs={12} md={6} className="right-menu">    
                                 <Nav>
-                                    <Nav.Link href="#" onClick={()=> goToHome("/catalogo")}>Inicio</Nav.Link>
-                                    <Nav.Link href="#features">Nuestras tiendas</Nav.Link>
-                                    <Nav.Link href="#" onClick={()=> goToCatalogue("/catalogo")}>Catálogo de productos</Nav.Link>
+                                    <Nav.Link href="#" onClick={()=> goToHome("/catalogo")}>Inicio</Nav.Link>                                    
+                                    <OverlayTrigger
+                                        placement="bottom"
+                                        delay={{ show: 250, hide: 400 }}
+                                        overlay={<Tooltip id="button-tooltip">Ver el catálogo de productos</Tooltip>}
+                                    >
+                                        <Nav.Link href="#" onClick={()=> goToCatalogue("/catalogo")}>Catálogo de productos</Nav.Link>
+                                    </OverlayTrigger>
+                                    <OverlayTrigger
+                                        placement="bottom"
+                                        delay={{ show: 250, hide: 400 }}
+                                        overlay={<Tooltip id="button-tooltip">Ir al módulo de administración de la tienda</Tooltip>}
+                                    >
+                                        <Nav.Link href="#" onClick={()=> gotToAdmin()}>Administrar tienda</Nav.Link>
+                                    </OverlayTrigger>
                                 </Nav>
                             </Col>
                         </Row>
