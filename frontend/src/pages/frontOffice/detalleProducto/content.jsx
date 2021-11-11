@@ -82,6 +82,9 @@ export const DetalleProductoContent = (props) => {
                             <Row>
                                 <Form.Label column sm="6">Precio : $ {formatearPrecio(productoState.precio_actual, productoState.total_impuestos)} </Form.Label>
                             </Row>
+                            <Row>
+                                <Form.Label>Stock: {productoState.stock} unidades disponibles</Form.Label>
+                            </Row>
                             <Row className="row-cantidad">
                                 <Form.Group as={Row} controlId="formTxtStock">
                                     <Form.Label column xs="3" sm="3">Cantidad </Form.Label>
@@ -104,18 +107,19 @@ export const DetalleProductoContent = (props) => {
                                 }
                                 
                             </Row>
+                            <br/>
                             <Row className="content-button">
-                                <Col xs={12} md="4">
+                                <Col xs={12} md="5">
                                     <Button 
                                         variant="primary" 
                                         onClick={() => agregarCarrito()}
-                                        disabled={Object.keys(errors).filter(e => errors[e] !=='').length > 0}
+                                        disabled={Object.keys(errors).filter(e => errors[e] !=='').length > 0 || productoState.stock === 0}
                                     >
                                         {textoBotonCarrito} {"  "} 
                                         <FaShoppingCart/>
                                     </Button>
                                 </Col>
-                                <Col xs={12} md={4}></Col>
+                                <Col xs={12} md={3}></Col>
                                 <Col xs={12} md="4">
                                     <Button 
                                         variant="danger" 

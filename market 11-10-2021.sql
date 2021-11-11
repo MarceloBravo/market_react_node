@@ -11,7 +11,7 @@
  Target Server Version : 80020
  File Encoding         : 65001
 
- Date: 06/10/2021 13:59:50
+ Date: 10/11/2021 22:46:49
 */
 
 SET NAMES utf8mb4;
@@ -22,11 +22,11 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `categorias`;
 CREATE TABLE `categorias`  (
-  `id` bigint(0) NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `created_at` timestamp(0) NOT NULL,
-  `updated_at` timestamp(0) NOT NULL,
-  `deleted_at` timestamp(0) NULL DEFAULT NULL,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
@@ -44,7 +44,7 @@ INSERT INTO `categorias` VALUES (7, 'wawawawawaw esese', '2021-06-14 00:00:00', 
 -- ----------------------------
 DROP TABLE IF EXISTS `clientes`;
 CREATE TABLE `clientes`  (
-  `id` bigint(0) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `rut` varchar(14) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `nombres` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `apellido1` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
@@ -61,11 +61,11 @@ CREATE TABLE `clientes`  (
   `casa_num` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `block_num` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT '',
   `referencia` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT '' COMMENT 'Reeferencias adicionales para la dirección del cliente',
-  `created_at` timestamp(0) NOT NULL,
-  `updated_at` timestamp(0) NOT NULL,
-  `deleted_at` timestamp(0) NULL DEFAULT NULL,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of clientes
@@ -81,12 +81,12 @@ INSERT INTO `clientes` VALUES (6, '77.777.777-7', 'Valeria', 'Maza', 'Perez', '1
 -- ----------------------------
 DROP TABLE IF EXISTS `companias_envios`;
 CREATE TABLE `companias_envios`  (
-  `id` bigint(0) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `codigo` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `nombre` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `created_at` timestamp(0) NOT NULL,
-  `updated_at` timestamp(0) NOT NULL,
-  `deleted_at` timestamp(0) NULL DEFAULT NULL,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
@@ -100,12 +100,12 @@ INSERT INTO `companias_envios` VALUES (1, 'chexp', 'Chile Express', '2021-08-24 
 -- ----------------------------
 DROP TABLE IF EXISTS `configuracion`;
 CREATE TABLE `configuracion`  (
-  `id` bigint(0) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `nombre_app` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp(0) NULL DEFAULT NULL,
-  `updated_at` timestamp(0) NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of configuracion
@@ -117,8 +117,8 @@ INSERT INTO `configuracion` VALUES (1, 'Mabc App', '2021-05-27 23:19:32', '2021-
 -- ----------------------------
 DROP TABLE IF EXISTS `despachos_ventas`;
 CREATE TABLE `despachos_ventas`  (
-  `id` bigint(0) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `venta_id` bigint(0) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `venta_id` bigint UNSIGNED NOT NULL,
   `direccion` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `region` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `provincia` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
@@ -127,17 +127,17 @@ CREATE TABLE `despachos_ventas`  (
   `casa_num` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `block_num` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
   `referencia` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
-  `shipping_cod` bigint(0) UNSIGNED NOT NULL,
-  `fecha_despacho` timestamp(0) NULL DEFAULT NULL,
-  `created_at` timestamp(0) NOT NULL,
-  `updated_at` timestamp(0) NOT NULL,
-  `deleted_at` timestamp(0) NULL DEFAULT NULL,
+  `shipping_cod` bigint UNSIGNED NOT NULL,
+  `fecha_despacho` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `ventas-despachos`(`venta_id`) USING BTREE,
   INDEX `companias_evios-despacho_ventas`(`shipping_cod`) USING BTREE,
   CONSTRAINT `companias_evios-despacho_ventas` FOREIGN KEY (`shipping_cod`) REFERENCES `companias_envios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `ventas-despachos` FOREIGN KEY (`venta_id`) REFERENCES `ventas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 418 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 539 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of despachos_ventas
@@ -521,28 +521,139 @@ INSERT INTO `despachos_ventas` VALUES (415, 440, '12 Norte 16 Oriente, #2288, Ta
 INSERT INTO `despachos_ventas` VALUES (416, 441, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-09-03 00:00:00', '2021-09-03 00:00:00', NULL);
 INSERT INTO `despachos_ventas` VALUES (417, 442, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-09-25 00:00:00', '2021-09-25 00:00:00', NULL);
 INSERT INTO `despachos_ventas` VALUES (418, 443, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-09-30 00:00:00', '2021-09-30 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (419, 444, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (420, 445, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (421, 446, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (422, 447, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (423, 448, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (424, 449, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (425, 450, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (426, 451, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (427, 452, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (428, 453, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (429, 454, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (430, 455, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (431, 456, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (432, 457, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (433, 458, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (434, 459, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (435, 460, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (436, 461, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (437, 462, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (438, 463, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (439, 464, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (440, 465, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (441, 466, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (442, 467, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (443, 468, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (444, 469, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (445, 470, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (447, 472, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (448, 473, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (449, 474, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (450, 475, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (451, 476, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (452, 477, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (453, 478, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (454, 479, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (455, 480, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (456, 481, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (457, 482, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (458, 483, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (459, 484, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (460, 485, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (462, 487, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (463, 488, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (464, 489, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (465, 490, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (466, 491, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (467, 492, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (468, 493, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (469, 494, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (470, 495, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (471, 496, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (472, 497, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (473, 498, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (474, 499, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (475, 500, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (476, 501, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (477, 502, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (482, 507, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (483, 508, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (484, 509, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (485, 510, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (486, 511, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (487, 512, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (488, 513, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (489, 514, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (490, 515, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (491, 516, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (492, 517, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (493, 518, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (494, 519, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (495, 520, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (496, 521, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (497, 522, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (498, 523, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (499, 524, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (500, 525, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (501, 526, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (502, 527, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (503, 528, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (504, 529, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (505, 530, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (509, 535, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (510, 536, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (511, 537, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (512, 538, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (513, 539, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (514, 540, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (515, 541, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (516, 542, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (517, 543, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (518, 544, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (519, 545, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (520, 546, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (521, 547, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (522, 548, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (523, 549, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (524, 550, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (525, 551, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (526, 552, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (527, 553, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (528, 554, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (529, 555, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (530, 556, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (531, 557, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (532, 558, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (533, 559, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (534, 560, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (535, 561, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (536, 562, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (537, 563, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `despachos_ventas` VALUES (538, 564, '12 Norte 16 Oriente, #2288, Talca', '07', '071', '07101', 'Talca', '1234', 'Talca', 'Cerca de colegio', 1, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
 
 -- ----------------------------
 -- Table structure for detalle_ventas
 -- ----------------------------
 DROP TABLE IF EXISTS `detalle_ventas`;
 CREATE TABLE `detalle_ventas`  (
-  `id` bigint(0) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `venta_id` bigint(0) UNSIGNED NOT NULL,
-  `producto_id` bigint(0) UNSIGNED NOT NULL,
-  `precio_neto` int(0) NOT NULL COMMENT 'Precio al momento de la venta',
-  `impuesto` int(0) NOT NULL COMMENT 'Promedio de los porcentajes de impuestos aplicados',
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `venta_id` bigint UNSIGNED NOT NULL,
+  `producto_id` bigint UNSIGNED NOT NULL,
+  `precio_neto` int NOT NULL COMMENT 'Precio al momento de la venta',
+  `impuesto` int NOT NULL COMMENT 'Promedio de los porcentajes de impuestos aplicados',
   `JSON_impuestos` varchar(300) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT '' COMMENT 'JSON con los códigos de los impuestos y porcentaje de cada impuesto',
-  `precio_venta` int(0) NOT NULL,
-  `cantidad` int(0) NOT NULL,
-  `total_producto` int(0) NOT NULL,
-  `created_at` timestamp(0) NOT NULL,
-  `updated_at` timestamp(0) NOT NULL,
-  `deleted_at` timestamp(0) NULL DEFAULT NULL,
+  `precio_venta` int NOT NULL,
+  `cantidad` int NOT NULL,
+  `total_producto` int NOT NULL,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `ventas-detalle_ventas`(`venta_id`) USING BTREE,
   CONSTRAINT `ventas-detalle_ventas` FOREIGN KEY (`venta_id`) REFERENCES `ventas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 469 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 710 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of detalle_ventas
@@ -938,61 +1049,287 @@ INSERT INTO `detalle_ventas` VALUES (466, 441, 70, 27990, 19, NULL, 33308, 1, 33
 INSERT INTO `detalle_ventas` VALUES (467, 442, 73, 27990, 19, NULL, 33308, 1, 33308, '2021-09-25 00:00:00', '2021-09-25 00:00:00', NULL);
 INSERT INTO `detalle_ventas` VALUES (468, 442, 69, 7000, 19, NULL, 8330, 1, 8330, '2021-09-25 00:00:00', '2021-09-25 00:00:00', NULL);
 INSERT INTO `detalle_ventas` VALUES (469, 443, 67, 21990, 19, NULL, 26168, 1, 26168, '2021-09-30 00:00:00', '2021-09-30 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (470, 444, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (471, 444, 63, 50000, 19, NULL, 59500, 1, 59500, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (472, 445, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (473, 445, 63, 50000, 19, NULL, 59500, 1, 59500, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (474, 446, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (475, 446, 63, 50000, 19, NULL, 59500, 1, 59500, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (476, 447, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (477, 447, 63, 50000, 19, NULL, 59500, 1, 59500, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (478, 448, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (479, 448, 63, 50000, 19, NULL, 59500, 1, 59500, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (480, 449, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (481, 449, 63, 50000, 19, NULL, 59500, 1, 59500, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (482, 450, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (483, 450, 63, 50000, 19, NULL, 59500, 1, 59500, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (484, 451, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (485, 451, 63, 50000, 19, NULL, 59500, 1, 59500, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (486, 452, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (487, 452, 63, 50000, 19, NULL, 59500, 1, 59500, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (488, 453, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (489, 453, 63, 50000, 19, NULL, 59500, 1, 59500, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (490, 454, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (491, 454, 63, 50000, 19, NULL, 59500, 1, 59500, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (492, 455, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (493, 455, 63, 50000, 19, NULL, 59500, 1, 59500, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (494, 456, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (495, 456, 63, 50000, 19, NULL, 59500, 1, 59500, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (496, 457, 61, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (497, 457, 65, 9990, 19, NULL, 11888, 1, 11888, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (498, 458, 61, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (499, 458, 65, 9990, 19, NULL, 11888, 1, 11888, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (500, 459, 61, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (501, 459, 65, 9990, 19, NULL, 11888, 1, 11888, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (502, 460, 61, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (503, 460, 65, 9990, 19, NULL, 11888, 1, 11888, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (504, 461, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (505, 461, 68, 48990, 19, NULL, 58298, 1, 58298, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (506, 462, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (507, 462, 68, 48990, 19, NULL, 58298, 1, 58298, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (508, 463, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (509, 463, 68, 48990, 19, NULL, 58298, 1, 58298, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (510, 464, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (511, 464, 68, 48990, 19, NULL, 58298, 1, 58298, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (512, 465, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (513, 465, 68, 48990, 19, NULL, 58298, 1, 58298, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (514, 466, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (515, 466, 68, 48990, 19, NULL, 58298, 1, 58298, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (516, 467, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (517, 467, 68, 48990, 19, NULL, 58298, 1, 58298, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (518, 468, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (519, 468, 68, 48990, 19, NULL, 58298, 1, 58298, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (520, 469, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (521, 469, 68, 48990, 19, NULL, 58298, 1, 58298, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (522, 470, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (523, 470, 68, 48990, 19, NULL, 58298, 1, 58298, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (526, 472, 61, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (527, 472, 63, 50000, 19, NULL, 59500, 1, 59500, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (528, 473, 61, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (529, 473, 63, 50000, 19, NULL, 59500, 1, 59500, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (530, 474, 61, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (531, 474, 63, 50000, 19, NULL, 59500, 1, 59500, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (532, 475, 61, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (533, 475, 63, 50000, 19, NULL, 59500, 1, 59500, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (534, 476, 61, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (535, 476, 63, 50000, 19, NULL, 59500, 1, 59500, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (536, 477, 61, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (537, 477, 63, 50000, 19, NULL, 59500, 1, 59500, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (538, 478, 61, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (539, 478, 63, 50000, 19, NULL, 59500, 1, 59500, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (540, 479, 61, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (541, 479, 63, 50000, 19, NULL, 59500, 1, 59500, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (542, 480, 61, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (543, 480, 66, 69990, 19, NULL, 83288, 1, 83288, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (544, 481, 61, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (545, 481, 66, 69990, 19, NULL, 83288, 1, 83288, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (546, 482, 61, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (547, 482, 66, 69990, 19, NULL, 83288, 1, 83288, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (548, 483, 61, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (549, 483, 66, 69990, 19, NULL, 83288, 1, 83288, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (550, 484, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (551, 484, 69, 10000, 19, NULL, 11900, 1, 11900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (552, 485, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (553, 485, 69, 10000, 19, NULL, 11900, 1, 11900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (556, 487, 65, 9990, 19, NULL, 11888, 1, 11888, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (557, 487, 68, 48990, 19, NULL, 58298, 1, 58298, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (558, 488, 65, 9990, 19, NULL, 11888, 1, 11888, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (559, 488, 68, 48990, 19, NULL, 58298, 1, 58298, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (560, 489, 65, 9990, 19, NULL, 11888, 1, 11888, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (561, 489, 68, 48990, 19, NULL, 58298, 1, 58298, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (562, 490, 65, 9990, 19, NULL, 11888, 1, 11888, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (563, 490, 68, 48990, 19, NULL, 58298, 1, 58298, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (564, 491, 65, 9990, 19, NULL, 11888, 1, 11888, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (565, 491, 68, 48990, 19, NULL, 58298, 1, 58298, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (566, 492, 65, 9990, 19, NULL, 11888, 1, 11888, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (567, 492, 68, 48990, 19, NULL, 58298, 1, 58298, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (568, 493, 67, 21990, 19, NULL, 26168, 1, 26168, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (569, 493, 72, 9990, 19, NULL, 11888, 1, 11888, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (570, 494, 67, 21990, 19, NULL, 26168, 1, 26168, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (571, 494, 72, 9990, 19, NULL, 11888, 1, 11888, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (572, 495, 67, 21990, 19, NULL, 26168, 1, 26168, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (573, 495, 72, 9990, 19, NULL, 11888, 1, 11888, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (574, 496, 67, 21990, 19, NULL, 26168, 1, 26168, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (575, 496, 72, 9990, 19, NULL, 11888, 1, 11888, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (576, 497, 67, 21990, 19, NULL, 26168, 1, 26168, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (577, 497, 72, 9990, 19, NULL, 11888, 1, 11888, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (578, 498, 67, 21990, 19, NULL, 26168, 1, 26168, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (579, 498, 72, 9990, 19, NULL, 11888, 1, 11888, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (580, 499, 67, 21990, 19, NULL, 26168, 1, 26168, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (581, 499, 72, 9990, 19, NULL, 11888, 1, 11888, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (582, 500, 67, 21990, 19, NULL, 26168, 1, 26168, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (583, 500, 72, 9990, 19, NULL, 11888, 1, 11888, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (584, 501, 67, 21990, 19, NULL, 26168, 1, 26168, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (585, 501, 72, 9990, 19, NULL, 11888, 1, 11888, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (586, 502, 67, 21990, 19, NULL, 26168, 1, 26168, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (587, 502, 72, 9990, 19, NULL, 11888, 1, 11888, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (596, 507, 60, 529990, 19, NULL, 630688, 1, 630688, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (597, 507, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (598, 508, 61, 110000, 19, NULL, 130900, 1, 130900, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (599, 508, 63, 50000, 19, NULL, 59500, 1, 59500, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (600, 509, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (601, 509, 65, 9990, 19, NULL, 11888, 1, 11888, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (602, 510, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (603, 510, 65, 9990, 19, NULL, 11888, 1, 11888, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (604, 511, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (605, 511, 65, 9990, 19, NULL, 11888, 1, 11888, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (606, 512, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (607, 512, 65, 9990, 19, NULL, 11888, 1, 11888, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (608, 513, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (609, 513, 63, 50000, 19, NULL, 59500, 1, 59500, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (610, 514, 61, 110000, 19, NULL, 130900, 1, 130900, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (611, 514, 63, 50000, 19, NULL, 59500, 1, 59500, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (612, 515, 61, 110000, 19, NULL, 130900, 1, 130900, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (613, 515, 63, 50000, 19, NULL, 59500, 1, 59500, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (614, 516, 61, 110000, 19, NULL, 130900, 1, 130900, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (615, 516, 63, 50000, 19, NULL, 59500, 1, 59500, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (616, 517, 61, 110000, 19, NULL, 130900, 1, 130900, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (617, 517, 63, 50000, 19, NULL, 59500, 1, 59500, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (618, 518, 61, 110000, 19, NULL, 130900, 1, 130900, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (619, 518, 63, 50000, 19, NULL, 59500, 1, 59500, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (620, 519, 61, 110000, 19, NULL, 130900, 1, 130900, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (621, 519, 63, 50000, 19, NULL, 59500, 1, 59500, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (622, 520, 61, 110000, 19, NULL, 130900, 1, 130900, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (623, 520, 63, 50000, 19, NULL, 59500, 1, 59500, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (624, 521, 66, 69990, 19, NULL, 83288, 1, 83288, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (625, 521, 68, 48990, 19, NULL, 58298, 1, 58298, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (626, 522, 66, 69990, 19, NULL, 83288, 1, 83288, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (627, 522, 68, 48990, 19, NULL, 58298, 1, 58298, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (628, 523, 66, 69990, 19, NULL, 83288, 1, 83288, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (629, 523, 68, 48990, 19, NULL, 58298, 1, 58298, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (630, 524, 66, 69990, 19, NULL, 83288, 1, 83288, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (631, 524, 68, 48990, 19, NULL, 58298, 1, 58298, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (632, 525, 66, 69990, 19, NULL, 83288, 1, 83288, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (633, 525, 68, 48990, 19, NULL, 58298, 1, 58298, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (634, 526, 66, 69990, 19, NULL, 83288, 1, 83288, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (635, 526, 68, 48990, 19, NULL, 58298, 1, 58298, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (636, 527, 66, 69990, 19, NULL, 83288, 1, 83288, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (637, 527, 68, 48990, 19, NULL, 58298, 1, 58298, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (638, 528, 66, 69990, 19, NULL, 83288, 1, 83288, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (639, 528, 68, 48990, 19, NULL, 58298, 1, 58298, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (640, 529, 66, 69990, 19, NULL, 83288, 1, 83288, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (641, 529, 68, 48990, 19, NULL, 58298, 1, 58298, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (642, 530, 66, 69990, 19, NULL, 83288, 1, 83288, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (643, 530, 68, 48990, 19, NULL, 58298, 1, 58298, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (650, 535, 61, 110000, 19, NULL, 130900, 1, 130900, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (651, 535, 70, 27990, 19, NULL, 33308, 1, 33308, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (652, 536, 61, 110000, 19, NULL, 130900, 1, 130900, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (653, 536, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (654, 537, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (655, 537, 72, 9990, 19, NULL, 11888, 1, 11888, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (656, 538, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (657, 538, 72, 9990, 19, NULL, 11888, 1, 11888, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (658, 539, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (659, 539, 72, 9990, 19, NULL, 11888, 1, 11888, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (660, 540, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (661, 540, 72, 9990, 19, NULL, 11888, 1, 11888, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (662, 541, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (663, 541, 72, 9990, 19, NULL, 11888, 1, 11888, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (664, 542, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (665, 542, 72, 9990, 19, NULL, 11888, 1, 11888, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (666, 543, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (667, 543, 72, 9990, 19, NULL, 11888, 1, 11888, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (668, 544, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (669, 544, 63, 50000, 19, NULL, 59500, 1, 59500, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (670, 545, 60, 529990, 19, NULL, 630688, 1, 630688, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (671, 545, 63, 50000, 19, NULL, 59500, 1, 59500, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (672, 546, 60, 529990, 19, NULL, 630688, 1, 630688, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (673, 546, 63, 50000, 19, NULL, 59500, 1, 59500, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (674, 547, 60, 529990, 19, NULL, 630688, 1, 630688, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (675, 547, 63, 50000, 19, NULL, 59500, 1, 59500, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (676, 548, 60, 529990, 19, NULL, 630688, 1, 630688, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (677, 548, 63, 50000, 19, NULL, 59500, 1, 59500, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (678, 549, 61, 110000, 19, NULL, 130900, 1, 130900, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (679, 549, 63, 50000, 19, NULL, 59500, 1, 59500, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (680, 550, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (681, 550, 68, 48990, 19, NULL, 58298, 1, 58298, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (682, 551, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (683, 551, 68, 48990, 19, NULL, 58298, 1, 58298, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (684, 552, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (685, 552, 68, 48990, 19, NULL, 58298, 1, 58298, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (686, 553, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (687, 553, 68, 48990, 19, NULL, 58298, 1, 58298, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (688, 554, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (689, 554, 68, 48990, 19, NULL, 58298, 1, 58298, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (690, 555, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (691, 555, 68, 48990, 19, NULL, 58298, 1, 58298, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (692, 556, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (693, 556, 68, 48990, 19, NULL, 58298, 1, 58298, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (694, 557, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (695, 557, 68, 48990, 19, NULL, 58298, 1, 58298, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (696, 558, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (697, 558, 68, 48990, 19, NULL, 58298, 1, 58298, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (698, 559, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (699, 559, 68, 48990, 19, NULL, 58298, 1, 58298, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (700, 560, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (701, 560, 68, 48990, 19, NULL, 58298, 1, 58298, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (702, 561, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (703, 561, 68, 48990, 19, NULL, 58298, 1, 58298, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (704, 562, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (705, 562, 68, 48990, 19, NULL, 58298, 1, 58298, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (706, 563, 62, 110000, 19, NULL, 130900, 1, 130900, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (707, 563, 68, 48990, 19, NULL, 58298, 1, 58298, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (708, 564, 61, 110000, 19, NULL, 130900, 1, 130900, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `detalle_ventas` VALUES (709, 564, 72, 9990, 19, NULL, 11888, 1, 11888, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
 
 -- ----------------------------
 -- Table structure for failed_jobs
 -- ----------------------------
 DROP TABLE IF EXISTS `failed_jobs`;
 CREATE TABLE `failed_jobs`  (
-  `id` bigint(0) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `uuid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `connection` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `queue` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `exception` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `failed_jobs_uuid_unique`(`uuid`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of failed_jobs
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for imagenes_marquesina_home
 -- ----------------------------
 DROP TABLE IF EXISTS `imagenes_marquesina_home`;
 CREATE TABLE `imagenes_marquesina_home`  (
-  `id` bigint(0) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `src_imagen` varchar(500) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `texto` varchar(200) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT '',
   `link` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
-  `posicion` bigint(0) NOT NULL,
-  `created_at` timestamp(0) NOT NULL,
-  `updated_at` timestamp(0) NOT NULL,
-  `deleted_at` timestamp(0) NULL DEFAULT NULL,
+  `posicion` bigint NOT NULL,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of imagenes_marquesina_home
 -- ----------------------------
-INSERT INTO `imagenes_marquesina_home` VALUES (25, 'carrousel 1.png', 'trtrtrtrtrtrtrtrtr', '', 10, '2021-07-13 00:00:00', '2021-07-13 00:00:00', NULL);
-INSERT INTO `imagenes_marquesina_home` VALUES (26, 'carrousel 3.png', 'Producto 2', 'link al producto 2', 20, '2021-07-13 00:00:00', '2021-07-13 00:00:00', NULL);
-INSERT INTO `imagenes_marquesina_home` VALUES (27, 'WIN_20200709_19_11_53_Pro (2).jpg', 'cccccccccccccccc', 'link cccccccccccccccc', 30, '2021-07-13 00:00:00', '2021-07-13 00:00:00', '2021-09-30 00:00:00');
-INSERT INTO `imagenes_marquesina_home` VALUES (28, 'carrousel 4.png', 'producto 3', 'link producto 3', 30, '2021-07-16 00:00:00', '2021-07-16 00:00:00', NULL);
+INSERT INTO `imagenes_marquesina_home` VALUES (25, 'carrousel 1.png', '', '', 10, '2021-07-13 00:00:00', '2021-07-13 00:00:00', NULL);
+INSERT INTO `imagenes_marquesina_home` VALUES (26, 'carrousel 3.png', '', 'link al producto 2', 20, '2021-07-13 00:00:00', '2021-07-13 00:00:00', NULL);
+INSERT INTO `imagenes_marquesina_home` VALUES (27, 'WIN_20200709_19_11_53_Pro (2).jpg', 'cccccccccccccccc', 'link cccccccccccccccc', 30, '2021-07-13 00:00:00', '2021-07-13 00:00:00', '2021-10-12 00:00:00');
+INSERT INTO `imagenes_marquesina_home` VALUES (28, 'carrousel 4.png', '', 'link producto 3', 30, '2021-07-16 00:00:00', '2021-07-16 00:00:00', NULL);
 INSERT INTO `imagenes_marquesina_home` VALUES (29, 'carrousel 5.png', '', '', 40, '2021-07-16 00:00:00', '2021-07-16 00:00:00', NULL);
-INSERT INTO `imagenes_marquesina_home` VALUES (30, 'carrousel 2.png', 'Parlantes', 'link parlantes', 15, '2021-07-17 00:00:00', '2021-07-17 00:00:00', NULL);
+INSERT INTO `imagenes_marquesina_home` VALUES (30, 'carrousel 2.png', '', 'link parlantes', 15, '2021-07-17 00:00:00', '2021-07-17 00:00:00', NULL);
 
 -- ----------------------------
 -- Table structure for imagenes_productos
 -- ----------------------------
 DROP TABLE IF EXISTS `imagenes_productos`;
 CREATE TABLE `imagenes_productos`  (
-  `id` bigint(0) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `producto_id` bigint(0) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `producto_id` bigint UNSIGNED NOT NULL,
   `source_image` varchar(500) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `imagen_principal` tinyint(0) NOT NULL DEFAULT 0,
-  `created_at` timestamp(0) NOT NULL,
-  `updated_at` timestamp(0) NOT NULL,
-  `deleted_at` timestamp(0) NULL DEFAULT NULL,
+  `imagen_principal` tinyint NOT NULL DEFAULT 0,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk_imagenes_productos-productos`(`producto_id`) USING BTREE,
   CONSTRAINT `fk_imagenes_productos-productos` FOREIGN KEY (`producto_id`) REFERENCES `productos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -1043,16 +1380,16 @@ INSERT INTO `imagenes_productos` VALUES (334, 73, 'zapatilla skechers.jpg', 0, '
 -- ----------------------------
 DROP TABLE IF EXISTS `impuestos`;
 CREATE TABLE `impuestos`  (
-  `id` bigint(0) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `sigla` varchar(15) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `porcentaje` decimal(65, 0) NOT NULL,
-  `created_at` timestamp(0) NULL DEFAULT NULL,
-  `updated_at` timestamp(0) NULL DEFAULT NULL,
-  `deleted_at` timestamp(0) NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `nombre`(`nombre`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of impuestos
@@ -1070,18 +1407,18 @@ INSERT INTO `impuestos` VALUES (30, 'Impuesto de alcoholes', 'ILA', 15, '2021-06
 -- ----------------------------
 DROP TABLE IF EXISTS `impuestos_productos`;
 CREATE TABLE `impuestos_productos`  (
-  `id` bigint(0) NOT NULL AUTO_INCREMENT,
-  `producto_id` bigint(0) UNSIGNED NOT NULL,
-  `impuesto_id` bigint(0) UNSIGNED NOT NULL,
-  `created_at` timestamp(0) NOT NULL,
-  `updated_at` timestamp(0) NOT NULL,
-  `deleted_at` timestamp(0) NULL DEFAULT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `producto_id` bigint UNSIGNED NOT NULL,
+  `impuesto_id` bigint UNSIGNED NOT NULL,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk_impuestos_productos-productos`(`producto_id`) USING BTREE,
   INDEX `fk_impuestos_productos-impuestos`(`impuesto_id`) USING BTREE,
   CONSTRAINT `fk_impuestos_productos-impuestos` FOREIGN KEY (`impuesto_id`) REFERENCES `impuestos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_impuestos_productos-productos` FOREIGN KEY (`producto_id`) REFERENCES `productos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 194 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 195 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of impuestos_productos
@@ -1106,13 +1443,13 @@ INSERT INTO `impuestos_productos` VALUES (194, 73, 10, '2021-09-06 00:00:00', '2
 -- ----------------------------
 DROP TABLE IF EXISTS `marcas`;
 CREATE TABLE `marcas`  (
-  `id` bigint(0) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `created_at` timestamp(0) NOT NULL,
-  `updated_at` timestamp(0) NOT NULL,
-  `deleted_at` timestamp(0) NULL DEFAULT NULL,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of marcas
@@ -1130,18 +1467,18 @@ INSERT INTO `marcas` VALUES (8, 'Skechers', '2021-09-06 00:00:00', '2021-09-06 0
 -- ----------------------------
 DROP TABLE IF EXISTS `menus`;
 CREATE TABLE `menus`  (
-  `id` bigint(0) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `url` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `created_at` timestamp(0) NULL DEFAULT NULL,
-  `updated_at` timestamp(0) NULL DEFAULT NULL,
-  `deleted_at` timestamp(0) NULL DEFAULT NULL,
-  `menu_padre_id` bigint(0) UNSIGNED NOT NULL DEFAULT 0,
-  `posicion` int(0) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `menu_padre_id` bigint UNSIGNED NOT NULL DEFAULT 0,
+  `posicion` int UNSIGNED NOT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `menus_nombre_unique`(`nombre`) USING BTREE,
   UNIQUE INDEX `menus_url_unique`(`url`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 36 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 37 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of menus
@@ -1175,14 +1512,14 @@ INSERT INTO `menus` VALUES (36, 'Clientes', 'clientes', '2021-09-27 00:00:00', '
 -- ----------------------------
 DROP TABLE IF EXISTS `menus_tienda`;
 CREATE TABLE `menus_tienda`  (
-  `id` bigint(0) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `url` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `menu_padre_id` bigint(0) NULL DEFAULT NULL,
-  `posicion` int(0) UNSIGNED NOT NULL,
-  `created_at` datetime(0) NOT NULL,
-  `updated_at` datetime(0) NOT NULL,
-  `deleted_at` datetime(0) NULL DEFAULT NULL,
+  `menu_padre_id` bigint NULL DEFAULT NULL,
+  `posicion` int UNSIGNED NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `deleted_at` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
@@ -1198,11 +1535,11 @@ INSERT INTO `menus_tienda` VALUES (3, 'Deportes', 'catalogo', 0, 30, '2021-07-10
 -- ----------------------------
 DROP TABLE IF EXISTS `migrations`;
 CREATE TABLE `migrations`  (
-  `id` int(0) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
   `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int(0) NOT NULL,
+  `batch` int NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of migrations
@@ -1230,20 +1567,20 @@ INSERT INTO `migrations` VALUES (20, '2021_05_27_020353_create_configuracion_tab
 -- ----------------------------
 DROP TABLE IF EXISTS `pantallas`;
 CREATE TABLE `pantallas`  (
-  `id` bigint(0) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp(0) NULL DEFAULT NULL,
-  `updated_at` timestamp(0) NULL DEFAULT NULL,
-  `deleted_at` timestamp(0) NULL DEFAULT NULL,
-  `menus_id` bigint(0) UNSIGNED NOT NULL,
-  `permite_crear` tinyint(0) NOT NULL DEFAULT 1,
-  `permite_modificar` tinyint(0) NOT NULL DEFAULT 1,
-  `permite_eliminar` tinyint(0) NOT NULL DEFAULT 1,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `menus_id` bigint UNSIGNED NOT NULL,
+  `permite_crear` tinyint NOT NULL DEFAULT 1,
+  `permite_modificar` tinyint NOT NULL DEFAULT 1,
+  `permite_eliminar` tinyint NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `pantallas_nombre_unique`(`nombre`) USING BTREE,
   INDEX `pantallas_menus_id_foreign`(`menus_id`) USING BTREE,
   CONSTRAINT `pantallas_menus_id_foreign` FOREIGN KEY (`menus_id`) REFERENCES `menus` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of pantallas
@@ -1265,7 +1602,7 @@ INSERT INTO `pantallas` VALUES (20, 'Tienda', '2021-07-06 00:00:00', '2021-07-06
 INSERT INTO `pantallas` VALUES (21, 'Menú Tienda', '2021-07-10 00:00:00', '2021-07-10 00:00:00', NULL, 32, 1, 1, 1);
 INSERT INTO `pantallas` VALUES (22, 'Secciones pág. Home', '2021-07-20 00:00:00', '2021-07-20 00:00:00', NULL, 33, 1, 1, 1);
 INSERT INTO `pantallas` VALUES (23, 'Depachos', '2021-08-26 00:00:00', '2021-08-26 00:00:00', NULL, 34, 0, 1, 1);
-INSERT INTO `pantallas` VALUES (24, 'Precios', '2021-09-20 00:00:00', '2021-09-21 00:00:00', NULL, 35, 1, 0, 1);
+INSERT INTO `pantallas` VALUES (24, 'Precios', '2021-09-20 00:00:00', '2021-10-31 00:00:00', NULL, 35, 1, 0, 0);
 INSERT INTO `pantallas` VALUES (25, 'Clientes', '2021-09-27 00:00:00', '2021-09-27 00:00:00', NULL, 36, 1, 1, 1);
 
 -- ----------------------------
@@ -1275,41 +1612,45 @@ DROP TABLE IF EXISTS `password_resets`;
 CREATE TABLE `password_resets`  (
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp(0) NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
   INDEX `password_resets_email_index`(`email`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of password_resets
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for permisos
 -- ----------------------------
 DROP TABLE IF EXISTS `permisos`;
 CREATE TABLE `permisos`  (
-  `id` bigint(0) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `roles_id` bigint(0) UNSIGNED NOT NULL,
-  `pantallas_id` bigint(0) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `roles_id` bigint UNSIGNED NOT NULL,
+  `pantallas_id` bigint UNSIGNED NOT NULL,
   `acceder` tinyint(1) NOT NULL DEFAULT 0,
   `crear` tinyint(1) NOT NULL DEFAULT 0,
   `modificar` tinyint(1) NOT NULL DEFAULT 0,
   `eliminar` tinyint(1) NOT NULL DEFAULT 0,
-  `created_at` timestamp(0) NULL DEFAULT NULL,
-  `updated_at` timestamp(0) NULL DEFAULT NULL,
-  `deleted_at` timestamp(0) NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `permisos_roles_id_foreign`(`roles_id`) USING BTREE,
   INDEX `permisos_pantallas_id_foreign`(`pantallas_id`) USING BTREE,
   CONSTRAINT `permisos_pantallas_id_foreign` FOREIGN KEY (`pantallas_id`) REFERENCES `pantallas` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `permisos_roles_id_foreign` FOREIGN KEY (`roles_id`) REFERENCES `roles` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 56 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 57 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of permisos
 -- ----------------------------
-INSERT INTO `permisos` VALUES (1, 1, 1, 1, 1, 1, 1, '2021-02-06 22:33:59', '2021-09-27 00:00:00', NULL);
-INSERT INTO `permisos` VALUES (2, 1, 2, 1, 1, 1, 1, '2021-02-06 22:33:59', '2021-09-27 00:00:00', NULL);
-INSERT INTO `permisos` VALUES (3, 1, 3, 1, 1, 1, 1, '2021-02-08 13:32:30', '2021-09-27 00:00:00', NULL);
-INSERT INTO `permisos` VALUES (5, 1, 4, 1, 1, 1, 1, '2021-02-10 11:39:33', '2021-09-27 00:00:00', NULL);
-INSERT INTO `permisos` VALUES (6, 1, 5, 1, 1, 1, 1, '2021-02-10 11:42:38', '2021-09-27 00:00:00', NULL);
-INSERT INTO `permisos` VALUES (7, 1, 6, 1, 0, 1, 1, '2021-04-28 20:03:52', '2021-09-27 00:00:00', NULL);
+INSERT INTO `permisos` VALUES (1, 1, 1, 1, 1, 1, 1, '2021-02-06 22:33:59', '2021-10-31 00:00:00', NULL);
+INSERT INTO `permisos` VALUES (2, 1, 2, 1, 1, 1, 1, '2021-02-06 22:33:59', '2021-10-31 00:00:00', NULL);
+INSERT INTO `permisos` VALUES (3, 1, 3, 1, 1, 1, 1, '2021-02-08 13:32:30', '2021-10-31 00:00:00', NULL);
+INSERT INTO `permisos` VALUES (5, 1, 4, 1, 1, 1, 1, '2021-02-10 11:39:33', '2021-10-31 00:00:00', NULL);
+INSERT INTO `permisos` VALUES (6, 1, 5, 1, 1, 1, 1, '2021-02-10 11:42:38', '2021-10-31 00:00:00', NULL);
+INSERT INTO `permisos` VALUES (7, 1, 6, 1, 0, 1, 1, '2021-04-28 20:03:52', '2021-10-31 00:00:00', NULL);
 INSERT INTO `permisos` VALUES (8, 6, 1, 0, 0, 0, 0, '2021-05-19 00:00:00', '2021-05-25 00:00:00', NULL);
 INSERT INTO `permisos` VALUES (9, 6, 2, 1, 1, 1, 1, '2021-05-19 00:00:00', '2021-05-25 00:00:00', NULL);
 INSERT INTO `permisos` VALUES (10, 6, 3, 1, 1, 1, 1, '2021-05-19 00:00:00', '2021-05-25 00:00:00', NULL);
@@ -1322,60 +1663,60 @@ INSERT INTO `permisos` VALUES (28, 2, 3, 1, 0, 0, 0, '2021-05-19 00:00:00', '202
 INSERT INTO `permisos` VALUES (29, 2, 4, 0, 0, 0, 0, '2021-05-19 00:00:00', '2021-05-26 00:00:00', NULL);
 INSERT INTO `permisos` VALUES (30, 2, 5, 1, 0, 0, 0, '2021-05-19 00:00:00', '2021-05-26 00:00:00', NULL);
 INSERT INTO `permisos` VALUES (31, 2, 6, 1, 1, 1, 1, '2021-05-19 00:00:00', '2021-05-26 00:00:00', NULL);
-INSERT INTO `permisos` VALUES (44, 1, 11, 1, 1, 0, 0, '2021-05-26 00:00:00', '2021-09-27 00:00:00', NULL);
-INSERT INTO `permisos` VALUES (45, 1, 14, 1, 1, 1, 1, '2021-06-12 00:00:00', '2021-09-27 00:00:00', NULL);
-INSERT INTO `permisos` VALUES (46, 1, 15, 1, 1, 1, 1, '2021-06-14 00:00:00', '2021-09-27 00:00:00', NULL);
-INSERT INTO `permisos` VALUES (47, 1, 16, 1, 1, 1, 1, '2021-06-18 00:00:00', '2021-09-27 00:00:00', NULL);
-INSERT INTO `permisos` VALUES (48, 1, 17, 1, 1, 1, 1, '2021-06-19 00:00:00', '2021-09-27 00:00:00', NULL);
-INSERT INTO `permisos` VALUES (49, 1, 18, 1, 1, 1, 1, '2021-06-21 00:00:00', '2021-09-27 00:00:00', NULL);
-INSERT INTO `permisos` VALUES (50, 1, 19, 1, 1, 1, 1, '2021-06-23 00:00:00', '2021-09-27 00:00:00', NULL);
-INSERT INTO `permisos` VALUES (51, 1, 20, 1, 0, 1, 0, '2021-07-06 00:00:00', '2021-09-27 00:00:00', NULL);
-INSERT INTO `permisos` VALUES (52, 1, 21, 1, 1, 1, 1, '2021-07-10 00:00:00', '2021-09-27 00:00:00', NULL);
-INSERT INTO `permisos` VALUES (53, 1, 22, 1, 1, 1, 1, '2021-07-20 00:00:00', '2021-09-27 00:00:00', NULL);
-INSERT INTO `permisos` VALUES (54, 1, 23, 1, 0, 1, 1, '2021-08-26 00:00:00', '2021-09-27 00:00:00', NULL);
-INSERT INTO `permisos` VALUES (55, 1, 24, 1, 1, 0, 1, '2021-09-20 00:00:00', '2021-09-27 00:00:00', NULL);
-INSERT INTO `permisos` VALUES (56, 1, 25, 1, 1, 1, 1, '2021-09-27 00:00:00', '2021-09-27 00:00:00', NULL);
+INSERT INTO `permisos` VALUES (44, 1, 11, 1, 1, 0, 0, '2021-05-26 00:00:00', '2021-10-31 00:00:00', NULL);
+INSERT INTO `permisos` VALUES (45, 1, 14, 1, 1, 1, 1, '2021-06-12 00:00:00', '2021-10-31 00:00:00', NULL);
+INSERT INTO `permisos` VALUES (46, 1, 15, 1, 1, 1, 1, '2021-06-14 00:00:00', '2021-10-31 00:00:00', NULL);
+INSERT INTO `permisos` VALUES (47, 1, 16, 1, 1, 1, 1, '2021-06-18 00:00:00', '2021-10-31 00:00:00', NULL);
+INSERT INTO `permisos` VALUES (48, 1, 17, 1, 1, 1, 1, '2021-06-19 00:00:00', '2021-10-31 00:00:00', NULL);
+INSERT INTO `permisos` VALUES (49, 1, 18, 1, 1, 1, 1, '2021-06-21 00:00:00', '2021-10-31 00:00:00', NULL);
+INSERT INTO `permisos` VALUES (50, 1, 19, 1, 1, 1, 1, '2021-06-23 00:00:00', '2021-10-31 00:00:00', NULL);
+INSERT INTO `permisos` VALUES (51, 1, 20, 1, 0, 1, 0, '2021-07-06 00:00:00', '2021-10-31 00:00:00', NULL);
+INSERT INTO `permisos` VALUES (52, 1, 21, 1, 1, 1, 1, '2021-07-10 00:00:00', '2021-10-31 00:00:00', NULL);
+INSERT INTO `permisos` VALUES (53, 1, 22, 1, 1, 1, 1, '2021-07-20 00:00:00', '2021-10-31 00:00:00', NULL);
+INSERT INTO `permisos` VALUES (54, 1, 23, 1, 0, 1, 1, '2021-08-26 00:00:00', '2021-10-31 00:00:00', NULL);
+INSERT INTO `permisos` VALUES (55, 1, 24, 1, 1, 0, 0, '2021-09-20 00:00:00', '2021-10-31 00:00:00', NULL);
+INSERT INTO `permisos` VALUES (56, 1, 25, 1, 1, 1, 1, '2021-09-27 00:00:00', '2021-10-31 00:00:00', NULL);
 
 -- ----------------------------
 -- Table structure for precios_productos
 -- ----------------------------
 DROP TABLE IF EXISTS `precios_productos`;
 CREATE TABLE `precios_productos`  (
-  `id` bigint(0) NOT NULL AUTO_INCREMENT,
-  `producto_id` bigint(0) UNSIGNED NOT NULL,
-  `precio` int(0) NULL DEFAULT NULL,
-  `descuento` int(0) NULL DEFAULT 0,
-  `descuento_maximo` int(0) NULL DEFAULT 0,
-  `fecha_desde` timestamp(0) NULL DEFAULT NULL,
-  `fecha_hasta` timestamp(0) NULL DEFAULT NULL,
-  `created_at` timestamp(0) NOT NULL,
-  `updated_at` timestamp(0) NOT NULL,
-  `deleted_at` timestamp(0) NULL DEFAULT NULL,
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `producto_id` bigint UNSIGNED NOT NULL,
+  `precio` int NULL DEFAULT NULL,
+  `descuento` int NULL DEFAULT 0,
+  `descuento_maximo` int NULL DEFAULT 0,
+  `fecha_desde` timestamp NULL DEFAULT NULL,
+  `fecha_hasta` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk_precios_productos-productos`(`producto_id`) USING BTREE,
   CONSTRAINT `fk_precios_productos-productos` FOREIGN KEY (`producto_id`) REFERENCES `productos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 31 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of precios_productos
 -- ----------------------------
-INSERT INTO `precios_productos` VALUES (1, 60, 500000, 6, 12, '2021-09-28 03:00:00', '2021-10-18 03:00:00', '2021-06-24 18:57:04', '2021-09-30 00:00:00', NULL);
+INSERT INTO `precios_productos` VALUES (1, 60, 498190, 6, 12, '2021-09-28 06:00:00', '2021-10-18 06:00:00', '2021-06-24 18:57:04', '2021-10-31 00:00:00', NULL);
 INSERT INTO `precios_productos` VALUES (2, 60, 450000, 16, 20, '2021-10-16 00:00:00', '2021-10-31 00:00:00', '2021-06-24 19:13:30', '2021-09-19 00:00:00', '2021-09-22 00:00:00');
-INSERT INTO `precios_productos` VALUES (15, 61, 93500, 15, 20, '2021-09-22 03:00:00', '2021-10-02 03:00:00', '2021-09-19 00:00:00', '2021-09-30 00:00:00', NULL);
+INSERT INTO `precios_productos` VALUES (15, 61, 93500, 15, 20, '2021-09-22 06:00:00', '2021-10-02 06:00:00', '2021-09-19 00:00:00', '2021-10-31 00:00:00', NULL);
 INSERT INTO `precios_productos` VALUES (16, 62, 55000, 50, 60, '2021-09-19 00:00:00', '2021-10-10 00:00:00', '2021-09-19 00:00:00', '2021-09-19 00:00:00', '2021-09-19 00:00:00');
 INSERT INTO `precios_productos` VALUES (17, 73, 20000, 29, 30, '2021-10-01 00:00:00', '2021-10-07 00:00:00', '2021-09-19 00:00:00', '2021-09-19 00:00:00', '2021-09-19 00:00:00');
-INSERT INTO `precios_productos` VALUES (18, 72, NULL, NULL, NULL, '2021-09-29 21:00:00', '2021-10-02 21:00:00', '2021-09-22 00:00:00', '2021-09-30 00:00:00', NULL);
-INSERT INTO `precios_productos` VALUES (19, 69, 7000, 30, NULL, '2021-10-06 09:00:00', '2021-10-15 09:00:00', '2021-09-22 00:00:00', '2021-09-30 00:00:00', NULL);
-INSERT INTO `precios_productos` VALUES (20, 66, NULL, NULL, NULL, NULL, NULL, '2021-09-22 00:00:00', '2021-09-30 00:00:00', NULL);
-INSERT INTO `precios_productos` VALUES (21, 63, 47500, 5, NULL, NULL, NULL, '2021-09-22 00:00:00', '2021-09-30 00:00:00', NULL);
+INSERT INTO `precios_productos` VALUES (18, 72, NULL, NULL, NULL, '2021-09-30 00:00:00', '2021-10-03 00:00:00', '2021-09-22 00:00:00', '2021-10-31 00:00:00', NULL);
+INSERT INTO `precios_productos` VALUES (19, 69, 7000, 30, NULL, '2021-10-06 12:00:00', '2021-10-15 12:00:00', '2021-09-22 00:00:00', '2021-10-31 00:00:00', NULL);
+INSERT INTO `precios_productos` VALUES (20, 66, NULL, NULL, NULL, NULL, NULL, '2021-09-22 00:00:00', '2021-10-31 00:00:00', NULL);
+INSERT INTO `precios_productos` VALUES (21, 63, 47500, 5, NULL, NULL, NULL, '2021-09-22 00:00:00', '2021-10-31 00:00:00', NULL);
 INSERT INTO `precios_productos` VALUES (22, 67, NULL, NULL, NULL, NULL, NULL, '2021-09-22 00:00:00', '2021-09-23 00:00:00', NULL);
 INSERT INTO `precios_productos` VALUES (23, 65, NULL, NULL, NULL, NULL, NULL, '2021-09-22 00:00:00', '2021-09-23 00:00:00', NULL);
 INSERT INTO `precios_productos` VALUES (24, 68, NULL, NULL, NULL, NULL, NULL, '2021-09-22 00:00:00', '2021-09-23 00:00:00', NULL);
 INSERT INTO `precios_productos` VALUES (25, 71, NULL, NULL, NULL, NULL, NULL, '2021-09-22 00:00:00', '2021-09-23 00:00:00', NULL);
-INSERT INTO `precios_productos` VALUES (26, 60, 400000, 6, 12, '2021-09-28 03:00:00', '2021-10-18 03:00:00', '2021-09-22 00:00:00', '2021-09-30 00:00:00', NULL);
-INSERT INTO `precios_productos` VALUES (27, 72, 5002, 49, NULL, '2021-09-25 06:00:00', '2021-09-29 06:00:00', '2021-09-22 00:00:00', '2021-09-30 00:00:00', NULL);
-INSERT INTO `precios_productos` VALUES (28, 69, 7700, 23, NULL, '2021-09-25 11:41:54', '2021-10-05 03:00:00', '2021-09-22 00:00:00', '2021-09-30 00:00:00', NULL);
-INSERT INTO `precios_productos` VALUES (29, 66, 55922, 20, NULL, '2021-09-27 07:35:01', '2021-10-03 07:34:52', '2021-09-22 00:00:00', '2021-09-30 00:00:00', NULL);
+INSERT INTO `precios_productos` VALUES (26, 60, 400000, 6, 12, '2021-09-28 06:00:00', '2021-10-18 06:00:00', '2021-09-22 00:00:00', '2021-10-31 00:00:00', NULL);
+INSERT INTO `precios_productos` VALUES (27, 72, 5002, 49, NULL, '2021-09-25 09:00:00', '2021-09-29 09:00:00', '2021-09-22 00:00:00', '2021-10-31 00:00:00', NULL);
+INSERT INTO `precios_productos` VALUES (28, 69, 7700, 23, NULL, '2021-09-25 14:41:54', '2021-10-05 06:00:00', '2021-09-22 00:00:00', '2021-10-31 00:00:00', NULL);
+INSERT INTO `precios_productos` VALUES (29, 66, 55922, 20, NULL, '2021-09-27 10:35:01', '2021-10-03 10:34:52', '2021-09-22 00:00:00', '2021-10-31 00:00:00', NULL);
 INSERT INTO `precios_productos` VALUES (30, 70, 23231, 17, NULL, NULL, NULL, '2021-09-23 00:00:00', '2021-09-23 00:00:00', NULL);
 
 -- ----------------------------
@@ -1383,18 +1724,18 @@ INSERT INTO `precios_productos` VALUES (30, 70, 23231, 17, NULL, NULL, NULL, '20
 -- ----------------------------
 DROP TABLE IF EXISTS `productos`;
 CREATE TABLE `productos`  (
-  `id` bigint(0) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `nombre` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `descripcion` varchar(1000) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `precio_venta_normal` int(0) UNSIGNED NOT NULL,
-  `stock` bigint(0) UNSIGNED NOT NULL DEFAULT 0,
-  `unidad_id` bigint(0) NOT NULL,
-  `marca_id` bigint(0) UNSIGNED NOT NULL,
-  `categoria_id` bigint(0) NOT NULL,
-  `sub_categoria_id` bigint(0) UNSIGNED NOT NULL,
-  `created_at` timestamp(0) NOT NULL,
-  `updated_at` timestamp(0) NOT NULL,
-  `deleted_at` timestamp(0) NULL DEFAULT NULL,
+  `precio_venta_normal` int UNSIGNED NOT NULL,
+  `stock` bigint UNSIGNED NOT NULL DEFAULT 0,
+  `unidad_id` bigint NOT NULL,
+  `marca_id` bigint UNSIGNED NOT NULL,
+  `categoria_id` bigint NOT NULL,
+  `sub_categoria_id` bigint UNSIGNED NOT NULL,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk_productos-marcas`(`marca_id`) USING BTREE,
   INDEX `fk_productos-categorias`(`categoria_id`) USING BTREE,
@@ -1409,19 +1750,19 @@ CREATE TABLE `productos`  (
 -- ----------------------------
 -- Records of productos
 -- ----------------------------
-INSERT INTO `productos` VALUES (60, 'Drone Phantom 3', 'Phantom 3 standar fácil de pilotar, vuelo estacionario de modo gps, registros automáticos de vuelo videocámara 2.7 k fotos de 12 megapixeles', 529990, 50, 3, 4, 1, 3, '2021-06-23 00:00:00', '2021-09-06 00:00:00', NULL);
-INSERT INTO `productos` VALUES (61, 'Celular LG X CAM', 'Celular LG X-CAM liberado con chip movistar', 110000, 70, 3, 4, 1, 4, '2021-06-24 00:00:00', '2021-09-06 00:00:00', NULL);
-INSERT INTO `productos` VALUES (62, 'Celular LG K41S', 'Celular LG K41S liberado con chip movistar', 110000, 60, 3, 4, 1, 4, '2021-06-24 00:00:00', '2021-09-06 00:00:00', NULL);
-INSERT INTO `productos` VALUES (63, 'Notebook aweiou', 'Laptop portátil ', 50000, 90, 3, 3, 1, 3, '2021-07-03 00:00:00', '2021-09-06 00:00:00', NULL);
+INSERT INTO `productos` VALUES (60, 'Drone Phantom 3', 'Phantom 3 standar fácil de pilotar, vuelo estacionario de modo gps, registros automáticos de vuelo videocámara 2.7 k fotos de 12 megapixeles', 529990, 45, 3, 4, 1, 3, '2021-06-23 00:00:00', '2021-09-06 00:00:00', NULL);
+INSERT INTO `productos` VALUES (61, 'Celular LG X CAM', 'Celular LG X-CAM liberado con chip movistar', 110000, 42, 3, 4, 1, 4, '2021-06-24 00:00:00', '2021-09-06 00:00:00', NULL);
+INSERT INTO `productos` VALUES (62, 'Celular LG K41S', 'Celular LG K41S liberado con chip movistar', 110000, 6, 3, 4, 1, 4, '2021-06-24 00:00:00', '2021-09-06 00:00:00', NULL);
+INSERT INTO `productos` VALUES (63, 'Notebook aweiou', 'Laptop portátil ', 50000, 54, 3, 3, 1, 3, '2021-07-03 00:00:00', '2021-09-06 00:00:00', NULL);
 INSERT INTO `productos` VALUES (64, 'trtrtrtrtr', 'trtrtrtrtr', 500000, 100, 1, 2, 1, 3, '2021-07-03 00:00:00', '2021-07-03 00:00:00', '2021-07-03 00:00:00');
-INSERT INTO `productos` VALUES (65, 'Pesos Para Tobillos Y Muñecas (3 Kg El Par)', 'Pesos Para Tobillos Y Muñecas (3 Kg El Par)', 9990, 100, 3, 2, 5, 6, '2021-07-26 00:00:00', '2021-09-06 00:00:00', NULL);
-INSERT INTO `productos` VALUES (66, 'Maleta Pesas 20 Kg', 'Maleta Pesas 20 Kg, 4 discos de 2,5 Kilos, 4 pesos, de 1,5 Kilos, 2 barras de 2 Kilos c/u, 1 maleta plástica para transporte', 69990, 14, 3, 2, 5, 7, '2021-07-26 00:00:00', '2021-07-26 00:00:00', NULL);
-INSERT INTO `productos` VALUES (67, 'Pesa Rusa Kettlebell 7 Kg', 'Pesa Rusa Kettlebell 7 Kg, Color negro', 21990, 9, 3, 5, 5, 7, '2021-07-26 00:00:00', '2021-07-26 00:00:00', NULL);
-INSERT INTO `productos` VALUES (68, 'Six Pack Maquina Abdominales 5 min shape', 'Maquina Para Abdominales SIX PACKCon esta Maquina podrás realizar ejercicios abdominales.Trabaja los músculos del abdomen sector alto, medio, bajo y oblicuos, También hombros, pecho, espalda y piernas.Posee 6 posiciones para ajuste de dificultad + 1 posición para guardar el producto para que no utilice espacio al terminar de utilizarlo quedando totalmente vertical.Incluye Pantalla donde se puede ver: Tiempo ? Calorías quemadas ? Contador de Repeticiones ? Tiempo.Pantalla necesita 1 pila AA, ( INCLUIDA )Ancho máximo 54 cmAltura producto: Dependerá del nivel de dificultad seleccionado.Altura máxima: (posición guardado): 125 cm', 48990, 15, 3, 5, 5, 7, '2021-07-26 00:00:00', '2021-09-06 00:00:00', NULL);
-INSERT INTO `productos` VALUES (69, 'Balon De Basketball 6 Muuk', 'La pelota de Basketball MUUK de tamaño Juvenil para entrenamiento, ideal para uso en exteriores. Elaborado con materiales altamente durables y resistentes, contiene cámara de butilo que retiene más el aire y viene encordado en nylon, lo que le hace conservar su esfericidad y un bote uniforme.', 10000, 2, 3, 4, 5, 7, '2021-07-26 00:00:00', '2021-08-22 00:00:00', NULL);
-INSERT INTO `productos` VALUES (70, 'Zapatilla Under Armour GS Charged Pursuit 2 Negra Unisex', 'Zapatilla running para niñas y niños, modelo gs charged pursuit 2 de color negro, marca Under Armour', 27990, 0, 5, 6, 5, 5, '2021-08-02 00:00:00', '2021-08-02 00:00:00', NULL);
-INSERT INTO `productos` VALUES (71, 'Zapatilla Running Adidas Unisex Tensaur Run K Negro', 'Zapatilla running unisex marca Adidas modelo Tensaur Run K de color negro con forro textil. Calzado con cordón y fit bajo el tobillo', 29990, 6, 5, 2, 5, 5, '2021-08-02 00:00:00', '2021-08-02 00:00:00', NULL);
-INSERT INTO `productos` VALUES (72, 'BALANZA DIGITAL NAPPO 180KG', 'Nueva balanza Nappo con diseño ergonómico, de excelente calidad, que gracias a su graduación de 100 gramos aseguran la mayor exactitud del peso.  Con capacidad de hasta 180KG. Ideal para colocar en el baño de tu casa, y pesarte despues de hacer ejercicio o en cualquier momento.', 9990, 30, 3, 7, 1, 8, '2021-09-06 00:00:00', '2021-09-06 00:00:00', NULL);
+INSERT INTO `productos` VALUES (65, 'Pesos Para Tobillos Y Muñecas (3 Kg El Par)', 'Pesos Para Tobillos Y Muñecas (3 Kg El Par)', 9990, 86, 3, 2, 5, 6, '2021-07-26 00:00:00', '2021-09-06 00:00:00', NULL);
+INSERT INTO `productos` VALUES (66, 'Maleta Pesas 20 Kg', 'Maleta Pesas 20 Kg, 4 discos de 2,5 Kilos, 4 pesos, de 1,5 Kilos, 2 barras de 2 Kilos c/u, 1 maleta plástica para transporte', 69990, 0, 3, 2, 5, 7, '2021-07-26 00:00:00', '2021-07-26 00:00:00', NULL);
+INSERT INTO `productos` VALUES (67, 'Pesa Rusa Kettlebell 7 Kg', 'Pesa Rusa Kettlebell 7 Kg, Color negro', 21990, 100, 3, 5, 5, 7, '2021-07-26 00:00:00', '2021-07-26 00:00:00', NULL);
+INSERT INTO `productos` VALUES (68, 'Six Pack Maquina Abdominales 5 min shape', 'Maquina Para Abdominales SIX PACKCon esta Maquina podrás realizar ejercicios abdominales.Trabaja los músculos del abdomen sector alto, medio, bajo y oblicuos, También hombros, pecho, espalda y piernas.Posee 6 posiciones para ajuste de dificultad + 1 posición para guardar el producto para que no utilice espacio al terminar de utilizarlo quedando totalmente vertical.Incluye Pantalla donde se puede ver: Tiempo ? Calorías quemadas ? Contador de Repeticiones ? Tiempo.Pantalla necesita 1 pila AA, ( INCLUIDA )Ancho máximo 54 cmAltura producto: Dependerá del nivel de dificultad seleccionado.Altura máxima: (posición guardado): 125 cm', 48990, 76, 3, 5, 5, 7, '2021-07-26 00:00:00', '2021-09-06 00:00:00', NULL);
+INSERT INTO `productos` VALUES (69, 'Balon De Basketball 6 Muuk', 'La pelota de Basketball MUUK de tamaño Juvenil para entrenamiento, ideal para uso en exteriores. Elaborado con materiales altamente durables y resistentes, contiene cámara de butilo que retiene más el aire y viene encordado en nylon, lo que le hace conservar su esfericidad y un bote uniforme.', 10000, 100, 3, 4, 5, 7, '2021-07-26 00:00:00', '2021-08-22 00:00:00', NULL);
+INSERT INTO `productos` VALUES (70, 'Zapatilla Under Armour GS Charged Pursuit 2 Negra Unisex', 'Zapatilla running para niñas y niños, modelo gs charged pursuit 2 de color negro, marca Under Armour', 27990, 99, 5, 6, 5, 5, '2021-08-02 00:00:00', '2021-08-02 00:00:00', NULL);
+INSERT INTO `productos` VALUES (71, 'Zapatilla Running Adidas Unisex Tensaur Run K Negro', 'Zapatilla running unisex marca Adidas modelo Tensaur Run K de color negro con forro textil. Calzado con cordón y fit bajo el tobillo', 29990, 100, 5, 2, 5, 5, '2021-08-02 00:00:00', '2021-08-02 00:00:00', NULL);
+INSERT INTO `productos` VALUES (72, 'BALANZA DIGITAL NAPPO 180KG', 'Nueva balanza Nappo con diseño ergonómico, de excelente calidad, que gracias a su graduación de 100 gramos aseguran la mayor exactitud del peso.  Con capacidad de hasta 180KG. Ideal para colocar en el baño de tu casa, y pesarte despues de hacer ejercicio o en cualquier momento.', 9990, 13, 3, 7, 1, 8, '2021-09-06 00:00:00', '2021-09-06 00:00:00', NULL);
 INSERT INTO `productos` VALUES (73, 'ZAPATILLA SKECHERS MICROSPEC MAX', 'Skechers es una marca global que se especializa en diseñar y desarrollar productos de Lifestyle y Performance conocidos por su estilo, innovación, calidad y comodidad. Junto con su variada oferta de calzado, Skechers posee colecciones para hombres, mujeres y niños, incluyendo una creciente gama de productos creados para brindar comodidad y estilo a toda la familia.', 27990, 59, 3, 8, 5, 5, '2021-09-06 00:00:00', '2021-09-06 00:00:00', NULL);
 
 -- ----------------------------
@@ -1429,14 +1770,14 @@ INSERT INTO `productos` VALUES (73, 'ZAPATILLA SKECHERS MICROSPEC MAX', 'Skecher
 -- ----------------------------
 DROP TABLE IF EXISTS `productos_secciones_home`;
 CREATE TABLE `productos_secciones_home`  (
-  `id` bigint(0) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `seccion_id` bigint(0) UNSIGNED NOT NULL,
-  `producto_id` bigint(0) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `seccion_id` bigint UNSIGNED NOT NULL,
+  `producto_id` bigint UNSIGNED NOT NULL,
   `texto1` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT '',
   `texto2` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT '',
-  `created_at` timestamp(0) NOT NULL,
-  `updated_at` timestamp(0) NOT NULL,
-  `deleted_at` timestamp(0) NULL DEFAULT NULL,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk-secciones-productos_secciones`(`seccion_id`) USING BTREE,
   INDEX `fk-secciones-productos`(`producto_id`) USING BTREE,
@@ -1464,14 +1805,14 @@ INSERT INTO `productos_secciones_home` VALUES (14, 7, 69, '', '', '2021-07-26 00
 -- ----------------------------
 DROP TABLE IF EXISTS `role_user`;
 CREATE TABLE `role_user`  (
-  `id` bigint(0) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `role_id` int(0) UNSIGNED NOT NULL,
-  `user_id` int(0) UNSIGNED NOT NULL,
-  `created_at` timestamp(0) NULL DEFAULT NULL,
-  `updated_at` timestamp(0) NULL DEFAULT NULL,
-  `deleted_at` timestamp(0) NULL DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `role_id` int UNSIGNED NOT NULL,
+  `user_id` int UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 33 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of role_user
@@ -1495,15 +1836,15 @@ INSERT INTO `role_user` VALUES (33, 1, 71, NULL, NULL, '2021-06-07 00:00:00');
 -- ----------------------------
 DROP TABLE IF EXISTS `roles`;
 CREATE TABLE `roles`  (
-  `id` bigint(0) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp(0) NULL DEFAULT NULL,
-  `updated_at` timestamp(0) NULL DEFAULT NULL,
-  `deleted_at` timestamp(0) NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `roles_name_unique`(`name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of roles
@@ -1521,11 +1862,11 @@ INSERT INTO `roles` VALUES (27, 'qawaw cgfcfcfcf', 'ddxdxdxdxdxdx', '2021-06-07 
 -- ----------------------------
 DROP TABLE IF EXISTS `secciones_home`;
 CREATE TABLE `secciones_home`  (
-  `id` bigint(0) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `created_at` timestamp(0) NOT NULL,
-  `updated_at` timestamp(0) NOT NULL,
-  `deleted_at` timestamp(0) NULL DEFAULT NULL,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
@@ -1540,12 +1881,12 @@ INSERT INTO `secciones_home` VALUES (7, 'Deportes', '2021-07-26 00:00:00', '2021
 -- ----------------------------
 DROP TABLE IF EXISTS `sub_categorias`;
 CREATE TABLE `sub_categorias`  (
-  `id` bigint(0) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `categoria_id` bigint(0) NOT NULL,
-  `created_at` timestamp(0) NOT NULL,
-  `updated_at` timestamp(0) NOT NULL,
-  `deleted_at` timestamp(0) NULL DEFAULT NULL,
+  `categoria_id` bigint NOT NULL,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `fk_categ-sub_categ`(`categoria_id`) USING BTREE,
   CONSTRAINT `fk_categ-sub_categ` FOREIGN KEY (`categoria_id`) REFERENCES `categorias` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -1571,35 +1912,35 @@ INSERT INTO `sub_categorias` VALUES (13, 'wawawawawawa', 1, '2021-09-29 00:00:00
 -- ----------------------------
 DROP TABLE IF EXISTS `tienda`;
 CREATE TABLE `tienda`  (
-  `id` bigint(0) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `nombre_tienda` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `fono_venta` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `email` varchar(150) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `direccion` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `created_at` timestamp(0) NOT NULL,
-  `updated_at` timestamp(0) NOT NULL,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tienda
 -- ----------------------------
-INSERT INTO `tienda` VALUES (1, 'Marcelo Market 2', '+56 1 987654321', 'mabcmarket@ejemplo.cl', '12 Norte 16 Oriente # 1234', '2021-07-06 00:00:00', '2021-08-23 00:00:00');
+INSERT INTO `tienda` VALUES (1, 'Marcelo Market 2', '+56 1 987654321', 'bravomarcelo@hotmail.es', '12 Norte 16 Oriente # 1234', '2021-07-06 00:00:00', '2021-11-10 00:00:00');
 
 -- ----------------------------
 -- Table structure for tipos_de_pago
 -- ----------------------------
 DROP TABLE IF EXISTS `tipos_de_pago`;
 CREATE TABLE `tipos_de_pago`  (
-  `id` bigint(0) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `codigo` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL COMMENT 'Código definido por WebPay',
   `nombre` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL COMMENT 'Nombre de la forma de pago ',
   `descripcion` varchar(400) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `created_at` timestamp(0) NOT NULL,
-  `updated_at` timestamp(0) NOT NULL,
-  `deleted_at` timestamp(0) NULL DEFAULT NULL,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tipos_de_pago
@@ -1617,14 +1958,14 @@ INSERT INTO `tipos_de_pago` VALUES (7, 'VP', 'Venta Prepago', 'Pago con tarjeta 
 -- ----------------------------
 DROP TABLE IF EXISTS `unidades`;
 CREATE TABLE `unidades`  (
-  `id` bigint(0) NOT NULL AUTO_INCREMENT,
+  `id` bigint NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `nombre_plural` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL DEFAULT '',
-  `created_at` timestamp(0) NOT NULL,
-  `updated_at` timestamp(0) NOT NULL,
-  `deleted_at` timestamp(0) NULL DEFAULT NULL,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of unidades
@@ -1639,15 +1980,15 @@ INSERT INTO `unidades` VALUES (5, 'Par', 'pares', '2021-08-02 00:00:00', '2021-0
 -- ----------------------------
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users`  (
-  `id` bigint(0) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email_verified_at` timestamp(0) NULL DEFAULT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL,
-  `created_at` timestamp(0) NULL DEFAULT NULL,
-  `updated_at` timestamp(0) NULL DEFAULT NULL,
-  `deleted_at` timestamp(0) NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   `a_paterno` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `a_materno` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `direccion` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1655,7 +1996,7 @@ CREATE TABLE `users`  (
   `fono` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `users_email_unique`(`email`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 71 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 72 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of users
@@ -1671,15 +2012,15 @@ INSERT INTO `users` VALUES (71, 'wawawaawa', 'prueba2@ejemplo.cl', NULL, '$2b$10
 -- ----------------------------
 DROP TABLE IF EXISTS `ventas`;
 CREATE TABLE `ventas`  (
-  `id` bigint(0) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `fecha_venta_tienda` timestamp(0) NOT NULL,
-  `total` bigint(0) NOT NULL,
-  `fecha_anulacion` timestamp(0) NULL DEFAULT NULL,
-  `created_at` timestamp(0) NOT NULL,
-  `updated_at` timestamp(0) NOT NULL,
-  `deleted_at` timestamp(0) NULL DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `fecha_venta_tienda` timestamp NOT NULL,
+  `total` bigint NOT NULL,
+  `fecha_anulacion` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 443 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 565 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ventas
@@ -2063,24 +2404,136 @@ INSERT INTO `ventas` VALUES (440, '2021-09-03 00:00:00', 33308, NULL, '2021-09-0
 INSERT INTO `ventas` VALUES (441, '2021-09-03 00:00:00', 33308, NULL, '2021-09-03 00:00:00', '2021-09-03 00:00:00', NULL);
 INSERT INTO `ventas` VALUES (442, '2021-09-25 00:00:00', 41638, NULL, '2021-09-25 00:00:00', '2021-09-25 00:00:00', NULL);
 INSERT INTO `ventas` VALUES (443, '2021-09-30 00:00:00', 26168, NULL, '2021-09-30 00:00:00', '2021-09-30 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (444, '2021-11-09 00:00:00', 190400, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (445, '2021-11-09 00:00:00', 190400, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (446, '2021-11-09 00:00:00', 190400, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (447, '2021-11-09 00:00:00', 190400, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (448, '2021-11-09 00:00:00', 190400, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (449, '2021-11-09 00:00:00', 190400, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (450, '2021-11-09 00:00:00', 190400, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (451, '2021-11-09 00:00:00', 190400, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (452, '2021-11-09 00:00:00', 190400, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (453, '2021-11-09 00:00:00', 190400, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (454, '2021-11-09 00:00:00', 190400, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (455, '2021-11-09 00:00:00', 190400, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (456, '2021-11-09 00:00:00', 190400, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (457, '2021-11-09 00:00:00', 142788, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (458, '2021-11-09 00:00:00', 142788, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (459, '2021-11-09 00:00:00', 142788, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (460, '2021-11-09 00:00:00', 142788, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (461, '2021-11-09 00:00:00', 189198, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (462, '2021-11-09 00:00:00', 189198, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (463, '2021-11-09 00:00:00', 189198, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (464, '2021-11-09 00:00:00', 189198, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (465, '2021-11-09 00:00:00', 189198, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (466, '2021-11-09 00:00:00', 189198, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (467, '2021-11-09 00:00:00', 189198, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (468, '2021-11-09 00:00:00', 189198, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (469, '2021-11-09 00:00:00', 189198, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (470, '2021-11-09 00:00:00', 189198, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (472, '2021-11-09 00:00:00', 190400, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (473, '2021-11-09 00:00:00', 190400, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (474, '2021-11-09 00:00:00', 190400, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (475, '2021-11-09 00:00:00', 190400, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (476, '2021-11-09 00:00:00', 190400, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (477, '2021-11-09 00:00:00', 190400, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (478, '2021-11-09 00:00:00', 190400, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (479, '2021-11-09 00:00:00', 190400, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (480, '2021-11-09 00:00:00', 214188, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (481, '2021-11-09 00:00:00', 214188, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (482, '2021-11-09 00:00:00', 214188, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (483, '2021-11-09 00:00:00', 214188, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (484, '2021-11-09 00:00:00', 142800, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (485, '2021-11-09 00:00:00', 142800, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (487, '2021-11-09 00:00:00', 70186, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (488, '2021-11-09 00:00:00', 70186, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (489, '2021-11-09 00:00:00', 70186, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (490, '2021-11-09 00:00:00', 70186, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (491, '2021-11-09 00:00:00', 70186, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (492, '2021-11-09 00:00:00', 70186, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (493, '2021-11-09 00:00:00', 38056, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (494, '2021-11-09 00:00:00', 38056, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (495, '2021-11-09 00:00:00', 38056, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (496, '2021-11-09 00:00:00', 38056, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (497, '2021-11-09 00:00:00', 38056, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (498, '2021-11-09 00:00:00', 38056, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (499, '2021-11-09 00:00:00', 38056, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (500, '2021-11-09 00:00:00', 38056, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (501, '2021-11-09 00:00:00', 38056, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (502, '2021-11-09 00:00:00', 38056, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (507, '2021-11-09 00:00:00', 761588, NULL, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (508, '2021-11-10 00:00:00', 190400, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (509, '2021-11-10 00:00:00', 142788, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (510, '2021-11-10 00:00:00', 142788, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (511, '2021-11-10 00:00:00', 142788, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (512, '2021-11-10 00:00:00', 142788, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (513, '2021-11-10 00:00:00', 190400, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (514, '2021-11-10 00:00:00', 190400, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (515, '2021-11-10 00:00:00', 190400, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (516, '2021-11-10 00:00:00', 190400, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (517, '2021-11-10 00:00:00', 190400, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (518, '2021-11-10 00:00:00', 190400, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (519, '2021-11-10 00:00:00', 190400, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (520, '2021-11-10 00:00:00', 190400, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (521, '2021-11-10 00:00:00', 141586, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (522, '2021-11-10 00:00:00', 141586, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (523, '2021-11-10 00:00:00', 141586, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (524, '2021-11-10 00:00:00', 141586, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (525, '2021-11-10 00:00:00', 141586, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (526, '2021-11-10 00:00:00', 141586, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (527, '2021-11-10 00:00:00', 141586, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (528, '2021-11-10 00:00:00', 141586, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (529, '2021-11-10 00:00:00', 141586, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (530, '2021-11-10 00:00:00', 141586, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (531, '2021-11-10 00:00:00', 141586, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (535, '2021-11-10 00:00:00', 164208, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (536, '2021-11-10 00:00:00', 261800, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (537, '2021-11-10 00:00:00', 142788, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (538, '2021-11-10 00:00:00', 142788, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (539, '2021-11-10 00:00:00', 142788, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (540, '2021-11-10 00:00:00', 142788, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (541, '2021-11-10 00:00:00', 142788, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (542, '2021-11-10 00:00:00', 142788, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (543, '2021-11-10 00:00:00', 142788, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (544, '2021-11-10 00:00:00', 190400, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (545, '2021-11-10 00:00:00', 690188, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (546, '2021-11-10 00:00:00', 690188, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (547, '2021-11-10 00:00:00', 690188, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (548, '2021-11-10 00:00:00', 690188, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (549, '2021-11-10 00:00:00', 190400, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (550, '2021-11-10 00:00:00', 189198, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (551, '2021-11-10 00:00:00', 189198, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (552, '2021-11-10 00:00:00', 189198, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (553, '2021-11-10 00:00:00', 189198, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (554, '2021-11-10 00:00:00', 189198, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (555, '2021-11-10 00:00:00', 189198, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (556, '2021-11-10 00:00:00', 189198, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (557, '2021-11-10 00:00:00', 189198, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (558, '2021-11-10 00:00:00', 189198, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (559, '2021-11-10 00:00:00', 189198, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (560, '2021-11-10 00:00:00', 189198, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (561, '2021-11-10 00:00:00', 189198, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (562, '2021-11-10 00:00:00', 189198, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (563, '2021-11-10 00:00:00', 189198, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas` VALUES (564, '2021-11-10 00:00:00', 142788, NULL, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
 
 -- ----------------------------
 -- Table structure for ventas_clientes
 -- ----------------------------
 DROP TABLE IF EXISTS `ventas_clientes`;
 CREATE TABLE `ventas_clientes`  (
-  `id` bigint(0) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `venta_id` bigint(0) UNSIGNED NOT NULL,
-  `cliente_id` bigint(0) UNSIGNED NOT NULL,
-  `created_at` timestamp(0) NOT NULL,
-  `updated_at` timestamp(0) NOT NULL,
-  `deleted_at` timestamp(0) NULL DEFAULT NULL,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `venta_id` bigint UNSIGNED NOT NULL,
+  `cliente_id` bigint UNSIGNED NOT NULL,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `ventas-ventas_clientes`(`venta_id`) USING BTREE,
   INDEX `ventas-clientes`(`cliente_id`) USING BTREE,
   CONSTRAINT `ventas-clientes` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `ventas-ventas_clientes` FOREIGN KEY (`venta_id`) REFERENCES `ventas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 427 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 549 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ventas_clientes
@@ -2464,37 +2917,152 @@ INSERT INTO `ventas_clientes` VALUES (424, 440, 2, '2021-09-03 00:00:00', '2021-
 INSERT INTO `ventas_clientes` VALUES (425, 441, 2, '2021-09-03 00:00:00', '2021-09-03 00:00:00', NULL);
 INSERT INTO `ventas_clientes` VALUES (426, 442, 2, '2021-09-25 00:00:00', '2021-09-25 00:00:00', NULL);
 INSERT INTO `ventas_clientes` VALUES (427, 443, 2, '2021-09-30 00:00:00', '2021-09-30 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (428, 444, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (429, 445, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (430, 446, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (431, 447, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (432, 448, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (433, 449, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (434, 450, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (435, 451, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (436, 452, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (437, 453, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (438, 454, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (439, 455, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (440, 456, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (441, 457, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (442, 458, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (443, 459, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (444, 460, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (445, 461, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (446, 462, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (447, 463, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (448, 464, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (449, 465, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (450, 466, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (451, 467, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (452, 468, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (453, 469, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (454, 470, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (456, 472, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (457, 473, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (458, 474, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (459, 475, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (460, 476, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (461, 477, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (462, 478, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (463, 479, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (464, 480, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (465, 481, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (466, 482, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (467, 483, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (468, 484, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (469, 485, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (471, 487, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (472, 488, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (473, 489, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (474, 490, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (475, 491, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (476, 492, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (477, 493, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (478, 494, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (479, 495, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (480, 496, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (481, 497, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (482, 498, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (483, 499, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (484, 500, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (485, 501, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (486, 502, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (491, 507, 2, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (492, 508, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (493, 509, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (494, 510, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (495, 511, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (496, 512, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (497, 513, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (498, 514, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (499, 515, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (500, 516, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (501, 517, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (502, 518, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (503, 519, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (504, 520, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (505, 521, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (506, 522, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (507, 523, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (508, 524, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (509, 525, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (510, 526, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (511, 527, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (512, 528, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (513, 529, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (514, 530, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (519, 535, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (520, 536, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (521, 537, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (522, 538, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (523, 539, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (524, 540, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (525, 541, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (526, 542, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (527, 543, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (528, 544, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (529, 545, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (530, 546, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (531, 547, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (532, 548, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (533, 549, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (534, 550, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (535, 551, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (536, 552, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (537, 553, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (538, 554, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (539, 555, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (540, 556, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (541, 557, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (542, 558, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (543, 559, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (544, 560, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (545, 561, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (546, 562, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (547, 563, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_clientes` VALUES (548, 564, 2, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
 
 -- ----------------------------
 -- Table structure for ventas_clientes_sin_registrar
 -- ----------------------------
 DROP TABLE IF EXISTS `ventas_clientes_sin_registrar`;
 CREATE TABLE `ventas_clientes_sin_registrar`  (
-  `id` bigint(0) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `venta_id` bigint(0) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `venta_id` bigint UNSIGNED NOT NULL,
   `rut` varchar(13) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `nombres` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `apellido1` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `apellido2` varchar(50) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
   `fono` varchar(20) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
   `email` varchar(255) CHARACTER SET utf8 COLLATE utf8_spanish_ci NOT NULL,
-  `created_at` timestamp(0) NOT NULL,
-  `updated_at` timestamp(0) NOT NULL,
-  `deleted_at` timestamp(0) NULL DEFAULT NULL,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `ventas-ventas_clientes_sin_registrar`(`venta_id`) USING BTREE,
   CONSTRAINT `ventas-ventas_clientes_sin_registrar` FOREIGN KEY (`venta_id`) REFERENCES `ventas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of ventas_clientes_sin_registrar
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for ventas_webpay
 -- ----------------------------
 DROP TABLE IF EXISTS `ventas_webpay`;
 CREATE TABLE `ventas_webpay`  (
-  `id` bigint(0) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `venta_id` bigint(0) UNSIGNED NOT NULL,
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `venta_id` bigint UNSIGNED NOT NULL,
   `vci` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
-  `amount` int(0) NOT NULL COMMENT 'monto',
+  `amount` int NOT NULL COMMENT 'monto',
   `buy_order` varchar(15) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL COMMENT 'número de orden de compra',
   `status` varchar(15) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL COMMENT 'estado',
   `session_id` varchar(15) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL COMMENT 'codigo sessión webpay',
@@ -2504,15 +3072,15 @@ CREATE TABLE `ventas_webpay`  (
   `transaction_date` varchar(30) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL COMMENT 'Fecha del servidor de webpay',
   `authorization_code` varchar(15) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL,
   `payment_type_code` varchar(10) CHARACTER SET utf8 COLLATE utf8_spanish_ci NULL DEFAULT NULL COMMENT 'tipo de pago',
-  `response_code` int(0) NULL DEFAULT NULL,
-  `installments_number` int(0) NULL DEFAULT NULL,
-  `created_at` timestamp(0) NOT NULL,
-  `updated_at` timestamp(0) NOT NULL,
-  `deleted_at` timestamp(0) NULL DEFAULT NULL,
+  `response_code` int NULL DEFAULT NULL,
+  `installments_number` int NULL DEFAULT NULL,
+  `created_at` timestamp NOT NULL,
+  `updated_at` timestamp NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `ventas-ventas_webpay`(`venta_id`) USING BTREE,
   CONSTRAINT `ventas-ventas_webpay` FOREIGN KEY (`venta_id`) REFERENCES `ventas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 401 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 511 CHARACTER SET = utf8 COLLATE = utf8_spanish_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of ventas_webpay
@@ -2895,5 +3463,114 @@ INSERT INTO `ventas_webpay` VALUES (398, 439, 'TSY', 33308, '6483', 'AUTHORIZED'
 INSERT INTO `ventas_webpay` VALUES (399, 440, 'TSY', 33308, '6483', 'AUTHORIZED', '19428', '7763', '1', '0903', '2021-09-03T22:38:31.796Z', '1415', 'VD', 0, 0, '2021-09-03 00:00:00', '2021-09-03 00:00:00', NULL);
 INSERT INTO `ventas_webpay` VALUES (400, 442, 'TSY', 41638, '8388', 'AUTHORIZED', '13225', '7763', '1', '0925', '2021-09-25T18:44:43.135Z', '1415', 'VD', 0, 0, '2021-09-25 00:00:00', '2021-09-25 00:00:00', NULL);
 INSERT INTO `ventas_webpay` VALUES (401, 443, 'TSY', 26168, '3414', 'AUTHORIZED', '11736', '7060', '1', '0930', '2021-09-30T22:08:08.071Z', '1819', 'VD', 0, 0, '2021-09-30 00:00:00', '2021-09-30 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (402, 444, 'TSY', 190400, '7207', 'AUTHORIZED', '14356', '7763', '1', '1109', '2021-11-09T11:40:34.950Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (403, 445, 'TSY', 190400, '7207', 'AUTHORIZED', '14356', '7763', '1', '1109', '2021-11-09T11:40:34.950Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (404, 446, 'TSY', 190400, '7207', 'AUTHORIZED', '14356', '7763', '1', '1109', '2021-11-09T11:40:34.950Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (405, 447, 'TSY', 190400, '7207', 'AUTHORIZED', '14356', '7763', '1', '1109', '2021-11-09T11:40:34.950Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (406, 448, 'TSY', 190400, '7207', 'AUTHORIZED', '14356', '7763', '1', '1109', '2021-11-09T11:40:34.950Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (407, 449, 'TSY', 190400, '7207', 'AUTHORIZED', '14356', '7763', '1', '1109', '2021-11-09T11:40:34.950Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (408, 450, 'TSY', 190400, '7207', 'AUTHORIZED', '14356', '7763', '1', '1109', '2021-11-09T11:40:34.950Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (409, 451, 'TSY', 190400, '7207', 'AUTHORIZED', '14356', '7763', '1', '1109', '2021-11-09T11:40:34.950Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (410, 452, 'TSY', 190400, '7207', 'AUTHORIZED', '14356', '7763', '1', '1109', '2021-11-09T11:40:34.950Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (411, 453, 'TSY', 190400, '7207', 'AUTHORIZED', '14356', '7763', '1', '1109', '2021-11-09T11:40:34.950Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (412, 454, 'TSY', 190400, '7207', 'AUTHORIZED', '14356', '7763', '1', '1109', '2021-11-09T11:40:34.950Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (413, 455, 'TSY', 190400, '7207', 'AUTHORIZED', '14356', '7763', '1', '1109', '2021-11-09T11:40:34.950Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (414, 456, 'TSY', 190400, '7207', 'AUTHORIZED', '14356', '7763', '1', '1109', '2021-11-09T11:40:34.950Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (415, 457, 'TSY', 142788, '1108', 'AUTHORIZED', '15551', '7763', '1', '1109', '2021-11-09T11:55:06.785Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (416, 458, 'TSY', 142788, '1108', 'AUTHORIZED', '15551', '7763', '1', '1109', '2021-11-09T11:55:06.785Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (417, 459, 'TSY', 142788, '1108', 'AUTHORIZED', '15551', '7763', '1', '1109', '2021-11-09T11:55:06.785Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (418, 460, 'TSY', 142788, '1108', 'AUTHORIZED', '15551', '7763', '1', '1109', '2021-11-09T11:55:06.785Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (419, 461, 'TSY', 189198, '8845', 'AUTHORIZED', '12316', '7763', '1', '1109', '2021-11-09T12:01:41.744Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (420, 462, 'TSY', 189198, '8845', 'AUTHORIZED', '12316', '7763', '1', '1109', '2021-11-09T12:01:41.744Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (421, 463, 'TSY', 189198, '8845', 'AUTHORIZED', '12316', '7763', '1', '1109', '2021-11-09T12:01:41.744Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (422, 464, 'TSY', 189198, '8845', 'AUTHORIZED', '12316', '7763', '1', '1109', '2021-11-09T12:01:41.744Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (423, 465, 'TSY', 189198, '8845', 'AUTHORIZED', '12316', '7763', '1', '1109', '2021-11-09T12:01:41.744Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (424, 466, 'TSY', 189198, '8845', 'AUTHORIZED', '12316', '7763', '1', '1109', '2021-11-09T12:01:41.744Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (425, 467, 'TSY', 189198, '8845', 'AUTHORIZED', '12316', '7763', '1', '1109', '2021-11-09T12:01:41.744Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (426, 468, 'TSY', 189198, '8845', 'AUTHORIZED', '12316', '7763', '1', '1109', '2021-11-09T12:01:41.744Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (427, 469, 'TSY', 189198, '8845', 'AUTHORIZED', '12316', '7763', '1', '1109', '2021-11-09T12:01:41.744Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (428, 470, 'TSY', 189198, '8845', 'AUTHORIZED', '12316', '7763', '1', '1109', '2021-11-09T12:01:41.744Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (429, 472, 'TSY', 190400, '9097', 'AUTHORIZED', '18765', '7763', '1', '1109', '2021-11-09T15:40:23.556Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (430, 473, 'TSY', 190400, '9097', 'AUTHORIZED', '18765', '7763', '1', '1109', '2021-11-09T15:40:23.556Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (431, 474, 'TSY', 190400, '9097', 'AUTHORIZED', '18765', '7763', '1', '1109', '2021-11-09T15:40:23.556Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (432, 475, 'TSY', 190400, '9097', 'AUTHORIZED', '18765', '7763', '1', '1109', '2021-11-09T15:40:23.556Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (433, 476, 'TSY', 190400, '5710', 'AUTHORIZED', '17026', '7763', '1', '1109', '2021-11-09T15:43:48.660Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (434, 477, 'TSY', 190400, '5710', 'AUTHORIZED', '17026', '7763', '1', '1109', '2021-11-09T15:43:48.660Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (435, 478, 'TSY', 190400, '5710', 'AUTHORIZED', '17026', '7763', '1', '1109', '2021-11-09T15:43:48.660Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (436, 479, 'TSY', 190400, '5710', 'AUTHORIZED', '17026', '7763', '1', '1109', '2021-11-09T15:43:48.660Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (437, 480, 'TSY', 214188, '8250', 'AUTHORIZED', '12754', '7763', '1', '1109', '2021-11-09T15:55:01.818Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (438, 481, 'TSY', 214188, '8250', 'AUTHORIZED', '12754', '7763', '1', '1109', '2021-11-09T15:55:01.818Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (439, 482, 'TSY', 214188, '8250', 'AUTHORIZED', '12754', '7763', '1', '1109', '2021-11-09T15:55:01.818Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (440, 483, 'TSY', 214188, '8250', 'AUTHORIZED', '12754', '7763', '1', '1109', '2021-11-09T15:55:01.818Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (441, 484, 'TSY', 142800, '2110', 'AUTHORIZED', '13059', '7763', '1', '1109', '2021-11-09T16:01:24.649Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (442, 485, 'TSY', 142800, '2110', 'AUTHORIZED', '13059', '7763', '1', '1109', '2021-11-09T16:01:24.649Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (443, 487, 'TSY', 70186, '9022', 'AUTHORIZED', '14214', '7763', '1', '1109', '2021-11-09T20:08:38.487Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (444, 488, 'TSY', 70186, '9022', 'AUTHORIZED', '14214', '7763', '1', '1109', '2021-11-09T20:08:38.487Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (445, 489, 'TSY', 70186, '9022', 'AUTHORIZED', '14214', '7763', '1', '1109', '2021-11-09T20:08:38.487Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (446, 490, 'TSY', 70186, '9022', 'AUTHORIZED', '14214', '7763', '1', '1109', '2021-11-09T20:08:38.487Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (447, 491, 'TSY', 70186, '9022', 'AUTHORIZED', '14214', '7763', '1', '1109', '2021-11-09T20:08:38.487Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (448, 493, 'TSY', 38056, '6106', 'AUTHORIZED', '17308', '7763', '1', '1109', '2021-11-09T20:15:13.575Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (449, 494, 'TSY', 38056, '6106', 'AUTHORIZED', '17308', '7763', '1', '1109', '2021-11-09T20:15:13.575Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (450, 495, 'TSY', 38056, '6106', 'AUTHORIZED', '17308', '7763', '1', '1109', '2021-11-09T20:15:13.575Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (451, 496, 'TSY', 38056, '6106', 'AUTHORIZED', '17308', '7763', '1', '1109', '2021-11-09T20:15:13.575Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (452, 497, 'TSY', 38056, '6106', 'AUTHORIZED', '17308', '7763', '1', '1109', '2021-11-09T20:15:13.575Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (453, 498, 'TSY', 38056, '6106', 'AUTHORIZED', '17308', '7763', '1', '1109', '2021-11-09T20:15:13.575Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (454, 499, 'TSY', 38056, '6106', 'AUTHORIZED', '17308', '7763', '1', '1109', '2021-11-09T20:15:13.575Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (455, 500, 'TSY', 38056, '6106', 'AUTHORIZED', '17308', '7763', '1', '1109', '2021-11-09T20:15:13.575Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (456, 501, 'TSY', 38056, '6106', 'AUTHORIZED', '17308', '7763', '1', '1109', '2021-11-09T20:15:13.575Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (457, 507, 'TSY', 761588, '5317', 'AUTHORIZED', '18741', '7763', '1', '1109', '2021-11-09T22:25:40.729Z', '1415', 'VD', 0, 0, '2021-11-09 00:00:00', '2021-11-09 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (458, 508, 'TSY', 190400, '9511', 'AUTHORIZED', '16039', '7763', '1', '1110', '2021-11-10T17:08:40.552Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (459, 509, 'TSY', 142788, '9147', 'AUTHORIZED', '11601', '7763', '1', '1110', '2021-11-10T17:10:20.711Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (460, 510, 'TSY', 142788, '9147', 'AUTHORIZED', '11601', '7763', '1', '1110', '2021-11-10T17:10:20.711Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (461, 511, 'TSY', 142788, '9147', 'AUTHORIZED', '11601', '7763', '1', '1110', '2021-11-10T17:10:20.711Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (462, 512, 'TSY', 142788, '9147', 'AUTHORIZED', '11601', '7763', '1', '1110', '2021-11-10T17:10:20.711Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (463, 513, 'TSY', 190400, '9577', 'AUTHORIZED', '14866', '7763', '1', '1110', '2021-11-10T17:15:02.315Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (464, 514, 'TSY', 190400, '1130', 'AUTHORIZED', '19357', '7763', '1', '1110', '2021-11-10T17:18:05.961Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (465, 515, 'TSY', 190400, '1130', 'AUTHORIZED', '19357', '7763', '1', '1110', '2021-11-10T17:18:05.961Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (466, 516, 'TSY', 190400, '1130', 'AUTHORIZED', '19357', '7763', '1', '1110', '2021-11-10T17:18:05.961Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (467, 517, 'TSY', 190400, '1130', 'AUTHORIZED', '19357', '7763', '1', '1110', '2021-11-10T17:18:05.961Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (468, 518, 'TSY', 190400, '1130', 'AUTHORIZED', '19357', '7763', '1', '1110', '2021-11-10T17:18:05.961Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (469, 519, 'TSY', 190400, '1130', 'AUTHORIZED', '19357', '7763', '1', '1110', '2021-11-10T17:18:05.961Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (470, 520, 'TSY', 190400, '1130', 'AUTHORIZED', '19357', '7763', '1', '1110', '2021-11-10T17:18:05.961Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (471, 521, 'TSY', 141586, '388', 'AUTHORIZED', '13848', '7763', '1', '1110', '2021-11-10T17:26:34.957Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (472, 522, 'TSY', 141586, '388', 'AUTHORIZED', '13848', '7763', '1', '1110', '2021-11-10T17:26:34.957Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (473, 523, 'TSY', 141586, '388', 'AUTHORIZED', '13848', '7763', '1', '1110', '2021-11-10T17:26:34.957Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (474, 524, 'TSY', 141586, '388', 'AUTHORIZED', '13848', '7763', '1', '1110', '2021-11-10T17:26:34.957Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (475, 525, 'TSY', 141586, '388', 'AUTHORIZED', '13848', '7763', '1', '1110', '2021-11-10T17:26:34.957Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (476, 526, 'TSY', 141586, '388', 'AUTHORIZED', '13848', '7763', '1', '1110', '2021-11-10T17:26:34.957Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (477, 527, 'TSY', 141586, '388', 'AUTHORIZED', '13848', '7763', '1', '1110', '2021-11-10T17:26:34.957Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (478, 528, 'TSY', 141586, '388', 'AUTHORIZED', '13848', '7763', '1', '1110', '2021-11-10T17:26:34.957Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (479, 529, 'TSY', 141586, '388', 'AUTHORIZED', '13848', '7763', '1', '1110', '2021-11-10T17:26:34.957Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (480, 530, 'TSY', 141586, '388', 'AUTHORIZED', '13848', '7763', '1', '1110', '2021-11-10T17:26:34.957Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (481, 535, 'TSY', 164208, '5488', 'AUTHORIZED', '10369', '7763', '1', '1110', '2021-11-10T17:43:10.465Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (482, 536, 'TSY', 261800, '1745', 'AUTHORIZED', '15270', '7763', '1', '1110', '2021-11-10T17:46:33.612Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (483, 537, 'TSY', 142788, '8210', 'AUTHORIZED', '17672', '7763', '1', '1110', '2021-11-10T17:50:21.427Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (484, 538, 'TSY', 142788, '8210', 'AUTHORIZED', '17672', '7763', '1', '1110', '2021-11-10T17:50:21.427Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (485, 539, 'TSY', 142788, '8210', 'AUTHORIZED', '17672', '7763', '1', '1110', '2021-11-10T17:50:21.427Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (486, 540, 'TSY', 142788, '8210', 'AUTHORIZED', '17672', '7763', '1', '1110', '2021-11-10T17:50:21.427Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (487, 541, 'TSY', 142788, '8210', 'AUTHORIZED', '17672', '7763', '1', '1110', '2021-11-10T17:50:21.427Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (488, 542, 'TSY', 142788, '8210', 'AUTHORIZED', '17672', '7763', '1', '1110', '2021-11-10T17:50:21.427Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (489, 543, 'TSY', 142788, '8210', 'AUTHORIZED', '17672', '7763', '1', '1110', '2021-11-10T17:50:21.427Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (490, 544, 'TSY', 190400, '2318', 'AUTHORIZED', '15418', '7763', '1', '1110', '2021-11-10T18:01:39.310Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (491, 545, 'TSY', 690188, '4797', 'AUTHORIZED', '15280', '7763', '1', '1110', '2021-11-10T18:12:31.057Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (492, 546, 'TSY', 690188, '4797', 'AUTHORIZED', '15280', '7763', '1', '1110', '2021-11-10T18:12:31.057Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (493, 547, 'TSY', 690188, '4797', 'AUTHORIZED', '15280', '7763', '1', '1110', '2021-11-10T18:12:31.057Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (494, 548, 'TSY', 690188, '4797', 'AUTHORIZED', '15280', '7763', '1', '1110', '2021-11-10T18:12:31.057Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (495, 549, 'TSY', 190400, '4523', 'AUTHORIZED', '11053', '7763', '1', '1110', '2021-11-10T18:20:28.859Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (496, 550, 'TSY', 189198, '8520', 'AUTHORIZED', '17471', '7763', '1', '1110', '2021-11-10T18:26:27.027Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (497, 551, 'TSY', 189198, '3394', 'AUTHORIZED', '10970', '7763', '1', '1110', '2021-11-10T18:29:00.580Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (498, 552, 'TSY', 189198, '3394', 'AUTHORIZED', '10970', '7763', '1', '1110', '2021-11-10T18:29:00.580Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (499, 553, 'TSY', 189198, '3394', 'AUTHORIZED', '10970', '7763', '1', '1110', '2021-11-10T18:29:00.580Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (500, 554, 'TSY', 189198, '3394', 'AUTHORIZED', '10970', '7763', '1', '1110', '2021-11-10T18:29:00.580Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (501, 555, 'TSY', 189198, '3394', 'AUTHORIZED', '10970', '7763', '1', '1110', '2021-11-10T18:29:00.580Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (502, 556, 'TSY', 189198, '3394', 'AUTHORIZED', '10970', '7763', '1', '1110', '2021-11-10T18:29:00.580Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (503, 557, 'TSY', 189198, '3394', 'AUTHORIZED', '10970', '7763', '1', '1110', '2021-11-10T18:29:00.580Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (504, 558, 'TSY', 189198, '3394', 'AUTHORIZED', '10970', '7763', '1', '1110', '2021-11-10T18:29:00.580Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (505, 559, 'TSY', 189198, '3394', 'AUTHORIZED', '10970', '7763', '1', '1110', '2021-11-10T18:29:00.580Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (506, 560, 'TSY', 189198, '3394', 'AUTHORIZED', '10970', '7763', '1', '1110', '2021-11-10T18:29:00.580Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (507, 561, 'TSY', 189198, '3394', 'AUTHORIZED', '10970', '7763', '1', '1110', '2021-11-10T18:29:00.580Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (508, 562, 'TSY', 189198, '3394', 'AUTHORIZED', '10970', '7763', '1', '1110', '2021-11-10T18:29:00.580Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (509, 563, 'TSY', 189198, '3394', 'AUTHORIZED', '10970', '7763', '1', '1110', '2021-11-10T18:29:00.580Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
+INSERT INTO `ventas_webpay` VALUES (510, 564, 'TSY', 142788, '6267', 'AUTHORIZED', '13112', '7763', '1', '1110', '2021-11-10T18:54:04.668Z', '1415', 'VD', 0, 0, '2021-11-10 00:00:00', '2021-11-10 00:00:00', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
