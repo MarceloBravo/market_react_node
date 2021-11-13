@@ -9,6 +9,7 @@ import { initTransaction } from '../../../actions/webpay'
 import { useHistory } from 'react-router-dom'
 import { types as spinnerTypes } from '../../../redux/Spinner/types'
 import { DatosDespachoContent } from './content'
+import { serverEndPoint } from '../../../shared/constantes'
 import './style.css'
 //npx browserslist@latest --update-db
 
@@ -187,7 +188,7 @@ export const DatosDespacho = () => {
             buy_order: `${Math.floor(Math.random() * 10000)}`, 
             session_id: `${Math.floor(Math.random() * 10000)+10000}`, 
             amount: parseInt(subTotal + despacho), 
-            return_url: 'http://192.168.43.118:3001/webpay_plus/success'
+            return_url: serverEndPoint + '/webpay_plus/success'
         }))
     }
     

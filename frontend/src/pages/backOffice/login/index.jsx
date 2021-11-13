@@ -121,7 +121,7 @@ export const Login = () => {
     /* ---------  /Validaciones ------------ */
 
     if (redirect && logedUser.accessToken) {
-        return (<Redirect to="/Home"/>)
+        return (<Redirect to="/home"/>)
     }
      
     return (
