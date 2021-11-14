@@ -18,6 +18,10 @@
     height: 43px;
 }
 
+.dark{
+    background-color: black !important;
+}
+
 .header-form-buscar{
     padding: 0px !important;
 }
