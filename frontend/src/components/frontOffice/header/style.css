@@ -10,18 +10,27 @@
     cursor: pointer;
 }
 
+.navbar-brand{
+    color: white !important;
+}
+
 .header-container{
-    background-color: #efefef;
+    background-color: #3a2294;
 }
 
 .header-market{
     height: 43px;
+    background-color: #4970b3  !important
 }
 
+.right-menu .navbar-nav a{
+    color: white !important;
+}
+/*
 .dark{
     background-color: black !important;
 }
-
+*/
 .header-form-buscar{
     padding: 0px !important;
 }

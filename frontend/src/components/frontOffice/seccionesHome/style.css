@@ -5,12 +5,15 @@
 
 .div-secction-title{
     display: flex;
+    background-color: #ffffff5c;
+    margin-bottom: 2%;
+    border-bottom: solid #3d42eb thin;
 }
 
 .div-secction-title > h3{
     display: inline-flex;
     padding: 0px 1em;
-    color: #494a4a;
+    color: #3d42eb;
     font-weight: lighter;
 }
 
