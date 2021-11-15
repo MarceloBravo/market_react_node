@@ -5,6 +5,7 @@ import { findByUrl } from '../../../../actions/pantallas'
 import { find, insert, update, deleteReg } from '../../../../actions/marcas'
 import { types as ModalTypes } from '../../../../redux/ModalDialog/types'
 import { types as spinnerTypes } from '../../../../redux/Spinner/types'
+import { types as marcasTypes } from '../../../../redux/Marcas/types'
 import { MarcasFormContent } from './content'
 
 
@@ -26,6 +27,9 @@ export const MarcasForm = () => {
         if(id){
             dispatch({type: spinnerTypes.SHOW_SPINNER})
             dispatch(find(id))
+        }else{
+            console.log('NUEVA MARCA')
+            dispatch({type: marcasTypes.NUEVA_MARCA})
         }
     },[dispatch, id])
     

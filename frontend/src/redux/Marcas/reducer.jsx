@@ -33,9 +33,10 @@ export const MarcasReducer = (state = INITIAL_STATE,  action) => {
                 marca: action.payload.data
             }
         case types.ELIMINAR_MARCA:
+        case types.NUEVA_MARCA:
             return {
                 ...state,
-                marca: INITIAL_STATE.marcas
+                marca: INITIAL_STATE.marca
             }
         case types.GET_ALL_MARCAS:
             return {
