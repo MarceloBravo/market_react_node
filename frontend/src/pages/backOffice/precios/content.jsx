@@ -36,7 +36,7 @@ export const PreciosContent = (props) => {
                 <Header />
                 <div className="content-section home-page">                    
                     <Alerta />
-                    <div className="div-button-group">
+                    <div className="div-button-group precios-button-group">
                         <Button variant="success" disabled={!editing} onClick={grabar}>Grabar</Button>
                         <Button variant="danger" disabled={!editing} onClick={cancelar}>Cancelar</Button>
                     </div>
