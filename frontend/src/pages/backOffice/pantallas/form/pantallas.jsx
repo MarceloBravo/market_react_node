@@ -32,7 +32,7 @@ export const PantallasForm = () => {
 
 
     useEffect(()=> {
-        if(id){
+        if(id && currentPantalla){
             setPantalla(currentPantalla);
         }else{
             setPantalla({nombre: '', menus_id: '', permite_crear: false, permite_modificar: false, permite_eliminar: false, created_at: null, updated_at: null, deleted_at: null})
