@@ -173,13 +173,8 @@ export const Catalogo = () => {
         }
     }
 
-
-    const cerrarFiltro = () => {
-        panelFiltro.current.style = "display: none"
-    }
-
     const mostrarFiltros = () => {
-        panelFiltro.current.style = "display: block"
+        panelFiltro.current.style = "display: block";
     }
 
     return (
@@ -201,7 +196,6 @@ export const Catalogo = () => {
             initialValuesGridCard={initialValuesGridCard} 
             productosState={productosState} 
             goToPage={goToPage}
-            cerrarFiltro={cerrarFiltro}
             panelFiltro={panelFiltro}
             mostrarFiltros={mostrarFiltros}
         />

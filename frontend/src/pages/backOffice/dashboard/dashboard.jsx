@@ -44,7 +44,7 @@ export const Dashboard = () => {
 
 
     useEffect(()=>{ 
-        if(ventasMensualesState){
+        if(ventasMensualesState?.length > 0){
             setDataUnidadesMensuales(ventasMensualesState.map(v => {
                 return {fecha: v.fecha_venta, cant_ventas: 'Unidades', unidades: parseInt(v.ventas)}
             }))
@@ -58,7 +58,7 @@ export const Dashboard = () => {
 
 
     useEffect(()=>{
-        if(ventasTrimestralesState){
+        if(ventasTrimestralesState?.length > 0){
             setDataUnidadesTrimestrales(ventasTrimestralesState.map(v => {
                 return {trimestre: `Trimestre ${v.trimestre}`, y: 'Trimestre ' , unidades: parseInt(v.cantidad)}
             }))
@@ -71,7 +71,7 @@ export const Dashboard = () => {
 
 
     useEffect(()=>{
-        if(ventasAnualesState){
+        if(ventasAnualesState?.length > 0){
             setDataUnidadesAnuales(ventasAnualesState.map(v => {
                 return {mes: `Mes ${v.mes}`, y: 'Meses' , unidades: parseInt(v.total)}
             }))
@@ -84,7 +84,7 @@ export const Dashboard = () => {
 
 
     useEffect(()=>{
-        if(masVendidosState){
+        if(masVendidosState?.length > 0){
             setProdMasVendidos(masVendidosState.map((p, k) => {return {angle: p.cantidad, label: p.nombre.substr(0, 20), key: k}}).filter( i => i.key < 5))
             setDataHBarChartMasVendidos(masVendidosState.map((p, k) => {return {value: p.cantidad, label: p.nombre.substr(0, 45), key: k}}).filter( i => i.key < 5).reverse())
             
@@ -102,7 +102,7 @@ export const Dashboard = () => {
 
 
     useEffect(()=>{
-        if(menosVendidosState){
+        if(menosVendidosState?.length > 0){
             setProdMenosVendidos(menosVendidosState.map((p, k) => {return {angle: p.cantidad, label: p.nombre.substr(0, 20), key: k}}).filter( i => i.key < 5))
             setDataHBarChartMenosVendidos(menosVendidosState.map((p, k) => {return {value: p.cantidad, label: p.nombre.substr(0, 45), key: k}}).filter( i => i.key < 5).reverse())
         }
@@ -110,14 +110,14 @@ export const Dashboard = () => {
     
 
     useEffect(()=>{
-        if(totalesVentasDespachosState){
+        if(totalesVentasDespachosState?.length > 0){
             setTotVentasDespachos([{angle: totalesVentasDespachosState.ventas, label: 'Ventas'},{angle: totalesVentasDespachosState.despachos, label: 'Despachos'}])
         }
     },[totalesVentasDespachosState])
 
 
     useEffect(()=>{
-        if(ventasDespachosUltimoAnioState){
+        if(ventasDespachosUltimoAnioState?.length > 0){
             let datos =ventasDespachosUltimoAnioState.map((i, k) => {return {fecha_venta: i.fecha_venta, fecha_despacho: i.fecha_despacho, productos: i.productos, despachos: i.despachos}})
             setDataVentasDespachosUltimoAnio({
                 ...dataVentasDespachosUltimoAnio,
