@@ -25,7 +25,7 @@ export const FormRoles = () => {
 
 
     useEffect(()=>{
-        if(id){
+        if(id && rolState){
             setRol(rolState);
         }else{
             setRol({id: '', name: '', description: '', created_at: '', updated_at: '', deleted_at: ''})
