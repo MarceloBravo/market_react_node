@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Form, Nav, Navbar, Dropdown, Image } from 'react-bootstrap'
+import { Form, Nav, Navbar, Dropdown, Image, OverlayTrigger, Tooltip } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout } from '../../../actions/login'
@@ -50,14 +50,32 @@ export const Header = (props) => {
         dispatch({type: menusTypes.TOGLE_MENU})
     }
 
+    const gogoutAndGoToMarket = () => {
+        dispatch(logout(getTokenFromStorage()))
+        history.push('/')
+    }
+
     return (
         <header className={"topbar " + (togleMenu ? 'widthHeader' : 'normalHeader')} data-navbarbg="skin6">
-            <Navbar variant="dark" className="navbar">
-                <Image src="/icon-menu.png" alt="Mostrar ocultar menú" className="icon-menu" onClick={()=>togleLeftMenu()}/>
+            <Navbar variant="dark" className="navbar admin-navbar">
+                <Image src="/icon-menu.png" alt="Mostrar/ocultar menú" className="icon-menu" onClick={()=>togleLeftMenu()}/>
                 {/*<Navbar.Brand href="/">{ nombre_app }</Navbar.Brand>*/}
                 <Nav className="mr-auto">
-                    <Nav.Link as={Link} to="/home" onClick={() => clearMessages()} className="bo-navLink ">Home</Nav.Link>
-                    <Nav.Link as={Link} to="/dashboard" onClick={() => clearMessages()}>Dashboard</Nav.Link>
+
+                    <OverlayTrigger
+                        placement="bottom"
+                        delay={{ show: 250, hide: 400 }}
+                        overlay={<Tooltip id="button-tooltip">Pedidos sin enviar</Tooltip>}
+                    >
+                        <Nav.Link as={Link} to="/home" onClick={() => clearMessages()} className="bo-navLink ">Home</Nav.Link>
+                    </OverlayTrigger>
+                    <OverlayTrigger
+                        placement="bottom"
+                        delay={{ show: 250, hide: 400 }}
+                        overlay={<Tooltip id="button-tooltip">Estadísticas de ventas</Tooltip>}
+                    >
+                        <Nav.Link as={Link} to="/dashboard" onClick={() => clearMessages()}>Dashboard</Nav.Link>
+                    </OverlayTrigger>
                 </Nav>
                 
                 <div className="user-session-info">
@@ -72,7 +90,8 @@ export const Header = (props) => {
                                 <Dropdown.Item as={Link} to="/perfil" onClick={() => clearMessages()}>Mi perfil</Dropdown.Item>
                                 <Dropdown.Divider />
                                 <Dropdown.Item as={Link} to="#" onClick={() => logoutApp()}>Cerrar sessión</Dropdown.Item>
-                                {token && <Dropdown.Item as={Link} to="#" onClick={() => goToMarket()}>Salir</Dropdown.Item>}
+                                {token && <Dropdown.Item as={Link} to="#" onClick={() => goToMarket()}>Regresar a la tienda</Dropdown.Item>}
+                                {!token && <Dropdown.Item as={Link} to="#" onClick={() => gogoutAndGoToMarket()}>Regresar a la tienda</Dropdown.Item>}
                             </Dropdown.Menu>
                         </Dropdown>
                     </Form>

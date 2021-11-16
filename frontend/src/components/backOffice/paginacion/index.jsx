@@ -37,6 +37,8 @@ export const Paginacion = (props) => {
             }
             arrNumbers.push(<Pagination.Last disabled={disabled} key={totPages*10+1} onClick={() => goToPage(totPages)}/>)
             setItems(arrNumbers)
+        }else{
+            setItems([])
         }        
     },[data, goToPage, disabled])
 
