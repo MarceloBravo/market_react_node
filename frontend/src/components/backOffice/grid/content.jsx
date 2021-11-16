@@ -35,7 +35,8 @@ export const TableGrid = (props) => {
         updateCondition,
         onChangeColumn,
         onDoubleClickColumn,
-        rowRef
+        rowRef,
+        handlerKeyFilter
     } = props
 
 
@@ -54,7 +55,13 @@ export const TableGrid = (props) => {
                         {showNewButton && permisos && permisos.crear === 1 && <Button variant="primary" onClick={handlerBtnNuevo }>Nuevo</Button>}
                     </Col>
                     <Col className="align-right">
-                        {showFindTextBox && <Form.Control disabled={disabledTextControl} type="text" placeholder="Ingresa el texto a buscar..." onBlur={e => handlerFilter(e)}/>}
+                        {showFindTextBox && <Form.Control 
+                                                disabled={disabledTextControl} 
+                                                type="text" 
+                                                placeholder="Ingresa el texto a buscar y presiona ENTER" 
+                                                onBlur={e => handlerFilter(e)} 
+                                                onKeyDown={e => handlerKeyFilter(e)}
+                                            />}
                     </Col>
                 </Row>
             </Container>

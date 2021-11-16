@@ -14,8 +14,8 @@ export const apisDigitalGob = 'https://apis.digital.gob.cl/dpa/'
 
 export const msgErrConection = 'Tiempo de conección expirado. '
 
-
-export const defaultImagesUrl = 'http://192.168.43.118:3001/images/avatars/'
-export const defaultImagesTienda = 'http://192.168.43.118:3001/images/tienda/'
-export const defaultImagesProducts = 'http://192.168.43.118:3001/images/productos/'
 export const serverEndPoint = 'http://192.168.43.118:3001'
+export const defaultImagesUrl = serverEndPoint + '/images/avatars/'
+export const defaultImagesTienda = serverEndPoint + '/images/tienda/'
+export const defaultImagesProducts = serverEndPoint + '/images/productos/'
+

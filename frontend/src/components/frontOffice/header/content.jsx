@@ -27,7 +27,7 @@ export const HeaderContentComponent = (props) => {
         <>
             <LeftMenuComponent toggleMenu={toggleMenu} sowMenu={sowMenu}/> 
             <div className="header-container">
-                <Navbar bg="dark" variant="dark" className="header-market">
+                <Navbar className="header-market dark">
                     <Container>
                         <Row>
                             <Col xs={12} md={6}>

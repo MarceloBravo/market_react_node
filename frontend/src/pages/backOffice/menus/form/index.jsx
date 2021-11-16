@@ -31,7 +31,7 @@ export const FormMenus = () => {
     },[id,dispatch])
 
     useEffect(() => {
-        if (id) {
+        if (id && currentMenu) {
             setMenu(currentMenu);
         }else{
             setMenu({ id: null, nombre: '', url: '', posicion: '', menu_padre_id: '', created_at: null, updated_at: null, deleted_at: null })

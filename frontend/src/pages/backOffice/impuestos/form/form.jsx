@@ -4,6 +4,7 @@ import { useHistory, useParams } from 'react-router-dom'
 import { types as ModalTypes } from '../../../../redux/ModalDialog/types'
 import { find, insert, update, deleteReg } from '../../../../actions/impuestos'
 import { types as spinnerTypes } from '../../../../redux/Spinner/types'
+import { types as impuestosTypes } from '../../../../redux/Impuestos/types'
 import { ContentImpuestos } from './content'
 
 export const ImpuestosForm = (props) => {
@@ -22,6 +23,8 @@ export const ImpuestosForm = (props) => {
         if(id){
             dispatch({type: spinnerTypes.SHOW_SPINNER})
             dispatch(find(id))
+        }else{
+            dispatch({type: impuestosTypes.NUEVO_IMPUESTO})
         }
     },[id, dispatch])
 

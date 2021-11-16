@@ -30,6 +30,10 @@ header {
   background-color: #ffffff  !important;
 }
 
+.admin-navbar a{
+  color: black !important;
+}
+
 .perfil-menu{
   background-color: #222e3c !important;
   border-color: #222e3c !important;

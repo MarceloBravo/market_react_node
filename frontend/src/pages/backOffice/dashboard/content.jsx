@@ -30,7 +30,7 @@ export const DashBoardContent = (props) => {
 
     return (
         <>
-            <Menu activeKeyMenu="30"/>
+            <Menu activeKeyMenu="0"/>
             <SpinnerComponent />
             <div className={"main-section " + (togleMenu ? 'main-width' : 'main-normal')}>                    
                 <Header />

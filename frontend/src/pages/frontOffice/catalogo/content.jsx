@@ -32,7 +32,6 @@ export const CatalogoContent = (props) => {
         initialValuesGridCard, 
         productosState, 
         goToPage,
-        cerrarFiltro,
         panelFiltro,
         mostrarFiltros
     } = props
@@ -117,7 +116,6 @@ export const CatalogoContent = (props) => {
 
 
                         <Button variant="primary" onClick={() => aplicarFiltro()}>Aplicar filtro</Button>
-                        <Button variant="primary" className="btn-cerrar-filtro" onClick={() => cerrarFiltro()}>Cerrar panel</Button>
                     </Col>
                     <Col xs={12} md={10}>
                         <GridCardComponent 

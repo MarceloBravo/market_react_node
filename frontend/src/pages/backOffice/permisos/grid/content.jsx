@@ -55,7 +55,7 @@ export const PermisosContent = (props) => {
                             </Form.Group>
                         }
                         
-                        <div classNmame="permisos-container">
+                        <div className="permisos-container">
                         {
                             permisos.length > 0 && 
                             <div className="divPermisos">

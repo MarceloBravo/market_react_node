@@ -34,9 +34,10 @@ export const ImpuestosReducer = (state = INITIAL_STATE,  action) => {
                 impuesto: action.payload.data
             }
         case types.ELIMINAR_IMPUESTOS:
+        case types.NUEVO_IMPUESTO:
             return {
                 ...state, 
-                state: INITIAL_STATE.impuesto
+                impuesto: INITIAL_STATE.impuesto
             }
 
         case types.GET_ALL_IMPUESTOS:

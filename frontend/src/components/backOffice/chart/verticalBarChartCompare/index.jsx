@@ -30,7 +30,7 @@ export const VerticalBarChartCompare = (props) => {
             <DiscreteColorLegend
                 style={{position: 'absolute', left: '50px', top: '-50px'}}
                 orientation="horizontal"
-                items={data.leyenda}
+                items={data.leyenda ? data.leyenda : []}
             />
 
             {data?.productos?.length > 0 && data.productos.map((i, key) =>{

@@ -1,7 +1,10 @@
 .div-button-group{
     width: fit-content !important;
-    position: relative;
-    top: 18%;
+}
+
+.precios-button-group{
+    position: absolute;
+    top: 19%;
 }
 
 .home-page .custom-class-table{

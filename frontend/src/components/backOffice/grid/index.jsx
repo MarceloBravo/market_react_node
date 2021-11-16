@@ -94,6 +94,11 @@ export const Grid = (props) => {
         onChangeFilter(e.target.value)
     }
 
+    const handlerKeyFilter = e => {
+        if(e.keyCode === 13){
+            handlerFilter(e)
+        }
+    }
 
     const handlerBtnNuevo = () => {
         dispatch({type: types.OCULTAR_ALERTA})
@@ -172,6 +177,7 @@ export const Grid = (props) => {
             onDoubleClickColumn={onDoubleClickColumn}
             disabledTextControl={disabledTextControl}
             rowRef={arrRowRef ? arrRowRef : refRows}
+            handlerKeyFilter={handlerKeyFilter}
         />
     )
 }
