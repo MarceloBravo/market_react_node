@@ -157,21 +157,26 @@ pantallaModel.filter = (texto, pag, callback) => {
         let desde = constantes.regPerPage * pag;
         let qry = `
                 SELECT
-                    id,
-                    nombre,
-                    created_at,
-                    updated_at,
-                    deleted_at,
-                    menus_id,
-                    permite_crear,
-                    permite_modificar,
-                    permite_eliminar
+                    p.id,
+                    p.nombre,
+                    m.nombre as menu,
+                    p.created_at,
+                    p.updated_at,
+                    p.deleted_at,
+                    p.menus_id,
+                    p.permite_crear,
+                    p.permite_modificar,
+                    p.permite_eliminar
                 FROM 
-                    pantallas
+                    pantallas p
+                INNER JOIN menus m ON p.menus_id = m.id 
                 WHERE
-                    deleted_at IS NULL
-                    AND nombre LIKE '%${texto}%' 
-                LIMIT ${desde}, ${constantes.regPerPage}
+                    p.deleted_at IS NULL
+                AND (
+                    p.nombre LIKE '%${cnn.escape(texto)}%' OR 
+                    m.nombre LIKE '%${cnn.escape(texto)}%'
+                )
+            LIMIT ${desde}, ${constantes.regPerPage}
                 `;
 
             cnn.query(qry, async (err, res) => {

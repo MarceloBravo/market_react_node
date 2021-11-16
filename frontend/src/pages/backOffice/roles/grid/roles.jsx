@@ -25,7 +25,7 @@ export const RolesGrid = () => {
     const filtrar = (texto) => {
         dispatch({type: spinnerTypes.SHOW_SPINNER})
         if(texto.length > 0){
-            dispatch(filter('roles', texto, 0));
+            dispatch(filter(texto, 0));
         }else{
             dispatch(getPage(0));
         }

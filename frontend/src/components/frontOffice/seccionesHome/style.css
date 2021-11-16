@@ -14,7 +14,7 @@
     display: inline-flex;
     padding: 0px 1em;
     color: #3d42eb;
-    font-weight: lighter;
+    font-weight: inherit;
 }
 
 .hr-seccion{

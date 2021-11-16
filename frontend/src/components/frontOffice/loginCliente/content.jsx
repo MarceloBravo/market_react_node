@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, Button, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-//import './style.css'
+import './style.css'
 
 export const LoginClientContent = (props) => {
     const { handlerInput, errors, registrarUsuario, login, rememberMe, changeRememberMeHandler, alingJson, cssClass } = props
@@ -49,7 +49,7 @@ export const LoginClientContent = (props) => {
                 </Col>
             </Form>
             <Row>
-                <Col md={{span: 4, offset: 4}}>
+                <Col md={{span: 4, offset: 4}} className="col-registro-cli">
                     ¿No tienes una cuenta? <Link to="#" onClick={()=>registrarUsuario()}>Registrate aqí</Link>
                 </Col>
             </Row>

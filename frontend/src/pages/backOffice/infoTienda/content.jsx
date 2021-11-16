@@ -16,7 +16,7 @@ export const InfoTiendaContent = (props) => {
      } = props
 
     return (
-        <>
+        <>  
             <ModalDialog response={response}/>
             <SpinnerComponent />
             <Menu activeKeyMenu="30"/>
@@ -24,7 +24,7 @@ export const InfoTiendaContent = (props) => {
                 <Header />
                 <div className="content-section">                    
                     <Alerta />
-                    
+                    <div className="div-title">Configuración de la tienda</div>
                     <Accordion>
                             <Card>
                                 <Card.Header>

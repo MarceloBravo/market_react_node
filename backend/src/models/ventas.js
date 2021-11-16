@@ -22,7 +22,7 @@ VentasModel.registrar = async (data, callback) => {
             }
 
             errMsg = 'registrar los datos de los productos'
-            await registrarProductos(ventaRes.insertId, data.productos)
+            await registrarProductos(ventaRes.insertId, data.productos, data.datos_webpay.status)
 
             errMsg = 'registrar los datos del despacho'
             await registrarDespacho(ventaRes.insertId, data.despacho)
@@ -33,7 +33,7 @@ VentasModel.registrar = async (data, callback) => {
             errMsg = 'finalizar la transacción'
             await cnn.promise().commit()
 
-            return callback(null, {mensaje: `Tu compra ha finalizado exitosamente.`, tipoMensaje: 'success'})
+            return callback(null, {mensaje: data.datos_webpay.status !== 'FAILED' ? `Tu compra ha finalizado exitosamente.` : 'La transacción no pudo llevarse a cabo o fue rechazada', tipoMensaje: data.datos_webpay.status !== 'FAILED' ? 'success' : 'danger'})
 
         }catch(error){
             await cnn.promise().rollback()
@@ -107,7 +107,7 @@ const registrarCliente = async (venta_id, data) => {
                             )`)
 }
 
-const registrarProductos = async (venta_id, data) => {
+const registrarProductos = async (venta_id, data, status) => {
     await data.map(async e => {
 
         await cnn.promise().query(`INSERT INTO detalle_ventas (
@@ -133,8 +133,9 @@ const registrarProductos = async (venta_id, data) => {
                                     CURDATE(),
                                     CURDATE()
                                 )`)
-
-        await descontarStock(e.producto_id, e.cantidad)
+        if(status !== 'FAILED'){
+            await descontarStock(e.producto_id, e.cantidad)
+        }
     })
 }
 
