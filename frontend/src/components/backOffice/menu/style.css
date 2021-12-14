@@ -5,11 +5,11 @@
 
 .flex-column a {
   /*color: #8e9eaa;*/
-  color: #b2c8ef;
+  color: rgba(233,236,239,.5);;
 }
 
 .flex-column a:hover {
-  color: rgb(113 154 215);
+  color: #bdc8d1;
 }
 /*
 .flex-column {
