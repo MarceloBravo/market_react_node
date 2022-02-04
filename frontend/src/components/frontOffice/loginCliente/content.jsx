@@ -4,7 +4,17 @@ import { Link } from 'react-router-dom'
 import './style.css'
 
 export const LoginClientContent = (props) => {
-    const { handlerInput, errors, registrarUsuario, login, rememberMe, changeRememberMeHandler, alingJson, cssClass } = props
+    const { 
+        handlerInput, 
+        errors, 
+        registrarUsuario, 
+        login, 
+        rememberMe, 
+        changeRememberMeHandler, 
+        alingJson, 
+        cssClass,
+        focusInput 
+    } = props
 
     return (
         <>  
@@ -17,6 +27,7 @@ export const LoginClientContent = (props) => {
                             name="email"
                             placeholder="Ingresa tu correo electrónico" 
                             onChange={e => handlerInput(e)}
+                            onFocus={() => focusInput()}
                         />
                     </Form.Group>
                     {errors.email && 
@@ -32,6 +43,7 @@ export const LoginClientContent = (props) => {
                             name="password"
                             placeholder="Ingresa tu contraseña" 
                             onChange={e => handlerInput(e)}
+                            onFocus={() => focusInput()}
                         />
                     </Form.Group>
                     {errors.password && 

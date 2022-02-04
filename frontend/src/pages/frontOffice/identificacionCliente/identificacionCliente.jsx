@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useHistory } from 'react-router-dom'
 import { validaRut, isEmail } from '../../../shared/funciones'
 import { types as clientesTypes } from '../../../redux/Clientes/types'
+import { types as alertasTypes } from '../../../redux/Alert/types'
 import { IdentificacionClienteContent } from './content'
 import { useDispatch, useSelector } from 'react-redux'
 import { getData } from '../../../actions/infoTienda'
@@ -21,6 +22,10 @@ export const IdentificacionCliente = () => {
             ...cliente,
             [e.target.name]: e.target.value
         })
+    }
+
+    const focusInput = () => {
+        dispatch({type: alertasTypes.OCULTAR_ALERTA })
     }
 
 
@@ -121,6 +126,7 @@ export const IdentificacionCliente = () => {
             errors={errors} 
             continuarCompra={continuarCompra} 
             continuar={continuar}
+            focusInput={focusInput}
         />       
     )
 }

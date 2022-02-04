@@ -108,8 +108,9 @@ export const DetalleProductoContent = (props) => {
                                 
                             </Row>
                             <br/>
-                            <Row className="content-button">
-                                <Col xs={12} md="5">
+                            <Row className="container-button">
+
+                                <Col md="4">
                                     <Button 
                                         variant="primary" 
                                         onClick={() => agregarCarrito()}
@@ -118,9 +119,9 @@ export const DetalleProductoContent = (props) => {
                                         {textoBotonCarrito} {"  "} 
                                         <FaShoppingCart/>
                                     </Button>
-                                </Col>
-                                <Col xs={12} md={3}></Col>
-                                <Col xs={12} md="4">
+                                </Col>    
+                            
+                                <Col md="4">
                                     <Button 
                                         variant="danger" 
                                         onClick={() => pagarProducto() }
@@ -129,22 +130,23 @@ export const DetalleProductoContent = (props) => {
                                         Ir al carrito
                                     </Button>
                                 </Col>
-                            </Row>
-                            <br/>
-                            <Row className="row-btn-buy">
-                                <Button 
-                                    variant="primary" 
-                                    onClick={() => volverAlCatalogo() }
-                                >
-                                    Seguir comprando
-                                </Button>
-                            </Row>
+                            
+                                <Col md="4">
+                                    <Button 
+                                        variant="primary" 
+                                        onClick={() => volverAlCatalogo() }
+                                    >
+                                        Seguir comprando
+                                    </Button>
+                                </Col>
 
+                            </Row>
+                            
                         </Col>
                     </Row>
 
                     {/* Columns are always 50% wide, on mobile and desktop */}
-                    <Row>
+                    <Row className="details-section">
                         <Tabs 
                             defaultActiveKey="profile" 
                             id="tab-detalles" 

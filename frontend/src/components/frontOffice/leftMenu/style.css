@@ -5,9 +5,17 @@
 #EZDrawer__container{
     width: 25% !important;
     box-shadow: 3px 5px #0000004f !important;
-    z-index: 1100 !important;
-    background-color: #2e3783 !important;
+    z-index: 11000 !important;
+    background-color: #161616 !important;
 }
+
+
+
+#EZDrawer__overlay{
+    z-index: 10100 !important;
+}
+
+
 
 .item-categoria-menu{
     margin-left: 3%;

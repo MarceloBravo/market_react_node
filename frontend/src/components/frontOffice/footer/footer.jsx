@@ -36,13 +36,8 @@ export const FooterComponent = () => {
                 </Container>
             </div>
             <div className="footer-credits">
-                <Container>
-                    <Row>
-                        <Col>Desarrollado por Marcelo Bravo C.</Col>
-                        <Col></Col>
-                        <Col>Talca, Chile 2021</Col>
-                    </Row>
-                </Container>
+                <div>Desarrollado por Marcelo Bravo C.</div>
+                <div>Talca, Chile 2021</div>
             </div>
         </div>
     )

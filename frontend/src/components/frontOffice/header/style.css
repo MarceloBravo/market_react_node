@@ -1,6 +1,6 @@
 
 .header-menu{
-    color: white;
+    color: #707071;
     position: inherit;
     margin-right: 10px;   
 }
@@ -11,20 +11,34 @@
 }
 
 .navbar-brand{
-    color: white !important;
+    color: #707071 !important;
 }
 
 .header-container{
-    background-color: #3a2294;
+    background-color: #f8f9fa;
+    margin-bottom: 3%;
+    -webkit-box-shadow: 5px 5px 15px -9px #000000; 
+    box-shadow: 5px 5px 15px -9px #000000;
+    padding-top: 1.5rem;
+    padding-bottom: 1rem;
+    position: fixed;
+    width: 100%;
+    z-index: 10000;
+}
+
+.header-container > .container{
+    width: 100%;
 }
 
 .header-market{
     height: 43px;
-    background-color: #4970b3  !important
+    background-color: #f8f9fa  !important;
+    padding-top: 1%;
+    width: 100%;
 }
 
 .right-menu .navbar-nav a{
-    color: white !important;
+    color: #707071 !important;
 }
 /*
 .dark{
@@ -59,6 +73,10 @@
     justify-content: right;
 }
 
+.mobile-view{
+    display: none !important;
+}
+
 @media screen and (max-width: 600px) {
     .header-market{
         height: 85px;
@@ -87,6 +105,14 @@
 
     .navbar-nav, 
     .navbar > .container{
-        justify-content: center !important;
+        justify-content: space-around !important;
+    }
+
+    .mobile-view{
+        display: block !important;
+    }
+
+    .desktop-view{
+        display: none !important;
     }
 }
