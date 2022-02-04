@@ -43,6 +43,7 @@ require('./routes/ordenesCompraRoutes')(app, null);
 require('./routes/dashboardRoutes')(app, null);
 require('./routes/preciosRoutes')(app, null);
 require('./routes/sendEmailRoutes')(app, null);
+require('./routes/ciudadesRoutes')(app, null);
 
 //app.listen(app.get('port'))
 

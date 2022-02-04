@@ -576,7 +576,7 @@ clientesModel.login = async (data, callback) => {
             if(err){
                 resp = callback({mensaje: 'Ocurrió un error al autenticar el usuario: '+err.message, tipoMensaje: 'danger'})
             }else if(row === undefined){
-                resp = callback({mensaje: 'Usuario y/ocontraseña no válidos', tipoMensaje: 'success'})
+                resp = callback({mensaje: 'Usuario y/ocontraseña no válidos', tipoMensaje: 'danger'})
             }else{
                 bcrypt.compare(data.password, row.password.toString(), (err, res)=>{
                     if(err || !res){

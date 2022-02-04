@@ -49,6 +49,7 @@ export const HeaderContentComponent = (props) => {
                             <Col xs={12} md={6} className="right-menu">    
                                 <Nav>
                                     <Nav.Link href="#" onClick={()=> goToHome("/catalogo")}>Inicio</Nav.Link>                                    
+                                    
                                     <OverlayTrigger
                                         placement="bottom"
                                         delay={{ show: 250, hide: 400 }}
@@ -56,13 +57,16 @@ export const HeaderContentComponent = (props) => {
                                     >
                                         <Nav.Link href="#" onClick={()=> goToCatalogue("/catalogo")}>Catálogo de productos</Nav.Link>
                                     </OverlayTrigger>
+
                                     <OverlayTrigger
+                                        className="desktop-view"
                                         placement="bottom"
                                         delay={{ show: 250, hide: 400 }}
                                         overlay={<Tooltip id="button-tooltip">Ir al módulo de administración de la tienda</Tooltip>}
                                     >
-                                        <Nav.Link href="#" onClick={()=> gotToAdmin()}>Administrar tienda</Nav.Link>
+                                        <Nav.Link href="#" className="desktop-view" onClick={()=> gotToAdmin()}>Administrar tienda</Nav.Link>
                                     </OverlayTrigger>
+
                                 </Nav>
                             </Col>
                         </Row>

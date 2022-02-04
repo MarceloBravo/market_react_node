@@ -63,7 +63,7 @@ export const ProductosForm = (props) => {
     const pantalla = useSelector(state => state.PantallasReducer.pantalla)
     const dispatch = useDispatch()
     const history = useHistory()
-    const inputFileRef = useRef()   //Referencia al control inputFile (para la busqueda y carga de imágenes)
+    const inputFileRef = useRef()   //Re|zferencia al control inputFile (para la busqueda y carga de imágenes)
     const imgRef = useRef([])   //Referencia a loscontroles images  (para mostrar las imágenes cargadas)
 
 

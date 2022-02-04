@@ -30,7 +30,7 @@ export const listaProvinciasRegion = (codigo) => {
 }
 
 
-//Debuelve una provincia
+//Devuelve una provincia
 export const buscar = (codigo) => {   //El código ha de ser un string de tres carácteres numéricos ej.: "071"
     return (dispatch, action) => {
         axios.get(`${apisDigitalGob}provincias/${codigo}`).then(res => {

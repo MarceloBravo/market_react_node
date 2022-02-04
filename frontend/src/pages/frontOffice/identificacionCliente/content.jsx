@@ -7,7 +7,7 @@ import { LoginClienteComponent } from '../../../components/frontOffice/loginClie
 import './style.css'
 
 export const IdentificacionClienteContent = (props) => {
-    const { cliente, handlerInput, errors, continuarCompra, continuar } = props
+    const { cliente, handlerInput, errors, continuarCompra, continuar, focusInput } = props
 
     return (
         <>
@@ -44,6 +44,7 @@ export const IdentificacionClienteContent = (props) => {
                                         placeholder="11.222.333-k" 
                                         value={cliente.rut}
                                         onChange={e => handlerInput(e)}
+                                        onFocus={() => focusInput()}
                                     />
                                     {errors.rut  &&
                                         <Form.Group as={Row}>
@@ -60,6 +61,7 @@ export const IdentificacionClienteContent = (props) => {
                                         placeholder="Nombre(s)" 
                                         value={cliente.nombres}
                                         onChange={e => handlerInput(e)}
+                                        onFocus={() => focusInput()}
                                     />
                                     {errors.nombres  &&
                                         <Form.Group as={Row}>
@@ -78,6 +80,7 @@ export const IdentificacionClienteContent = (props) => {
                                         placeholder="Apellido 1" 
                                         value={cliente.apellido1}
                                         onChange={e => handlerInput(e)}
+                                        onFocus={() => focusInput()}
                                     />
                                     {errors.apellido1  &&
                                         <Form.Group as={Row}>
@@ -94,6 +97,7 @@ export const IdentificacionClienteContent = (props) => {
                                         placeholder="Apellido 2 (Opcional)" 
                                         value={cliente.apellido2}
                                         onChange={e => handlerInput(e)}
+                                        onFocus={() => focusInput()}
                                     />
                                     {errors.apellido2  &&
                                         <Form.Group as={Row}>
@@ -113,6 +117,7 @@ export const IdentificacionClienteContent = (props) => {
                                         placeholder="Celular"
                                         value={cliente.fono}
                                         onChange={e => handlerInput(e)}
+                                        onFocus={() => focusInput()}
                                     />
                                     {errors.fono  &&
                                         <Form.Group as={Row}>
@@ -129,6 +134,7 @@ export const IdentificacionClienteContent = (props) => {
                                         placeholder="Correo electrónico" 
                                         value={cliente.email}
                                         onChange={e => handlerInput(e)}    
+                                        onFocus={() => focusInput()}
                                     />
                                     {errors.email  &&
                                         <Form.Group as={Row}>

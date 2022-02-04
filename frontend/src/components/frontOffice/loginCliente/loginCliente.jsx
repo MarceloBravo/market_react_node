@@ -55,6 +55,9 @@ export const LoginClienteComponent = (props) => {
         })
     }
 
+    const focusInput = () => {
+        dispatch({type: alertasTypes.OCULTAR_ALERTA})
+    }
 
     const changeRememberMeHandler = (e) => {
         setRememberMe(e.target.checked);
@@ -100,6 +103,7 @@ export const LoginClienteComponent = (props) => {
             changeRememberMeHandler={changeRememberMeHandler}
             alingJson={alingJson}
             cssClass={cssClass}
+            focusInput={focusInput}
         />
     )
 }
