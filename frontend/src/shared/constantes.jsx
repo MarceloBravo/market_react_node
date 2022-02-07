@@ -18,4 +18,3 @@ export const serverEndPoint = 'http://192.168.43.118:3001'
 export const defaultImagesUrl = serverEndPoint + '/images/avatars/'
 export const defaultImagesTienda = serverEndPoint + '/images/tienda/'
 export const defaultImagesProducts = serverEndPoint + '/images/productos/'
-

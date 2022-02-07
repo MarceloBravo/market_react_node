@@ -36,6 +36,7 @@ import { DespachosGrid } from './pages/backOffice/despachos/grid/grid'
 import { MntPrecios } from './pages/backOffice/precios/precios'
 import { GridMntClientes } from './pages/backOffice/clientes/grid/grid'
 import { MntClientesContent } from './pages/backOffice/clientes/form/form'
+import { Dashboard } from './pages/backOffice/dashboard/dashboard'
 
 //Componentes del FrontOffice
 import { Catalogo } from './pages/frontOffice/catalogo/catalogo'
@@ -48,7 +49,7 @@ import { PageMessage } from './pages/frontOffice/pageMessage/pageMessage'
 import { IdentificacionCliente } from './pages/frontOffice/identificacionCliente/identificacionCliente'
 import { DatosDespacho } from './pages/frontOffice/datosDespacho/datosDespacho'
 import { ResultadoVentaWebPayComponent } from './pages/frontOffice/resultadoVenta/webpay/resultadoVentaWebPay'
-import { Dashboard } from './pages/backOffice/dashboard/dashboard'
+import { AcercaDe } from './pages/frontOffice/acerca_de/acerca_de'
 
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import './App.css';
@@ -81,12 +82,14 @@ function App() {
             <Route exact path="/info" component={PageMessage}/>
             <Route exact path="/IdentificacionCliente" component={IdentificacionCliente}/>
             <Route exact path="/DatosDespacho" component={DatosDespacho}/>
-            <Route exact path="/ResultadoVentaWebpay" component={ResultadoVentaWebPayComponent}/>
-            <Route exact path="/dashboard" component={Dashboard}/>
+            <Route exact path="/ResultadoVentaWebpay" component={ResultadoVentaWebPayComponent}/>            
+            <Route exact path="/acerca_de" component={AcercaDe}/>
+
 
             {/* Rutas BackOffice */}
             <Route exact path="/login" component={Login} />
             <Route exact path="/home" component={Home} />
+            <Route exact path="/dashboard" component={Dashboard}/>
             <Route exact path="/detalle_despacho" component={DespachosGrid} />
             <Route exact path="/detalle_despacho/edit/:id" component={DespachosForm} />
             <Route exact path="/menus" component={MenusGrid} />

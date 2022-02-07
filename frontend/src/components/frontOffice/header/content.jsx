@@ -20,13 +20,15 @@ export const HeaderContentComponent = (props) => {
         datosCliente,
         cerrarSession,
         goToUpdateUserData, 
-        gotToAdmin
+        gotToAdmin,
+        gotToAcercaDe,
+        shadow
      } = props
 
     return (
         <>
             <LeftMenuComponent toggleMenu={toggleMenu} sowMenu={sowMenu}/> 
-            <div className="header-container">
+            <div className={'header-container ' + (shadow ? 'shadow' : '')}>
                 <Navbar className="header-market dark">
                     <Container>
                         <Row>
@@ -59,12 +61,19 @@ export const HeaderContentComponent = (props) => {
                                     </OverlayTrigger>
 
                                     <OverlayTrigger
-                                        className="desktop-view"
                                         placement="bottom"
                                         delay={{ show: 250, hide: 400 }}
                                         overlay={<Tooltip id="button-tooltip">Ir al módulo de administración de la tienda</Tooltip>}
                                     >
-                                        <Nav.Link href="#" className="desktop-view" onClick={()=> gotToAdmin()}>Administrar tienda</Nav.Link>
+                                        <Nav.Link href="#" onClick={()=> gotToAdmin()}>Administrar tienda</Nav.Link>
+                                    </OverlayTrigger>
+
+                                    <OverlayTrigger
+                                        placement="bottom"
+                                        delay={{ show: 250, hide: 400 }}
+                                        overlay={<Tooltip id="button-tooltip">Conocer información referente a ésta página.</Tooltip>}
+                                    >
+                                        <Nav.Link href="#" onClick={()=> gotToAcercaDe()}>Acerca de...</Nav.Link>
                                     </OverlayTrigger>
 
                                 </Nav>

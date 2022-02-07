@@ -1,0 +1,42 @@
+.createdFor{
+    font-size: larger;
+}
+
+.sub-title{
+    padding-top: 2%;
+}
+
+.acerca_de_container img{
+    max-height: 205px;
+}
+
+.tech-info{
+    display: flex;
+    align-items: center;
+}
+
+.tech-info .row{
+    text-align: justify;
+}
+
+.img-content{
+    text-align: right;
+}
+
+.webpay-steps{
+    margin-top: 10px !important;
+}
+
+.span-lnk{
+    color: #0d6efd;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.span-lnk:hover{
+    color: #0a58ca;
+}
+
+.form-label-info{
+    margin-top: 2% !important;
+}

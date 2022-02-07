@@ -8,7 +8,7 @@ import { types as clientesTypes } from '../../../redux/Clientes/types'
 import jwt_decode from 'jwt-decode'    //yarn add jwt-decode -> https://www.npmjs.com/package//jwt-decode
 import './style.css'
 
-export const HeaderMarketComponent = () => {
+export const HeaderMarketComponent = (props) => {
     const infoTiendaState = useSelector(state => state.InfoTiendaReducer.infoTienda)
     const textoFiltroState = useSelector(state => state.ProductosReducer.textoFiltro)
     const dispatch = useDispatch()
@@ -17,7 +17,20 @@ export const HeaderMarketComponent = () => {
     const [ token, setToken ] = useState(null)
     const [ datosCliente, setDatosCliente ] = useState(null)
     const history = useHistory()
+    const [scrollPosition, setScrollPosition] = useState(0);
+    const handleScroll = () => {
+        const position = window.pageYOffset;
+        setScrollPosition(position);
+    };
 
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll, { passive: true });
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
 
     useEffect(()=>{
         dispatch(getData())
@@ -97,6 +110,10 @@ export const HeaderMarketComponent = () => {
         history.push('/login')
     }
 
+    const gotToAcercaDe = () => {
+        history.push('/acerca_de')
+    }
+
 
     return (
         <HeaderContentComponent 
@@ -114,6 +131,8 @@ export const HeaderMarketComponent = () => {
             cerrarSession={cerrarSession}
             goToUpdateUserData={goToUpdateUserData}
             gotToAdmin={gotToAdmin}
+            gotToAcercaDe={gotToAcercaDe}
+            shadow={scrollPosition > 0}
         />
     )
 }

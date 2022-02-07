@@ -58,12 +58,29 @@ export const ResultadoVentaWebPayComponent = () => {
             let cart = JSON.parse(localStorage.getItem('cart-'+infoTiendaState.nombre_tienda))
             if(cart){
                 setCarrito(cart)
+                debugger
                 setDatosVenta({...datosVenta, productos: Object.keys(cart).map(item => cart[item])})
-                setCliente(JSON.parse(localStorage.getItem(`cliente-${infoTiendaState.nombre_tienda}`)))
+                setCliente(getDatosCliente())
             }
         }
         // eslint-disable-next-line
     },[infoTiendaState])
+
+
+    const getDatosCliente = () => {
+        debugger
+        let storageCli = localStorage.getItem(`${infoTiendaState.nombre_tienda}-cliente`)
+        if(storageCli){
+            let cli = atob(storageCli.split('.')[1])
+            if(cli){
+                return JSON.parse(cli).user
+            }
+        }
+        return null
+
+        
+        //JSON.parse(atob())
+    }
 
 
     useEffect(()=>{
@@ -78,6 +95,7 @@ export const ResultadoVentaWebPayComponent = () => {
         if(transactionStatus?.payment_type_code){
             dispatch({type: spinnerTypes.SHOW_SPINNER})
             dispatch(searchByCode(transactionStatus.payment_type_code))
+            debugger
             setDatosVenta({...datosVenta, total: transactionStatus.amount, datos_webpay: transactionStatus})
         }
     // eslint-disable-next-line
@@ -94,6 +112,7 @@ export const ResultadoVentaWebPayComponent = () => {
 
     useEffect(()=>{
         if(cliente){
+            debugger
             setDatosVenta({...datosVenta, 
                 cliente_id: cliente.id,
                 datos_cliente: {
@@ -128,6 +147,7 @@ export const ResultadoVentaWebPayComponent = () => {
             datosVenta.despacho && 
             datosVenta.datos_webpay && 
             datosVenta.productos?.length > 0){
+                debugger
                 //Registrar venta en base de datos
                 dispatch(registrarVenta(datosVenta))
         }
