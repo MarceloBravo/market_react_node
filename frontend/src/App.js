@@ -37,6 +37,8 @@ import { MntPrecios } from './pages/backOffice/precios/precios'
 import { GridMntClientes } from './pages/backOffice/clientes/grid/grid'
 import { MntClientesContent } from './pages/backOffice/clientes/form/form'
 import { Dashboard } from './pages/backOffice/dashboard/dashboard'
+import { TallasGrid } from './pages/backOffice/tallas/grid/tallas';
+import { TallasForm } from './pages/backOffice/tallas/form/tallas';
 
 //Componentes del FrontOffice
 import { Catalogo } from './pages/frontOffice/catalogo/catalogo'
@@ -136,6 +138,9 @@ function App() {
             <Route exact path="/clientes" component={GridMntClientes} />
             <Route exact path="/clientes/nuevo" component={MntClientesContent} />
             <Route exact path="/clientes/edit/:id" component={MntClientesContent} />
+            <Route exact path="/tallas" component={TallasGrid}/>
+            <Route exact path="/tallas/nuevo" component={TallasForm}/>
+            <Route exact path="/tallas/edit/:id" component={TallasForm}/>
             <Route exact path=""/>
           </Switch>
         </BrowserRouter>

@@ -62,7 +62,7 @@ export const Home  = () => {
             <SpinnerComponent />
             <div className={"main-section " + (togleMenu ? 'main-width' : 'main-normal')}>
                 <Header />                      
-                <div className="content-section home-page">                    
+                <div className="content-section home-page-admin">                    
                     <Alerta />
                     <Grid
                         data={dataGrid}

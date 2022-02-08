@@ -63,7 +63,7 @@ export const FormMenus = () => {
 
     const grabar = () => {
         Object.keys(menu).forEach(f => validaDatos(f, menu[f]))
-        if (Object.keys(menu).map(e => menu[e] !== '' && menu[e] !== null).filter(r => !r).length === 0) {
+        if (Object.keys(menu).filter(e => menu[e] !== '' && menu[e] !== null && e.includes(['nombre','posicion','url','menu_padre_id'])).filter(r => !r).length === 0) {
             setAccion('grabar')
             dispatch({ type: types.SHOW_MODAL_DIALOG, payload: {titulo: 'Grabar',mensaje: '¿Desea grabar el registro?'} })
         }

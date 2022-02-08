@@ -44,6 +44,7 @@ require('./routes/dashboardRoutes')(app, null);
 require('./routes/preciosRoutes')(app, null);
 require('./routes/sendEmailRoutes')(app, null);
 require('./routes/ciudadesRoutes')(app, null);
+require('./routes/tallasRoutes')(app, null);
 
 //app.listen(app.get('port'))
 

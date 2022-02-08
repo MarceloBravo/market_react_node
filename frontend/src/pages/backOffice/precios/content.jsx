@@ -34,7 +34,7 @@ export const PreciosContent = (props) => {
             <ModalDialog response={response}/>
             <div className={"main-section " + (togleMenu ? 'main-width' : 'main-normal')}>
                 <Header />
-                <div className="content-section home-page">                    
+                <div className="content-section home-page-admin">                    
                     <Alerta />
                     <div className="div-button-group precios-button-group">
                         <Button variant="success" disabled={!editing} onClick={grabar}>Grabar</Button>

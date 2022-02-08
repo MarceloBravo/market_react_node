@@ -78,8 +78,8 @@ export const update = (id, data) => {
     return (dispatch, action) => {
         axios.put(`${serverEndPoint}/${url}/${id}`, data, {headers: getHeader()}).then(res => {
             dispatch({type: spinnerTypes.HIDE_SPINNER})
-            dispatch({type: subCategoriasTypes.ACTUALIZAR_SUB_CATEGORIAS, payload: data})
             dispatch({type: alertasTypes.MOSTRAR_ALERTA, payload: {mensaje: res.data.mensaje, tipo: res.data.tipoMensaje}})
+            dispatch({type: subCategoriasTypes.ACTUALIZAR_SUB_CATEGORIAS, payload: data})
         }).catch(error => {
             handlerError(dispatch, error, 'Ocurrió un error al actualizar la sub-categoría: ')
         })

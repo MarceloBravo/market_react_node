@@ -266,7 +266,7 @@ SubCategoriasModel.insert = (data, callback) => {
             if(err){
                 resp = callback({mensaje: 'Ocurrió un error al insertar la sub-categoría: ' + err.message, tipoMensaje: 'danger'})
             }else{
-                if(res.affectedRows > 0){
+                if(result.affectedRows > 0){
                     resp = callback(null, {mensaje: 'La sub-categoría ha sido ingresada.', tipoMensaje: 'success', id: result.insertId});
                 }else{
                     resp = callback({mensaje: 'No fue posible insertar la sub-categoría.', tipoMensaje: 'danger'})
