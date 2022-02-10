@@ -77,7 +77,7 @@ export const  ResultadoVentaContent = (props) => {
                                             <tbody>
                                                 {carrito && Object.keys(carrito).map((item, key )=> {
                                                     return <tr key={key}>
-                                                                <td>{carrito[item].nombre}</td>
+                                                                <td>{carrito[item].nombre}{ carrito[item].tallaValor ? ', talla ' + carrito[item].tallaValor : '' } </td>
                                                                 <td className="resumen-col-cantidad">{carrito[item].cantidad}</td>
                                                                 <td className="resumen-col-precio">{carrito[item].str_precio}</td>
                                                             </tr>

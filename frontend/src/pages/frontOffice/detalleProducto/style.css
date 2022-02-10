@@ -26,13 +26,17 @@
     width: auto;
 }
 
+.preview-full-screen{
+    text-align: center;
+    z-index: 20000;
+}
+
 .preview-full-screen > label{
     width: 100%;
     color: white;
     font-size: xx-large;
     text-align: center;
-    background: #0000009c;
-    height: 100%;
+    background: #444544;
 }
 
 .preview-full-screen,
@@ -43,17 +47,18 @@
     height: 100%;
     width: 100%;
     cursor: zoom-out;
+    
 }
 
 .preview-full-screen > div{
-    background: #00000070;
+    z-index: -1;
+    background-color: #000000ba;
 }
 
 .preview-full-screen > img{
-    position: absolute;
     top: 7%;
-    left: 24%;
-    max-width: 52%;
+    /*left: 24%;
+    max-width: 52%;*/
     border: solid #b3b0b0;
 }
 

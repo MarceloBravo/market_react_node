@@ -9,6 +9,7 @@ import { useHistory, useParams } from 'react-router-dom'
 import { defaultImagesProducts } from '../../../shared/constantes'
 import { DetalleProductoContent } from './content'
 import { useToasts } from 'react-toast-notifications';
+import { getBySubCategory } from '../../../actions/tallas'
 /*
   TOAST: 
   yarn add react-toast-notifications
@@ -24,7 +25,10 @@ export const DetalleProducto = () => {
     const categoriaState = useSelector(state => state.CategoriasReducer.categoria)
     const subCategoriaState = useSelector(state => state.SubCategoriasReducer.subCategoria)
     const infoTiendaState = useSelector(state => state.InfoTiendaReducer.infoTienda)
+    const tallasState = useSelector(state => state.TallasReducer.list )
     const [ itemCantidad, setItemCantidad ] = useState(1)
+    const [ itemTallaId , setItemTallaId ] = useState('')
+    const [ itemTallaValor, setItemTallaValor ] = useState('')
     const [ activeImage, setActiveImage ] = useState(defaultImagesProducts + 'not-found-image.jpg')
     const [ keyTab, setKeyTab ] = useState('caracteristicas')
     const [ showPreView, setShowPreView ] = useState(false)
@@ -83,12 +87,26 @@ export const DetalleProducto = () => {
         }
     },[infoTiendaState.nombre_tienda, carrito])
 
-   
+
+    useEffect(()=>{
+        dispatch(getBySubCategory(subCategoriaState.id))
+    },[subCategoriaState, dispatch])
+
+
     const handlerInput = (e) => {
         validaDatos(e.target.name, e.target.value)
         setItemCantidad(e.target.value)
     }
 
+
+    const handlerChangeSelect = (e) => {
+        //let selected = Array.from(e.target.selectedOptions, e => e.value)
+        setItemTallaId(e.target.value)
+        let selectedItem = tallasState.filter(t=> t.id == e.target.value)
+        if(selectedItem.length > 0){
+            setItemTallaValor(selectedItem[0].talla)
+        }
+    }
 
     const selectImage = (src) => {
         setActiveImage(defaultImagesProducts + src)
@@ -121,7 +139,9 @@ export const DetalleProducto = () => {
                 categoria: productoState.nombre_categoria,
                 sub_categoria: productoState.subCategoria,
                 marca: productoState.nombre_marca,
-                stock: productoState.stock
+                stock: productoState.stock,
+                talla: itemTallaId,
+                tallaValor: itemTallaValor
             }
         })
         addToast('El producto ha sigo agregado al carrito', { appearance: 'success' })
@@ -168,6 +188,9 @@ export const DetalleProducto = () => {
                 setKeyTab={setKeyTab} 
                 showPreView={showPreView}
                 volverAlCatalogo={volverAlCatalogo}
+                handlerChangeSelect={handlerChangeSelect}
+                itemTalla={itemTallaId}
+                tallasState={tallasState}
             />       
     )
 }

@@ -25,6 +25,9 @@ export const DetalleProductoContent = (props) => {
         setKeyTab, 
         showPreView,
         volverAlCatalogo, 
+        handlerChangeSelect,
+        itemTalla, 
+        tallasState
     } = props
 
     return (
@@ -107,6 +110,37 @@ export const DetalleProductoContent = (props) => {
                                 }
                                 
                             </Row>
+                            
+                            {tallasState.length >0 &&
+                                <Row>
+                                    <Form.Group as={Row} controlId="formTxtCategoria">
+                                        <Form.Label column sm="3">Talla</Form.Label>
+                                        <Col xs="3" md="2">
+                                            <Form.Control
+                                                as="select"
+                                                name="tallas_id"
+                                                value={itemTalla}
+                                                onChange={e => handlerChangeSelect(e)}
+                                            >
+                                                {tallasState.map((i, key) => {
+                                                        return <option key={key} value={i.id}>{i.talla}</option>
+                                                    })
+                                                }
+                                            </Form.Control>
+                                        </Col>
+                                        
+                                    </Form.Group>
+                                    {errors.impuestos_id &&
+                                        <Form.Group as={Row}>
+                                            <Form.Text  className="field-error offset-2">{ errors.tallas_id }</Form.Text>
+                                        </Form.Group>
+                                    }
+
+                                </Row>
+                            }
+
+
+                            
                             <br/>
                             <Row className="container-button">
 

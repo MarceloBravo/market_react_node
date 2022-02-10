@@ -130,6 +130,7 @@ const registrarProductos = async (cnn, venta_id, data, status) => {
                                     JSON_impuestos,
                                     precio_venta,
                                     cantidad,
+                                    talla,
                                     total_producto,
                                     created_at,
                                     updated_at
@@ -141,6 +142,7 @@ const registrarProductos = async (cnn, venta_id, data, status) => {
                                     ${cnn.escape(e.JSON_impuestos)}, 
                                     ${cnn.escape(parseInt(e.precio_venta.substring(1).split('.').join('')))},
                                     ${cnn.escape(e.cantidad)},
+                                    ${cnn.escape(e.talla)},
                                     ${cnn.escape(parseInt(e.precio_venta.substring(1).split('.').join('')) * e.cantidad)},
                                     CURDATE(),
                                     CURDATE()
