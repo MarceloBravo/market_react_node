@@ -28,9 +28,15 @@ export const TallasReducer = (state = INITIAL_STATE, action) => {
                 dataGrid: action.payload.data
             }
         case types.OBTENER_TODAS_TALLAS:
+        case types.LISTAR_TALLAS_POR_SUBCATEGORIAS:
             return {
                 ...state,
                 list: action.payload
+            }
+        case types.VACIAR_LISTADO_TALLAS:
+            return {
+                ...state,
+                list: []
             }
         case types.NUEVA_TALLA:
         case types.ELIMINAR_TALLA:

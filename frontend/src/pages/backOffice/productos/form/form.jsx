@@ -9,8 +9,10 @@ import { types as productosTypes } from '../../../../redux/Productos/types'
 import { getAll as getAllUnidades } from '../../../../actions/unidades'
 import { getAll as marcasGetAll } from '../../../../actions/marcas'
 import { getAll as categoriasGetAll } from '../../../../actions/categorias'
+import { getBySubCategory as obtenerTallas } from '../../../../actions/tallas'
 import { getAllByCategory as subCategoriasGetAll } from '../../../../actions/subCategorias'
 import { types as subCategoriasTypes } from '../../../../redux/SubCategorias/types'
+import{ types as TallasTypes } from '../../../../redux/Tallas/types'
 import { getAll as impuestosGetAll } from '../../../../actions/impuestos'
 import { defaultImagesProducts } from '../../../../shared/constantes'
 import { ProductosFormContent } from './content'
@@ -28,6 +30,7 @@ export const ProductosForm = (props) => {
     const tipoAlerta = useSelector(state => state.AlertaReducer.tipo)
     const productoState = useSelector(state => state.ProductosReducer.producto)
     const togleMenu = useSelector(state => state.MenusReducer.togle)
+    const tallasState = useSelector(state => state.TallasReducer.list )
     const [ producto, setProducto ] = useState({
         id: 0,
         nombre: '',
@@ -41,6 +44,8 @@ export const ProductosForm = (props) => {
         marca_id: 0,
         categoria_id: 0,
         sub_categoria_id: 0,
+        tallas_id:[],
+        tallas: [],
         impuestos_id: [],
         impuestos: [],
         imagenes: [],  
@@ -57,7 +62,8 @@ export const ProductosForm = (props) => {
         marca_id: '',
         categoria_id: '',
         sub_categoria_id: '',
-        impuestos_id: ''})
+        impuestos_id: '',
+        tallas_id: ''})
     const [ accion, setAccion ] = useState(null)
     const [ imageCtrl, setimageCtrl ] = useState(null)    
     const pantalla = useSelector(state => state.PantallasReducer.pantalla)
@@ -96,6 +102,7 @@ export const ProductosForm = (props) => {
         if(productoState){
             setProducto(productoState)
             dispatch(subCategoriasGetAll(productoState.categoria_id))
+            dispatch(obtenerTallas(productoState.sub_categoria_id))
         }
     },[dispatch, productoState])
 
@@ -105,8 +112,8 @@ export const ProductosForm = (props) => {
             history.push('/'+currentUrl)
         }
     },[tipoAlerta, history, currentUrl])
-
     
+
     const response = (e) => {
         if(e){
             dispatch({type: spinnerTypes.SHOW_SPINNER})
@@ -124,7 +131,7 @@ export const ProductosForm = (props) => {
 
 
     const handlerChangeValue = (e) => {
-        if(e.target.name === 'impuestos_id'){
+        if(e.target.name === 'impuestos_id' || e.target.name === 'tallas_id'){
             let value = Array.from(e.target.selectedOptions, option => option.value)
             setProducto({...producto, [e.target.name]: value})
         }else{
@@ -141,6 +148,15 @@ export const ProductosForm = (props) => {
                 dispatch(subCategoriasGetAll(e.target.value))
             }else{
                 dispatch({type: subCategoriasTypes.VACIAR_LISTADO_TODAS_LAS_SUBCATEGORIAS})
+            }
+        }
+
+        //Cargando las tallas del producto
+        if(e.target.name === 'sub_categoria_id'){
+            if(e.target.selectedIndex > 0){
+                dispatch(obtenerTallas(e.target.value))
+            }else{
+                dispatch({type: TallasTypes.VACIAR_LISTADO_TALLAS})
             }
         }
     }
@@ -380,6 +396,7 @@ export const ProductosForm = (props) => {
             handlerBtnCancelar={handlerBtnCancelar} 
             id={id}
             togleMenu={togleMenu}
+            tallasState={tallasState}
         />       
     )
 }

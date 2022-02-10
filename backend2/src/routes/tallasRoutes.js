@@ -23,6 +23,13 @@ module.exports = function(app, passport){
     } )
 
 
+    app.get('/tallas/sub_categoria/:idSubCategoria', (req, res) => {
+        tiendaModel.getBySubCategory(req.params.idSubCategoria, (err, data) => {
+            res.json(err ? err : data)
+        })
+    })
+    
+
     app.get('/tallas/:id',(req, res) => {
         tiendaModel.find(req.params.id, (err, data) => {
             res.json(err ? err : data)

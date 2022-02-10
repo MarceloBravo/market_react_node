@@ -7,7 +7,7 @@ var storage = multer.diskStorage({
     callback(null, path.join(`${__dirname}/../../public/images/productos`));
   },
   filename: (req, file, callback) => {
-    const match = ["image/png", "image/jpeg"];
+    const match = ["image/png", "image/jpeg", "image/webp"];
 
     if (match.indexOf(file.mimetype) === -1) {
       var message = `${file.originalname} no es válido. sólo se aceptan archivos png/jpeg.`;

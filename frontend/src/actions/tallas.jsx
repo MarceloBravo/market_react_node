@@ -29,6 +29,18 @@ export const filter = (texto, pag) => {
     }
 }
 
+export const getBySubCategory = (idSubCategoria) => {
+    console.log(`${endPoint + url}/sub_categoria/${idSubCategoria}`)
+    return (dispatch, action)=>{
+        axios.get(`${endPoint + url}/sub_categoria/${idSubCategoria}`,{headers: getHeader()}).then(res => {
+            dispatch({type: SpinnerTypes.HIDE_SPINNER})
+            dispatch({type: TallasTypes.LISTAR_TALLAS_POR_SUBCATEGORIAS, payload: res.data})
+        }).catch(error => {
+            handlerError(dispatch,error,'Ocurrio un error al obtener el listado de tallas por subcategoría')
+        })
+    }
+}
+
 export const find = (id) => {
     return (dispatch, action) => {
         axios.get(`${endPoint + url}/${id}`, {headers: getHeader()}).then(res => {

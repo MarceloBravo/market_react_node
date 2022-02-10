@@ -106,12 +106,11 @@ export const insert = (data) => {
 
 
 export const update = (id, data) => {
-
     let fd = crearFormData(data)
     
     return (dispatch, action) => {
         axios.put(`${endPoint}/${url}/${id}`,fd, {headers: getHeaderFormData()}).then(res => {
-            dispatch({type: spinnerTypes.HIDE_SPINNER})
+            //dispatch({type: spinnerTypes.HIDE_SPINNER})
             dispatch({type: alertaTypes.MOSTRAR_ALERTA, payload: {mensaje: res.data.mensaje, tipo: res.data.tipoMensaje}})
             dispatch({type: productosTypes.ACTUALIZAR_PRODUCTO, payload: data})
         }).catch(error => {

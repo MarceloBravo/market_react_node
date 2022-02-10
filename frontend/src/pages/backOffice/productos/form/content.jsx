@@ -9,9 +9,11 @@ import { Form, Row, Col, Container, Image, Button } from 'react-bootstrap'
 import { formatearNumero } from '../../../../shared/funciones'
 
 export const ProductosFormContent = (props) => {
-    const { response, pantalla, producto, handlerChangeValue, errors, formatDate, unidades, marcas, categorias,
+    const { 
+        response, pantalla, producto, handlerChangeValue, errors, formatDate, unidades, marcas, categorias,
         subCategorias, impuestos, loadImage, inputFileRef, refreshImage, getImage, imgRef, changeImage, 
-        selectDefaultImage, removeImage, grabar, eliminar, handlerBtnCancelar, id, togleMenu  } = props
+        selectDefaultImage, removeImage, grabar, eliminar, handlerBtnCancelar, id, togleMenu, tallasState  
+    } = props
 
     return (
         <div>
@@ -221,6 +223,33 @@ export const ProductosFormContent = (props) => {
                                         <Form.Text  className="field-error offset-2">{ errors.sub_categoria_id }</Form.Text>
                                     </Form.Group>
                                 }
+
+
+                                <Form.Group as={Row} controlId="formTxtCategoria">
+                                    <Form.Label column sm="4">Tallas</Form.Label>
+                                    <Col md="8">
+                                        <Form.Control
+                                            as="select"
+                                            multiple
+                                            name="tallas_id"
+                                            value={producto.tallas_id ? producto.tallas_id : ''}
+                                            onChange={e => handlerChangeValue(e)}
+                                        >
+                                            {tallasState.length === 0 && <option value="0">No se encontraron tallas</option>}
+                                            {tallasState.map((i, key) => {
+                                                    return <option key={key} value={i.id}>{i.talla}</option>
+                                                })
+                                            }
+                                        </Form.Control>
+                                    </Col>
+                                    
+                                </Form.Group>
+                                {errors.impuestos_id &&
+                                    <Form.Group as={Row}>
+                                        <Form.Text  className="field-error offset-2">{ errors.tallas_id }</Form.Text>
+                                    </Form.Group>
+                                }
+
 
                                 <Form.Group as={Row} controlId="formTxtCategoria">
                                     <Form.Label column sm="4">Impuestos</Form.Label>

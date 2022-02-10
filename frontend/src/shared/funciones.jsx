@@ -53,7 +53,7 @@ const dv = (T) => {
 
 
 export const getHeaderFormData = () => {
-    let token = localStorage.getItem('gimAppMabc')
+    let token = getTokenFromStorage()
     return {'Content-Type':'multipart/form-data', 'Authorization':`Bearer ${token}`}
 }
 

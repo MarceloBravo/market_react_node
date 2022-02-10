@@ -8,6 +8,7 @@ import { getAllByCategory } from '../../../../actions/subCategorias'
 import { findByUrl } from '../../../../actions/pantallas'
 import { useState } from 'react'
 import { types as ModalTypes } from '../../../../redux/ModalDialog/types'
+import { types as TallasTypes } from '../../../../redux/Tallas/types'
 import { insert, update, deleteReg } from '../../../../actions/tallas'
 import { TallasContent } from './content'
 
@@ -40,6 +41,8 @@ export const TallasForm = () => {
     useEffect(()=>{
         if(id){
             dispatch(find(id))
+        }else{
+            dispatch({type: TallasTypes.NUEVA_TALLA})
         }
     },[id])
 
@@ -52,7 +55,7 @@ export const TallasForm = () => {
     
     useEffect(()=>{
         
-        if(tallaState.categoria_id){
+        
             setTalla({
                     id:tallaState.id, 
                     talla: tallaState.talla, 
@@ -61,7 +64,7 @@ export const TallasForm = () => {
                     created_at: tallaState.created_at,
                     updaated_at: tallaState.updated_at
                 })
-
+        if(tallaState.categoria_id){
             dispatch(getAllByCategory(tallaState.categoria_id))
         }
     },[tallaState])

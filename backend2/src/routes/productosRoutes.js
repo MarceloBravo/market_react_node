@@ -66,6 +66,7 @@ module.exports = function(app, passport) {
          res.status(400).send({ error: error.message })
      })
     
+     
     app.put('/productos/:id', [checkToken, mw_uploadFiles_productos.array('objImages')], (req, res) => {
         ProductosModel.update(req.params.id, req.body, (err, data) => {
             res.json(err ? err : data)
