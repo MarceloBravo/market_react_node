@@ -102,6 +102,7 @@ export const DetalleProducto = () => {
     const handlerChangeSelect = (e) => {
         //let selected = Array.from(e.target.selectedOptions, e => e.value)
         setItemTallaId(e.target.value)
+        // eslint-disable-next-line
         let selectedItem = tallasState.filter(t=> t.id == e.target.value)
         if(selectedItem.length > 0){
             setItemTallaValor(selectedItem[0].talla)

@@ -14,6 +14,7 @@ export const apisDigitalGob = 'https://apis.digital.gob.cl/dpa/'
 
 export const msgErrConection = 'Tiempo de conección expirado. '
 
+//export const serverEndPoint = 'https://api-market-nodejs.herokuapp.com'
 export const serverEndPoint = 'http://192.168.43.118:3001'
 export const defaultImagesUrl = serverEndPoint + '/images/avatars/'
 export const defaultImagesTienda = serverEndPoint + '/images/tienda/'

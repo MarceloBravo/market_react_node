@@ -5,6 +5,14 @@ var publicDir = require('path').join(__dirname,'/public');  //Configurando la ca
 const app = express();
 app.use(express.static(publicDir)); 
 app.use(cors());
+/*
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", '*');
+    res.header("Access-Control-Allow-Credentials", true);
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
+    next();
+});*/
 
 const morgan = require('morgan');   //
 const bodyParser = require('body-parser');  //Necesario para atender las peticiones post
@@ -48,7 +56,7 @@ require('./routes/tallasRoutes')(app, null);
 
 //app.listen(app.get('port'))
 
-//app.listen(app.get('port'), 'https://api-heroku-react-node.herokuapp.com/',() => {
+//app.listen(app.get('port'), '0.0.0.0',() => { //heroku
 app.listen(app.get('port'), '192.168.43.118',() => {    
     console.log('Servidor activo en el puerto ' + app.get('port'))
 })

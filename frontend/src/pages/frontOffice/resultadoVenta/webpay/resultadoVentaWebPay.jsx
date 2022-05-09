@@ -39,7 +39,7 @@ export const ResultadoVentaWebPayComponent = () => {
     const [ carrito, setCarrito ] = useState(null)
     const [ impuestos, setImpuestos ] = useState(0)
     const [ cliente, setCliente ] = useState(null)
-    const [ dataPDF, setDataPDF ] = useState(null)
+    //const [ dataPDF, setDataPDF ] = useState(null)
     const [ nombreTienda, setNombreTienda ]= useState('')
     const dispatch = useDispatch()
     const history = useHistory()
@@ -157,13 +157,14 @@ export const ResultadoVentaWebPayComponent = () => {
         // eslint-disable-next-line
     },[tipoAlertaState])
 
-
+    /*
     useEffect(()=>{
         if(transactionStatus && tipoPagoState && impuestos){
             let obj = Object.assign({},transactionStatus, tipoPagoState, {impuestos})
             setDataPDF(obj)
         }
     },[transactionStatus, tipoPagoState, impuestos])
+    */
 
 
 
@@ -442,7 +443,7 @@ export const ResultadoVentaWebPayComponent = () => {
             carrito={carrito} 
             impuestos={impuestos} 
             goToInicio={goToInicio}
-            dataPDF={dataPDF}
+            //dataPDF={dataPDF}
             nombreTienda={nombreTienda}
             sendEmail={sendEmail}
             generarBoleta={generarBoleta}

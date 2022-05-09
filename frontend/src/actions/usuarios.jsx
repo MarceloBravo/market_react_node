@@ -66,7 +66,7 @@ export const actualizar = (id, user) => {
         axios.put(`${endPoint}/${url}/${id}`, jsonUser, {headers: getHeader()}).then(data => {
             dispatch({type: spinnerTypes.HIDE_SPINNER})
             dispatch({type: types.ACTUALIZAR_USUARIO})
-            dispatch({type: loginTypes.REFRESH_USER_DATA, payload: {user}})            
+            dispatch({type: loginTypes.REFRESH_TOKEN, payload: {user}})            
             dispatch({type: alertTypes.MOSTRAR_ALERTA, payload: {mensaje: data.data.mensaje, tipo: data.data.tipoMensaje}})
         }).catch(error => {
             handlerError(dispatch, error, 'Error al actualizar el usuario: ')

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { HeaderMarketComponent } from '../../../components/frontOffice/header/header'
 import { FooterComponent } from '../../../components/frontOffice/footer/footer'
-import { Container, Row, Col, Form,Nav } from 'react-bootstrap'
+import { Container, Row, Col, Form } from 'react-bootstrap'
 import { serverEndPoint as endPoint } from '../../../shared/constantes'
 import { useHistory } from 'react-router-dom'
 import './acerca_de.css'
@@ -189,7 +189,7 @@ export const AcercaDe = () => {
                     <Row>
                         <Form.Label className="form-label-info">
                             * Para probar otras tarjetas y medios de pago con Webpay, los puedes obtener en la página de 
-                            <a href="https://www.transbankdevelopers.cl/documentacion/como_empezar#tarjetas-de-prueba" target="_blank">Transbank developers</a> 
+                            <a href="https://www.transbankdevelopers.cl/documentacion/como_empezar#tarjetas-de-prueba" target="_blank" rel="noreferrer">Transbank developers</a> 
                             en la sección Tarjetas de Prueba
                         </Form.Label>
                     </Row>
