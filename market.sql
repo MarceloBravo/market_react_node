@@ -11,7 +11,7 @@
  Target Server Version : 80020
  File Encoding         : 65001
 
- Date: 08/05/2022 23:11:56
+ Date: 09/05/2022 00:14:03
 */
 
 SET NAMES utf8mb4;
@@ -788,7 +788,7 @@ INSERT INTO `role_user` VALUES (27, 1, 29, '2021-05-05 00:52:28', '2021-05-05 00
 INSERT INTO `role_user` VALUES (29, 1, 30, '2021-05-05 01:13:57', '2021-05-05 01:13:57', NULL);
 INSERT INTO `role_user` VALUES (31, 1, 69, NULL, NULL, NULL);
 INSERT INTO `role_user` VALUES (33, 1, 71, NULL, NULL, '2021-06-07 00:00:00');
-INSERT INTO `role_user` VALUES (35, 6, 73, NULL, NULL, NULL);
+INSERT INTO `role_user` VALUES (36, 1, 73, '2022-05-09 00:00:00', '2022-05-09 00:00:00', NULL);
 
 -- ----------------------------
 -- Table structure for roles
@@ -1110,7 +1110,7 @@ INSERT INTO `users` VALUES (19, 'Valeria', 'prueba@ejemplo.cl', NULL, '$2b$10$BC
 INSERT INTO `users` VALUES (30, 'Marcelo Antonio', 'marcelo.a.bravo.c@gmail.cl', NULL, '$2b$10$66WGQByMZWmVkOtRin00eOGUlw2BKuWu5/nS2Gm.fDEGH0/otpWLi', NULL, '2021-05-05 01:13:57', '2021-06-27 00:00:00', NULL, 'Bravo', 'Castillo', '12 Norte #123', 'FB_IMG_1619323830505.jpg', '');
 INSERT INTO `users` VALUES (62, 'Mariela Andrea', 'mariela2@ejemplo.cl', NULL, '$2b$10$b.qrq9mTNfYSgdPqC.veQuWXNDHe0OeCrlVHVisek7VtrtlhD5Mf6', NULL, '2021-05-05 01:13:57', '2021-04-08 00:00:00', NULL, 'Bezoain', 'Bravo', '12 Norte #123', 'fgfgfgfgfgf', '');
 INSERT INTO `users` VALUES (71, 'wawawaawa', 'prueba2@ejemplo.cl', NULL, '$2b$10$4vk0/hohwXVdCxkC039iju7eJT9poh.5jR86Ed9mzHqGkXNdAGl42', NULL, '2021-06-07 00:00:00', '2021-06-07 00:00:00', '2021-06-07 00:00:00', 'esesesesesese vvgvgvv', 'drdrdrdrdrd', 'tftftftftftftftft', NULL, '6676767676767');
-INSERT INTO `users` VALUES (73, 'Pedro', 'prueba3@ejemplo3.cl', NULL, '$2b$10$GCW/XjHJigALbEmLs10M4ue.DCIJvyK92/tssMEdnY0RHFCG4YHTG', NULL, '2022-05-08 00:00:00', '2022-05-08 00:00:00', NULL, 'Perez', 'Pereira', '1 Sur 3 poniente, sin número', '', '0987654321');
+INSERT INTO `users` VALUES (73, 'Pedro', 'prueba3@ejemplo3.cl', NULL, '$2b$10$GCW/XjHJigALbEmLs10M4ue.DCIJvyK92/tssMEdnY0RHFCG4YHTG', NULL, '2022-05-08 00:00:00', '2022-05-09 00:00:00', NULL, 'Perez', 'Pereira', '1 Sur 3 poniente, sin número', '', '0987654321');
 
 -- ----------------------------
 -- Table structure for ventas
