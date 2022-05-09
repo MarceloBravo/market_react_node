@@ -18,7 +18,8 @@ export const TallasGrid = () => {
 
     useEffect(()=>{
         dispatch(getPage(pagina))
-    },[])
+        // eslint-disable-next-line
+    },[dispatch])
 
     useEffect(()=>{
         console.log('dataGrid',dataGrid)

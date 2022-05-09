@@ -6,10 +6,7 @@ import { formatearNumero, formatearFechaHora }  from '../../../../shared/funcion
 import { Alerta } from '../../../../components/shared/alerts'
 //import { BoletaPDFComponent } from '../../../../components/shared/boletaPDF/BoletaPDF'
 // eslint-disable-next-line
-import { PDFDownloadLink, PDFViewer } from '@react-pdf/renderer';
-import { ErrorHandler } from '../../../../components/errorHandler/ErrorHandlrer'
 
-import { PDFComponent } from '../../../../components/shared/pdf/boletaPdf'
 import{ init } from 'emailjs-com';
 init("user_LZ7olBSXez61SyilXGFV9");
 
@@ -21,8 +18,6 @@ export const  ResultadoVentaContent = (props) => {
         carrito, 
         impuestos, 
         goToInicio, 
-        dataPDF,
-        nombreTienda,
         sendEmail,
         generarBoleta
     } = props

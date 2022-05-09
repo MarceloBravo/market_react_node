@@ -11,7 +11,7 @@
  Target Server Version : 80020
  File Encoding         : 65001
 
- Date: 19/04/2022 11:49:41
+ Date: 08/05/2022 23:11:56
 */
 
 SET NAMES utf8mb4;
@@ -592,12 +592,12 @@ INSERT INTO `permisos` VALUES (3, 1, 3, 1, 1, 1, 1, '2021-02-08 13:32:30', '2022
 INSERT INTO `permisos` VALUES (5, 1, 4, 1, 1, 1, 1, '2021-02-10 11:39:33', '2022-02-07 00:00:00', NULL);
 INSERT INTO `permisos` VALUES (6, 1, 5, 1, 1, 1, 1, '2021-02-10 11:42:38', '2022-02-07 00:00:00', NULL);
 INSERT INTO `permisos` VALUES (7, 1, 6, 1, 0, 1, 1, '2021-04-28 20:03:52', '2022-02-07 00:00:00', NULL);
-INSERT INTO `permisos` VALUES (8, 6, 1, 0, 0, 0, 0, '2021-05-19 00:00:00', '2021-05-25 00:00:00', NULL);
-INSERT INTO `permisos` VALUES (9, 6, 2, 1, 1, 1, 1, '2021-05-19 00:00:00', '2021-05-25 00:00:00', NULL);
-INSERT INTO `permisos` VALUES (10, 6, 3, 1, 1, 1, 1, '2021-05-19 00:00:00', '2021-05-25 00:00:00', NULL);
-INSERT INTO `permisos` VALUES (11, 6, 4, 1, 0, 0, 1, '2021-05-19 00:00:00', '2021-05-25 00:00:00', NULL);
-INSERT INTO `permisos` VALUES (12, 6, 5, 1, 0, 0, 0, '2021-05-19 00:00:00', '2021-05-25 00:00:00', NULL);
-INSERT INTO `permisos` VALUES (13, 6, 6, 1, 1, 1, 1, '2021-05-19 00:00:00', '2021-05-25 00:00:00', NULL);
+INSERT INTO `permisos` VALUES (8, 6, 1, 0, 0, 0, 0, '2021-05-19 00:00:00', '2022-05-08 00:00:00', NULL);
+INSERT INTO `permisos` VALUES (9, 6, 2, 0, 0, 0, 0, '2021-05-19 00:00:00', '2022-05-08 00:00:00', NULL);
+INSERT INTO `permisos` VALUES (10, 6, 3, 0, 0, 0, 0, '2021-05-19 00:00:00', '2022-05-08 00:00:00', NULL);
+INSERT INTO `permisos` VALUES (11, 6, 4, 0, 0, 0, 0, '2021-05-19 00:00:00', '2022-05-08 00:00:00', NULL);
+INSERT INTO `permisos` VALUES (12, 6, 5, 0, 0, 0, 0, '2021-05-19 00:00:00', '2022-05-08 00:00:00', NULL);
+INSERT INTO `permisos` VALUES (13, 6, 6, 1, 1, 1, 1, '2021-05-19 00:00:00', '2022-05-08 00:00:00', NULL);
 INSERT INTO `permisos` VALUES (26, 2, 1, 0, 0, 0, 0, '2021-05-19 00:00:00', '2021-05-26 00:00:00', NULL);
 INSERT INTO `permisos` VALUES (27, 2, 2, 1, 1, 1, 0, '2021-05-19 00:00:00', '2021-05-26 00:00:00', NULL);
 INSERT INTO `permisos` VALUES (28, 2, 3, 1, 0, 0, 0, '2021-05-19 00:00:00', '2021-05-26 00:00:00', NULL);
@@ -618,6 +618,20 @@ INSERT INTO `permisos` VALUES (54, 1, 23, 1, 0, 1, 1, '2021-08-26 00:00:00', '20
 INSERT INTO `permisos` VALUES (55, 1, 24, 1, 1, 0, 0, '2021-09-20 00:00:00', '2022-02-07 00:00:00', NULL);
 INSERT INTO `permisos` VALUES (56, 1, 25, 1, 1, 1, 1, '2021-09-27 00:00:00', '2022-02-07 00:00:00', NULL);
 INSERT INTO `permisos` VALUES (57, 1, 26, 1, 1, 1, 1, '2022-02-07 00:00:00', '2022-02-07 00:00:00', NULL);
+INSERT INTO `permisos` VALUES (58, 6, 11, 0, 0, 0, 0, '2022-05-08 00:00:00', '2022-05-08 00:00:00', NULL);
+INSERT INTO `permisos` VALUES (59, 6, 14, 1, 1, 1, 1, '2022-05-08 00:00:00', '2022-05-08 00:00:00', NULL);
+INSERT INTO `permisos` VALUES (60, 6, 15, 1, 1, 1, 1, '2022-05-08 00:00:00', '2022-05-08 00:00:00', NULL);
+INSERT INTO `permisos` VALUES (61, 6, 16, 1, 1, 1, 1, '2022-05-08 00:00:00', '2022-05-08 00:00:00', NULL);
+INSERT INTO `permisos` VALUES (62, 6, 17, 1, 1, 1, 1, '2022-05-08 00:00:00', '2022-05-08 00:00:00', NULL);
+INSERT INTO `permisos` VALUES (63, 6, 18, 1, 1, 1, 1, '2022-05-08 00:00:00', '2022-05-08 00:00:00', NULL);
+INSERT INTO `permisos` VALUES (64, 6, 19, 1, 1, 1, 1, '2022-05-08 00:00:00', '2022-05-08 00:00:00', NULL);
+INSERT INTO `permisos` VALUES (65, 6, 20, 1, 0, 1, 0, '2022-05-08 00:00:00', '2022-05-08 00:00:00', NULL);
+INSERT INTO `permisos` VALUES (66, 6, 21, 1, 1, 1, 1, '2022-05-08 00:00:00', '2022-05-08 00:00:00', NULL);
+INSERT INTO `permisos` VALUES (67, 6, 22, 1, 1, 1, 1, '2022-05-08 00:00:00', '2022-05-08 00:00:00', NULL);
+INSERT INTO `permisos` VALUES (68, 6, 23, 1, 0, 1, 1, '2022-05-08 00:00:00', '2022-05-08 00:00:00', NULL);
+INSERT INTO `permisos` VALUES (69, 6, 24, 1, 1, 0, 0, '2022-05-08 00:00:00', '2022-05-08 00:00:00', NULL);
+INSERT INTO `permisos` VALUES (70, 6, 25, 1, 1, 1, 1, '2022-05-08 00:00:00', '2022-05-08 00:00:00', NULL);
+INSERT INTO `permisos` VALUES (71, 6, 26, 1, 1, 1, 1, '2022-05-08 00:00:00', '2022-05-08 00:00:00', NULL);
 
 -- ----------------------------
 -- Table structure for precios_productos
@@ -774,6 +788,7 @@ INSERT INTO `role_user` VALUES (27, 1, 29, '2021-05-05 00:52:28', '2021-05-05 00
 INSERT INTO `role_user` VALUES (29, 1, 30, '2021-05-05 01:13:57', '2021-05-05 01:13:57', NULL);
 INSERT INTO `role_user` VALUES (31, 1, 69, NULL, NULL, NULL);
 INSERT INTO `role_user` VALUES (33, 1, 71, NULL, NULL, '2021-06-07 00:00:00');
+INSERT INTO `role_user` VALUES (35, 6, 73, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for roles
@@ -1095,6 +1110,7 @@ INSERT INTO `users` VALUES (19, 'Valeria', 'prueba@ejemplo.cl', NULL, '$2b$10$BC
 INSERT INTO `users` VALUES (30, 'Marcelo Antonio', 'marcelo.a.bravo.c@gmail.cl', NULL, '$2b$10$66WGQByMZWmVkOtRin00eOGUlw2BKuWu5/nS2Gm.fDEGH0/otpWLi', NULL, '2021-05-05 01:13:57', '2021-06-27 00:00:00', NULL, 'Bravo', 'Castillo', '12 Norte #123', 'FB_IMG_1619323830505.jpg', '');
 INSERT INTO `users` VALUES (62, 'Mariela Andrea', 'mariela2@ejemplo.cl', NULL, '$2b$10$b.qrq9mTNfYSgdPqC.veQuWXNDHe0OeCrlVHVisek7VtrtlhD5Mf6', NULL, '2021-05-05 01:13:57', '2021-04-08 00:00:00', NULL, 'Bezoain', 'Bravo', '12 Norte #123', 'fgfgfgfgfgf', '');
 INSERT INTO `users` VALUES (71, 'wawawaawa', 'prueba2@ejemplo.cl', NULL, '$2b$10$4vk0/hohwXVdCxkC039iju7eJT9poh.5jR86Ed9mzHqGkXNdAGl42', NULL, '2021-06-07 00:00:00', '2021-06-07 00:00:00', '2021-06-07 00:00:00', 'esesesesesese vvgvgvv', 'drdrdrdrdrd', 'tftftftftftftftft', NULL, '6676767676767');
+INSERT INTO `users` VALUES (73, 'Pedro', 'prueba3@ejemplo3.cl', NULL, '$2b$10$GCW/XjHJigALbEmLs10M4ue.DCIJvyK92/tssMEdnY0RHFCG4YHTG', NULL, '2022-05-08 00:00:00', '2022-05-08 00:00:00', NULL, 'Perez', 'Pereira', '1 Sur 3 poniente, sin número', '', '0987654321');
 
 -- ----------------------------
 -- Table structure for ventas

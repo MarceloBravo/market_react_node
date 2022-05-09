@@ -53,6 +53,7 @@ export const UsuariosForm = () => {
     },[user])
 
 
+    //Recoge el resultado del cuadro de diálogo Aceptar/Cancelar
     const response = (res) => {
         if(res){
             dispatch({type: spinnerTypes.SHOW_SPINNER})
@@ -90,7 +91,7 @@ export const UsuariosForm = () => {
     const fnGrabar = () =>{
         Object.keys(usuario).forEach(f => validaDatos(f, usuario[f]))
         if(
-            Object.keys(errors).filter(e => usuario[e].length === 0 && e !== 'password' && e !== 'confirmPassword').length === 0 && 
+            Object.keys(errors).filter(e => usuario[e].length === 0 && !['password','confirmPassword','foto','objImagen'].includes(e)).length === 0 && 
             ((!id && usuario.password.length > 0 && usuario.confirmPassword.length > 0) || id)
         ){
             setAccion('grabar')
@@ -111,7 +112,7 @@ export const UsuariosForm = () => {
         fileAvatar.current.click()
     }
     
-    const fnRefgreshImage = (e) => {
+    const fnRefreshImage = (e) => {
         //La arrow function actualiza el estado del useState sin necesidad de utilizar el useEffect
         //Al no utilizar la arrow function el objeto usuario recibe el nuevo estado, pero no se ve 
         //reflejado a menos que se utilize un useEffect o una función de flecha como la utilizada
@@ -242,7 +243,7 @@ export const UsuariosForm = () => {
             id={id}
             fileReference={fileAvatar}  //Referencia al control file
             fnLoadImage={handlerFile} //Función que muestra el cuadro de dialogo para buscar una imágen
-            fnRefgreshImage={fnRefgreshImage}   //Función que recibe los cambios de imágen del avatar del usuario
+            fnRefreshImage={fnRefreshImage}   //Función que recibe los cambios de imágen del avatar del usuario
             togleMenu={togleMenu}
         />       
     )
