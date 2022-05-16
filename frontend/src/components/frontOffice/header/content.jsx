@@ -86,7 +86,7 @@ export const HeaderContentComponent = (props) => {
                         <Row>
                             <Col xs={12} md={5}>
                                 <Nav className="me-auto">
-                                    <Nav.Link href="#home">{infoTiendaState.fono_venta ? 'Venta telefónica al '+infoTiendaState.fono_venta : 'Venta on-line'}</Nav.Link>
+                                    <Nav.Link href="#home">{(infoTiendaState && infoTiendaState.fono_venta) ? 'Venta telefónica al '+infoTiendaState.fono_venta : 'Venta on-line'}</Nav.Link>
                                 </Nav>
                             </Col>
                             <Col xs={12} md={7} className="find-column">

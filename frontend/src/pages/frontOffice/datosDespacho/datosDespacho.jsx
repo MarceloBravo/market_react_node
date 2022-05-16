@@ -74,17 +74,23 @@ export const DatosDespacho = () => {
 
 
     useEffect(()=>{
-        setRegiones(listaRegionesState.sort((a,b) => a.codigo - b.codigo))
+        if(listaRegionesState?.length > 0){
+            setRegiones(listaRegionesState.sort((a,b) => a.codigo - b.codigo))
+        }
     },[listaRegionesState])
 
 
     useEffect(()=>{
-        setProvincias(listaProvinciasState.sort((a,b) => a.codigo - b.codigo))
+        if(listaProvinciasState?.length > 0){
+            setProvincias(listaProvinciasState.sort((a,b) => a.codigo - b.codigo))
+        }
     },[listaProvinciasState])
 
 
     useEffect(()=>{
-        setComunas(listaComunasState.sort((a,b) => a.codigo - b.codigo))
+        if(listaComunasState?.length > 0){
+            setComunas(listaComunasState.sort((a,b) => a.codigo - b.codigo))
+        }
     },[listaComunasState])
 
 
