@@ -9,7 +9,7 @@ import { getData } from '../../../actions/infoTienda'
 
 export const IdentificacionCliente = () => {
     const infoTiendaState = useSelector(state => state.InfoTiendaReducer.infoTienda)
-    const [ cliente, setCliente ] = useState({rut: '', nombres: '', apellido1: '', apellido2: '', fono: '', email: '', direccion: '', region: '', provincia: '', comuna: '', ciudad: '', casa_num: '', block_num: '', referecia: ''})
+    const [ cliente, setCliente ] = useState({rut: '', nombres: '', apellido1: '', apellido2: '', fono: '', email: '', direccion: '', cod_region: '', cod_provincia: '', cod_comuna: '', ciudad: '', casa_num: '', block_num: '', referencia: ''})
     const [ errors, setErrors ] = useState({rut: '', nombres: '', apellido1: '', apellido2: '', fono:'', email: ''})
     const [ continuar, setContinuar ] = useState(false)
     const history = useHistory()

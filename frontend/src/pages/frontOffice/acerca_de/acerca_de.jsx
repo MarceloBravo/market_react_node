@@ -57,7 +57,7 @@ export const AcercaDe = () => {
                             </Row>
                         </Col>
                         <Col md="5" className="img-content">
-                            <img src={ imgSource + 'react-hooks.png' } alt="React Hooks" />
+                            <img src={ `${imgSource}react-hooks.png` } alt="React Hooks" />
                         </Col>
                     </Row>
                     <Row>

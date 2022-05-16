@@ -8,6 +8,7 @@ app.use(express.static(publicDir));
 
 const morgan = require('morgan');   //
 const bodyParser = require('body-parser');  //Necesario para atender las peticiones post
+const { resolve } = require('path');
 
 
 app.set('port', process.env.PORT || 3001);
