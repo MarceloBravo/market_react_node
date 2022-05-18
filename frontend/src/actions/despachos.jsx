@@ -20,6 +20,7 @@ export const getPage = (pag) => {
 
 
 export const filtrar = (texto, pag) => {
+    console.log('FILTRO DESPACHOS',`${serverEndPoint}/${url}/filter/${texto}/${pag}`)
     return (dispatch, action) => {
         axios.get(`${serverEndPoint}/${url}/filter/${texto}/${pag}`,{headers: getHeader()}).then(res => {
             dispatch({type: spinnerTypes.HIDE_SPINNER})

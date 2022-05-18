@@ -47,7 +47,7 @@ export const SeccionesHomeComponent = (props) => {
     
     return (
         <>
-        { listaSeccionesState?.map( (s, key1) => {
+        {listaSeccionesState && listaSeccionesState?.map( (s, key1) => {
             return  <div className="div-carrousel" key={key1}>
                         <div className="div-secction-title">
                             <h3>{s.nombre}</h3>
@@ -73,7 +73,7 @@ export const SeccionesHomeComponent = (props) => {
                             centerMode={true}
                             >
 
-                                { s.productos?.map((i, key2) => {
+                                {s && s.productos?.map((i, key2) => {
                                     return <div key={key2}>
                                                 <Card>
                                                     <Card.Img variant="top" src={defaultImagesProducts + i.source_image} />

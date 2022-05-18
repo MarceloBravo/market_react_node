@@ -17,7 +17,7 @@ export const Marquesina = () => {
 
     return (
         <Carousel fade variant="dark">
-            { imagenesState.map((i, key) => {
+            {imagenesState && imagenesState.map((i, key) => {
                 return <Carousel.Item key={key}>
                         <img
                         className="d-block w-100"

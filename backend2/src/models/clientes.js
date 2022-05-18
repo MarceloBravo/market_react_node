@@ -84,6 +84,8 @@ clientesModel.filter = (texto, pag, callback) => {
                         casa_num  LIKE ${cnn.escape('%'+texto+'%')} OR 
                         block_num  LIKE ${cnn.escape('%'+texto+'%')} OR 
                         referencia LIKE ${cnn.escape('%'+texto+'%')} OR 
+                        DATE_FORMAT(created_at, '%d/%m/%Y') LIKE ${cnn.escape('%'+texto+'%')} OR
+                        DATE_FORMAT(updated_at, '%d/%m/%Y') LIKE ${cnn.escape('%'+texto+'%')} OR 
                         DATE_FORMAT(created_at, '%d-%m-%Y') LIKE ${cnn.escape('%'+texto+'%')} OR
                         DATE_FORMAT(updated_at, '%d-%m-%Y') LIKE ${cnn.escape('%'+texto+'%')} 
                         )` : ''

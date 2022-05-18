@@ -67,7 +67,9 @@ export const ResultadoVentaWebPayComponent = () => {
 
 
     const getDatosCliente = () => {
+        //Buscando los datos del cliente
         let storageCli = localStorage.getItem(`${infoTiendaState.nombre_tienda}-cliente`)
+        if(!storageCli)storageCli = sessionStorage.getItem(`${infoTiendaState.nombre_tienda}-cliente`)
         if(storageCli){
             let cli = atob(storageCli.split('.')[1])
             if(cli){
@@ -138,6 +140,7 @@ export const ResultadoVentaWebPayComponent = () => {
 
 
     useEffect(()=>{
+        console.log('Registrar venta', datosVenta)
         if(datosVenta.total && 
             datosVenta.datos_cliente && 
             datosVenta.despacho && 

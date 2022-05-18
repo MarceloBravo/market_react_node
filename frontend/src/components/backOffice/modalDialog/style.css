@@ -5,6 +5,7 @@
   top: 0px;
   width: 100%;
   height: 100%;
+  z-index: 100000;
 }
 
 .content-modal {
@@ -13,4 +14,9 @@
 
 .back-modal {
   background-color: #00000038;
+}
+
+.modal-backdrop, 
+.modal{
+  z-index: 10000 !important;
 }

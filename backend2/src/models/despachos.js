@@ -139,8 +139,10 @@ DespachosModel.filter = (texto, pag, callback) => {
                             dv.referencia LIKE ${cnn.escape('%'+texto+'%')} OR 
                             dv.shipping_cod LIKE ${cnn.escape('%'+texto+'%')} OR 
                             vwp.buy_order LIKE ${cnn.escape('%'+texto+'%')} OR 
-                            DATE_FORMAT(dv.created_at, "%d/%M/%Y") LIKE ${cnn.escape('%'+texto+'%')} OR 
-                            DATE_FORMAT(dv.updated_at, "%d/%M/%Y") LIKE ${cnn.escape('%'+texto+'%')}  
+                            DATE_FORMAT(dv.created_at, "%d/%m/%Y") LIKE ${cnn.escape('%'+texto+'%')} OR 
+                            DATE_FORMAT(dv.updated_at, "%d/%m/%Y") LIKE ${cnn.escape('%'+texto+'%')} OR 
+                            DATE_FORMAT(dv.created_at, "%d-%m-%Y") LIKE ${cnn.escape('%'+texto+'%')} OR 
+                            DATE_FORMAT(dv.updated_at, "%d-%m-%Y") LIKE ${cnn.escape('%'+texto+'%')}  
                     )`
         let qry = `SELECT 
                         dv.id, 
@@ -181,12 +183,11 @@ DespachosModel.filter = (texto, pag, callback) => {
                         LEFT JOIN ventas_clientes_sin_registrar vcsr ON v.id = vcsr.venta_id 
                     WHERE
                         v.deleted_at IS NULL AND  
-                        dv.deleted_at IS NULL AND 
+                        dv.deleted_at IS NULL  
                         ${filtro}
                     ORDER BY fecha_despacho ASC 
                     LIMIT ${desde}, ${constantes.regPerPage}`
         
-
         cnn.query(qry, async (err, res) => {
             let resp = null
             if(err){

@@ -125,8 +125,10 @@ DespachosModel.filter = (texto, pag, callback) => {
                             dv.referencia LIKE ${cnn.escape('%'+texto+'%')} OR 
                             dv.shipping_cod LIKE ${cnn.escape('%'+texto+'%')} OR 
                             vwp.buy_order LIKE ${cnn.escape('%'+texto+'%')} OR 
-                            DATE_FORMAT(dv.created_at, "%d/%M/%Y") LIKE ${cnn.escape('%'+texto+'%')} OR 
-                            DATE_FORMAT(dv.updated_at, "%d/%M/%Y") LIKE ${cnn.escape('%'+texto+'%')}  
+                            DATE_FORMAT(dv.created_at, "%d/%m/%Y") LIKE ${cnn.escape('%'+texto+'%')} OR 
+                            DATE_FORMAT(dv.updated_at, "%d/%m/%Y") LIKE ${cnn.escape('%'+texto+'%')} OR 
+                            DATE_FORMAT(dv.created_at, "%d-%m-%Y") LIKE ${cnn.escape('%'+texto+'%')} OR 
+                            DATE_FORMAT(dv.updated_at, "%d-%m-%Y") LIKE ${cnn.escape('%'+texto+'%')}  
                     )`
         let qry = `SELECT 
                         dv.id, 

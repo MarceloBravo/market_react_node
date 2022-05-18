@@ -9,6 +9,8 @@ const url = 'ventas'
 export const registrar = (data) => {
     return (dispatch, action) => {
         axios.post(`${endPoint}/${url}/registrar`, data, {headers: getHeader()}).then(res => {
+            console.log('registrando venta')
+            debugger
             dispatch({type: spinnerTypes.HIDE_SPINNER})
             dispatch({type: alertasTypes.MOSTRAR_ALERTA, payload: {mensaje: res.data.mensaje, tipo: res.data.tipoMensaje}})
             if(res.data.tipoMensaje === 'success'){

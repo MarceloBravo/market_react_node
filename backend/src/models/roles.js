@@ -118,8 +118,10 @@ rolesModel.filter = (texto, pag, callback) => {
                     (
                         name LIKE ${cnn.escape('%' + texto+ '%')}
                         OR description LIKE ${cnn.escape('%' + texto + '%')}
-                        OR DATE_FORMAT(created_at, "%d/%M/%Y") LIKE ${cnn.escape('%' + texto + '%')}
-                        OR DATE_FORMAT(updated_at, "%d/%M/%Y") LIKE ${cnn.escape('%' + texto + '%')}
+                        OR DATE_FORMAT(created_at, "%d/%m/%Y") LIKE ${cnn.escape('%' + texto + '%')}
+                        OR DATE_FORMAT(updated_at, "%d/%m/%Y") LIKE ${cnn.escape('%' + texto + '%')} 
+                        OR DATE_FORMAT(created_at, "%d-%m-%Y") LIKE ${cnn.escape('%' + texto + '%')}
+                        OR DATE_FORMAT(updated_at, "%d-%m-%Y") LIKE ${cnn.escape('%' + texto + '%')}
                     )`;
                     
         let desde = rowsPerPage  * pag;

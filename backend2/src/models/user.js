@@ -166,8 +166,10 @@ userModel.filter = (texto, pag, callback) => {
                             a_paterno LIKE ${cnn.escape('%'+texto+'%')} OR 
                             a_materno LIKE ${cnn.escape('%'+texto+'%')} OR 
                             direccion LIKE ${cnn.escape('%'+texto+'%')} OR 
-                            DATE_FORMAT(created_at, "%d/%M/%Y") LIKE ${cnn.escape('%'+texto+'%')} OR 
-                            DATE_FORMAT(deleted_at, "%d/%M/%Y") LIKE ${cnn.escape('%'+texto+'%')} 
+                            DATE_FORMAT(created_at, "%d/%m/%Y") LIKE ${cnn.escape('%'+texto+'%')} OR 
+                            DATE_FORMAT(deleted_at, "%d/%m/%Y") LIKE ${cnn.escape('%'+texto+'%')} OR 
+                            DATE_FORMAT(created_at, "%d-%m-%Y") LIKE ${cnn.escape('%'+texto+'%')} OR 
+                            DATE_FORMAT(deleted_at, "%d-%m-%Y") LIKE ${cnn.escape('%'+texto+'%')} 
                         )`;
 
         let qry = `SELECT 

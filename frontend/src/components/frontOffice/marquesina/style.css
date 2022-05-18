@@ -21,7 +21,7 @@
 
 
 .carousel-inner{
-    overflow: scroll;
+    overflow: hidden;
     height: 395px;
 }
 
