@@ -23,7 +23,7 @@ export const ContentMenuComponent = (props) => {
                                         {menu.sub_menu && 
                                             <Card.Body>
                                                 <Nav defaultActiveKey={'0-' + menu.id.toString()}>
-                                                    {menu.sub_menu.map((sm, k) => 
+                                                    {menu && menu.sub_menu.map((sm, k) => 
                                                         sm.acceder === 1 && <Nav.Link onClick={() => clearMessages() } as={Link} to={"/" + sm.url} key={key + '-' + k}>{sm.nombre}</Nav.Link>
                                                     )}
                                                 </Nav>
