@@ -214,12 +214,12 @@ export const AcercaDe = () => {
                     </Row>
                     <Row>
                         <Form.Label>
-                            Usuario: <b>mabc@live.cl</b>
+                            Usuario: <b>prueba3@ejemplo3.cl</b>
                         </Form.Label>
                     </Row>
                     <Row>
                         <Form.Label>
-                            Contraseña: <b>123456</b>
+                            Contraseña: <b>123321</b>
                         </Form.Label>
                     </Row>
                 
