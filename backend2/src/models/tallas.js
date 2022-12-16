@@ -188,14 +188,14 @@ TallasModel.find = (id, callback) => {
                 INNER JOIN sub_categorias sc ON tsc.sub_categorias_id = sc.id 
             WHERE 
                 tsc.tallas_id = ${cnn.escape(id)}
-        `
-
-        cnn.query(qry, async (err, result) => {
+        `;
+        cnn.query(qrySubCategorias, async (err, result) => {
             let res = null
             if(err){
                 res = callback({mensaje: 'Ocurrio un error al buscar el registro: ' + err.message, tipoMensaje: 'danger', id: -1})
             }else{
                 let subCategorias = await cnn.promise().query(qrySubCategorias)
+                console.log('SubCategorias = ',result);
                 result[0].sub_categorias = subCategorias[0]
                 res = callback(null, result[0])
             }

@@ -50,6 +50,6 @@ require('./routes/tallasRoutes')(app, null);
 //app.listen(app.get('port'))
 
 //app.listen(app.get('port'), '0.0.0.0',() => { //heroku
-app.listen(app.get('port'), '192.168.43.118',() => {    
+app.listen(app.get('port'), '192.168.1.125',() => {    
     console.log('Servidor activo en el puerto ' + app.get('port'))
 })

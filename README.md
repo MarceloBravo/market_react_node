@@ -19,13 +19,15 @@ La aplicación posee un módulo de administración en el cual se pueden administ
     backend2/db/connection.js
 
 Una vez corrido el script y configurada la conección de la base de datos en el archivo connection.js:    
- 
-8. Ingresar a la carpeta backend2 a través de una terminal de comandos y correr el backend con el comando:   
+
+8. Editar el arcivo node src/app.js y configurar la dirección IP en la que debe correr el backend.
+
+9. Ingresar a la carpeta backend2 a través de una terminal de comandos y correr el backend con el comando:   
     node src/app.js    
     
- 9. Modificar el archivo frontend/src/shared/constantes.js y configurar la constante endPoint con el host y puerto al cual apunta el API levantado en el punto 8  
+ 10. Modificar el archivo frontend/src/shared/constantes.js y configurar la constante endPoint con el host y puerto al cual apunta el API levantado en el punto 8  
  
- 10.  Ingresar a la carpeta frontend a través de una terminal de comandos y correr la aplicación con el comando:  
+ 11.  Ingresar a la carpeta frontend a través de una terminal de comandos y correr la aplicación con el comando:  
     yarn start
     
     
